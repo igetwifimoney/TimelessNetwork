@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Sidebar from '@/components/Sidebar'
 import {
@@ -24,16 +24,15 @@ const WINS = [
 
 const ONLINE_NOW = 487
 
-export default function DashboardPage() {
-  const [missions, setMissions] = useState(MISSIONS)
-  const [toast, setToast]       = useState<'success' | 'canceled' | null>(null)
+// Isolated so useSearchParams doesn't block static rendering of the page
+function PaymentToast() {
+  const [toast, setToast] = useState<'success' | 'canceled' | null>(null)
   const searchParams = useSearchParams()
 
   useEffect(() => {
     const payment = searchParams.get('payment')
     if (payment === 'success') {
       setToast('success')
-      // Remove query param from URL without reload
       window.history.replaceState({}, '', '/dashboard')
       setTimeout(() => setToast(null), 6000)
     } else if (payment === 'canceled') {
@@ -42,6 +41,40 @@ export default function DashboardPage() {
       setTimeout(() => setToast(null), 4000)
     }
   }, [searchParams])
+
+  if (!toast) return null
+
+  return (
+    <div
+      className="fixed top-5 right-5 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl text-sm font-medium shadow-2xl"
+      style={toast === 'success'
+        ? { background: 'rgba(52,211,153,0.12)', border: '1px solid rgba(52,211,153,0.25)', color: '#34D399' }
+        : { background: 'rgba(248,113,113,0.10)', border: '1px solid rgba(248,113,113,0.2)', color: '#F87171' }
+      }
+      role="status"
+      aria-live="polite"
+    >
+      {toast === 'success'
+        ? <CheckCircle className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
+        : <X className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
+      }
+      {toast === 'success'
+        ? "Payment successful — welcome to Timeless! 🎉"
+        : "Payment canceled. No charge was made."
+      }
+      <button
+        onClick={() => setToast(null)}
+        className="ml-2 opacity-60 hover:opacity-100 transition-opacity"
+        aria-label="Dismiss"
+      >
+        <X className="w-3.5 h-3.5" />
+      </button>
+    </div>
+  )
+}
+
+export default function DashboardPage() {
+  const [missions, setMissions] = useState(MISSIONS)
 
   const toggle = (id: number) =>
     setMissions(prev => prev.map(m => m.id === id ? { ...m, done: !m.done } : m))
@@ -54,34 +87,10 @@ export default function DashboardPage() {
     <div className="flex min-h-screen bg-black">
       <Sidebar />
 
-      {/* ── Payment toast ───────────────────────────────────── */}
-      {toast && (
-        <div
-          className="fixed top-5 right-5 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl text-sm font-medium shadow-2xl"
-          style={toast === 'success'
-            ? { background: 'rgba(52,211,153,0.12)', border: '1px solid rgba(52,211,153,0.25)', color: '#34D399' }
-            : { background: 'rgba(248,113,113,0.10)', border: '1px solid rgba(248,113,113,0.2)', color: '#F87171' }
-          }
-          role="status"
-          aria-live="polite"
-        >
-          {toast === 'success'
-            ? <CheckCircle className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
-            : <X className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
-          }
-          {toast === 'success'
-            ? "Payment successful — welcome to Timeless! 🎉"
-            : "Payment canceled. No charge was made."
-          }
-          <button
-            onClick={() => setToast(null)}
-            className="ml-2 opacity-60 hover:opacity-100 transition-opacity"
-            aria-label="Dismiss"
-          >
-            <X className="w-3.5 h-3.5" />
-          </button>
-        </div>
-      )}
+      {/* Payment toast wrapped in Suspense — required for useSearchParams in Next.js 14 */}
+      <Suspense fallback={null}>
+        <PaymentToast />
+      </Suspense>
 
       <main className="flex-1 overflow-y-auto" id="main-content">
         <div className="max-w-5xl mx-auto px-6 py-8">
@@ -103,7 +112,6 @@ export default function DashboardPage() {
             {/* ── TODAY'S MISSIONS ── */}
             <div className="lg:col-span-2 space-y-5">
               <section className="card rounded-2xl overflow-hidden" aria-labelledby="missions-heading">
-                {/* Mission header */}
                 <div className="px-6 pt-6 pb-4 border-b border-white/[0.04]">
                   <div className="flex items-center justify-between mb-4">
                     <div>
@@ -117,7 +125,6 @@ export default function DashboardPage() {
                       </div>
                     </div>
                   </div>
-                  {/* Progress bar */}
                   <div
                     className="w-full h-1 bg-white/5 rounded-full overflow-hidden"
                     role="progressbar"
@@ -133,7 +140,6 @@ export default function DashboardPage() {
                   </div>
                 </div>
 
-                {/* Mission list */}
                 <ul className="divide-y divide-white/[0.03]" aria-label="Daily missions">
                   {missions.map(m => (
                     <li key={m.id}>
@@ -144,10 +150,7 @@ export default function DashboardPage() {
                         aria-label={`${m.done ? 'Unmark' : 'Complete'} mission: ${m.text} — ${m.xp} XP`}
                       >
                         <div className={`flex-shrink-0 transition-colors ${m.done ? 'text-[#4F8EF7]' : 'text-gray-700'}`} aria-hidden="true">
-                          {m.done
-                            ? <CheckSquare className="w-5 h-5" />
-                            : <Square className="w-5 h-5" />
-                          }
+                          {m.done ? <CheckSquare className="w-5 h-5" /> : <Square className="w-5 h-5" />}
                         </div>
                         <span className={`flex-1 text-sm font-medium transition-colors ${m.done ? 'line-through text-gray-600' : 'text-gray-200'}`}>
                           {m.text}
@@ -198,16 +201,14 @@ export default function DashboardPage() {
 
             {/* ── RIGHT COLUMN ── */}
             <div className="space-y-5">
-
-              {/* Stats */}
               <section className="card rounded-2xl p-5" aria-labelledby="stats-heading">
                 <h2 id="stats-heading" className="font-bold text-sm mb-5">Your Stats</h2>
                 <dl className="space-y-4">
                   {[
-                    { icon: Flame, iconColor: 'text-orange-400', label: 'Current Streak', value: '31 Days 🔥' },
-                    { icon: Zap,   iconColor: 'text-[#4F8EF7]', label: 'Total XP',        value: '3,240 XP' },
-                    { icon: TrendingUp, iconColor: 'text-emerald-400', label: 'Leaderboard', value: '#124 this week' },
-                    { icon: Users, iconColor: 'text-purple-400', label: 'Community Online', value: `${ONLINE_NOW} members`, green: true },
+                    { icon: Flame,      iconColor: 'text-orange-400',  label: 'Current Streak',    value: '31 Days 🔥' },
+                    { icon: Zap,        iconColor: 'text-[#4F8EF7]',   label: 'Total XP',          value: '3,240 XP' },
+                    { icon: TrendingUp, iconColor: 'text-emerald-400', label: 'Leaderboard',       value: '#124 this week' },
+                    { icon: Users,      iconColor: 'text-purple-400',  label: 'Community Online',  value: `${ONLINE_NOW} members`, green: true },
                   ].map(({ icon: Icon, iconColor, label, value, green }) => (
                     <div key={label} className="flex items-center gap-2.5">
                       <div className="w-8 h-8 rounded-lg glass-blue flex items-center justify-center flex-shrink-0" aria-hidden="true">
@@ -222,7 +223,6 @@ export default function DashboardPage() {
                 </dl>
               </section>
 
-              {/* Latest Wins */}
               <section className="card rounded-2xl p-5" aria-labelledby="wins-heading">
                 <div className="flex items-center justify-between mb-4">
                   <h2 id="wins-heading" className="font-bold text-sm flex items-center gap-2">
