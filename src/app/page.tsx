@@ -221,38 +221,63 @@ function StatItem({ prefix = '', value, suffix = '', label, decimals = 0 }: {
   )
 }
 
-function Sparkline({ data }: { data: number[] }) {
+function Sparkline({ data, uid }: { data: number[]; uid: string }) {
   const w = 120, h = 40
   const min = Math.min(...data), max = Math.max(...data)
-  const pts = data.map((v, i) => {
-    const x = (i / (data.length - 1)) * w
-    const y = h - ((v - min) / (max - min)) * h
-    return `${x},${y}`
-  }).join(' ')
-  const area = `M0,${h} L${pts.split(' ').join(' L')} L${w},${h} Z`
+  const coords = data.map((v, i) => ({
+    x: (i / (data.length - 1)) * w,
+    y: h - ((v - min) / (max - min)) * (h - 2) - 1,
+  }))
+  const linePath = 'M ' + coords.map(p => `${p.x} ${p.y}`).join(' L ')
+  const areaPath = `M 0 ${h} L ${coords.map(p => `${p.x} ${p.y}`).join(' L ')} L ${w} ${h} Z`
+  const gradId = `sg_${uid}`
+
+  const lineRef = useRef<SVGPathElement>(null)
+  const [drawn, setDrawn] = useState(false)
+
+  useEffect(() => {
+    const el = lineRef.current
+    if (!el) return
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setDrawn(true); obs.disconnect() }
+    }, { threshold: 0.4 })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
   return (
     <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} fill="none" aria-hidden="true" focusable="false">
       <defs>
-        <linearGradient id="sparkGrad" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stopColor="#4F8EF7" stopOpacity="0.3" />
+        <linearGradient id={gradId} x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stopColor="#4F8EF7" stopOpacity="0.25" />
           <stop offset="100%" stopColor="#4F8EF7" stopOpacity="0" />
         </linearGradient>
       </defs>
-      <path d={area} fill="url(#sparkGrad)" />
-      <polyline
-        points={pts}
+      <path
+        d={areaPath}
+        fill={`url(#${gradId})`}
+        style={{ opacity: drawn ? 1 : 0, transition: 'opacity 0.6s ease 1s' }}
+      />
+      <path
+        ref={lineRef}
+        d={linePath}
         fill="none"
         stroke="#4F8EF7"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="sparkline-path"
+        pathLength="1"
+        strokeDasharray="1"
+        strokeDashoffset={drawn ? 0 : 1}
+        style={{
+          transition: drawn ? 'stroke-dashoffset 1.1s cubic-bezier(0.4,0,0.2,1)' : 'none',
+        }}
       />
     </svg>
   )
 }
 
-function ResultCard({ card }: { card: typeof RESULT_CARDS[0] }) {
+function ResultCard({ card, idx }: { card: typeof RESULT_CARDS[0]; idx: number }) {
   const { count, ref } = useCountUp(card.revenue, 1800)
   return (
     <article className="card-premium p-6 group cursor-default">
@@ -298,7 +323,7 @@ function ResultCard({ card }: { card: typeof RESULT_CARDS[0] }) {
       </div>
 
       <div className="my-4 opacity-80 group-hover:opacity-100 transition-opacity">
-        <Sparkline data={card.spark} />
+        <Sparkline data={card.spark} uid={`card${idx}`} />
       </div>
 
       <div className="flex items-center justify-between">
@@ -807,7 +832,7 @@ export default function LandingPage() {
             <div className="grid md:grid-cols-2 gap-4">
               {RESULT_CARDS.map((card, i) => (
                 <div key={card.name} className={`reveal reveal-delay-${i + 1}`}>
-                  <ResultCard card={card} />
+                  <ResultCard card={card} idx={i} />
                 </div>
               ))}
             </div>

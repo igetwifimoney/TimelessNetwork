@@ -84,7 +84,16 @@ export default function CoursesPage() {
 
           {/* Header */}
           <header className="mb-8">
-            <h1 className="text-3xl font-black mb-1">Courses</h1>
+            <div className="flex items-center gap-3 mb-1">
+              <h1 className="text-3xl font-black">Courses</h1>
+              <span
+                className="text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1"
+                style={{ background: 'rgba(79,142,247,0.08)', border: '1px solid rgba(79,142,247,0.2)', color: '#60A5FA' }}
+              >
+                <Clock className="w-2.5 h-2.5" />
+                Updated July 2026
+              </span>
+            </div>
             <p className="text-gray-500 text-sm">Your complete TikTok Shop & creator curriculum. Learn at your pace, earn XP every lesson.</p>
           </header>
 
