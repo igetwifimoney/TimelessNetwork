@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { Eye, EyeOff, Check, Loader2, ArrowRight, Star, Mail } from 'lucide-react'
 import { createClient, isSupabaseConfigured } from '@/lib/supabase'
 
@@ -15,8 +14,6 @@ const PERKS = [
 ]
 
 export default function SignupPage() {
-  const router = useRouter()
-
   const [form, setForm] = useState({ name: '', email: '', password: '' })
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -36,22 +33,27 @@ export default function SignupPage() {
     }
     setLoading(true)
     setError('')
-    const supabase = createClient()
-    const { error: signupError } = await supabase.auth.signUp({
-      email: form.email,
-      password: form.password,
-      options: {
-        data: { full_name: form.name },
-        emailRedirectTo: `${window.location.origin}/dashboard`,
-      },
-    })
-    if (signupError) {
-      setError(signupError.message)
+    try {
+      const supabase = createClient()
+      const { error: signupError } = await supabase.auth.signUp({
+        email: form.email,
+        password: form.password,
+        options: {
+          data: { full_name: form.name },
+          emailRedirectTo: `${window.location.origin}/dashboard`,
+        },
+      })
+      if (signupError) {
+        setError(signupError.message)
+        return
+      }
+      setSubmitted(true)
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Something went wrong. Please try again.'
+      setError(msg)
+    } finally {
       setLoading(false)
-      return
     }
-    setSubmitted(true)
-    setLoading(false)
   }
 
   // ── Email verification screen ──────────────────────────
