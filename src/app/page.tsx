@@ -109,27 +109,27 @@ const NAV_LINKS = [
 const RESULT_CARDS = [
   {
     avatar: 'MJ', name: 'Marcus J.', niche: 'Home Goods',
-    revenue: 23400, growth: 418, period: 'Last 30 Days',
+    revenue: 23400, growth: 418, period: 'June 1 – June 30, 2026',
     spark: [30, 45, 38, 60, 72, 58, 85, 91, 88, 100],
-    products: '14 products active',
-  },
-  {
-    avatar: 'DR', name: 'Destiny R.', niche: 'Beauty & Skincare',
-    revenue: 11200, growth: 289, period: 'Last 30 Days',
-    spark: [20, 28, 35, 44, 38, 55, 62, 70, 80, 100],
-    products: '8 products active',
+    kpi: '18.2M video views', badge: 'Full-Time Seller',
   },
   {
     avatar: 'JK', name: 'Jordan K.', niche: 'Kitchen Gadgets',
-    revenue: 8750, growth: 196, period: 'Last 30 Days',
+    revenue: 8750, growth: 196, period: 'June 1 – June 30, 2026',
     spark: [15, 22, 30, 25, 42, 50, 60, 72, 85, 100],
-    products: '6 products active',
+    kpi: '4.6% conversion rate', badge: 'Creator',
   },
   {
     avatar: 'AD', name: 'Aaliyah D.', niche: 'Fashion Accessories',
-    revenue: 5400, growth: 340, period: 'First 6 Weeks',
+    revenue: 5400, growth: 340, period: 'June 1 – June 30, 2026',
     spark: [5, 10, 18, 30, 45, 55, 68, 80, 90, 100],
-    products: '4 products active',
+    kpi: '87 videos posted', badge: 'Mentor Graduate',
+  },
+  {
+    avatar: 'CR', name: 'C. Rivera', niche: 'Beauty & Skincare',
+    revenue: 1870, growth: 127, period: 'Past 30 Days · Month 3',
+    spark: [8, 12, 15, 20, 18, 30, 38, 50, 72, 100],
+    kpi: '12 winning products tested', badge: 'Premium Member',
   },
 ]
 
@@ -256,7 +256,7 @@ function ResultCard({ card }: { card: typeof RESULT_CARDS[0] }) {
   const { count, ref } = useCountUp(card.revenue, 1800)
   return (
     <article className="card-premium p-6 group cursor-default">
-      <div className="flex items-center justify-between mb-5">
+      <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
           <div
             className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-black text-white relative"
@@ -269,7 +269,9 @@ function ResultCard({ card }: { card: typeof RESULT_CARDS[0] }) {
             </div>
           </div>
           <div>
-            <div className="text-sm font-bold">{card.name}</div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-sm font-bold">{card.name}</span>
+            </div>
             <div className="text-xs text-gray-500">{card.niche}</div>
           </div>
         </div>
@@ -279,8 +281,19 @@ function ResultCard({ card }: { card: typeof RESULT_CARDS[0] }) {
         </div>
       </div>
 
+      {/* Verified badge */}
+      <div className="flex items-center gap-1.5 mb-3">
+        <div
+          className="flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold text-emerald-400"
+          style={{ background: 'rgba(52,211,153,0.08)', border: '1px solid rgba(52,211,153,0.2)' }}
+        >
+          <svg className="w-2.5 h-2.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" /></svg>
+          TikTok Shop Verified
+        </div>
+      </div>
+
       <div className="mb-1">
-        <div className="text-xs text-gray-600 mb-1">{card.period}</div>
+        <div className="text-[10px] text-gray-600 mb-1 font-medium tracking-wide">{card.period}</div>
         <span ref={ref} className="text-3xl font-black count-up" aria-live="polite">${Math.floor(count).toLocaleString()}</span>
       </div>
 
@@ -289,9 +302,9 @@ function ResultCard({ card }: { card: typeof RESULT_CARDS[0] }) {
       </div>
 
       <div className="flex items-center justify-between">
-        <span className="text-xs text-gray-600">{card.products}</span>
+        <span className="text-xs text-gray-600">{card.kpi}</span>
         <div className="glass-blue rounded-full px-2.5 py-1 text-xs font-medium text-[#4F8EF7]">
-          Timeless Member
+          {card.badge}
         </div>
       </div>
     </article>

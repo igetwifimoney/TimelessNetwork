@@ -43,173 +43,197 @@ const CHANNELS = [
 const SEED_POSTS: Post[] = [
   // general
   {
-    id: 'g1', avatar: 'TB', name: 'Ty - igetwifimoney', role: 'Founder', time: '5m ago',
-    channel: 'general', isWin: false, likes: 142, likedByMe: false,
+    id: 'g1', avatar: 'TB', name: 'Ty - igetwifimoney', role: 'Founder', time: '3m ago',
+    channel: 'general', isWin: false, likes: 184, likedByMe: false,
     content: 'Welcome to the Timeless community. This is your home base. Ask questions, share wins, help each other out. The people in this room are building real businesses — treat it like a mastermind, not a comment section.',
     replies: [
-      { id: 'g1r1', avatar: 'MK', name: 'Marcus K.', content: 'Appreciate you for building this Ty. Already learned more here in 2 weeks than the past year on YouTube.', time: '3m ago', likes: 31, likedByMe: false },
+      { id: 'g1r1', avatar: 'ZM', name: 'Zara M.', content: 'Been here 3 weeks and already made my first sale. The energy in this community is different. Thank you Ty.', time: '2m ago', likes: 41, likedByMe: false },
     ],
   },
   {
-    id: 'g2', avatar: 'JT', name: 'Jordan T.', role: 'Elite Member', time: '22m ago',
-    channel: 'general', isWin: false, likes: 18, likedByMe: false,
-    content: 'Anyone else notice TikTok Shop pushed a new affiliate dashboard update? The analytics section looks completely different now. Curious if the commission tracking changed.',
+    id: 'g2', avatar: 'DH', name: 'Darius H.', role: 'Elite Member', time: '11m ago',
+    channel: 'general', isWin: false, likes: 27, likedByMe: false,
+    content: 'TikTok just pushed another algorithm update. Short-form under 30 seconds is getting way more reach than longer vids right now. If your content is 60+ seconds, test cutting it down and see what happens.',
     replies: [
-      { id: 'g2r1', avatar: 'SR', name: 'Sofia R.', content: 'Yes! Noticed this morning. Seems like they added breakdown by video now which is huge.', time: '18m ago', likes: 9, likedByMe: false },
-      { id: 'g2r2', avatar: 'AD', name: 'Aaliyah D.', content: 'The new breakdown is actually way easier to read. You can see which exact products are driving the most volume.', time: '12m ago', likes: 14, likedByMe: false },
+      { id: 'g2r1', avatar: 'PK', name: 'Priya K.', content: 'Tested this last week. 28-second version of my video got 3x the views of the original 55-second cut.', time: '8m ago', likes: 19, likedByMe: false },
+      { id: 'g2r2', avatar: 'CW', name: 'Cameron W.', content: 'Makes sense. TikTok rewards completion rate and short vids are easier to watch twice.', time: '4m ago', likes: 11, likedByMe: false },
     ],
   },
   {
-    id: 'g3', avatar: 'NP', name: 'Nadia P.', role: 'Member', time: '1h ago',
-    channel: 'general', isWin: false, likes: 7, likedByMe: false,
-    content: 'Just finished the onboarding quiz. The personalized roadmap actually makes sense for where I am right now. Week 1 here we go.',
+    id: 'g3', avatar: 'ET', name: 'Elise T.', role: 'Member', time: '42m ago',
+    channel: 'general', isWin: false, likes: 9, likedByMe: false,
+    content: 'Just did the onboarding quiz and the roadmap it gave me actually makes sense for where I am. Week 1, let\'s go. Gonna post updates here every Sunday.',
     replies: [],
+  },
+  {
+    id: 'g4', avatar: 'NB', name: 'Noah B.', role: 'Gold Member', time: '1h ago',
+    channel: 'general', isWin: false, likes: 34, likedByMe: false,
+    content: 'Reminder for anyone feeling stuck: the goal isn\'t to go viral. The goal is to find one product that converts, then post about it until it does. Virality is a bonus. Consistency is the strategy.',
+    replies: [
+      { id: 'g4r1', avatar: 'TB', name: 'Ty - igetwifimoney', content: 'Pin this. Honestly the most common mistake I see. Everyone chasing views instead of conversions.', time: '50m ago', likes: 62, likedByMe: false },
+    ],
   },
 
   // wins
   {
-    id: 'w1', avatar: 'MK', name: 'Marcus K.', role: 'Gold Member', time: '8m ago',
-    channel: 'wins', isWin: true, likes: 94, likedByMe: false,
-    content: 'Just crossed $10k in total TikTok Shop sales! Started 6 weeks ago with zero experience. The product research system in the foundation course changed everything for me. DM me if you want to know what niche I went with. 🔥',
+    id: 'w1', avatar: 'JR', name: 'Jasmine R.', role: 'Gold Member', time: '6m ago',
+    channel: 'wins', isWin: true, likes: 113, likedByMe: false,
+    content: 'First $10k month hit 🎉 I almost quit at week 4 because nothing was converting. Week 5 I switched products and something clicked. $0 to $10,200 in 7 weeks total. The foundation course product research section literally saved me.',
     replies: [
-      { id: 'w1r1', avatar: 'JT', name: 'Jordan T.', content: 'LFG Marcus!! Six weeks is insane. What was your starting budget if you don\'t mind sharing?', time: '5m ago', likes: 22, likedByMe: false },
-      { id: 'w1r2', avatar: 'TB', name: 'Ty - igetwifimoney', content: 'This is exactly why I built Timeless. Proud of you bro. Keep posting.', time: '2m ago', likes: 47, likedByMe: false },
+      { id: 'w1r1', avatar: 'DH', name: 'Darius H.', content: 'JASMINE!! This is massive. What niche if you don\'t mind sharing?', time: '4m ago', likes: 28, likedByMe: false },
+      { id: 'w1r2', avatar: 'TB', name: 'Ty - igetwifimoney', content: 'Week 4 is where most people quit. You didn\'t. That\'s everything. So proud of you.', time: '2m ago', likes: 55, likedByMe: false },
     ],
   },
   {
-    id: 'w2', avatar: 'JT', name: 'Jordan T.', role: 'Elite Member', time: '1h ago',
-    channel: 'wins', isWin: true, likes: 89, likedByMe: false,
-    content: 'Day 45 check-in ✅ Posted every day for 45 days straight. Revenue: $0 to $6,800/mo. Consistency is the entire game. Who else is on a streak?',
+    id: 'w2', avatar: 'MC', name: 'Malik C.', role: 'Elite Member', time: '58m ago',
+    channel: 'wins', isWin: true, likes: 97, likedByMe: false,
+    content: '60 day update 📍 Posted every single day. No days off. Revenue went from $0 to $9,400/mo. The algorithm started rewarding me around day 22. If you\'re in the first 3 weeks and nothing\'s happening — that\'s normal. Keep going.',
     replies: [
-      { id: 'w2r1', avatar: 'SR', name: 'Sofia R.', content: 'Day 12 here! Not at your numbers yet but the momentum is real. This post keeps me going.', time: '55m ago', likes: 18, likedByMe: false },
-      { id: 'w2r2', avatar: 'NP', name: 'Nadia P.', content: 'This is goals. Saving this post for the days I want to quit.', time: '40m ago', likes: 11, likedByMe: false },
+      { id: 'w2r1', avatar: 'ET', name: 'Elise T.', content: 'I\'m on day 9. Needed to see this so bad right now. Saving this post.', time: '45m ago', likes: 21, likedByMe: false },
+      { id: 'w2r2', avatar: 'ZM', name: 'Zara M.', content: 'Day 22 is real. I noticed a shift at exactly that point too. Hang in there everyone.', time: '30m ago', likes: 17, likedByMe: false },
     ],
   },
   {
-    id: 'w3', avatar: 'CL', name: 'Chris L.', role: 'Member', time: '3h ago',
-    channel: 'wins', isWin: true, likes: 56, likedByMe: false,
-    content: 'First video to hit 500K views 🎉 It\'s a simple unboxing. Nothing fancy. Just good lighting, clear audio, and the hook from lesson 3 of the viral hook course. Goes to show it really is the basics.',
+    id: 'w3', avatar: 'TV', name: 'Taylor V.', role: 'Member', time: '2h ago',
+    channel: 'wins', isWin: true, likes: 71, likedByMe: false,
+    content: 'First video to crack 1M views 🔥 It was my 34th video. Simple talking-head demo, natural lighting, no fancy editing. The hook from lesson 2 of the viral content module. Just goes to show — volume + basics beats production value every time.',
     replies: [
-      { id: 'w3r1', avatar: 'MK', name: 'Marcus K.', content: 'What hook did you use if you don\'t mind? Lesson 3 has like 5 different formats.', time: '2h ago', likes: 8, likedByMe: false },
+      { id: 'w3r1', avatar: 'MC', name: 'Malik C.', content: '1M!! What hook did you open with? Lesson 2 has a few frameworks.', time: '1h ago', likes: 12, likedByMe: false },
+      { id: 'w3r2', avatar: 'NB', name: 'Noah B.', content: 'This is the post right here. 34 videos in before the big one. Consistency wins.', time: '45m ago', likes: 33, likedByMe: false },
     ],
   },
 
   // product-research
   {
-    id: 'pr1', avatar: 'AD', name: 'Aaliyah D.', role: 'Member', time: '2h ago',
-    channel: 'product-research', isWin: false, likes: 31, likedByMe: false,
-    content: 'Has anyone tested the kitchen gadget niche recently? Seeing crazy engagement on my test videos but conversions are low. Wondering if it\'s a product selection issue or my CTAs.',
+    id: 'pr1', avatar: 'DF', name: 'Destiny F.', role: 'Member', time: '25m ago',
+    channel: 'product-research', isWin: false, likes: 38, likedByMe: false,
+    content: 'Tested the pet niche for 2 weeks. Engagement is insane but conversions are mid. Anyone with experience here — is it an audience intent problem or a product selection problem?',
     replies: [
-      { id: 'pr1r1', avatar: 'JT', name: 'Jordan T.', content: 'Kitchen gadgets are saturated at the low end but the $40-80 range is still printing. What price point are you testing?', time: '1h ago', likes: 19, likedByMe: false },
-      { id: 'pr1r2', avatar: 'MK', name: 'Marcus K.', content: 'Your CTA matters a lot. If your video ends without a clear "link in bio" or shop link visible, people just swipe.', time: '45m ago', likes: 14, likedByMe: false },
+      { id: 'pr1r1', avatar: 'DH', name: 'Darius H.', content: 'Pet niche engagement is emotional not purchase-intent. You need products that solve a visible problem — leash pullers, anxiety wraps, dental stuff. Cute products get likes, problem-solving products get sales.', time: '18m ago', likes: 44, likedByMe: false },
+      { id: 'pr1r2', avatar: 'MC', name: 'Malik C.', content: 'Price point matters a lot too. $20-35 range converts way better in pet than anything over $50.', time: '10m ago', likes: 16, likedByMe: false },
     ],
   },
   {
-    id: 'pr2', avatar: 'BK', name: 'Brandon K.', role: 'Gold Member', time: '4h ago',
-    channel: 'product-research', isWin: false, likes: 43, likedByMe: false,
-    content: 'Finding winner products framework I use: 1) TikTok search for "TikTok made me buy" in the niche 2) Check order count on TikTok Shop 3) Find the product on 1688 and check margin 4) Order sample before scaling. Simple but it works every time.',
+    id: 'pr2', avatar: 'KS', name: 'Kwame S.', role: 'Gold Member', time: '3h ago',
+    channel: 'product-research', isWin: false, likes: 58, likedByMe: false,
+    content: 'My product vetting checklist before I touch anything:\n\n✅ 500+ orders on TikTok Shop already\n✅ At least 4.2 star rating\n✅ Margin >40% after shipping\n✅ Can demo the result in under 10 seconds\n✅ Solves a problem I can show on camera\n\nIf it doesn\'t clear all 5, I skip it. Period.',
     replies: [
-      { id: 'pr2r1', avatar: 'AD', name: 'Aaliyah D.', content: 'Bookmarking this. Do you use any tools to check the order count or just native TikTok?', time: '3h ago', likes: 7, likedByMe: false },
-      { id: 'pr2r2', avatar: 'SR', name: 'Sofia R.', content: 'This is gold. The 1688 check is the step most people skip.', time: '2h ago', likes: 22, likedByMe: false },
+      { id: 'pr2r1', avatar: 'DF', name: 'Destiny F.', content: 'The "demo in under 10 seconds" one is huge. I never thought about it that way.', time: '2h ago', likes: 22, likedByMe: false },
+      { id: 'pr2r2', avatar: 'PK', name: 'Priya K.', content: 'Bookmarked. This is going in my product research doc right now.', time: '1h ago', likes: 19, likedByMe: false },
     ],
   },
   {
-    id: 'pr3', avatar: 'LP', name: 'Lena P.', role: 'Member', time: '6h ago',
-    channel: 'product-research', isWin: false, likes: 15, likedByMe: false,
-    content: 'Quick question — when you find a winning product someone else is selling, how close can you get with a similar product before it\'s considered copying? Or is that not really a concern in this space?',
+    id: 'pr3', avatar: 'BL', name: 'Bianca L.', role: 'Member', time: '5h ago',
+    channel: 'product-research', isWin: false, likes: 22, likedByMe: false,
+    content: 'Question: do you guys research products by scrolling TikTok organically or do you use tools like Kalodata/Shoplus? Trying to figure out the best workflow.',
     replies: [
-      { id: 'pr3r1', avatar: 'BK', name: 'Brandon K.', content: 'Not copying at all. Products aren\'t unique. Your content and positioning are. That\'s where differentiation happens.', time: '5h ago', likes: 29, likedByMe: false },
+      { id: 'pr3r1', avatar: 'KS', name: 'Kwame S.', content: 'Both. Organic scroll catches what\'s trending now. Tools give you order data you can\'t see natively. Start organic, graduate to tools once you have consistent income.', time: '4h ago', likes: 31, likedByMe: false },
     ],
   },
 
   // content-tips
   {
-    id: 'ct1', avatar: 'SR', name: 'Sofia R.', role: 'Member', time: '34m ago',
-    channel: 'content-tips', isWin: false, likes: 67, likedByMe: false,
-    content: 'Quick tip: posting between 6–8pm EST has doubled my views consistently. Also stop overthinking the hook. Just start with the product and let the results speak. Tested this across 30+ videos now.',
+    id: 'ct1', avatar: 'PK', name: 'Priya K.', role: 'Gold Member', time: '17m ago',
+    channel: 'content-tips', isWin: false, likes: 79, likedByMe: false,
+    content: 'Posting time data after 90 videos:\n\n📈 Best: Tuesday–Thursday 7–9pm EST\n📈 Surprise winner: Sunday 6pm EST\n📉 Worst: Monday mornings, Saturday afternoon\n\nThis is MY data on MY account. Test your own. But if you haven\'t tested posting times yet, start here.',
     replies: [
-      { id: 'ct1r1', avatar: 'JT', name: 'Jordan T.', content: 'The 6–8pm window is real. I\'ve tested it across two accounts now and the pattern holds.', time: '28m ago', likes: 24, likedByMe: false },
-      { id: 'ct1r2', avatar: 'CL', name: 'Chris L.', content: 'What about weekends? I\'ve been avoiding Sundays but not sure if that\'s right.', time: '15m ago', likes: 5, likedByMe: false },
-      { id: 'ct1r3', avatar: 'SR', name: 'Sofia R.', content: 'Sundays before 9pm EST actually outperform Friday for me. Test it for 2 weeks and see.', time: '10m ago', likes: 17, likedByMe: false },
+      { id: 'ct1r1', avatar: 'TN', name: 'Troy N.', content: 'Sunday 6pm is real. Consistent for me too. People are bored and doom-scrolling before the week starts.', time: '12m ago', likes: 28, likedByMe: false },
+      { id: 'ct1r2', avatar: 'JR', name: 'Jasmine R.', content: 'The Monday morning thing is real too. Always tanks for me.', time: '8m ago', likes: 14, likedByMe: false },
     ],
   },
   {
-    id: 'ct2', avatar: 'MK', name: 'Marcus K.', role: 'Gold Member', time: '2h ago',
-    channel: 'content-tips', isWin: false, likes: 52, likedByMe: false,
-    content: 'Hook formats that are working for me right now:\n\n"The reason [X product] keeps selling out..."\n"I tested [X] for 30 days and here\'s what happened"\n"Nobody talks about this but [X]"\n\nPattern: curiosity gap + clear product in frame in first 0.3 seconds.',
+    id: 'ct2', avatar: 'TN', name: 'Troy N.', role: 'Elite Member', time: '1h ago',
+    channel: 'content-tips', isWin: false, likes: 64, likedByMe: false,
+    content: 'The hooks that are printing right now:\n\n"I spent $200 testing this so you don\'t have to"\n"This is why [product] is always sold out"\n"POV: you finally tried [product]"\n\nKey is making the viewer feel like they\'re missing out on something real, not something you\'re selling.',
     replies: [
-      { id: 'ct2r1', avatar: 'TB', name: 'Ty - igetwifimoney', content: 'The curiosity gap format is probably the highest ROI hook structure on TikTok Shop right now. Great post Marcus.', time: '1h ago', likes: 38, likedByMe: false },
+      { id: 'ct2r1', avatar: 'TB', name: 'Ty - igetwifimoney', content: 'The FOMO hook is underrated. Especially "always sold out" — that one triggers both curiosity and social proof at the same time.', time: '48m ago', likes: 41, likedByMe: false },
     ],
   },
   {
-    id: 'ct3', avatar: 'BK', name: 'Brandon K.', role: 'Gold Member', time: '5h ago',
-    channel: 'content-tips', isWin: false, likes: 29, likedByMe: false,
-    content: 'Stop using trending sounds for product videos. Your viewer is there for the product not the vibe. Clean simple audio almost always converts better. Controversial take but look at your analytics — it\'ll back this up.',
+    id: 'ct3', avatar: 'SA', name: 'Simone A.', role: 'Member', time: '4h ago',
+    channel: 'content-tips', isWin: false, likes: 35, likedByMe: false,
+    content: 'Hot take: stop trying to make content look professional. The more "filmed on my kitchen counter" your video looks, the more it blends with organic content and the less it gets flagged as an ad. Polish can actually hurt you.',
     replies: [
-      { id: 'ct3r1', avatar: 'AD', name: 'Aaliyah D.', content: 'Actually tested this side by side. Trending audio: 800K views, 40 sales. Silent product demo: 200K views, 180 sales. The numbers don\'t lie.', time: '4h ago', likes: 61, likedByMe: false },
+      { id: 'ct3r1', avatar: 'MC', name: 'Malik C.', content: 'Data backs this up. My highest converting video was filmed vertically on my kitchen table with a ring light. My most "professional" video flopped.', time: '3h ago', likes: 47, likedByMe: false },
     ],
   },
 
   // tiktok-shop
   {
-    id: 'ts1', avatar: 'JT', name: 'Jordan T.', role: 'Elite Member', time: '15m ago',
-    channel: 'tiktok-shop', isWin: false, likes: 38, likedByMe: false,
-    content: 'For anyone just starting affiliate: focus on ONE product for 30 days minimum. Most people hop between 10 products and wonder why nothing converts. Depth beats breadth especially when the algorithm is still learning your content.',
+    id: 'ts1', avatar: 'CW', name: 'Cameron W.', role: 'Elite Member', time: '9m ago',
+    channel: 'tiktok-shop', isWin: false, likes: 46, likedByMe: false,
+    content: 'Starting tip nobody told me: before spending hours making content, request the product sample and TEST IT. I wasted 3 weeks on a product that fell apart after a week. Real review > fake enthusiasm every time, and TikTok Shop reviews tank your commission if returns spike.',
     replies: [
-      { id: 'ts1r1', avatar: 'LP', name: 'Lena P.', content: 'This is the advice I wish I had 3 months ago. I was switching products weekly and making zero progress.', time: '10m ago', likes: 12, likedByMe: false },
+      { id: 'ts1r1', avatar: 'BL', name: 'Bianca L.', content: 'This is so important. I had a similar situation with a skincare product. Broke me out, caused returns, commission dropped. Not worth it.', time: '5m ago', likes: 18, likedByMe: false },
     ],
   },
   {
-    id: 'ts2', avatar: 'CL', name: 'Chris L.', role: 'Member', time: '1h ago',
-    channel: 'tiktok-shop', isWin: false, likes: 24, likedByMe: false,
-    content: 'TikTok Shop commission rates thread — what\'s everyone seeing? I\'m getting 10–15% on beauty, 8% on home goods. Is that normal or am I leaving money on the table?',
+    id: 'ts2', avatar: 'ZM', name: 'Zara M.', role: 'Gold Member', time: '2h ago',
+    channel: 'tiktok-shop', isWin: false, likes: 33, likedByMe: false,
+    content: 'Commission rate thread — what\'s everyone getting?\n\nBeauty: 12-18%\nHome goods: 10-15%\nFitness: 8-12%\nElectronics: 5-8%\n\nIf you\'re getting less than these ranges, email the brand directly and ask. Most will bump you after consistent sales.',
     replies: [
-      { id: 'ts2r1', avatar: 'BK', name: 'Brandon K.', content: '10–15% beauty is solid. Some brands negotiate higher if you have consistent volume. Email them directly after you have 5+ sales.', time: '50m ago', likes: 16, likedByMe: false },
-      { id: 'ts2r2', avatar: 'MK', name: 'Marcus K.', content: 'I\'ve gotten up to 20% on home goods by DMing the brand owner directly. Most sellers on TikTok Shop are small businesses and they\'ll work with you.', time: '35m ago', likes: 23, likedByMe: false },
+      { id: 'ts2r1', avatar: 'KS', name: 'Kwame S.', content: 'Got bumped from 12% to 20% on a beauty brand by DMing the seller after I sent them 40 orders in a month. They\'ll negotiate.', time: '1h ago', likes: 29, likedByMe: false },
+      { id: 'ts2r2', avatar: 'DH', name: 'Darius H.', content: 'The direct DM approach is slept on. Most TikTok Shop sellers are small businesses and they actually respond.', time: '45m ago', likes: 21, likedByMe: false },
     ],
   },
   {
-    id: 'ts3', avatar: 'NP', name: 'Nadia P.', role: 'Member', time: '3h ago',
-    channel: 'tiktok-shop', isWin: false, likes: 11, likedByMe: false,
-    content: 'Newbie question — is it better to start with high-ticket or low-ticket products as a beginner? I\'ve heard both sides.',
+    id: 'ts3', avatar: 'SA', name: 'Simone A.', role: 'Member', time: '4h ago',
+    channel: 'tiktok-shop', isWin: false, likes: 16, likedByMe: false,
+    content: 'Beginner question — how many products should I be running at once when starting out? I\'ve heard everything from 1 to 10.',
     replies: [
-      { id: 'ts3r1', avatar: 'TB', name: 'Ty - igetwifimoney', content: 'Start low-ticket ($15–40 range). Lower barrier for buyers, faster feedback loop, easier to get your first 10 sales. Move up once you know what converts for YOU.', time: '2h ago', likes: 44, likedByMe: false },
+      { id: 'ts3r1', avatar: 'TB', name: 'Ty - igetwifimoney', content: 'One. Always one to start. You need to understand why something converts before you scale. Two products means split attention and half the data. Find one winner first.', time: '3h ago', likes: 51, likedByMe: false },
     ],
   },
 
   // accountability
   {
-    id: 'ac1', avatar: 'JT', name: 'Jordan T.', role: 'Elite Member', time: '1h ago',
-    channel: 'accountability', isWin: true, likes: 89, likedByMe: false,
-    content: 'Day 45 check-in ✅ Posted every day for 45 days straight. Revenue: $0 to $6,800/mo. Consistency is the entire game. Who else is on a streak?',
+    id: 'ac1', avatar: 'MC', name: 'Malik C.', role: 'Elite Member', time: '30m ago',
+    channel: 'accountability', isWin: true, likes: 102, likedByMe: false,
+    content: 'Day 60 official ✅\n\nPosted 60 days straight. Zero days missed.\n\nRevenue this month: $9,400\nVideos posted: 60\nBest video: 840K views\n\nThe people who said "take rest days" were wrong. Momentum is fragile. Protect it.',
     replies: [
-      { id: 'ac1r1', avatar: 'SR', name: 'Sofia R.', content: 'Day 12! Still going. This post is my daily motivation.', time: '55m ago', likes: 18, likedByMe: false },
-      { id: 'ac1r2', avatar: 'LP', name: 'Lena P.', content: 'Day 7 checking in. Small but showing up.', time: '30m ago', likes: 9, likedByMe: false },
+      { id: 'ac1r1', avatar: 'ET', name: 'Elise T.', content: 'I\'m on day 9 and this is exactly what I needed to see. Not stopping.', time: '22m ago', likes: 24, likedByMe: false },
+      { id: 'ac1r2', avatar: 'DF', name: 'Destiny F.', content: 'Day 17 checking in. $580 so far this month. Small but I see it building.', time: '15m ago', likes: 16, likedByMe: false },
     ],
   },
   {
-    id: 'ac2', avatar: 'AD', name: 'Aaliyah D.', role: 'Member', time: '3h ago',
-    channel: 'accountability', isWin: false, likes: 22, likedByMe: false,
-    content: 'Weekly accountability check-in 📊\n\nVideos posted: 7\nBest performer: 180K views\nSales: $340\nBiggest lesson: thumbnails on the first frame matter way more than I thought.',
+    id: 'ac2', avatar: 'PK', name: 'Priya K.', role: 'Gold Member', time: '2h ago',
+    channel: 'accountability', isWin: false, likes: 29, likedByMe: false,
+    content: 'Weekly check-in 📊\n\nVideos: 7/7 ✅\nBest video: 320K views\nSales this week: $1,140\nKey win: finally figured out why my CTAs weren\'t working (I was waiting too long in the video to mention the link)\n\nWho else is checking in?',
     replies: [
-      { id: 'ac2r1', avatar: 'MK', name: 'Marcus K.', content: '$340 in a week is real money. Don\'t overlook that. Keep stacking.', time: '2h ago', likes: 15, likedByMe: false },
+      { id: 'ac2r1', avatar: 'TN', name: 'Troy N.', content: '$1,140 in a week is real money. Don\'t sleep on that number. That\'s $4k+ a month pace.', time: '1h ago', likes: 18, likedByMe: false },
     ],
   },
   {
-    id: 'ac3', avatar: 'NP', name: 'Nadia P.', role: 'Member', time: '6h ago',
-    channel: 'accountability', isWin: false, likes: 14, likedByMe: false,
-    content: 'Day 1 official. Posting my accountability here so I have to show up. Goal: 5 videos per week for the next 90 days. Someone hold me to this.',
+    id: 'ac3', avatar: 'BL', name: 'Bianca L.', role: 'Member', time: '5h ago',
+    channel: 'accountability', isWin: false, likes: 18, likedByMe: false,
+    content: 'Day 1. Starting today. Goal is 5 videos a week for the next 12 weeks. Posting this publicly so I can\'t back out. Someone check on me.',
     replies: [
-      { id: 'ac3r1', avatar: 'JT', name: 'Jordan T.', content: 'Locked in. We\'re watching 👀 Tag me in your day 30 check-in.', time: '5h ago', likes: 19, likedByMe: false },
-      { id: 'ac3r2', avatar: 'SR', name: 'Sofia R.', content: 'Let\'s go! Day 1 energy is everything. Come back and update us end of week.', time: '4h ago', likes: 7, likedByMe: false },
+      { id: 'ac3r1', avatar: 'MC', name: 'Malik C.', content: 'Locked in. Come back on day 30. We\'re watching 👀', time: '4h ago', likes: 22, likedByMe: false },
+      { id: 'ac3r2', avatar: 'JR', name: 'Jasmine R.', content: 'I did exactly this 8 weeks ago. Best decision I ever made. You\'ve got this.', time: '3h ago', likes: 14, likedByMe: false },
     ],
   },
 ]
 
+// ─── Live activity pool (rotates in automatically) ────────
+const LIVE_POOL: Omit<Post, 'id'>[] = [
+  { avatar: 'TN', name: 'Troy N.', role: 'Elite Member', time: 'just now', channel: 'wins', isWin: true, likes: 0, likedByMe: false, content: 'Just hit $4,200 in a single day for the first time 🔥 Product went semi-viral. Proving to myself this is real.', replies: [] },
+  { avatar: 'SA', name: 'Simone A.', role: 'Member', time: 'just now', channel: 'general', isWin: false, likes: 0, likedByMe: false, content: 'Made my first sale!! It was $18 but I literally screamed. This is real, this works. Keep going everyone.', replies: [] },
+  { avatar: 'KS', name: 'Kwame S.', role: 'Gold Member', time: 'just now', channel: 'content-tips', isWin: false, likes: 0, likedByMe: false, content: 'Quick reminder: batch your content. I film 7 videos every Sunday. Saves me from the "I don\'t feel like filming" trap during the week.', replies: [] },
+  { avatar: 'DF', name: 'Destiny F.', role: 'Member', time: 'just now', channel: 'accountability', isWin: false, likes: 0, likedByMe: false, content: 'Day 21 check-in ✅ Revenue this week: $390. Slow but stacking. Not stopping.', replies: [] },
+  { avatar: 'CW', name: 'Cameron W.', role: 'Elite Member', time: 'just now', channel: 'product-research', isWin: false, likes: 0, likedByMe: false, content: 'Niche that\'s slept on right now: posture and back pain products. Huge search volume, high purchase intent, easy to demo on camera.', replies: [] },
+  { avatar: 'ZM', name: 'Zara M.', role: 'Gold Member', time: 'just now', channel: 'tiktok-shop', isWin: false, likes: 0, likedByMe: false, content: 'Pro tip: always disclose your affiliate link upfront. Not just for compliance — it actually increases trust and conversions in my experience.', replies: [] },
+  { avatar: 'NB', name: 'Noah B.', role: 'Gold Member', time: 'just now', channel: 'wins', isWin: true, likes: 0, likedByMe: false, content: 'Week 8 total: $11,800. I keep this number in my phone lock screen so I never forget why I started.', replies: [] },
+  { avatar: 'ET', name: 'Elise T.', role: 'Member', time: 'just now', channel: 'general', isWin: false, likes: 0, likedByMe: false, content: 'The community calls alone are worth the membership. Got a product idea validated in 5 minutes that I\'d been sitting on for 2 weeks.', replies: [] },
+  { avatar: 'JR', name: 'Jasmine R.', role: 'Gold Member', time: 'just now', channel: 'content-tips', isWin: false, likes: 0, likedByMe: false, content: 'If your hook isn\'t written before you press record, you\'re wasting time. Script the first 3 seconds. The rest can be natural.', replies: [] },
+  { avatar: 'DH', name: 'Darius H.', role: 'Elite Member', time: 'just now', channel: 'tiktok-shop', isWin: false, likes: 0, likedByMe: false, content: 'Heads up: TikTok Shop is expanding to more markets this quarter. If you\'re not already thinking about international products, start now.', replies: [] },
+  { avatar: 'MC', name: 'Malik C.', role: 'Elite Member', time: 'just now', channel: 'accountability', isWin: false, likes: 0, likedByMe: false, content: 'If you posted today, drop a ✅ below. Let\'s see who\'s actually showing up.', replies: [] },
+  { avatar: 'BL', name: 'Bianca L.', role: 'Member', time: 'just now', channel: 'product-research', isWin: false, likes: 0, likedByMe: false, content: 'Found a product with 2,000+ orders this week, 4.8 stars, and I can get it for $4 landed. Currently selling for $29. Running the demo tomorrow.', replies: [] },
+]
+
 const LEADERBOARD = [
-  { initials: 'MK', name: 'Marcus K.', xp: '3,240 XP' },
-  { initials: 'JT', name: 'Jordan T.', xp: '2,890 XP' },
-  { initials: 'SR', name: 'Sofia R.',  xp: '2,610 XP' },
+  { initials: 'MC', name: 'Malik C.',   xp: '4,120 XP' },
+  { initials: 'JR', name: 'Jasmine R.', xp: '3,740 XP' },
+  { initials: 'TN', name: 'Troy N.',    xp: '3,290 XP' },
 ]
 
 // ─── Post component ───────────────────────────────────────
@@ -410,6 +434,34 @@ export default function CommunityPage() {
     } catch {}
   }, [])
 
+  // Live activity simulator — drops a new post every 35–65 seconds
+  useEffect(() => {
+    let poolIndex = Math.floor(Math.random() * LIVE_POOL.length)
+
+    function dropPost() {
+      const template = LIVE_POOL[poolIndex % LIVE_POOL.length]
+      poolIndex++
+      const newLivePost: Post = {
+        ...template,
+        id: `live_${Date.now()}`,
+        time: 'just now',
+        likes: Math.floor(Math.random() * 8),
+      }
+      setPosts(prev => [newLivePost, ...prev])
+    }
+
+    function scheduleNext() {
+      const delay = 35000 + Math.random() * 30000 // 35–65 seconds
+      return setTimeout(() => {
+        dropPost()
+        timerRef.current = scheduleNext()
+      }, delay)
+    }
+
+    const timerRef = { current: scheduleNext() }
+    return () => clearTimeout(timerRef.current)
+  }, [])
+
   function savePosts(updated: Post[]) {
     // Only persist user-added posts (not seed)
     const seedIds = new Set(SEED_POSTS.map(p => p.id))
@@ -603,7 +655,7 @@ export default function CommunityPage() {
                 <Hash className="w-4 h-4 text-[#4F8EF7]" />
                 <h1 className="font-bold">{activeChannel}</h1>
               </div>
-              <p className="text-xs text-gray-600 mt-0.5">1,200+ members · {visiblePosts.length} posts</p>
+              <p className="text-xs text-gray-600 mt-0.5">2,200+ members · {visiblePosts.length} posts</p>
             </div>
             <div
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-emerald-400"
