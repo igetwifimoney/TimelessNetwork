@@ -67,16 +67,23 @@ export async function GET() {
       .eq('id', user.id)
       .single()
 
-    // Total members count
-    const { count: totalMembers } = await supabase
+    // Real member count from DB — but we display a minimum of 1,200 for social proof
+    const { count: realCount } = await supabase
       .from('user_profiles')
       .select('id', { count: 'exact', head: true })
+
+    const DISPLAY_MEMBERS = Math.max(realCount ?? 0, 1200)
+
+    // If user has 0 XP or no rank yet, show them as last place
+    const userRank = (profile.xp ?? 0) === 0
+      ? DISPLAY_MEMBERS
+      : (rankData?.rank ?? DISPLAY_MEMBERS)
 
     return NextResponse.json<UserStats>({
       xp: profile.xp,
       streakCount: newStreak,
-      leaderboardRank: rankData?.rank ?? null,
-      totalMembers: totalMembers ?? 0,
+      leaderboardRank: userRank,
+      totalMembers: DISPLAY_MEMBERS,
     })
   } catch (err) {
     console.error('User stats error:', err)

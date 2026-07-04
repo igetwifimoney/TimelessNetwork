@@ -2406,7 +2406,1341 @@ Available at 500+ subscribers. Offer exclusive perks for $3–$15/month:
 Your YouTube audience trusts you. Once you have 5K+ subscribers, selling your own course or product is viable. A simple $50–$200 course sold to 1% of your audience generates life-changing income.`
       }
     ]
-  }
+  },
+
+  // ── COURSE 16: Product Research Mastery ──────────────────────────────────
+  {
+    slug: 'ttshop-product-research',
+    title: 'Product Research Mastery',
+    description: 'Find winning products before everyone else. The exact frameworks and tools used to spot $10k/month products early.',
+    badge: '🔍',
+    level: 'Intermediate',
+    category: 'ttshop',
+    totalLessons: 5,
+    totalXP: 250,
+    lessons: [
+      {
+        slug: 'research-framework',
+        title: 'The Winning Product Framework',
+        duration: '20 min',
+        xp: 50,
+        content: `## The Winning Product Framework
+
+Most creators pick products they like. Winners pick products the data says will sell.
+
+### The 5-Point Winning Product Checklist
+
+A product needs to pass all 5 to be worth testing:
+
+**1. Visual appeal**
+Can you demonstrate it in under 10 seconds with zero context? If someone scrolling at 2x speed can understand what it does, it passes.
+
+**2. Problem-solution clarity**
+Does it solve an obvious frustration? The more universal the problem, the bigger the market.
+- Bad: "premium insulated tumbler" (generic)
+- Good: "the lid that actually stops coffee spills" (specific pain)
+
+**3. Price point: $15–$60**
+- Under $15: margins get killed by TikTok's commission + shipping
+- Over $60: buyer hesitation increases dramatically
+- Sweet spot: $25–$45 moves fast with good margin
+
+**4. Existing demand (not creating a market)**
+Look for products already selling 10K–500K GMV in the last 30 days on TikTok. You want to enter a proven market, not create one.
+
+**5. Repeatability**
+Can someone realistically buy it more than once, or buy accessories/variants? Repeat buyers = compound growth.
+
+### The Elimination Method
+
+Start with 50 products. Run each through the checklist. You'll end up with 5–8 worth testing. Test those. Double down on what wins.
+
+This beats guessing by 10x every time.`
+      },
+      {
+        slug: 'tiktok-creative-center',
+        title: 'Mining TikTok Creative Center for Products',
+        duration: '18 min',
+        xp: 50,
+        content: `## Mining TikTok Creative Center for Products
+
+TikTok's own data tells you what's already selling. Most creators never look at it.
+
+### Where to Find It
+
+Go to ads.tiktok.com → Creative Center → Top Products. This shows you the top-performing products in TikTok Shop right now, filtered by category, region, and time period.
+
+### What to Look For
+
+**GMV (Gross Merchandise Value):** Total sales in the last 30 days. Look for products doing $10K–$500K. Below $10K might be too small. Above $500K means the market is saturated.
+
+**Growth rate:** Filter for "Rising" products — ones that grew 50%+ in the last 7 days. These are the early movers you want to catch before they're everywhere.
+
+**Video count:** If a product has 500+ videos, it's getting competitive. If it has 50–200, you're early.
+
+**Average video views:** Divide total views by video count. A product with 200 videos and 50M total views averages 250K per video — that's a hot product.
+
+### The Spy Method
+
+Find the top 5 videos for any product you're researching. Study:
+- What hook they use
+- What pain they lead with
+- What CTA drives the most clicks
+
+Then make a better version of the best performing video. Don't copy — upgrade.
+
+### Weekly Research Routine
+
+Every Monday:
+1. Open Creative Center
+2. Filter: your niche, last 7 days, rising
+3. Screenshot 10 products that pass your checklist
+4. Add 2–3 to your Product Tracker to test this week
+
+Consistency here is the entire game.`
+      },
+      {
+        slug: 'competitor-analysis',
+        title: 'Reverse-Engineering Your Competitors',
+        duration: '16 min',
+        xp: 50,
+        content: `## Reverse-Engineering Your Competitors
+
+Your competitors already did the hard work of figuring out what sells. Your job is to study them, extract the pattern, and execute better.
+
+### Finding the Right Competitors
+
+Search your niche keywords on TikTok. Sort by "Most Liked" and "This Month." The creators who appear consistently are your benchmarks.
+
+Don't copy the biggest accounts — they have audiences you don't. Study creators with 10K–100K followers who are actively posting TikTok Shop content. They're in the same trenches as you.
+
+### The Competitor Breakdown
+
+For each competitor, document:
+
+**Content format**
+- Are they doing slideshows, videos, or lives?
+- Average video length?
+- Posting frequency?
+
+**Product selection**
+- What price points are they pushing?
+- Are they diversifying or dominating one product?
+- Which products have the most TikTok Shop link clicks?
+
+**Hook patterns**
+- What's their opening line in their top 5 videos?
+- Is it curiosity, problem, or social proof?
+
+**Engagement signals**
+- Comments: are people asking "where to buy?" (buying intent)
+- Saves: high saves = people want to come back (great sign)
+- Shares: people are sending this to friends (viral potential)
+
+### The Improvement Filter
+
+For every winning video you find, ask: what would make this 20% better?
+- Stronger hook?
+- Cleaner demo?
+- Better CTA?
+- Higher quality footage?
+
+Make that version. You don't need to be 10x better — just meaningfully better.`
+      },
+      {
+        slug: 'product-testing-system',
+        title: 'Your Product Testing System',
+        duration: '20 min',
+        xp: 50,
+        content: `## Your Product Testing System
+
+Most creators test wrong. They make one video, it flops, they move on. That's not a test — that's a guess.
+
+### The Real Testing Protocol
+
+**Phase 1: Minimum viable test (Week 1)**
+- Make 3 different videos for the same product
+- Different hooks (curiosity, problem, social proof)
+- Different formats (slideshow, video, or both)
+- Post all 3 within 48 hours
+
+If none of the 3 break 10K views: kill the product.
+If 1 breaks 10K: move to Phase 2.
+
+**Phase 2: Double down (Week 2)**
+- Make 5 more variations of the winning format
+- Test different CTAs
+- Try different times of day
+- Try trending audio variants
+
+If you're consistently getting 15K+ views with link clicks: it's a winner.
+
+**Phase 3: Scale (Week 3+)**
+- Post 2–3 videos per day on this product
+- Start testing for live selling potential
+- Research similar products in the same niche
+
+### Kill Criteria
+
+Cut a product if after 5 videos:
+- Average views under 8K
+- Link click rate under 1%
+- Zero sales
+
+Don't get attached. The market is always right.
+
+### Test Tracking
+
+Use your Product Tracker (in the app) to log:
+- Product name + supplier
+- Test start date
+- Video count
+- Total views
+- Link clicks
+- Sales + revenue
+
+This data tells you exactly what's working. Gut feelings don't.`
+      },
+      {
+        slug: 'scaling-winners',
+        title: 'Scaling Your Winning Products',
+        duration: '22 min',
+        xp: 50,
+        content: `## Scaling Your Winning Products
+
+Finding a winner is step one. Scaling it before it saturates is where the real money is.
+
+### The Scaling Window
+
+Most TikTok Shop products have a 4–12 week peak. After that, competition floods in and views drop. Your job is to identify the window early and pour fuel on it.
+
+Signs you're in the scaling window:
+- Views staying above 20K consistently
+- Link click rate above 2%
+- New competitors appearing (validation, not threat)
+- Comments showing repeat questions ("where do I get this?")
+
+### Volume is the Answer
+
+When a product is hot, posting frequency is your biggest lever. Increase from 2/day to 4–5/day. Use every angle:
+- Different hooks
+- Different scenarios
+- Different settings/backgrounds
+- Different video lengths (15s, 30s, 60s)
+
+One of these variants will hit differently. When it does, remix that angle immediately.
+
+### Expanding the Product Line
+
+Once a product is winning, look for adjacent products:
+- Same problem, different solution
+- Same customer, different need
+- Bundles (product A + product B together)
+
+If you're selling a posture corrector and it's killing it, the same buyer also wants ergonomic desk accessories, neck stretchers, and lumbar supports.
+
+### Going Live with Winners
+
+Your top-selling product becomes your live anchor. Feature it prominently, demo it multiple times per stream, and use social proof ("we've sold 300 of these this week alone") to drive urgency.
+
+Live converts at 3–5x the rate of video for products with visual demos.`
+      }
+    ]
+  },
+
+  // ── COURSE 17: Creator Studio Analytics ──────────────────────────────────
+  {
+    slug: 'ttshop-analytics',
+    title: 'Creator Studio Analytics',
+    description: 'Read your data like a pro. Know exactly what to fix, what to scale, and what to kill based on real numbers.',
+    badge: '📊',
+    level: 'Intermediate',
+    category: 'ttshop',
+    totalLessons: 4,
+    totalXP: 200,
+    lessons: [
+      {
+        slug: 'analytics-overview',
+        title: 'Understanding Creator Studio',
+        duration: '16 min',
+        xp: 50,
+        content: `## Understanding Creator Studio
+
+Creator Studio is your business intelligence dashboard. Most creators check views and move on. That's leaving money on the table.
+
+### The Metrics That Actually Matter
+
+**GMV (Gross Merchandise Value)**
+Total revenue generated from your content. This is the number — everything else leads to this.
+
+**CTR (Click-Through Rate)**
+What % of viewers clicked the product link. Industry average: 1–3%. Above 3% is excellent. Below 1% means your CTA or product-content fit is off.
+
+**CVR (Conversion Rate)**
+Of people who clicked, what % bought. Average: 3–8%. Below 3% means the product page isn't converting — check the listing quality.
+
+**Revenue Per View (RPV)**
+GMV ÷ total views. This is your efficiency metric. A video with 100K views and $500 GMV has $0.005 RPV. A video with 20K views and $400 GMV has $0.02 RPV — 4x more efficient.
+
+Always optimize for RPV, not just views.
+
+### The Weekly Review Ritual
+
+Every Friday, spend 20 minutes in Creator Studio:
+1. Which 3 videos generated the most GMV?
+2. What do they have in common (hook, format, product, CTA)?
+3. Which videos had high views but low CTR? (hook problem)
+4. Which had high CTR but low CVR? (product/listing problem)
+
+This weekly ritual is worth more than any course.`
+      },
+      {
+        slug: 'ctr-optimization',
+        title: 'Optimizing Click-Through Rate',
+        duration: '18 min',
+        xp: 50,
+        content: `## Optimizing Click-Through Rate
+
+CTR tells you whether your content makes people want to buy. If it's low, the problem is almost always one of three things.
+
+### The Three CTR Killers
+
+**1. Weak CTA placement**
+Most creators put the CTA at the end. By then, 70% of viewers are gone. Put a soft CTA in the first 15 seconds AND a hard CTA at the end.
+
+Soft CTA: "The link is in my bio if you want one"
+Hard CTA: "Click the yellow cart button right now — link's in bio"
+
+**2. CTA-content mismatch**
+If your video is about how amazing a product is but your CTA says "check it out," you're leaving urgency on the table.
+
+Match CTA energy to content energy:
+- High-energy demo → "Grab yours before they sell out"
+- Problem/solution → "This is the fix — link is in my bio"
+- Review content → "I've tested 10 of these — this is the only one I kept"
+
+**3. No clear buying signal**
+TikTok viewers need to know exactly what to do. "Link in bio" is not enough for many viewers. Say it explicitly: "Tap my profile, tap the link, it takes you straight to the product."
+
+### CTR by Format
+
+- Slideshows: typically 1.5–2.5% CTR
+- Videos: 2–4% CTR
+- Lives: 4–10% CTR (highest because real-time urgency)
+
+If your videos are underperforming the format average, it's a CTA or hook problem, not a product problem.`
+      },
+      {
+        slug: 'conversion-optimization',
+        title: 'Improving Conversion Rate',
+        duration: '16 min',
+        xp: 50,
+        content: `## Improving Conversion Rate
+
+People clicked your link. They're on the product page. Now they're leaving without buying. Here's why — and how to fix it.
+
+### The CVR Audit
+
+When CVR is low (under 3%), check these in order:
+
+**Product listing quality**
+- Main image: professional, clean, white or lifestyle background
+- Title: includes key benefit + search keyword
+- Price: competitive with Amazon for the same product
+- Reviews: under 4.0 stars tanks CVR hard
+- Description: answers every objection (size, material, shipping time)
+
+**Price anchoring**
+If your content showed value at $35 and the listing says $45, there's a disconnect. Your content should either justify the price OR you should price-match what the video implies.
+
+**Trust signals**
+New listings with 0 reviews convert at 1–2%. Same product with 50 reviews converts at 5–8%. Early on, focus on products with existing strong reviews, or run your own purchase to kickstart reviews.
+
+**Shipping time**
+TikTok Shop shoppers have Amazon-brain. If estimated delivery is 14+ days, CVR craters. Target products with 5–7 day shipping.
+
+### The CVR Formula
+
+High CVR = Great listing + Right price + Fast shipping + Strong reviews
+
+Fix the weakest link first.`
+      },
+      {
+        slug: 'revenue-forecasting',
+        title: 'Forecasting and Setting Revenue Goals',
+        duration: '20 min',
+        xp: 50,
+        content: `## Forecasting and Setting Revenue Goals
+
+Guessing your income isn't a business strategy. Here's how to project and plan.
+
+### The Revenue Formula
+
+Monthly Revenue = (Daily Videos × Avg Views × CTR × CVR × Avg Order Value) × 30
+
+Example:
+- 3 videos/day × 15K avg views = 45K views/day
+- 45K × 2% CTR = 900 clicks/day
+- 900 × 5% CVR = 45 sales/day
+- 45 × $35 avg order = $1,575/day
+- $1,575 × 30 = $47,250/month
+
+That's how creators hit $40K+ months. The math is simple. The execution is the work.
+
+### Your 90-Day Revenue Ladder
+
+**Month 1 target: $500–$2,000**
+Goal: find 1 winning product, learn the system, prove the model to yourself.
+
+**Month 2 target: $2,000–$8,000**
+Goal: scale the winner, test 3 more products, add slideshows + video mix.
+
+**Month 3 target: $8,000–$20,000**
+Goal: go live weekly, build a product portfolio of 3–5 active winners.
+
+### What to Track Weekly
+
+- Total GMV
+- RPV (revenue per view)
+- Best performing product
+- New products tested
+- New products killed
+
+Businesses that track grow. Businesses that don't, stagnate.`
+      }
+    ]
+  },
+
+  // ── COURSE 18: Brand Partnerships & Outreach ─────────────────────────────
+  {
+    slug: 'ttshop-brand-partnerships',
+    title: 'Brand Partnerships & Outreach',
+    description: 'Land free products, paid deals, and exclusive affiliate rates. How to pitch brands and build relationships that pay.',
+    badge: '🤝',
+    level: 'Intermediate',
+    category: 'ttshop',
+    totalLessons: 4,
+    totalXP: 200,
+    lessons: [
+      {
+        slug: 'brand-outreach-basics',
+        title: 'How Brand Outreach Works',
+        duration: '16 min',
+        xp: 50,
+        content: `## How Brand Outreach Works
+
+You don't need 100K followers to get brand deals. You need proof you can sell.
+
+### What Brands Actually Want
+
+Brands don't care about your follower count as much as your sales data. A creator with 5K followers and $8K in product sales is more valuable to a brand than a creator with 50K followers and zero Shop activity.
+
+Before you reach out to any brand, make sure you have:
+- At least 30 days of TikTok Shop activity
+- At least one product with proven sales
+- A screenshot of your Creator Studio showing GMV
+
+This is your pitch. Data over vanity metrics.
+
+### The Three Types of Brand Deals
+
+**1. Product gifting (free product in exchange for content)**
+Easiest to land as a new creator. You create content, they get exposure. No cash changes hands.
+
+**2. Affiliate rate upgrades (higher commission %)**
+Standard TikTok Shop commission is 5–15%. Some brands will give proven sellers 20–30% if you can show sales volume.
+
+**3. Paid sponsorships (flat fee + commission)**
+This comes at 10K+ followers with consistent sales. Brands pay $200–$2,000 flat + keep you on affiliate for ongoing commission.
+
+### Finding Brands to Contact
+
+- Search your niche on TikTok Shop marketplace
+- Find brands doing $50K+ GMV (they have budget)
+- Find their email via their website or Instagram bio
+- Look for "collab" or "partnership" links on their TikTok profile`
+      },
+      {
+        slug: 'pitch-templates',
+        title: 'The Perfect Brand Pitch',
+        duration: '18 min',
+        xp: 50,
+        content: `## The Perfect Brand Pitch
+
+Most creator pitches get ignored because they're vague. A winning pitch is short, specific, and data-first.
+
+### The 5-Line Pitch Formula
+
+Line 1: Who you are + your niche
+Line 2: Your numbers (views, followers, GMV if you have it)
+Line 3: Why their specific product fits your audience
+Line 4: What you're proposing (gifting, affiliate, paid)
+Line 5: Clear CTA
+
+### Example Pitch (Gifting)
+
+Subject: TikTok Shop Creator — [Your Niche] — Collab Request
+
+"Hi [Brand Name] team,
+
+I'm a TikTok creator focused on [niche] with [X followers] and [X avg views per video]. I've been generating consistent TikTok Shop sales in this space — my last 30 days brought in [GMV number or "strong commission revenue"].
+
+I came across your [specific product] and think it's a perfect fit for my audience — I already get comments asking for recommendations in this exact category.
+
+I'd love to try your product and create 2–3 dedicated videos. Happy to discuss gifting or an affiliate rate upgrade.
+
+Would you be open to a quick chat or email thread?
+
+[Your name + TikTok handle]"
+
+### Follow-Up Strategy
+
+Send the pitch. Wait 5 days. If no reply, send one follow-up:
+
+"Hey [name], just following up on my message from last week. Still very interested in working together — happy to share more of my analytics if helpful."
+
+After 2 attempts with no reply, move on. Don't burn goodwill by over-following up.`
+      },
+      {
+        slug: 'negotiating-rates',
+        title: 'Negotiating Rates Like a Pro',
+        duration: '14 min',
+        xp: 50,
+        content: `## Negotiating Rates Like a Pro
+
+The first number a brand offers is rarely their best number. Here's how to negotiate without burning the relationship.
+
+### Know Your Floor
+
+Before any negotiation, know your minimum acceptable rate. For affiliate upgrades, anything under 15% isn't worth the exclusivity. For paid deals, your floor should be at least $10 per 1,000 avg views.
+
+If you average 20K views per video, your floor is $200 per paid post.
+
+### The Counter Offer
+
+When a brand offers a rate, pause before accepting. A simple response:
+
+"Thanks for the offer — I'm excited about this partnership. Based on my current analytics and engagement rate, I was thinking closer to [X]. Is there flexibility there?"
+
+That one sentence has increased creator rates by 30–50% in many cases.
+
+### What to Bundle
+
+If a brand won't move on rate, negotiate the deliverables:
+- "For this rate, I can do 1 dedicated video. For $X more, I'll add a slideshow and a community post."
+- "Can we include a 30-day exclusivity waiver so I can still promote competitors?"
+
+### Contracts and Payments
+
+For deals over $500, always get a written agreement. It doesn't have to be formal — even a detailed email thread with both parties confirming the terms is enough.
+
+Standard payment terms: 50% upfront, 50% on delivery. Never deliver content before receiving the upfront payment.`
+      },
+      {
+        slug: 'long-term-brand-relationships',
+        title: 'Building Long-Term Brand Relationships',
+        duration: '16 min',
+        xp: 50,
+        content: `## Building Long-Term Brand Relationships
+
+One-off deals pay once. Long-term partnerships pay indefinitely.
+
+### The 90-Day Rule
+
+Don't pitch for a long-term deal on the first contact. Do one project, deliver exceptional results, then pitch the retainer.
+
+"I loved working together on this — the [video] got [X views] and drove [Y clicks]. Would you be open to a monthly arrangement? I'm thinking 4 videos/month at [rate]."
+
+This works because you have proof instead of promises.
+
+### How to Over-Deliver
+
+On every brand deal:
+- Deliver before the deadline
+- Send them the analytics 7 days after posting (screenshot from Creator Studio)
+- Tag them in the video (if they want visibility)
+- Send a personal note with what performed well and why
+
+This makes you memorable. Most creators ghost brands after posting. You won't.
+
+### Building a Brand Roster
+
+Your goal: 3–5 recurring brand relationships generating $2K–$5K/month in paid content fees, on top of your affiliate income.
+
+At that point, you have:
+- Guaranteed baseline income from brand deals
+- Variable upside from affiliate commissions
+- Free products to keep content fresh
+
+That's a real business.`
+      }
+    ]
+  },
+
+  // ── COURSE 19: Pricing & Margin Strategy ─────────────────────────────────
+  {
+    slug: 'ttshop-margins',
+    title: 'Pricing & Margin Strategy',
+    description: 'Maximize your take-home on every sale. Understand commissions, fees, and how to engineer your portfolio for profit.',
+    badge: '💰',
+    level: 'Intermediate',
+    category: 'ttshop',
+    totalLessons: 4,
+    totalXP: 200,
+    lessons: [
+      {
+        slug: 'how-commissions-work',
+        title: 'How TikTok Shop Commissions Work',
+        duration: '14 min',
+        xp: 50,
+        content: `## How TikTok Shop Commissions Work
+
+You don't own the product. You earn a % every time someone buys through your link. Understanding this structure is how you pick products that actually pay.
+
+### The Commission Structure
+
+TikTok Shop affiliate commissions range from 5% to 30%+ depending on:
+- The brand/seller's settings (they set the base rate)
+- Your performance tier (higher sellers get better rates)
+- Whether you've negotiated a custom rate
+
+Standard rates by category:
+- Beauty & skincare: 15–25%
+- Electronics/gadgets: 5–10%
+- Home & kitchen: 10–20%
+- Fashion: 15–30%
+- Health & wellness: 15–25%
+
+Electronics pay less but have higher AOV (average order value). A 7% commission on a $150 product = $10.50. A 20% commission on a $30 product = $6. Know your math.
+
+### Platform Fees
+
+TikTok takes a platform fee from sellers (not creators directly). But sellers pass this cost into their margin, which affects what commission rates they can offer. As rates get more competitive, expect this to tighten.
+
+### Your Effective Take Rate
+
+Your actual earnings per sale:
+Commission % × Sell Price = Earnings Per Sale
+
+$35 product × 15% commission = $5.25/sale
+To earn $5,000/month: need ~952 sales/month = ~32 sales/day
+
+Knowing your take rate lets you set realistic posting and volume targets.`
+      },
+      {
+        slug: 'product-margin-analysis',
+        title: 'Analyzing Product Margins Before You Promote',
+        duration: '16 min',
+        xp: 50,
+        content: `## Analyzing Product Margins Before You Promote
+
+Not all winning products are worth your time. Some products convert great but pay terrible. Here's how to screen.
+
+### The Margin Screen
+
+Before adding any product to your testing roster, calculate:
+
+**Earnings Per Sale = Commission % × Price**
+**Earnings Per View = (CTR × CVR × EPS)**
+
+Example:
+- $40 product, 18% commission = $7.20/sale
+- If your videos average 2% CTR and 5% CVR:
+- 10,000 views × 2% × 5% = 10 sales
+- 10 sales × $7.20 = $72 revenue per 10K views = $7.20 RPV
+
+Compare this to another product:
+- $25 product, 12% commission = $3.00/sale
+- Same 10K views → 10 sales → $30 revenue = $3.00 RPV
+
+The first product earns 2.4x more per view even though it's not dramatically more expensive. Small differences in price and commission stack up massively at scale.
+
+### The Minimum Viable Commission
+
+My personal rule: don't promote anything under $5 EPS (earnings per sale) unless volume is extremely high.
+
+Why? If a product converts at 5% CVR and you need $10K/month:
+- At $5/sale: need 2,000 sales/month
+- At $10/sale: need 1,000 sales/month
+
+Half the work. Same income. Always optimize for EPS.
+
+### Negotiating Higher Commissions
+
+Once you prove sales volume on a product, message the seller directly:
+"I've driven [X] sales in the last 30 days. Would you consider bumping my commission rate to [X%]? I'm planning to feature this product in my live stream this weekend."
+
+Most sellers will negotiate. One percentage point on 100 sales/month at a $40 product = $40 extra. Doesn't sound like much — until you have 10 products.`
+      },
+      {
+        slug: 'portfolio-engineering',
+        title: 'Engineering Your Product Portfolio',
+        duration: '18 min',
+        xp: 50,
+        content: `## Engineering Your Product Portfolio
+
+The biggest creators don't rely on one product. They run a portfolio — a mix of products at different price points and commission rates that creates stable, diversified income.
+
+### The Portfolio Framework
+
+**Anchor products (1–2 products)**
+Your consistent earners. $30–$60, proven sales, strong commission. These are in every live, every week.
+
+**Testing products (3–5 products)**
+New products you're actively testing. Running parallel tests means you always have potential new winners in the pipeline.
+
+**Spike products (1–2 products)**
+Seasonal or trending products with a short window. Black Friday products, summer items, holiday gifts. These spike your income but aren't sustainable year-round.
+
+**Passive earners (3–5 products)**
+Older videos that still generate occasional sales from search and organic traffic. Low maintenance, consistent trickle of income.
+
+A healthy portfolio might look like:
+- 2 anchors generating $3K/month each
+- 1 spike generating $2K during its window
+- 5 passive earners generating $500/month combined
+
+Total: ~$9K/month with moderate effort.
+
+### Portfolio Rotation
+
+Replace anchors every 3–6 months as they saturate. Always have a new anchor being developed from your testing pool.
+
+This is what professional TikTok Shop creators do. It's not luck. It's portfolio management.`
+      },
+      {
+        slug: 'tax-and-business',
+        title: 'Setting Up Your Business the Right Way',
+        duration: '16 min',
+        xp: 50,
+        content: `## Setting Up Your Business the Right Way
+
+You're running a real business. Set it up like one before the money gets serious.
+
+### LLC vs Sole Proprietor
+
+Most creators start as sole proprietors (just your SSN, no paperwork). That's fine for the first few months.
+
+Once you hit $2K+/month, form an LLC:
+- Protects your personal assets
+- Lets you deduct business expenses
+- Creates separation between personal and business money
+- Costs $50–$500 to form depending on your state
+
+### Tax Basics for Creators
+
+TikTok will issue a 1099 if you earn over $600/year. You pay self-employment tax (15.3%) plus income tax on profits.
+
+A rough rule: set aside 25–30% of all income for taxes.
+
+**Deductible business expenses:**
+- Phone bill (% used for content)
+- Camera, ring light, equipment
+- Editing apps and software
+- Products purchased for testing
+- Home office (% of rent/mortgage)
+- Business courses and education (like this one)
+
+### The Simple Business Stack
+
+- Business checking account (keep business money separate)
+- Simple bookkeeping app (Wave is free, QuickBooks is $15/month)
+- Quarterly estimated tax payments to avoid penalties
+- An accountant who works with content creators once you hit $5K+/month
+
+This is not exciting. But building the right infrastructure early saves massive headaches later.`
+      }
+    ]
+  },
+
+  // ── COURSE 20: Viral Hook Formula ────────────────────────────────────────
+  {
+    slug: 'tiktok-hooks',
+    title: 'Viral Hook Formula',
+    description: 'The exact hook frameworks that stop scrollers cold. 50+ proven templates and the psychology behind why they work.',
+    badge: '🎣',
+    level: 'Beginner',
+    category: 'tiktok',
+    totalLessons: 5,
+    totalXP: 250,
+    lessons: [
+      {
+        slug: 'hook-psychology',
+        title: 'The Psychology Behind Hooks',
+        duration: '16 min',
+        xp: 50,
+        content: `## The Psychology Behind Hooks
+
+You have 1.5 seconds. Not 3 seconds, not 5 seconds — 1.5 seconds before a viewer decides to swipe or stay.
+
+The hook isn't just your opening line. It's the combination of your first visual, your first word, and your first second of audio working together to trigger one of four psychological responses.
+
+### The Four Hook Triggers
+
+**1. Pattern interrupt**
+The viewer is on autopilot. Your hook breaks the expected pattern.
+"Wait — this can't be legal."
+"I cannot believe I just found this."
+"Stop scrolling."
+
+**2. Curiosity gap**
+You create an information gap the brain needs to close.
+"I tested this for 30 days. The results were insane."
+"This is the one product my entire family now owns."
+"Here's what nobody tells you about [topic]."
+
+**3. Relatability**
+The viewer sees themselves in your situation.
+"POV: you're tired of making content that gets zero views."
+"If you're a small creator, you NEED to see this."
+"Me six months ago vs. me now:"
+
+**4. Social proof + urgency**
+The fear of missing out combined with evidence others already know this.
+"500K people already bought this."
+"Everyone in the comments is asking about this."
+"This sold out twice last week."
+
+### Stacking Triggers
+
+The most powerful hooks stack two triggers. Pattern interrupt + curiosity gap is the most potent combination in TikTok history.
+
+"Wait — I found a product that actually pays your bills?" (pattern interrupt + curiosity gap)
+
+Study your best-performing hooks. You'll find they almost always stack.`
+      },
+      {
+        slug: 'hook-templates',
+        title: '50 Hook Templates That Actually Work',
+        duration: '20 min',
+        xp: 50,
+        content: `## 50 Hook Templates That Actually Work
+
+Copy these. Customize them. Run them. These are proven across thousands of TikTok Shop videos.
+
+### Curiosity Hooks
+1. "I can't believe this actually works."
+2. "Nobody talks about this and I don't know why."
+3. "I tested [X] for [time period] and here's what happened."
+4. "This is the [product] nobody told me about."
+5. "Wait until you see what this does."
+6. "I almost didn't buy this. Then I did. Then I bought 3 more."
+7. "The [product] that broke my brain."
+8. "I've been doing it wrong for [time]. This fixed it in [time]."
+9. "This costs $[X] and it replaced a $[Y] [expensive thing]."
+10. "My [family member/friend] saw this and immediately ordered one."
+
+### Problem Hooks
+11. "If you struggle with [problem], watch this."
+12. "This is for everyone who's tired of [pain point]."
+13. "Stop buying [expensive thing]. Get this instead."
+14. "The reason your [problem] isn't getting better."
+15. "I've tried everything for [problem]. This is the only thing that worked."
+16. "If [relatable situation], you need this product."
+17. "Why does nobody talk about how bad [common product] is?"
+18. "I wasted $[amount] before finding this."
+19. "The $[X] solution to a [Y] problem."
+20. "Imagine never having to [annoying task] again."
+
+### Social Proof Hooks
+21. "[X] people have already bought this."
+22. "This has [X] five-star reviews and they're all right."
+23. "My entire [family/office/friend group] owns this now."
+24. "I showed this to [X people] and [X-1] ordered it immediately."
+25. "I posted about this 3 months ago. I still get DMs about it."
+
+### POV Hooks
+26. "POV: you found the product that actually does what it claims."
+27. "POV: you spend [time] looking for [solution] and finally find it."
+28. "POV: your friend shows you this and your cart gets dangerous."
+29. "POV: this is your life before and after [product]."
+30. "POV: you're buying this for the third time."
+
+### Urgency Hooks
+31. "This keeps selling out and I finally understand why."
+32. "If this is still available when you see this, buy it."
+33. "I almost waited too long to get this."
+34. "They only make [X] of these per month. I'm not joking."
+35. "The price went up twice while I was filming this video."
+
+### Comparison Hooks
+36. "TikTok vs. Amazon: who actually has the better [product]?"
+37. "I bought the $[expensive] version and the $[cheap] version. Watch."
+38. "Brand name vs. TikTok Shop. The results surprised me."
+39. "I spent $[X] testing every [product type]. Here's the winner."
+40. "The [premium brand] is good. This is somehow better."
+
+### Transformation Hooks
+41. "30 days later: what happened when I actually used this."
+42. "Before and after using this for [time period]."
+43. "I didn't think this would work. I was wrong."
+44. "Week 1 vs. week 4 with this [product]."
+45. "What [X] looks like before this product. And after."
+
+### Niche-Specific Hooks
+46. "Small business owners, this is for you."
+47. "If you work from home, you need this."
+48. "Moms, this changed bath time completely."
+49. "This is built for people who actually [do X activity]."
+50. "Attention [niche]: this is the product you've been waiting for."`
+      },
+      {
+        slug: 'visual-hooks',
+        title: 'Visual Hooks — What You Show Before You Speak',
+        duration: '14 min',
+        xp: 50,
+        content: `## Visual Hooks — What You Show Before You Speak
+
+Your first frame is a hook before you say a single word. Most creators waste it.
+
+### The First Frame Formula
+
+The moment someone lands on your video, they see a still frame (or your first half-second of footage). This needs to immediately communicate:
+
+- Something surprising or unusual
+- A product in use (not just held up)
+- A before/after comparison
+- A reaction (your genuine surprise/excitement)
+- Text that teases the payoff
+
+### High-Performing First Frames
+
+**The reaction shot**
+Your face showing genuine shock, delight, or disbelief. Humans are hardwired to read faces. A compelling expression drives curiosity.
+
+**The result reveal**
+Show the outcome immediately, then explain how. "Here's the clean [thing]. Here's what I used to get there."
+
+**The unusual angle**
+Film from a perspective people don't expect. Under the product, overhead, extreme close-up. Unusual visuals trigger the pattern interrupt.
+
+**Text on screen**
+Bold, contrasting text in the first frame: "This changed everything" or "Wait for it" or "No way this is real." Works especially well on slideshows.
+
+### The 3-Second Rule
+
+Whatever you show in the first 3 seconds should be the most compelling visual in your entire video. Don't save the best for last — front-load it.
+
+If your hook is "this product makes my skin glow," the first frame should be the glow, not you talking about it.`
+      },
+      {
+        slug: 'audio-hooks',
+        title: 'Audio Hooks — Sound Before Sight',
+        duration: '14 min',
+        xp: 50,
+        content: `## Audio Hooks — Sound Before Sight
+
+On TikTok, sound often registers before full visual processing. A strong audio hook can stop someone mid-swipe.
+
+### Types of Audio Hooks
+
+**The verbal pattern interrupt**
+Your opening word(s) should be unexpected. Don't start with "So..." or "Hey guys" or "Welcome back."
+
+Strong openers:
+- "Wait."
+- "Okay."
+- "Real talk —"
+- "Not me buying this for the third time."
+- "I lied. I said I'd never buy this."
+
+**Trending audio**
+Using a trending sound immediately signals to the algorithm AND to the viewer that this content is current. The sound itself creates familiarity that lowers resistance.
+
+Rules for trending audio:
+- Use the trending part (usually the first 15 seconds)
+- Make sure the audio's energy matches your content's energy
+- High-energy sounds for transformation/reveal content
+- Calm/satisfying sounds for product demos
+
+**ASMR elements**
+Product sounds — unboxing, clicking, texture, water — trigger sensory engagement that holds attention longer than talking.
+
+If your product makes any sound during normal use, film it and include it.
+
+### Volume Balance
+
+Your voice should be the loudest element in your video. Music at 30–40% of voice volume. Product sounds at 60–70%.
+
+Use TikTok's built-in volume controls. Creators who neglect audio mix lose viewers to fatigue.`
+      },
+      {
+        slug: 'hook-testing',
+        title: 'A/B Testing Your Hooks Systematically',
+        duration: '16 min',
+        xp: 50,
+        content: `## A/B Testing Your Hooks Systematically
+
+Most creators don't know which of their hooks works. They post, see a number, and guess. Here's a systematic approach.
+
+### The Hook Split Test
+
+Take one product. Make the same video with 3 different hooks. Post all 3 within 24 hours. After 48 hours, compare:
+- Average watch time (first 3 seconds is the key metric)
+- View count
+- CTR
+
+The hook with the best 3-second retention AND the most views is your winner. Use that hook formula for future videos on similar products.
+
+### Tracking Your Hook Data
+
+Keep a simple log:
+
+| Hook | Views | 3-sec retention | CTR |
+|------|-------|-----------------|-----|
+| "I can't believe..." | 24K | 68% | 2.1% |
+| "POV: you're tired of..." | 11K | 52% | 1.4% |
+| "This costs $19 and..." | 42K | 74% | 3.2% |
+
+After 20 tests, patterns emerge. Maybe price-specific hooks always outperform. Maybe your face-to-camera hooks beat text hooks. This is your personal hook intelligence.
+
+### The Iteration Cycle
+
+Test → Identify winner → Run winner 5 more times → Test new variations against the winner → New winner → Repeat.
+
+Over 3 months of systematic testing, you'll have a swipe file of 10–15 hooks that consistently outperform. These become your default templates.
+
+The creators at the top of TikTok Shop are not more creative than you. They've just tested more.`
+      }
+    ]
+  },
+
+  // ── COURSE 21: Comment Section Strategy ──────────────────────────────────
+  {
+    slug: 'tiktok-comments',
+    title: 'Comment Section Strategy',
+    description: 'Turn your comment section into a sales machine. How to engage, reply, and use comments to boost algorithm reach.',
+    badge: '💬',
+    level: 'Beginner',
+    category: 'tiktok',
+    totalLessons: 4,
+    totalXP: 175,
+    lessons: [
+      {
+        slug: 'comments-and-algorithm',
+        title: 'Why Comments Matter for the Algorithm',
+        duration: '14 min',
+        xp: 44,
+        content: `## Why Comments Matter for the Algorithm
+
+Comments are one of the strongest engagement signals TikTok uses to determine how widely to push your content.
+
+### How TikTok Weights Engagement
+
+TikTok's algorithm weighs engagement signals roughly in this order:
+1. Watch time / video completion
+2. Shares
+3. Comments
+4. Saves
+5. Likes
+
+Comments rank third — above saves and likes — because they represent active engagement. Someone who takes 10 seconds to type something is far more invested than someone who taps a heart.
+
+A video with 50K views and 500 comments outperforms one with 50K views and 50 comments in continued distribution.
+
+### Comment Velocity Matters
+
+When your video gets a surge of comments early (within the first 30 minutes of posting), TikTok reads this as high engagement and boosts distribution. This is why:
+- Posting at peak times matters
+- Having a community of engaged followers matters
+- Your CTA can deliberately invite comments
+
+### Inviting Comments
+
+End your videos with a comment invitation:
+- "Drop a 🔥 in the comments if you want the link."
+- "Comment 'yes' if you've been looking for something like this."
+- "Tell me: have you tried this brand before?"
+
+These increase comment volume directly. Higher comment volume → more distribution. More distribution → more sales.`
+      },
+      {
+        slug: 'replying-to-comments',
+        title: 'How to Reply to Comments for Maximum Impact',
+        duration: '16 min',
+        xp: 44,
+        content: `## How to Reply to Comments for Maximum Impact
+
+Most creators reply to comments randomly or not at all. Done strategically, comment replies become a secondary content machine.
+
+### The Golden Hour
+
+In the first 60 minutes after posting, reply to every comment. This does three things:
+1. Signals to TikTok that your content is generating active conversation
+2. Makes commenters feel seen (increasing loyalty)
+3. Often generates additional replies (comment thread = more engagement)
+
+### Video Reply Comments
+
+When a comment asks a good question or makes a great point, create a video reply. TikTok surfaces this video to everyone who saw the original video AND to the commenter's followers.
+
+High-value comments to reply to with video:
+- "Does this actually work?"
+- "How much did it cost?"
+- "Where do you get it?"
+- "I've been wanting to try this"
+- Skeptical or challenging comments (these get the most views)
+
+Video replies to skeptical comments convert extremely well because they turn objections into testimonials.
+
+### Pinning Comments
+
+Pin the most useful comment on each video. Good candidates:
+- A comment where you give more detail about the product
+- A comment asking the #1 question you know people have
+- A comment with strong social proof from a buyer
+
+The pinned comment is the first thing viewers read. Make it work for you.`
+      },
+      {
+        slug: 'comment-ctas',
+        title: 'Using Comments to Drive Sales',
+        duration: '14 min',
+        xp: 44,
+        content: `## Using Comments to Drive Sales
+
+Your comment section is a sales floor. Treat it that way.
+
+### Buying Intent Comments
+
+Learn to recognize comments that signal purchase intent:
+- "Where can I get this?"
+- "What's the link?"
+- "Is this on Amazon?"
+- "How much is shipping?"
+- "Does it come in [size/color]?"
+- "Does this work for [specific use case]?"
+
+These people are ready to buy. Reply to every single one within 2 hours.
+
+### The Buying Intent Reply
+
+Don't just post "link in bio." Give them a reason to trust you and make the path to purchase as clear as possible:
+
+"Yes! It's on TikTok Shop — link is in my bio, just tap the link and it'll take you straight to the product page. It ships in 5–7 days and has a 30-day return policy. Let me know if you have questions!"
+
+This reply converts at 3–5x higher than just saying "link in bio."
+
+### The Comment Funnel
+
+Think of your comment section as a funnel:
+- 100 commenters
+- 20 show buying intent
+- You reply to all 20 with a clear path
+- 5–8 convert to buyers
+- That's $150–$400 in additional sales from comments alone
+
+At scale, this adds thousands per month.`
+      },
+      {
+        slug: 'dealing-with-negative-comments',
+        title: 'Handling Negative Comments Like a Pro',
+        duration: '12 min',
+        xp: 43,
+        content: `## Handling Negative Comments Like a Pro
+
+Negative comments are inevitable. How you respond determines whether they hurt you or help you.
+
+### Types of Negative Comments
+
+**Skepticism:** "This is probably fake." "All these products are scams."
+→ Don't get defensive. Respond with evidence: "Fair skepticism — here's what actually happened when I tried it for 30 days."
+
+**Bad experience:** "I bought this and it broke in 2 weeks."
+→ This is a gift. Reply publicly and compassionately: "I'm sorry to hear that — that wasn't my experience but I'd reach out to the seller directly for a replacement. Here's the customer service link."
+
+**Hate/trolls:** "You're just trying to make money." "Sellout."
+→ Ignore or give a light, non-defensive reply: "Yep, I promote products I actually use — that's the deal 😂" Don't give energy to people looking for a fight.
+
+**Competitive comments:** Other creators promoting their links in your comments.
+→ Delete immediately. You don't owe anyone your comment section as real estate.
+
+### Negative Comments Drive Reach
+
+Controversial, disagreeing comments actually boost TikTok distribution because they create debate threads. Let legitimate skepticism play out. Other viewers will often defend you better than you can defend yourself.
+
+A comment saying "this is overpriced" followed by 20 people explaining why it's worth it is better than no comments at all.`
+      }
+    ]
+  },
+
+  // ── COURSE 22: Collaboration & Growth Hacking ─────────────────────────────
+  {
+    slug: 'tiktok-collabs',
+    title: 'Collaboration & Growth Hacking',
+    description: 'Double your reach by working with other creators. Duets, stitches, and co-promotion strategies that actually move the needle.',
+    badge: '🤝',
+    level: 'Intermediate',
+    category: 'tiktok',
+    totalLessons: 4,
+    totalXP: 200,
+    lessons: [
+      {
+        slug: 'collab-basics',
+        title: 'The Collaboration Playbook',
+        duration: '16 min',
+        xp: 50,
+        content: `## The Collaboration Playbook
+
+Collaboration is the fastest free growth hack on TikTok. Two audiences → two creators → mutual benefit.
+
+### Why Collabs Work
+
+When you collaborate with another creator, you get:
+- Exposure to their audience (who already trusts them)
+- Algorithm signal that your content is connected to another account (cross-referral)
+- Social proof (being associated with other respected creators in your niche)
+- Often, a performance boost from the collab video itself
+
+The key: collaborate with creators in adjacent niches, not the same niche. Competing directly reduces both parties' incentive.
+
+### Finding the Right Collab Partners
+
+Ideal collab partner criteria:
+- Similar follower count (±50%) — equal exchange of value
+- Adjacent niche (your audience would care about their content)
+- Consistent poster (active accounts only)
+- Genuine engagement (not inflated by bots)
+
+Where to find them:
+- Search your niche, find creators in the 5K–50K range
+- Look at who your followers also follow
+- Check the duet/stitch ecosystem around your best videos
+- TikTok's "Creator Marketplace" for formal partnerships
+
+### The Collab Pitch
+
+Keep it simple and specific:
+
+"Hey [creator] — I'm [your name], I make [content type] for [niche]. I think our audiences would really enjoy each other's content. Would you be open to doing a [duet/product collab/joint video]? Happy to brainstorm a concept."
+
+Short. Specific. Low-friction. Makes it easy for them to say yes.`
+      },
+      {
+        slug: 'duets-and-stitches',
+        title: 'Mastering Duets and Stitches',
+        duration: '18 min',
+        xp: 50,
+        content: `## Mastering Duets and Stitches
+
+Duets and stitches are TikTok's built-in collab formats. Used right, they're one of the highest-ROI content strategies on the platform.
+
+### Duets
+
+A duet plays your video side-by-side with the original. Best used for:
+- Reaction content ("my reaction to this viral product")
+- Adding value to a trending video ("they showed the product, here's my 30-day update")
+- Agreements or disagreements ("they said X, here's why they're right/wrong")
+
+Duet strategy:
+1. Find a viral video in your niche (500K+ views)
+2. Add your unique perspective, experience, or expertise
+3. Post within 24 hours of the original going viral
+
+You ride the original video's momentum while adding your own value.
+
+### Stitches
+
+A stitch lets you use the first 5 seconds of another video as your intro. Best used for:
+- Answering questions ("great question — here's what actually happens")
+- Fact-checking or adding nuance
+- Building on a trend with your product angle
+
+Stitch strategy:
+Find videos where someone asks a question your product answers. Stitch it and answer it. You get relevant traffic from people who searched the original topic.
+
+### When NOT to Duet/Stitch
+
+Avoid stitching/dueting:
+- Direct competitors (you're amplifying them)
+- Creators who've asked not to have their content used
+- Negative or controversial content (associated stigma)
+- Content older than 2 weeks (trend is dead)`
+      },
+      {
+        slug: 'cross-promotion',
+        title: 'Cross-Promotion and Platform Stacking',
+        duration: '16 min',
+        xp: 50,
+        content: `## Cross-Promotion and Platform Stacking
+
+Your TikTok audience can become your Instagram audience, your YouTube audience, and your email list — if you build the bridges correctly.
+
+### Why Platform Stacking Matters
+
+TikTok is a discovery platform — it can make you go viral. But TikTok can also change its algorithm, its policies, or its commission rates. Creators who built followings on one platform without diversifying got burned when those platforms changed.
+
+Platform stacking gives you:
+- Multiple revenue streams
+- Audience insurance (if one platform changes, others survive)
+- Cross-platform amplification (one piece of content, multiple audiences)
+
+### The Platform Stack
+
+**TikTok → Instagram Reels**
+Repurpose your best TikTok videos (remove the watermark first — use Snaptik or similar) and post to Reels. Instagram's Reels algorithm rewards fresh content. Your TikTok wins can win again on Instagram.
+
+**TikTok → YouTube Shorts**
+Same process. Shorts now have shopping integrations as well. Your top TikTok product videos can drive YouTube commissions simultaneously.
+
+**TikTok → Email List**
+Create a freebie (resource guide, checklist, hook list) and promote it in your bio. Collect emails. Email is the only audience you truly own.
+
+**TikTok → Community (Discord/Telegram)**
+Invite your engaged followers to a community you control. This is how you build a brand that outlasts any single platform.
+
+### Cross-Promotion Cadence
+
+Post on TikTok first (primary platform). Repurpose to Reels and Shorts within 24 hours. Mention your free resource in every 5th video. Add community link to bio.
+
+Done consistently, you'll grow 3 platforms simultaneously with the same content.`
+      },
+      {
+        slug: 'community-building',
+        title: 'Building a Community That Sells for You',
+        duration: '18 min',
+        xp: 50,
+        content: `## Building a Community That Sells for You
+
+The most powerful distribution channel isn't TikTok. It's a loyal community that recommends you to each other.
+
+### The Community Flywheel
+
+Creator posts content → Community members engage, share, tag friends → Friends become followers → Followers join community → Community grows
+
+At scale, your community does your marketing for you. Members tag friends ("this creator found the product I told you about"), share your content, and defend you against skeptics.
+
+### Starting Your Community
+
+You don't need thousands of followers to start. Start when you have 500 engaged followers.
+
+Options:
+- **Discord server** — best for highly engaged communities, good for multiple channels
+- **Telegram group** — simpler, great for announcements and quick content sharing
+- **Private Facebook Group** — older demographic, still strong for certain niches
+- **Paid community platforms** (Circle, Skool) — for premium communities
+
+### Community Content Strategy
+
+Your community should get:
+- First look at products you're testing
+- Behind-the-scenes content (what your analytics look like, what's working)
+- Exclusive resources (hook lists, scripts, research templates)
+- Access to you (Q&As, voice chats, DMs)
+
+This creates a tier of superfans who share your content everywhere because they feel invested in your success.
+
+### Monetizing Your Community
+
+- Affiliate links in community posts (high conversion because trust is high)
+- Exclusive product drops for community members
+- Paid membership tier for premium access
+- Sponsored community posts from brands who want your audience
+
+A 1,000-person community can generate $2K–$10K/month in additional revenue beyond your content.`
+      }
+    ]
+  },
 
 ]
 

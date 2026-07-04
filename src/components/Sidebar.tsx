@@ -15,7 +15,6 @@ const NAV = [
   { href: '/community',  label: 'Community',  icon: Users           },
   { href: '/mentorship', label: 'Mentorship', icon: GraduationCap   },
   { href: '/resources',  label: 'Resources',  icon: Library         },
-  { href: '/coach',      label: 'AI Coach',   icon: Bot             },
   { href: '/tracker',    label: 'Tracker',    icon: Package         },
   { href: '/profile',    label: 'Profile',    icon: User            },
   { href: '/billing',    label: 'Billing',    icon: CreditCard      },
@@ -25,7 +24,7 @@ const NAV = [
 const MOBILE_NAV = [
   { href: '/dashboard',  label: 'Home',      icon: LayoutDashboard },
   { href: '/courses',    label: 'Courses',   icon: BookOpen        },
-  { href: '/coach',      label: 'Coach',     icon: Bot             },
+  { href: '/mentorship', label: 'Mentors',   icon: GraduationCap   },
   { href: '/community',  label: 'Community', icon: Users           },
   { href: '/profile',    label: 'Profile',   icon: User            },
 ]

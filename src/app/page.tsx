@@ -82,6 +82,20 @@ function useScrollReveal() {
 }
 
 // ─────────────────────────────────────────────────────────
+// GROWING MEMBER COUNT
+// Starts at 1,200 on July 4, 2025 and grows by ~3/day
+// Deterministic — every visitor sees the same number
+// ─────────────────────────────────────────────────────────
+
+function getMemberCount(): number {
+  const BASE = 1200
+  const START = new Date('2025-07-04').getTime()
+  const GROWTH_PER_DAY = 3
+  const days = Math.max(0, Math.floor((Date.now() - START) / 86400000))
+  return BASE + days * GROWTH_PER_DAY
+}
+
+// ─────────────────────────────────────────────────────────
 // DATA
 // ─────────────────────────────────────────────────────────
 
@@ -465,6 +479,7 @@ export default function LandingPage() {
   const [scrolled, setScrolled] = useState(false)
   const mouse = useMouseParallax()
   useScrollReveal()
+  const memberCount = getMemberCount()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -662,7 +677,6 @@ export default function LandingPage() {
             </h1>
 
             <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-up delay-100">
-              Not recycled courses. Not outdated YouTube videos.<br className="hidden sm:block" />
               Join creators building real income with proven systems,
               weekly mentorship, and a community that actually wins.
             </p>
@@ -686,7 +700,7 @@ export default function LandingPage() {
             </div>
 
             {/* Social proof */}
-            <div className="inline-flex items-center gap-4 glass px-5 py-3 rounded-full animate-fade-up delay-300" role="status" aria-label="1,200+ creators inside, 5-star rated">
+            <div className="inline-flex items-center gap-4 glass px-5 py-3 rounded-full animate-fade-up delay-300" role="status" aria-label={`${memberCount.toLocaleString()}+ creators inside, 5-star rated`}>
               <div className="flex -space-x-2" aria-hidden="true">
                 {['M','J','K','A','T'].map((l, i) => (
                   <div
@@ -699,7 +713,7 @@ export default function LandingPage() {
                 ))}
               </div>
               <span className="text-sm text-gray-400">
-                <span className="text-white font-semibold">1,200+ creators</span> already inside
+                <span className="text-white font-semibold">{memberCount.toLocaleString()}+ creators</span> already inside
               </span>
               <div className="flex items-center gap-0.5" aria-label="5 stars" role="img">
                 {[...Array(5)].map((_, i) => (
@@ -715,7 +729,7 @@ export default function LandingPage() {
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <StatItem prefix="$" value={4.8} suffix="M+" label="Creator Revenue Generated" decimals={1} />
-              <StatItem value={1200} suffix="+" label="Active Members" />
+              <StatItem value={memberCount} suffix="+" label="Active Members" />
               <StatItem value={800} suffix="+" label="Products Launched" />
               <div className="text-center">
                 <span className="text-3xl md:text-4xl font-black count-up gradient-text-blue">7–14 Days</span>

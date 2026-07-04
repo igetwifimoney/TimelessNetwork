@@ -115,6 +115,7 @@ export default function DashboardPage() {
   const xp = stats?.xp ?? 0
   const streak = stats?.streakCount ?? 0
   const rank = stats?.leaderboardRank
+  const totalMembers = stats?.totalMembers ?? 1200
 
   // Achievement stats from local + real data
   const achievementStats: AchievementStats = {
@@ -187,7 +188,7 @@ export default function DashboardPage() {
               },
               {
                 icon: TrendingUp, color: 'text-emerald-400', bg: 'rgba(52,211,153,0.08)', border: 'rgba(52,211,153,0.15)',
-                label: 'Rank', value: statsLoading ? '—' : rank ? `#${rank}` : 'Unranked',
+                label: 'Rank', value: statsLoading ? '—' : rank ? `#${rank.toLocaleString()} of ${totalMembers.toLocaleString()}` : 'Unranked',
               },
               {
                 icon: Trophy, color: 'text-yellow-400', bg: 'rgba(250,204,21,0.08)', border: 'rgba(250,204,21,0.15)',

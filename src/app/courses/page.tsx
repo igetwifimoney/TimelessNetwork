@@ -4,13 +4,12 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Sidebar from '@/components/Sidebar'
 import { COURSES, type Course } from '@/data/courses'
-import { BookOpen, Clock, Zap, ChevronRight, ShoppingBag, TrendingUp, Youtube } from 'lucide-react'
+import { BookOpen, Clock, Zap, ChevronRight, ShoppingBag, TrendingUp } from 'lucide-react'
 
 const CATEGORIES = [
-  { id: 'all',     label: 'All Courses',    icon: BookOpen    },
-  { id: 'ttshop',  label: 'TikTok Shop',    icon: ShoppingBag },
-  { id: 'tiktok',  label: 'TikTok Growth',  icon: TrendingUp  },
-  { id: 'youtube', label: 'YouTube',        icon: Youtube     },
+  { id: 'all',    label: 'All Courses',   icon: BookOpen    },
+  { id: 'ttshop', label: 'TikTok Shop',   icon: ShoppingBag },
+  { id: 'tiktok', label: 'TikTok Growth', icon: TrendingUp  },
 ] as const
 
 const LEVEL_COLOR: Record<string, string> = {
@@ -67,10 +66,10 @@ function CourseCard({ course }: { course: Course }) {
 }
 
 export default function CoursesPage() {
-  const [activeCategory, setActiveCategory] = useState<'all' | 'ttshop' | 'tiktok' | 'youtube'>('all')
+  const [activeCategory, setActiveCategory] = useState<'all' | 'ttshop' | 'tiktok'>('all')
 
   const filtered = activeCategory === 'all'
-    ? COURSES
+    ? COURSES.filter(c => c.category !== 'youtube')
     : COURSES.filter(c => c.category === activeCategory)
 
   const totalXP = COURSES.reduce((s, c) => s + c.totalXP, 0)
@@ -137,6 +136,15 @@ export default function CoursesPage() {
               </div>
             )}
           </section>
+
+          {/* Coming Soon */}
+          <div className="mt-10 rounded-2xl p-6 text-center" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <div className="text-2xl mb-2">🎬</div>
+            <h3 className="font-bold text-sm mb-1">YouTube & Video Courses — Coming Soon</h3>
+            <p className="text-xs text-gray-500 max-w-sm mx-auto">
+              Full video course library with walkthroughs, breakdowns, and step-by-step tutorials. Drop in the community when you want to see it.
+            </p>
+          </div>
         </div>
       </main>
     </div>
