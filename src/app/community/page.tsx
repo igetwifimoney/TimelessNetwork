@@ -655,7 +655,7 @@ export default function CommunityPage() {
                 <Hash className="w-4 h-4 text-[#4F8EF7]" />
                 <h1 className="font-bold">{activeChannel}</h1>
               </div>
-              <p className="text-xs text-gray-600 mt-0.5">2,200+ members · {visiblePosts.length} posts</p>
+              <p className="text-xs text-gray-600 mt-0.5">1,200+ members · {visiblePosts.length} posts</p>
             </div>
             <div
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-emerald-400"

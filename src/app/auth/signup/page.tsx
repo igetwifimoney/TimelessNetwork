@@ -7,7 +7,7 @@ import { createClient, isSupabaseConfigured } from '@/lib/supabase'
 
 const PERKS = [
   { icon: '📚', text: 'Complete TikTok Shop course library' },
-  { icon: '👥', text: 'Private creator community (2,200+ members)' },
+  { icon: '👥', text: 'Private creator community (1,200+ members)' },
   { icon: '🎙️', text: 'Weekly live Q&A calls with active sellers' },
   { icon: '🎯', text: 'Daily missions, streaks & XP system' },
   { icon: '💬', text: 'Discord access — every niche, every stage' },

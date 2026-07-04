@@ -83,13 +83,13 @@ function useScrollReveal() {
 
 // ─────────────────────────────────────────────────────────
 // GROWING MEMBER COUNT
-// Starts at 1,200 on July 4, 2025 and grows by ~3/day
+// Resets to 2,200 on July 4, 2026 and grows by ~3/day
 // Deterministic — every visitor sees the same number
 // ─────────────────────────────────────────────────────────
 
 function getMemberCount(): number {
   const BASE = 1200
-  const START = new Date('2025-07-04').getTime()
+  const START = new Date('2026-07-04').getTime()
   const GROWTH_PER_DAY = 3
   const days = Math.max(0, Math.floor((Date.now() - START) / 86400000))
   return BASE + days * GROWTH_PER_DAY
@@ -768,7 +768,7 @@ export default function LandingPage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <StatItem prefix="$" value={4.8} suffix="M+" label="Creator Revenue Generated" decimals={1} />
               <StatItem value={memberCount} suffix="+" label="Active Members" />
-              <StatItem value={800} suffix="+" label="Products Launched" />
+              <StatItem value={14000} suffix="+" label="Videos Posted" />
               <div className="text-center">
                 <span className="text-3xl md:text-4xl font-black count-up gradient-text-blue">7–14 Days</span>
                 <div className="text-sm text-gray-500 mt-2">Avg. Time to First Sale</div>
