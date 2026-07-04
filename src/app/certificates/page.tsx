@@ -10,7 +10,7 @@ function getCertEarned(courseSlug: string, completed: CompletedLesson[]): boolea
   const course = COURSES.find(c => c.slug === courseSlug)
   if (!course) return false
   const completedSlugs = completed.filter(c => c.courseSlug === courseSlug).map(c => c.lessonSlug)
-  return course.lessons.every(l => completedSlugs.includes(l.lessonSlug ?? l.slug))
+  return course.lessons.every(l => completedSlugs.includes(l.slug))
 }
 
 function Certificate({ course, name, date }: { course: typeof COURSES[0]; name: string; date: string }) {
@@ -119,10 +119,11 @@ export default function CertificatesPage() {
 
   useEffect(() => {
     // Load completed lessons from localStorage
-    const keys = Object.keys(localStorage).filter(k => k.startsWith('lesson_complete_'))
+    // Lesson page saves keys as: completed:courseSlug:lessonSlug
+    const keys = Object.keys(localStorage).filter(k => k.startsWith('completed:'))
     const lessons: CompletedLesson[] = keys.map(k => {
-      const [, , courseSlug, lessonSlug] = k.split('_').join('_').split('lesson_complete_')[1].split('/')
-      return { courseSlug, lessonSlug }
+      const parts = k.split(':')
+      return { courseSlug: parts[1] ?? '', lessonSlug: parts[2] ?? '' }
     }).filter(l => l.courseSlug && l.lessonSlug)
     setCompleted(lessons)
 
