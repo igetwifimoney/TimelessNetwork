@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Eye, EyeOff, Check, Loader2, ArrowRight, Star } from 'lucide-react'
+import { Eye, EyeOff, Check, Loader2, ArrowRight, Star, Mail } from 'lucide-react'
 import { createClient, isSupabaseConfigured } from '@/lib/supabase'
 
 const PERKS = [
@@ -21,6 +21,7 @@ export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [submitted, setSubmitted] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
@@ -49,7 +50,65 @@ export default function SignupPage() {
       setLoading(false)
       return
     }
-    router.push('/dashboard')
+    setSubmitted(true)
+    setLoading(false)
+  }
+
+  // ── Email verification screen ──────────────────────────
+  if (submitted) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center px-6">
+        <div className="max-w-md w-full text-center">
+          {/* Icon */}
+          <div
+            className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6"
+            style={{ background: 'rgba(79,142,247,0.08)', border: '1px solid rgba(79,142,247,0.2)' }}
+          >
+            <Mail className="w-9 h-9 text-[#4F8EF7]" />
+          </div>
+
+          {/* Heading */}
+          <h1 className="text-3xl font-black mb-3">Check your email</h1>
+          <p className="text-gray-400 text-sm leading-relaxed mb-2">
+            We sent a verification link to
+          </p>
+          <p className="font-bold text-white mb-6">{form.email}</p>
+
+          {/* Instructions */}
+          <div
+            className="rounded-2xl p-5 mb-6 text-left space-y-3"
+            style={{ background: 'rgba(79,142,247,0.04)', border: '1px solid rgba(79,142,247,0.12)' }}
+          >
+            {[
+              { num: '1', text: 'Open your email inbox' },
+              { num: '2', text: 'Find the email from Timeless' },
+              { num: '3', text: 'Click the "Confirm your email" link' },
+              { num: '4', text: "You'll be taken straight to your dashboard" },
+            ].map(step => (
+              <div key={step.num} className="flex items-center gap-3">
+                <div
+                  className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black flex-shrink-0 text-[#4F8EF7]"
+                  style={{ background: 'rgba(79,142,247,0.12)' }}
+                >
+                  {step.num}
+                </div>
+                <span className="text-sm text-gray-300">{step.text}</span>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-xs text-gray-600">
+            Didn&apos;t get it? Check your spam folder.{' '}
+            <button
+              onClick={() => setSubmitted(false)}
+              className="text-[#4F8EF7] hover:text-[#60A5FA] transition-colors"
+            >
+              Try a different email
+            </button>
+          </p>
+        </div>
+      </div>
+    )
   }
 
   return (
