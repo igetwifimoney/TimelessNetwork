@@ -7,6 +7,7 @@ import Sidebar from '@/components/Sidebar'
 import { getTodaysPlan, getGreeting, getDayName } from '@/data/missions'
 import { ACHIEVEMENTS, getUnlockedAchievements, type AchievementStats } from '@/data/achievements'
 import { COURSES } from '@/data/courses'
+import { createClient, isSupabaseConfigured } from '@/lib/supabase'
 import {
   CheckSquare, Square, Zap, ArrowRight, Play,
   CheckCircle, X, Loader2, Flame, TrendingUp,
@@ -80,11 +81,20 @@ export default function DashboardPage() {
   const [stats, setStats] = useState<UserStats | null>(null)
   const [statsLoading, setStatsLoading] = useState(true)
   const [completedLessons, setCompletedLessons] = useState<string[]>([])
+  const [firstName, setFirstName] = useState('')
   const countdown = useCountdown(NEXT_LIVE.date)
 
   useEffect(() => {
     // Fetch real stats
     fetch('/api/user-stats').then(r => r.json()).then(setStats).catch(() => {}).finally(() => setStatsLoading(false))
+    // Get user's first name from Supabase session
+    if (isSupabaseConfigured()) {
+      const supabase = createClient()
+      supabase.auth.getUser().then(({ data }) => {
+        const fullName: string = data.user?.user_metadata?.full_name ?? data.user?.email ?? ''
+        setFirstName(fullName.split(' ')[0])
+      }).catch(() => {})
+    }
     // Load completed lessons from localStorage
     const completed: string[] = []
     COURSES.forEach(course => {
@@ -170,7 +180,7 @@ export default function DashboardPage() {
               </div>
             </div>
             <h1 className="text-3xl lg:text-4xl font-black mb-1">
-              {getGreeting()}, Ty 👋
+              {getGreeting()}{firstName ? `, ${firstName}` : ''} 👋
             </h1>
             <p className="text-gray-500 text-sm">{plan.tagline}</p>
           </header>
