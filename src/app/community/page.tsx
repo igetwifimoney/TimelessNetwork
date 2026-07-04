@@ -23,7 +23,7 @@ const POSTS = [
   {
     avatar: 'MK', name: 'Marcus K.', role: 'Gold Member', time: '8m ago',
     channel: 'wins',
-    content: 'Just crossed $10k in total TikTok Shop sales! Started 6 weeks ago with zero experience. The product research system in Module 2 changed everything for me. DM me if you want to know what niche I went with. 🔥',
+    content: 'Just crossed $10k in total TikTok Shop sales! Started 6 weeks ago with zero experience. The product research system in the foundation course changed everything for me. DM me if you want to know what niche I went with. 🔥',
     likes: 47, comments: 12, isWin: true,
   },
   {
@@ -57,10 +57,11 @@ export default function CommunityPage() {
     <div className="flex min-h-screen bg-black">
       <Sidebar />
 
-      <div className="flex-1 flex min-w-0">
-        {/* ── Channel sidebar ── */}
+      <div className="flex-1 flex min-w-0 overflow-hidden">
+
+        {/* ── Channel sidebar — hidden on mobile ── */}
         <nav
-          className="w-52 flex-shrink-0 flex flex-col h-screen sticky top-0"
+          className="hidden lg:flex w-52 flex-shrink-0 flex-col h-screen sticky top-0"
           style={{ background: '#050505', borderRight: '1px solid rgba(255,255,255,0.04)' }}
           aria-label="Community channels"
         >
@@ -135,9 +136,46 @@ export default function CommunityPage() {
 
         {/* ── Main feed ── */}
         <main className="flex-1 flex flex-col min-w-0 overflow-hidden" id="main-content">
+
+          {/* Mobile channel tabs (visible on mobile only) */}
+          <div
+            className="lg:hidden flex gap-2 overflow-x-auto px-4 py-3 flex-shrink-0"
+            style={{ borderBottom: '1px solid rgba(255,255,255,0.04)', background: '#000' }}
+            role="tablist"
+            aria-label="Community channels"
+          >
+            {CHANNELS.map(ch => (
+              <button
+                key={ch.id}
+                onClick={() => setActiveChannel(ch.id)}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold flex-shrink-0 transition-all"
+                style={activeChannel === ch.id
+                  ? { background: 'rgba(79,142,247,0.12)', border: '1px solid rgba(79,142,247,0.25)', color: '#60A5FA' }
+                  : { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', color: '#6B7280' }
+                }
+                role="tab"
+                aria-selected={activeChannel === ch.id}
+              >
+                <Hash className="w-3 h-3" aria-hidden="true" />
+                {ch.label}
+                {ch.count > 0 && (
+                  <span
+                    className="text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center"
+                    style={activeChannel === ch.id
+                      ? { background: 'rgba(79,142,247,0.2)', color: '#4F8EF7' }
+                      : { background: 'rgba(255,255,255,0.05)', color: '#6B7280' }}
+                    aria-hidden="true"
+                  >
+                    {ch.count > 9 ? '9+' : ch.count}
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+
           {/* Top bar */}
           <div
-            className="flex items-center justify-between px-6 py-4 flex-shrink-0"
+            className="hidden lg:flex items-center justify-between px-6 py-4 flex-shrink-0"
             style={{ borderBottom: '1px solid rgba(255,255,255,0.04)', background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(20px)' }}
           >
             <div>
@@ -158,13 +196,32 @@ export default function CommunityPage() {
             </div>
           </div>
 
+          {/* Mobile header */}
+          <div
+            className="lg:hidden flex items-center justify-between px-4 py-3 flex-shrink-0"
+            style={{ background: 'rgba(0,0,0,0.6)' }}
+          >
+            <div className="flex items-center gap-2">
+              <Hash className="w-4 h-4 text-[#4F8EF7]" aria-hidden="true" />
+              <h1 className="font-bold text-sm">{activeChannel}</h1>
+            </div>
+            <div
+              className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium text-emerald-400"
+              style={{ background: 'rgba(52,211,153,0.08)', border: '1px solid rgba(52,211,153,0.15)' }}
+              role="status"
+            >
+              <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
+              128 online
+            </div>
+          </div>
+
           {/* Posts */}
-          <div className="flex-1 overflow-y-auto p-5 space-y-3" role="feed" aria-label="Community posts">
+          <div className="flex-1 overflow-y-auto p-4 lg:p-5 space-y-3 pb-24 lg:pb-0" role="feed" aria-label="Community posts">
             {POSTS.map((post, i) => (
-              <article key={i} className="card-premium p-5 group">
-                <div className="flex items-start gap-3.5">
+              <article key={i} className="card-premium p-4 lg:p-5 group">
+                <div className="flex items-start gap-3 lg:gap-3.5">
                   <div
-                    className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-black text-white flex-shrink-0"
+                    className="w-8 h-8 lg:w-9 lg:h-9 rounded-full flex items-center justify-center text-xs lg:text-sm font-black text-white flex-shrink-0"
                     style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
                     aria-hidden="true"
                   >
@@ -222,46 +279,52 @@ export default function CommunityPage() {
           </div>
 
           {/* Composer */}
-          <div className="flex-shrink-0 p-4" style={{ borderTop: '1px solid rgba(255,255,255,0.04)', background: '#000' }}>
-            <form
-              onSubmit={e => { e.preventDefault(); setNewPost('') }}
-              className="flex gap-3 items-end"
-              aria-label="New post composer"
-            >
-              <div
-                className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black text-white flex-shrink-0"
-                style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
-                aria-hidden="true"
+          <div
+            className="flex-shrink-0 p-3 lg:p-4"
+            style={{ borderTop: '1px solid rgba(255,255,255,0.04)', background: '#000', paddingBottom: 'max(12px, env(safe-area-inset-bottom))' }}
+          >
+            {/* Add pb-20 on mobile to clear the bottom nav */}
+            <div className="pb-16 lg:pb-0">
+              <form
+                onSubmit={e => { e.preventDefault(); setNewPost('') }}
+                className="flex gap-2 lg:gap-3 items-end"
+                aria-label="New post composer"
               >
-                Y
-              </div>
-              <div
-                className="flex-1 rounded-2xl px-4 py-3 focus-within:border-[#4F8EF7]/40 transition-all"
-                style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}
-              >
-                <label htmlFor="post-input" className="sr-only">Write a post to #{activeChannel}</label>
-                <textarea
-                  id="post-input"
-                  value={newPost}
-                  onChange={e => setNewPost(e.target.value)}
-                  placeholder="Share a win, ask a question, or post an update..."
-                  rows={2}
-                  className="w-full bg-transparent text-sm text-white placeholder-gray-700 resize-none outline-none leading-relaxed"
-                />
-                <div className="flex items-center justify-between mt-2">
-                  <span className="text-xs text-gray-700" aria-hidden="true"># {activeChannel}</span>
-                  <button
-                    type="submit"
-                    disabled={!newPost.trim()}
-                    className="btn-premium flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs"
-                    aria-label={`Post to #${activeChannel}`}
-                  >
-                    <Send className="w-3 h-3" aria-hidden="true" />
-                    Post
-                  </button>
+                <div
+                  className="w-7 h-7 lg:w-8 lg:h-8 rounded-full flex items-center justify-center text-xs font-black text-white flex-shrink-0"
+                  style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
+                  aria-hidden="true"
+                >
+                  Y
                 </div>
-              </div>
-            </form>
+                <div
+                  className="flex-1 rounded-2xl px-3 lg:px-4 py-2.5 lg:py-3 focus-within:border-[#4F8EF7]/40 transition-all"
+                  style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}
+                >
+                  <label htmlFor="post-input" className="sr-only">Write a post to #{activeChannel}</label>
+                  <textarea
+                    id="post-input"
+                    value={newPost}
+                    onChange={e => setNewPost(e.target.value)}
+                    placeholder="Share a win, ask a question, or post an update..."
+                    rows={2}
+                    className="w-full bg-transparent text-sm text-white placeholder-gray-700 resize-none outline-none leading-relaxed"
+                  />
+                  <div className="flex items-center justify-between mt-2">
+                    <span className="text-xs text-gray-700" aria-hidden="true"># {activeChannel}</span>
+                    <button
+                      type="submit"
+                      disabled={!newPost.trim()}
+                      className="btn-premium flex items-center gap-1.5 px-3 lg:px-4 py-1.5 rounded-lg text-xs"
+                      aria-label={`Post to #${activeChannel}`}
+                    >
+                      <Send className="w-3 h-3" aria-hidden="true" />
+                      Post
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
         </main>
       </div>

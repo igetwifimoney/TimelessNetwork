@@ -22,8 +22,8 @@ const MOBILE_NAV = [
   { href: '/dashboard',  label: 'Home',      icon: LayoutDashboard },
   { href: '/courses',    label: 'Courses',   icon: BookOpen        },
   { href: '/community',  label: 'Community', icon: Users           },
+  { href: '/mentorship', label: 'Mentors',   icon: GraduationCap   },
   { href: '/profile',    label: 'Profile',   icon: User            },
-  { href: '/billing',    label: 'Billing',   icon: CreditCard      },
 ]
 
 export default function Sidebar() {

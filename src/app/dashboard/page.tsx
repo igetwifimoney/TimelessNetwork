@@ -2,29 +2,31 @@
 
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
+import Link from 'next/link'
 import Sidebar from '@/components/Sidebar'
 import {
   Flame, CheckSquare, Square, ChevronRight,
-  TrendingUp, Users, Star, Zap, ArrowRight, Play, CheckCircle, X
+  TrendingUp, Users, Star, Zap, ArrowRight, Play, CheckCircle, X, Loader2
 } from 'lucide-react'
+import type { UserStats } from '@/app/api/user-stats/route'
 
 const MISSIONS = [
-  { id: 1, text: 'Upload one product video', xp: 50, done: false },
-  { id: 2, text: 'Watch Module 8', xp: 100, done: false },
-  { id: 3, text: 'Message one creator in community', xp: 25, done: false },
-  { id: 4, text: 'Complete daily check-in', xp: 20, done: true },
+  { id: 1, text: 'Complete one lesson', xp: 50, done: false },
+  { id: 2, text: 'Post a win in community', xp: 25, done: false },
+  { id: 3, text: 'Review a course module', xp: 30, done: false },
+  { id: 4, text: 'Daily check-in', xp: 20, done: false },
 ]
 
 const WINS = [
-  { avatar: 'MK', name: 'Marcus K.', msg: '+$3,200 today — new daily record 🔥', time: '8m ago', type: 'money' },
-  { avatar: 'JR', name: 'Jade R.', msg: 'First $1k month achieved', time: '41m ago', type: 'money' },
-  { avatar: 'SK', name: 'Sofia K.', msg: 'Viral video — 1.7M views overnight', time: '2h ago', type: 'viral' },
-  { avatar: 'TC', name: 'Tyler C.', msg: '30-day streak maintained ✅', time: '3h ago', type: 'streak' },
+  { avatar: 'MK', name: 'Marcus K.', msg: '+$3,200 today — new daily record 🔥', time: '8m ago' },
+  { avatar: 'JR', name: 'Jade R.', msg: 'First $1k month achieved', time: '41m ago' },
+  { avatar: 'SK', name: 'Sofia K.', msg: 'Viral video — 1.7M views overnight', time: '2h ago' },
+  { avatar: 'TC', name: 'Tyler C.', msg: '30-day streak maintained ✅', time: '3h ago' },
 ]
 
 const ONLINE_NOW = 487
 
-// Isolated so useSearchParams doesn't block static rendering of the page
+// Isolated so useSearchParams doesn't block static rendering
 function PaymentToast() {
   const [toast, setToast] = useState<'success' | 'canceled' | null>(null)
   const searchParams = useSearchParams()
@@ -58,23 +60,33 @@ function PaymentToast() {
         ? <CheckCircle className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
         : <X className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
       }
-      {toast === 'success'
-        ? "Payment successful — welcome to Timeless! 🎉"
-        : "Payment canceled. No charge was made."
-      }
-      <button
-        onClick={() => setToast(null)}
-        className="ml-2 opacity-60 hover:opacity-100 transition-opacity"
-        aria-label="Dismiss"
-      >
+      {toast === 'success' ? "Payment successful — welcome to Timeless! 🎉" : "Payment canceled. No charge was made."}
+      <button onClick={() => setToast(null)} className="ml-2 opacity-60 hover:opacity-100 transition-opacity" aria-label="Dismiss">
         <X className="w-3.5 h-3.5" />
       </button>
     </div>
   )
 }
 
+// Fetch real user stats and update streak
+function useUserStats() {
+  const [stats, setStats] = useState<UserStats | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch('/api/user-stats')
+      .then(r => r.json())
+      .then((data: UserStats) => setStats(data))
+      .catch(() => setStats(null))
+      .finally(() => setLoading(false))
+  }, [])
+
+  return { stats, loading }
+}
+
 export default function DashboardPage() {
   const [missions, setMissions] = useState(MISSIONS)
+  const { stats, loading: statsLoading } = useUserStats()
 
   const toggle = (id: number) =>
     setMissions(prev => prev.map(m => m.id === id ? { ...m, done: !m.done } : m))
@@ -83,11 +95,14 @@ export default function DashboardPage() {
   const total = missions.length
   const pct = Math.round((done / total) * 100)
 
+  const xp = stats?.xp ?? 0
+  const streak = stats?.streakCount ?? 0
+  const rank = stats?.leaderboardRank
+
   return (
     <div className="flex min-h-screen bg-black">
       <Sidebar />
 
-      {/* Payment toast wrapped in Suspense — required for useSearchParams in Next.js 14 */}
       <Suspense fallback={null}>
         <PaymentToast />
       </Suspense>
@@ -168,70 +183,91 @@ export default function DashboardPage() {
               {/* Continue Course */}
               <section className="card rounded-2xl p-6" aria-labelledby="course-heading">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 id="course-heading" className="font-bold">Continue Course</h2>
-                  <a href="/courses" className="text-xs text-gray-500 hover:text-white transition-colors flex items-center gap-1">
-                    All modules <ChevronRight className="w-3 h-3" aria-hidden="true" />
-                  </a>
+                  <h2 id="course-heading" className="font-bold">Continue Learning</h2>
+                  <Link href="/courses" className="text-xs text-gray-500 hover:text-white transition-colors flex items-center gap-1">
+                    All courses <ChevronRight className="w-3 h-3" aria-hidden="true" />
+                  </Link>
                 </div>
                 <div className="glass rounded-xl p-4 flex items-center gap-4">
                   <div className="w-12 h-12 rounded-xl glass-blue flex items-center justify-center flex-shrink-0" aria-hidden="true">
                     <Play className="w-5 h-5 text-[#4F8EF7]" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-xs text-[#4F8EF7] font-semibold mb-1">Module 8 · Lesson 3</div>
-                    <div className="text-sm font-bold mb-2">Scaling Your Content System</div>
-                    <div
-                      className="w-full h-1 bg-white/5 rounded-full overflow-hidden"
-                      role="progressbar"
-                      aria-valuenow={62}
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                      aria-label="Course progress: 62%"
-                    >
-                      <div className="h-full rounded-full" style={{ width: '62%', background: 'linear-gradient(90deg, #4F8EF7, #60A5FA)' }} />
-                    </div>
-                    <div className="text-xs text-gray-600 mt-1">62% complete</div>
+                    <div className="text-xs text-[#4F8EF7] font-semibold mb-1">TikTok Shop Foundation</div>
+                    <div className="text-sm font-bold mb-2">Setting Up Your TikTok Account for Sales</div>
+                    <div className="text-xs text-gray-600">Tap Resume to start watching →</div>
                   </div>
-                  <a href="/courses" className="btn-blue px-4 py-2.5 rounded-lg text-sm flex-shrink-0" aria-label="Resume Module 8, Lesson 3">
+                  <Link href="/courses/ttshop-foundation/account-setup" className="btn-blue px-4 py-2.5 rounded-lg text-sm flex-shrink-0" aria-label="Resume first course">
                     <span>Resume</span>
-                  </a>
+                  </Link>
                 </div>
               </section>
             </div>
 
             {/* ── RIGHT COLUMN ── */}
             <div className="space-y-5">
+              {/* Real Stats */}
               <section className="card rounded-2xl p-5" aria-labelledby="stats-heading">
                 <h2 id="stats-heading" className="font-bold text-sm mb-5">Your Stats</h2>
-                <dl className="space-y-4">
-                  {[
-                    { icon: Flame,      iconColor: 'text-orange-400',  label: 'Current Streak',    value: '31 Days 🔥' },
-                    { icon: Zap,        iconColor: 'text-[#4F8EF7]',   label: 'Total XP',          value: '3,240 XP' },
-                    { icon: TrendingUp, iconColor: 'text-emerald-400', label: 'Leaderboard',       value: '#124 this week' },
-                    { icon: Users,      iconColor: 'text-purple-400',  label: 'Community Online',  value: `${ONLINE_NOW} members`, green: true },
-                  ].map(({ icon: Icon, iconColor, label, value, green }) => (
-                    <div key={label} className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-lg glass-blue flex items-center justify-center flex-shrink-0" aria-hidden="true">
-                        <Icon className={`w-4 h-4 ${iconColor}`} />
+                {statsLoading ? (
+                  <div className="flex items-center justify-center py-4">
+                    <Loader2 className="w-5 h-5 animate-spin text-gray-600" aria-label="Loading stats" />
+                  </div>
+                ) : (
+                  <dl className="space-y-4">
+                    {[
+                      {
+                        icon: Flame,
+                        iconColor: 'text-orange-400',
+                        label: 'Current Streak',
+                        value: streak > 0 ? `${streak} Day${streak === 1 ? '' : 's'} 🔥` : 'Start today 🔥',
+                      },
+                      {
+                        icon: Zap,
+                        iconColor: 'text-[#4F8EF7]',
+                        label: 'Total XP',
+                        value: xp > 0 ? `${xp.toLocaleString()} XP` : '0 XP — earn some!',
+                      },
+                      {
+                        icon: TrendingUp,
+                        iconColor: 'text-emerald-400',
+                        label: 'Leaderboard',
+                        value: rank ? `#${rank} globally` : 'Complete a lesson to rank',
+                      },
+                      {
+                        icon: Users,
+                        iconColor: 'text-purple-400',
+                        label: 'Community Online',
+                        value: `${ONLINE_NOW} members`,
+                        green: true,
+                      },
+                    ].map(({ icon: Icon, iconColor, label, value, green }) => (
+                      <div key={label} className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-lg glass-blue flex items-center justify-center flex-shrink-0" aria-hidden="true">
+                          <Icon className={`w-4 h-4 ${iconColor}`} />
+                        </div>
+                        <div>
+                          <dt className="text-xs text-gray-500">{label}</dt>
+                          <dd className={`text-sm font-bold ${green ? 'text-emerald-400' : ''}`}>
+                            {green ? `● ${value}` : value}
+                          </dd>
+                        </div>
                       </div>
-                      <div>
-                        <dt className="text-xs text-gray-500">{label}</dt>
-                        <dd className={`text-sm font-bold ${green ? 'text-emerald-400' : ''}`}>{green ? `● ${value}` : value}</dd>
-                      </div>
-                    </div>
-                  ))}
-                </dl>
+                    ))}
+                  </dl>
+                )}
               </section>
 
+              {/* Latest Wins */}
               <section className="card rounded-2xl p-5" aria-labelledby="wins-heading">
                 <div className="flex items-center justify-between mb-4">
                   <h2 id="wins-heading" className="font-bold text-sm flex items-center gap-2">
                     <Star className="w-3.5 h-3.5 text-[#4F8EF7]" aria-hidden="true" />
                     Latest Wins
                   </h2>
-                  <a href="/community" className="text-xs text-gray-600 hover:text-white transition-colors" aria-label="See all community posts">
+                  <Link href="/community" className="text-xs text-gray-600 hover:text-white transition-colors" aria-label="See all community posts">
                     All →
-                  </a>
+                  </Link>
                 </div>
                 <ul className="space-y-3" aria-label="Recent member wins">
                   {WINS.map((w, i) => (
@@ -251,12 +287,12 @@ export default function DashboardPage() {
                     </li>
                   ))}
                 </ul>
-                <a
+                <Link
                   href="/community"
                   className="mt-4 w-full glass rounded-lg py-2.5 text-xs text-center text-gray-400 hover:text-white hover:bg-white/5 transition-all flex items-center justify-center gap-1.5"
                 >
                   View community feed <ArrowRight className="w-3 h-3" aria-hidden="true" />
-                </a>
+                </Link>
               </section>
             </div>
           </div>
