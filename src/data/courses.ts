@@ -2315,13 +2315,11 @@ This gives TikTok-first viewers a reason to visit your YouTube for the full revi
 
 ### The Content Ecosystem
 
-```
-TikTok Short → YouTube Short (repost)
-YouTube Short → Long-form YouTube (expanded)
-Long-form YouTube → Blog post (SEO)
-Blog post → Newsletter (owned audience)
-Newsletter → Direct sales / affiliate
-```
+  TikTok Short → YouTube Short (repost)
+  YouTube Short → Long-form YouTube (expanded)
+  Long-form YouTube → Blog post (SEO)
+  Blog post → Newsletter (owned audience)
+  Newsletter → Direct sales / affiliate
 
 Each piece of content feeds the next. The same 30 minutes of effort generates weeks of content across multiple platforms.`
       },

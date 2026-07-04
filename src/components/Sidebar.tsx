@@ -4,25 +4,29 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, BookOpen, Users, GraduationCap,
-  User, Settings, LogOut, Shield, CreditCard
+  User, Settings, LogOut, Shield, CreditCard,
+  Library, Bot, Package
 } from 'lucide-react'
 import { createClient, isSupabaseConfigured } from '@/lib/supabase'
 
 const NAV = [
-  { href: '/dashboard',   label: 'Dashboard',  icon: LayoutDashboard },
-  { href: '/courses',     label: 'Courses',    icon: BookOpen        },
-  { href: '/community',   label: 'Community',  icon: Users           },
-  { href: '/mentorship',  label: 'Mentorship', icon: GraduationCap   },
-  { href: '/profile',     label: 'Profile',    icon: User            },
-  { href: '/billing',     label: 'Billing',    icon: CreditCard      },
+  { href: '/dashboard',  label: 'Dashboard',  icon: LayoutDashboard },
+  { href: '/courses',    label: 'Courses',    icon: BookOpen        },
+  { href: '/community',  label: 'Community',  icon: Users           },
+  { href: '/mentorship', label: 'Mentorship', icon: GraduationCap   },
+  { href: '/resources',  label: 'Resources',  icon: Library         },
+  { href: '/coach',      label: 'AI Coach',   icon: Bot             },
+  { href: '/tracker',    label: 'Tracker',    icon: Package         },
+  { href: '/profile',    label: 'Profile',    icon: User            },
+  { href: '/billing',    label: 'Billing',    icon: CreditCard      },
 ]
 
-// Shown in the mobile bottom bar (subset of NAV)
+// Shown in the mobile bottom bar (5 items max)
 const MOBILE_NAV = [
   { href: '/dashboard',  label: 'Home',      icon: LayoutDashboard },
   { href: '/courses',    label: 'Courses',   icon: BookOpen        },
+  { href: '/coach',      label: 'Coach',     icon: Bot             },
   { href: '/community',  label: 'Community', icon: Users           },
-  { href: '/mentorship', label: 'Mentors',   icon: GraduationCap   },
   { href: '/profile',    label: 'Profile',   icon: User            },
 ]
 
