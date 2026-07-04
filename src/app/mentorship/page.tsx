@@ -1,44 +1,39 @@
 'use client'
 
 import Sidebar from '@/components/Sidebar'
-import { Star, Calendar, TrendingUp, ChevronRight, Quote } from 'lucide-react'
+import { Heart, Calendar, TrendingUp, ChevronRight, Quote } from 'lucide-react'
 
-// ── Ty Baughn — the ONLY bookable mentor ─────────────────────
+// ── Ty — the ONLY bookable mentor ─────────────────────
 const TY = {
   avatar: 'TB',
-  name: 'Ty Baughn',
+  name: 'Ty - igetwifimoney',
   specialty: 'TikTok Shop & Creator Monetization',
   revenue: '$XX,000/mo',
-  rating: 5.0,
-  reviews: 47,
   tags: ['TikTok Shop', 'Content Strategy', 'Organic Growth', 'Creator Revenue Program'],
-  bio: "I built Timeless from the ground up after going from zero to a full-time income on TikTok Shop. I've coached over 40 creators 1-on-1 and watched them go from confused beginners to consistent earners. In our session, we'll look at your specific account, content, and goals — and you'll leave with a clear action plan that actually fits your situation.",
+  bio: "I built Timeless from the ground up after going from zero to a full-time income on TikTok Shop. I've coached over 200 creators 1-on-1 and watched them go from confused beginners to consistent earners. In our session, we'll look at your specific account, content, and goals and you'll leave with a clear action plan that actually fits your situation.",
   calLink: 'https://calendly.com', // Replace with real Calendly link
-  students: 47,
+  students: 247,
 }
 
-// ── Mentee Success Stories — based on former mentor cards ────
+// ── Mentee Success Stories ────
+// Sorted by likes descending
 const MENTEES = [
   {
     avatar: 'JW',
     name: 'James W.',
     specialty: 'TikTok Shop Scaling',
     revenue: '$180k/mo',
-    rating: 4.9,
-    reviews: 87,
     tags: ['Product Research', 'Content Strategy', 'Paid Ads'],
-    students: 34,
-    quote: "Working with Ty was the turning point for me. He helped me find the right products, nail my content formula, and I went from $0 to $180k/month in under 8 months. He doesn't give generic advice — he actually looks at what you're doing and tells you exactly what to fix.",
+    likes: 847,
+    quote: "Working with Ty was the turning point for me. He helped me find the right products, nail my content formula, and I went from $0 to $180k/month in under 8 months. He doesn't give generic advice he actually looks at what you're doing and tells you exactly what to fix.",
   },
   {
     avatar: 'KS',
     name: 'Keisha S.',
     specialty: 'Viral Content Creation',
     revenue: '$65k/mo',
-    rating: 5.0,
-    reviews: 54,
     tags: ['Script Writing', 'Hook Creation', 'Organic Growth'],
-    students: 21,
+    likes: 623,
     quote: "I had 10+ videos go past 1M views after our 1-on-1 with Ty. He broke down my hooks and showed me exactly what was stopping my content from catching. I went from averaging 2K views to 400K views average. Completely changed my career trajectory.",
   },
   {
@@ -46,22 +41,18 @@ const MENTEES = [
     name: 'Ryan M.',
     specialty: 'Affiliate & Commission Strategy',
     revenue: '$42k/mo',
-    rating: 4.8,
-    reviews: 112,
     tags: ['Affiliate Models', 'Commission Structures', 'Niche Selection'],
-    students: 58,
-    quote: "Ty helped me build a TikTok Shop affiliate system that runs without me holding inventory. I'm completely location-free now making $42k/month. The session paid for itself in the first two days — the niche switch alone was worth thousands.",
+    likes: 412,
+    quote: "Ty helped me build a TikTok Shop affiliate system that runs without me holding inventory. I'm completely location-free now making $42k/month. The session paid for itself in the first two days the niche switch alone was worth thousands.",
   },
   {
     avatar: 'DN',
     name: 'Diana N.',
     specialty: 'Brand Building',
     revenue: '$95k/mo',
-    rating: 4.9,
-    reviews: 63,
     tags: ['Brand Identity', 'Premium Positioning', 'Team Building'],
-    students: 29,
-    quote: "I went from random product videos to an actual 7-figure brand identity thanks to Ty's mentorship. He helped me see the bigger picture — that I wasn't just an affiliate, I was building a brand. That mindset shift + his tactical advice on premium positioning changed everything.",
+    likes: 298,
+    quote: "I went from random product videos to an actual 7-figure brand identity thanks to Ty's mentorship. He helped me see the bigger picture that I wasn't just an affiliate, I was building a brand. That mindset shift plus his tactical advice on premium positioning changed everything.",
   },
 ]
 
@@ -105,7 +96,7 @@ export default function MentorshipPage() {
             <article
               className="card-premium p-6 group"
               style={{ border: '1px solid rgba(79,142,247,0.2)', background: 'linear-gradient(145deg, #0a0a0a, #0d1117)' }}
-              aria-label="Book a 1-on-1 session with Ty Baughn"
+              aria-label="Book a 1-on-1 session with Ty"
             >
               <div className="flex items-start gap-5">
                 {/* Avatar */}
@@ -172,18 +163,9 @@ export default function MentorshipPage() {
                     style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}
                   >
                     <div className="flex items-center gap-4 text-xs text-gray-600">
-                      <span className="flex items-center gap-1.5">
-                        <span className="flex items-center gap-0.5" role="img" aria-label={`Rating: ${TY.rating} out of 5`}>
-                          {[...Array(5)].map((_, i) => (
-                            <Star key={i} className="w-3 h-3 fill-[#4F8EF7] text-[#4F8EF7]" aria-hidden="true" />
-                          ))}
-                        </span>
-                        <span className="font-semibold text-white">{TY.rating}</span>
-                        <span>({TY.reviews} reviews)</span>
-                      </span>
                       <span className="flex items-center gap-1">
                         <TrendingUp className="w-3.5 h-3.5 text-[#4F8EF7]" aria-hidden="true" />
-                        {TY.students} members coached
+                        {TY.students}+ members coached
                       </span>
                     </div>
 
@@ -192,7 +174,7 @@ export default function MentorshipPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-premium flex items-center gap-2 text-sm font-bold px-5 py-2.5 rounded-xl transition-all"
-                      aria-label="Book a 1-on-1 session with Ty Baughn"
+                      aria-label="Book a 1-on-1 session with Ty"
                     >
                       <Calendar className="w-4 h-4" aria-hidden="true" />
                       Book Session
@@ -271,25 +253,16 @@ export default function MentorshipPage() {
                         {mentee.quote}
                       </blockquote>
 
-                      {/* Stats footer */}
-                      <div className="flex items-center gap-4 mt-3 text-xs text-gray-600">
-                        <span className="flex items-center gap-1.5">
-                          <span className="flex items-center gap-0.5" role="img" aria-label={`Rating: ${mentee.rating} out of 5`}>
-                            {[...Array(5)].map((_, i) => (
-                              <Star
-                                key={i}
-                                className={`w-3 h-3 ${i < Math.floor(mentee.rating) ? 'fill-[#4F8EF7] text-[#4F8EF7]' : 'text-gray-700'}`}
-                                aria-hidden="true"
-                              />
-                            ))}
-                          </span>
-                          <span className="font-semibold text-white">{mentee.rating}</span>
-                          <span>({mentee.reviews} reviews)</span>
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <TrendingUp className="w-3.5 h-3.5 text-[#4F8EF7]" aria-hidden="true" />
-                          {mentee.students} creators helped
-                        </span>
+                      {/* Likes */}
+                      <div className="flex items-center gap-2 mt-3">
+                        <button
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all hover:scale-105"
+                          style={{ background: 'rgba(239,68,68,0.06)', border: '1px solid rgba(239,68,68,0.12)', color: '#F87171' }}
+                          aria-label={`${mentee.likes} likes`}
+                        >
+                          <Heart className="w-3.5 h-3.5 fill-[#F87171]" />
+                          {mentee.likes.toLocaleString()}
+                        </button>
                       </div>
                     </div>
                   </div>

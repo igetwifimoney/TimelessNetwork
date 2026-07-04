@@ -2,7 +2,6 @@
 
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { use } from 'react'
 import Sidebar from '@/components/Sidebar'
 import { getCourseBySlug, COURSES } from '@/data/courses'
 import { BookOpen, Zap, Clock, Play, ChevronRight, ArrowLeft } from 'lucide-react'
@@ -13,8 +12,8 @@ const LEVEL_COLOR: Record<string, string> = {
   Advanced:     'text-orange-400',
 }
 
-export default function CoursePage({ params }: { params: Promise<{ courseSlug: string }> }) {
-  const { courseSlug } = use(params)
+export default function CoursePage({ params }: { params: { courseSlug: string } }) {
+  const { courseSlug } = params
   const course = getCourseBySlug(courseSlug)
   if (!course) notFound()
 

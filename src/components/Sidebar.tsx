@@ -5,19 +5,23 @@ import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, BookOpen, Users, GraduationCap,
   User, Settings, LogOut, Shield, CreditCard,
-  Library, Bot, Package
+  Library, Package, Search, CalendarDays, Award, Gift
 } from 'lucide-react'
 import { createClient, isSupabaseConfigured } from '@/lib/supabase'
 
 const NAV = [
-  { href: '/dashboard',  label: 'Dashboard',  icon: LayoutDashboard },
-  { href: '/courses',    label: 'Courses',    icon: BookOpen        },
-  { href: '/community',  label: 'Community',  icon: Users           },
-  { href: '/mentorship', label: 'Mentorship', icon: GraduationCap   },
-  { href: '/resources',  label: 'Resources',  icon: Library         },
-  { href: '/tracker',    label: 'Tracker',    icon: Package         },
-  { href: '/profile',    label: 'Profile',    icon: User            },
-  { href: '/billing',    label: 'Billing',    icon: CreditCard      },
+  { href: '/dashboard',    label: 'Dashboard',  icon: LayoutDashboard },
+  { href: '/courses',      label: 'Courses',    icon: BookOpen        },
+  { href: '/community',    label: 'Community',  icon: Users           },
+  { href: '/mentorship',   label: 'Mentorship', icon: GraduationCap   },
+  { href: '/resources',    label: 'Resources',  icon: Library         },
+  { href: '/tracker',      label: 'Tracker',    icon: Package         },
+  { href: '/planner',      label: 'Planner',    icon: CalendarDays    },
+  { href: '/search',       label: 'Search',     icon: Search          },
+  { href: '/certificates', label: 'Certs',      icon: Award           },
+  { href: '/referral',     label: 'Referral',   icon: Gift            },
+  { href: '/profile',      label: 'Profile',    icon: User            },
+  { href: '/billing',      label: 'Billing',    icon: CreditCard      },
 ]
 
 // Shown in the mobile bottom bar (5 items max)

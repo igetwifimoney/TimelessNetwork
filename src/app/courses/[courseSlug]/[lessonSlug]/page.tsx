@@ -2,9 +2,9 @@
 
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { use, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Sidebar from '@/components/Sidebar'
-import { getCourseBySlug, getLessonBySlug } from '@/data/courses'
+import { getCourseBySlug } from '@/data/courses'
 import {
   ArrowLeft, ChevronLeft, ChevronRight,
   CheckCircle, Zap, Clock, Loader2, BookOpen
@@ -102,9 +102,9 @@ function RenderContent({ content }: { content: string }) {
 export default function LessonPage({
   params,
 }: {
-  params: Promise<{ courseSlug: string; lessonSlug: string }>
+  params: { courseSlug: string; lessonSlug: string }
 }) {
-  const { courseSlug, lessonSlug } = use(params)
+  const { courseSlug, lessonSlug } = params
   const course = getCourseBySlug(courseSlug)
   if (!course) notFound()
 
