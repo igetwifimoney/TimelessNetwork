@@ -334,6 +334,34 @@ textarea::placeholder { color: #374151; }
 }
 
 /* ─────────────────────────────────────────
+   FORM INPUTS
+───────────────────────────────────────── */
+.field-input {
+  width: 100%;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 0.875rem;
+  color: #E5E7EB;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.field-input::placeholder {
+  color: rgba(255,255,255,0.2);
+}
+.field-input:focus {
+  border-color: rgba(79,142,247,0.45);
+  box-shadow: 0 0 0 3px rgba(79,142,247,0.08);
+}
+.field-input option {
+  background: #0a0a0a;
+  color: #E5E7EB;
+}
+
+/* ─────────────────────────────────────────
    BADGE
 ───────────────────────────────────────── */
 .badge {

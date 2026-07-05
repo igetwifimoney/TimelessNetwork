@@ -417,21 +417,62 @@ function PostCard({
   )
 }
 
+// ─── Helpers ─────────────────────────────────────────────
+function timeAgo(iso: string): string {
+  const diff = Date.now() - new Date(iso).getTime()
+  const mins = Math.floor(diff / 60000)
+  if (mins < 1) return 'just now'
+  if (mins < 60) return `${mins}m ago`
+  const hrs = Math.floor(mins / 60)
+  if (hrs < 24) return `${hrs}h ago`
+  return `${Math.floor(hrs / 24)}d ago`
+}
+
 // ─── Main page ────────────────────────────────────────────
 export default function CommunityPage() {
   const [activeChannel, setActiveChannel] = useState('general')
   const [posts, setPosts] = useState<Post[]>(SEED_POSTS)
   const [newPost, setNewPost] = useState('')
 
-  // Load any saved posts from localStorage (user-added ones)
+  // Fetch real posts from Supabase, merge with seeds
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem('timeless_community_posts')
-      if (saved) {
-        const extra: Post[] = JSON.parse(saved)
-        setPosts([...SEED_POSTS, ...extra])
-      }
-    } catch {}
+    fetch('/api/community')
+      .then(r => r.json())
+      .then(({ posts: dbPosts }) => {
+        if (!Array.isArray(dbPosts)) return
+        const mapped: Post[] = dbPosts.map((p: {
+          id: string; avatar: string; name: string; role: string;
+          created_at: string; channel: string; content: string;
+          likes: number; is_win: boolean;
+          community_replies?: { id: string; avatar: string; name: string; content: string; created_at: string; likes: number }[]
+        }) => ({
+          id: p.id,
+          avatar: p.avatar,
+          name: p.name,
+          role: p.role ?? 'Member',
+          time: timeAgo(p.created_at),
+          channel: p.channel,
+          content: p.content,
+          likes: p.likes ?? 0,
+          likedByMe: false,
+          isWin: p.is_win ?? false,
+          replies: (p.community_replies ?? []).map(r => ({
+            id: r.id,
+            avatar: r.avatar,
+            name: r.name,
+            content: r.content,
+            time: timeAgo(r.created_at),
+            likes: r.likes ?? 0,
+            likedByMe: false,
+          })),
+        }))
+        // Real posts on top, seeds below
+        setPosts([...mapped, ...SEED_POSTS])
+      })
+      .catch(() => {
+        // Fallback to seeds only if API fails
+        setPosts(SEED_POSTS)
+      })
   }, [])
 
   // Live activity simulator — drops a new post every 35–65 seconds
@@ -451,7 +492,7 @@ export default function CommunityPage() {
     }
 
     function scheduleNext() {
-      const delay = 35000 + Math.random() * 30000 // 35–65 seconds
+      const delay = 35000 + Math.random() * 30000
       return setTimeout(() => {
         dropPost()
         timerRef.current = scheduleNext()
@@ -462,82 +503,98 @@ export default function CommunityPage() {
     return () => clearTimeout(timerRef.current)
   }, [])
 
-  function savePosts(updated: Post[]) {
-    // Only persist user-added posts (not seed)
-    const seedIds = new Set(SEED_POSTS.map(p => p.id))
-    const userPosts = updated.filter(p => !seedIds.has(p.id))
-    try { localStorage.setItem('timeless_community_posts', JSON.stringify(userPosts)) } catch {}
-  }
+  const seedIds = new Set(SEED_POSTS.map(p => p.id))
 
   function handleLike(postId: string) {
-    setPosts(prev => {
-      const updated = prev.map(p => {
-        if (p.id !== postId) return p
-        return { ...p, likes: p.likedByMe ? p.likes - 1 : p.likes + 1, likedByMe: !p.likedByMe }
-      })
-      savePosts(updated)
-      return updated
-    })
+    const post = posts.find(p => p.id === postId)
+    if (!post) return
+    const delta = post.likedByMe ? -1 : 1
+    setPosts(prev => prev.map(p =>
+      p.id !== postId ? p : { ...p, likes: p.likes + delta, likedByMe: !p.likedByMe }
+    ))
+    // Sync to DB for real posts (not seeds/live)
+    if (!seedIds.has(postId) && !postId.startsWith('live_')) {
+      fetch(`/api/community/${postId}/like`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ delta }),
+      }).catch(() => {})
+    }
   }
 
   function handleLikeReply(postId: string, replyId: string) {
-    setPosts(prev => {
-      const updated = prev.map(p => {
-        if (p.id !== postId) return p
-        return {
-          ...p,
-          replies: p.replies.map(r => {
-            if (r.id !== replyId) return r
-            return { ...r, likes: r.likedByMe ? r.likes - 1 : r.likes + 1, likedByMe: !r.likedByMe }
-          }),
-        }
-      })
-      savePosts(updated)
-      return updated
-    })
+    setPosts(prev => prev.map(p => {
+      if (p.id !== postId) return p
+      return {
+        ...p,
+        replies: p.replies.map(r =>
+          r.id !== replyId ? r : { ...r, likes: r.likedByMe ? r.likes - 1 : r.likes + 1, likedByMe: !r.likedByMe }
+        ),
+      }
+    }))
   }
 
   function handleReply(postId: string, content: string) {
-    const newReply: Reply = {
+    const tempReply: Reply = {
       id: `r_${Date.now()}`,
       avatar: 'Y',
       name: 'You',
       content,
-      time: 'Just now',
+      time: 'just now',
       likes: 0,
       likedByMe: false,
     }
-    setPosts(prev => {
-      const updated = prev.map(p =>
-        p.id !== postId ? p : { ...p, replies: [...p.replies, newReply] }
-      )
-      savePosts(updated)
-      return updated
-    })
+    setPosts(prev => prev.map(p =>
+      p.id !== postId ? p : { ...p, replies: [...p.replies, tempReply] }
+    ))
+    // Persist to DB for real posts
+    if (!seedIds.has(postId) && !postId.startsWith('live_')) {
+      fetch(`/api/community/${postId}/replies`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content }),
+      }).catch(() => {})
+    }
   }
 
   function handlePost(e: React.FormEvent) {
     e.preventDefault()
     if (!newPost.trim()) return
-    const post: Post = {
-      id: `user_${Date.now()}`,
+    const content = newPost.trim()
+    setNewPost('')
+
+    // Optimistic UI
+    const tempPost: Post = {
+      id: `temp_${Date.now()}`,
       avatar: 'Y',
       name: 'You',
       role: 'Member',
-      time: 'Just now',
+      time: 'just now',
       channel: activeChannel,
-      content: newPost.trim(),
+      content,
       likes: 0,
       likedByMe: false,
       isWin: false,
       replies: [],
     }
-    setPosts(prev => {
-      const updated = [post, ...prev]
-      savePosts(updated)
-      return updated
+    setPosts(prev => [tempPost, ...prev])
+
+    // Persist to Supabase
+    fetch('/api/community', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ channel: activeChannel, content }),
     })
-    setNewPost('')
+      .then(r => r.json())
+      .then(({ post }) => {
+        if (post) {
+          // Replace temp post with real DB post
+          setPosts(prev => prev.map(p =>
+            p.id === tempPost.id ? { ...tempPost, id: post.id } : p
+          ))
+        }
+      })
+      .catch(() => {})
   }
 
   const visiblePosts = posts.filter(p => p.channel === activeChannel)

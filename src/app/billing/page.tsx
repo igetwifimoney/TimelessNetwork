@@ -80,6 +80,25 @@ export default function BillingPage() {
     }
   }
 
+  const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null)
+
+  const startCheckout = async (productKey: string) => {
+    setCheckoutLoading(productKey)
+    try {
+      const res = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productKey }),
+      })
+      const { url, error: err } = await res.json()
+      if (err) { setError(err); setCheckoutLoading(null); return }
+      window.location.href = url
+    } catch {
+      setError('Could not start checkout')
+      setCheckoutLoading(null)
+    }
+  }
+
   const activeSubs   = billing?.subscriptions.filter(s => ACTIVE_STATUSES.has(s.status)) ?? []
   const canceledSubs = billing?.subscriptions.filter(s => s.status === 'canceled')        ?? []
   const purchases    = billing?.purchases ?? []
@@ -123,17 +142,38 @@ export default function BillingPage() {
                 </h2>
 
                 {activeSubs.length === 0 ? (
-                  <div className="flex items-center justify-between gap-4 flex-wrap">
-                    <div className="flex items-center gap-3 text-gray-500">
-                      <AlertCircle className="w-5 h-5 text-gray-700 flex-shrink-0" aria-hidden="true" />
-                      <span className="text-sm">No active subscription.</span>
+                  <div className="space-y-4">
+                    <p className="text-sm text-gray-500 mb-5">No active subscription. Choose a plan below to get full access.</p>
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      {/* Monthly */}
+                      <div className="rounded-2xl p-5" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                        <div className="text-xs text-gray-500 uppercase tracking-wider mb-2">Monthly</div>
+                        <div className="text-3xl font-black mb-0.5">$49<span className="text-base font-normal text-gray-500">.99/mo</span></div>
+                        <div className="text-xs text-gray-600 mb-4">Cancel anytime</div>
+                        <button
+                          onClick={() => startCheckout('TIMELESS_MONTHLY')}
+                          disabled={checkoutLoading !== null}
+                          className="w-full py-2.5 rounded-xl text-sm font-bold transition-all"
+                          style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }}
+                        >
+                          {checkoutLoading === 'TIMELESS_MONTHLY' ? <Loader className="w-4 h-4 animate-spin mx-auto" /> : 'Subscribe Monthly'}
+                        </button>
+                      </div>
+                      {/* Annual */}
+                      <div className="rounded-2xl p-5 relative" style={{ background: 'rgba(79,142,247,0.04)', border: '1px solid rgba(79,142,247,0.25)' }}>
+                        <div className="absolute -top-3 left-4 text-[10px] font-black px-3 py-1 rounded-full text-white" style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}>BEST VALUE</div>
+                        <div className="text-xs text-[#4F8EF7] uppercase tracking-wider mb-2">Annual</div>
+                        <div className="text-3xl font-black mb-0.5">$39<span className="text-base font-normal text-gray-500">/mo</span></div>
+                        <div className="text-xs text-gray-600 mb-4">$468/year · save $132</div>
+                        <button
+                          onClick={() => startCheckout('TIMELESS_ANNUAL')}
+                          disabled={checkoutLoading !== null}
+                          className="btn-premium w-full py-2.5 rounded-xl text-sm font-bold"
+                        >
+                          {checkoutLoading === 'TIMELESS_ANNUAL' ? <Loader className="w-4 h-4 animate-spin mx-auto" /> : 'Subscribe Annual'}
+                        </button>
+                      </div>
                     </div>
-                    <a
-                      href="/#pricing"
-                      className="btn-premium flex items-center gap-2 px-4 py-2 rounded-lg text-sm"
-                    >
-                      View plans →
-                    </a>
                   </div>
                 ) : (
                   <ul className="space-y-4" aria-label="Active subscriptions">

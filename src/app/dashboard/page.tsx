@@ -11,7 +11,7 @@ import { createClient, isSupabaseConfigured } from '@/lib/supabase'
 import {
   CheckSquare, Square, Zap, ArrowRight, Play,
   CheckCircle, X, Loader2, Flame, TrendingUp,
-  Star, Trophy, ChevronRight, Users, Calendar, BookOpen
+  Star, Trophy, ChevronRight, Users, Calendar, BookOpen, MessageSquare
 } from 'lucide-react'
 import type { UserStats } from '@/app/api/user-stats/route'
 
@@ -328,6 +328,44 @@ export default function DashboardPage() {
 
             {/* ── RIGHT 1/3 ── */}
             <div className="space-y-5">
+
+              {/* Discord Community */}
+              <section
+                className="rounded-2xl p-5 relative overflow-hidden"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(88,101,242,0.12), rgba(88,101,242,0.04))',
+                  border: '1px solid rgba(88,101,242,0.25)',
+                }}
+                aria-labelledby="discord-heading"
+              >
+                <div className="absolute top-0 right-0 w-28 h-28 pointer-events-none" style={{ background: 'radial-gradient(circle at top right, rgba(88,101,242,0.15), transparent 70%)' }} aria-hidden="true" />
+                <div className="relative">
+                  <div className="flex items-center gap-2.5 mb-3">
+                    {/* Discord logo mark */}
+                    <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(88,101,242,0.2)', border: '1px solid rgba(88,101,242,0.3)' }}>
+                      <MessageSquare className="w-4.5 h-4.5 text-indigo-400" style={{ width: '18px', height: '18px' }} aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h2 id="discord-heading" className="font-bold text-sm leading-tight">Join the Discord</h2>
+                      <div className="text-xs text-gray-500">Members-only community</div>
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-400 leading-relaxed mb-4">
+                    Connect with the crew, share wins, get feedback on your content, and stay plugged in between live calls.
+                  </p>
+                  <a
+                    href="https://discord.gg/timeless"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-xs font-bold transition-all duration-200 hover:opacity-90"
+                    style={{ background: '#5865F2', color: '#fff' }}
+                    aria-label="Join Timeless Discord server"
+                  >
+                    <MessageSquare className="w-3.5 h-3.5" aria-hidden="true" />
+                    Join Discord
+                  </a>
+                </div>
+              </section>
 
               {/* Upcoming Live Call */}
               <section className="card rounded-2xl p-5" aria-labelledby="live-heading">

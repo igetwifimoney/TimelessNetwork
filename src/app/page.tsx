@@ -960,198 +960,263 @@ export default function LandingPage() {
 
         {/* ── PRICING ─────────────────────────────────────── */}
         <section id="pricing" className="py-28 px-5 border-t border-white/[0.04]" aria-labelledby="pricing-heading">
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-2xl mx-auto">
             <div className="text-center mb-16 reveal">
               <div className="badge mx-auto mb-5">Pricing</div>
               <h2 id="pricing-heading" className="text-4xl md:text-5xl font-black mb-4">
-                One price.<br />
+                One membership.<br />
                 <span className="gradient-text">Everything unlocked.</span>
               </h2>
-              <p className="text-gray-500">No upsells. No paywalled content. Full access from day one.</p>
+              <p className="text-gray-500">No tiers. No paywalled content. Full access from day one.</p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-4 mb-8">
-              {/* Monthly */}
-              <div className="card-premium p-8 group reveal">
-                <div className="text-xs text-gray-500 uppercase tracking-wider mb-4">Monthly</div>
-                <div className="flex items-end gap-1 mb-1">
-                  <span className="text-5xl font-black">$49</span>
-                  <span className="text-lg font-bold text-gray-400 mb-1">.99</span>
-                  <span className="text-gray-500 mb-1.5">/month</span>
-                </div>
-                <div className="text-xs text-gray-600 mb-6">Full access. Cancel anytime.</div>
-                <ul className="space-y-3 mb-8" aria-label="Monthly plan features">
-                  {['Complete TikTok Shop course', 'Private creator community', 'Weekly live calls', 'Daily missions & streaks', 'Discord access', 'Course updates forever'].map(f => (
-                    <li key={f} className="flex items-center gap-3">
-                      <div className="w-5 h-5 rounded-full glass-blue flex items-center justify-center flex-shrink-0" aria-hidden="true">
-                        <Check className="w-3 h-3 text-[#4F8EF7]" />
-                      </div>
-                      <span className="text-sm text-gray-300">{f}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link href="/auth/signup" className="btn-ghost block text-center py-3.5 rounded-xl font-bold text-sm">
-                  Join Timeless
-                </Link>
-              </div>
-
-              {/* Annual */}
-              <div
-                className="relative rounded-2xl p-8 group reveal reveal-delay-1"
-                style={{ background: 'rgba(79,142,247,0.04)', border: '1px solid rgba(79,142,247,0.2)', boxShadow: '0 0 40px rgba(79,142,247,0.08)' }}
-              >
-                <div
-                  className="absolute -top-3.5 left-1/2 -translate-x-1/2 text-xs font-black px-4 py-1.5 rounded-full whitespace-nowrap text-white animate-pulse-blue"
-                  style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
-                >
-                  BEST VALUE — Save $132
-                </div>
-                <div className="text-xs text-[#4F8EF7] uppercase tracking-wider mb-4 font-semibold">Annual</div>
-                <div className="flex items-end gap-1 mb-1">
-                  <span className="text-5xl font-black">$39</span>
-                  <span className="text-gray-400 mb-1.5">/month</span>
-                </div>
-                <div className="text-xs text-gray-500 mb-6">Billed annually — $468/year</div>
-                <ul className="space-y-3 mb-8" aria-label="Annual plan features">
-                  {[
-                    'Everything in Monthly',
-                    '2 private mentorship calls included',
-                    'Priority support & content feedback',
-                    'Exclusive member-only workshops',
-                    'Early access to new modules',
-                  ].map(f => (
-                    <li key={f} className="flex items-center gap-3">
-                      <div className="w-5 h-5 rounded-full glass-blue flex items-center justify-center flex-shrink-0" aria-hidden="true">
-                        <Check className="w-3 h-3 text-[#4F8EF7]" />
-                      </div>
-                      <span className="text-sm text-gray-300">{f}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link href="/auth/signup" className="btn-premium block text-center py-3.5 rounded-xl font-bold text-sm group/btn">
-                  <span className="flex items-center justify-center gap-2">
-                    Get Instant Access
-                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" aria-hidden="true" />
-                  </span>
-                </Link>
-              </div>
-            </div>
-
-            {/* Trust badges */}
-            <div className="flex flex-wrap justify-center gap-3 mb-12" role="list" aria-label="Trust signals">
-              {[
-                { icon: RefreshCw, label: '30-Day Guarantee' },
-                { icon: Lock, label: 'Secure Checkout' },
-                { icon: CreditCard, label: 'Powered by Stripe' },
-                { icon: XCircle, label: 'Cancel Anytime' },
-              ].map(b => {
-                const Icon = b.icon
-                return (
-                  <div key={b.label} className="flex items-center gap-2 glass px-3.5 py-2 rounded-full text-xs text-gray-400" role="listitem">
-                    <Icon className="w-3.5 h-3.5 text-[#4F8EF7]" aria-hidden="true" />
-                    {b.label}
-                  </div>
-                )
-              })}
-            </div>
-
-            {/* ── MENTORSHIP UPSELL ── */}
+            {/* ── MAIN PRICING CARD ── */}
             <div
-              className="relative rounded-2xl overflow-hidden group/mentorship transition-all duration-500 reveal"
+              className="relative rounded-3xl overflow-hidden reveal mb-6"
               style={{
-                background: '#050505',
-                border: '1px solid rgba(79,142,247,0.12)',
-                boxShadow: '0 0 0 1px rgba(79,142,247,0.04), 0 24px 80px rgba(0,0,0,0.6)',
+                background: 'rgba(79,142,247,0.03)',
+                border: '1px solid rgba(79,142,247,0.22)',
+                boxShadow: '0 0 60px rgba(79,142,247,0.07), 0 24px 80px rgba(0,0,0,0.5)',
+              }}
+            >
+              <div className="absolute top-0 right-0 w-96 h-64 pointer-events-none" style={{ background: 'radial-gradient(circle at top right, rgba(79,142,247,0.09), transparent 65%)' }} aria-hidden="true" />
+              <div className="absolute bottom-0 left-0 w-64 h-48 pointer-events-none" style={{ background: 'radial-gradient(circle at bottom left, rgba(37,99,235,0.06), transparent 70%)' }} aria-hidden="true" />
+
+              <div className="relative p-8 md:p-10">
+                {/* Header */}
+                <div className="mb-7">
+                  <div className="text-xs text-[#4F8EF7] font-bold uppercase tracking-widest mb-3">Timeless Membership</div>
+                  <div className="flex flex-wrap items-end gap-x-6 gap-y-3">
+                    {/* Monthly option */}
+                    <div>
+                      <div className="flex items-end gap-1">
+                        <span className="text-5xl font-black">$49</span>
+                        <span className="text-xl font-bold text-gray-400 mb-1">.99</span>
+                        <span className="text-gray-500 mb-1.5 ml-0.5">/mo</span>
+                      </div>
+                      <div className="text-xs text-gray-600 mt-0.5">Billed monthly · Cancel anytime</div>
+                    </div>
+
+                    <div className="text-gray-700 font-light text-lg mb-1">or</div>
+
+                    {/* Annual option */}
+                    <div className="relative">
+                      <div
+                        className="absolute -top-3.5 left-0 text-[10px] font-black px-2.5 py-0.5 rounded-full whitespace-nowrap text-white"
+                        style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
+                      >
+                        SAVE 25%
+                      </div>
+                      <div className="flex items-end gap-1 pt-1">
+                        <span className="text-5xl font-black">$449</span>
+                        <span className="text-gray-500 mb-1.5 ml-0.5">/year</span>
+                      </div>
+                      <div className="text-xs text-gray-600 mt-0.5">~$37/mo · Best value</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Divider */}
+                <div className="h-px mb-7" style={{ background: 'rgba(255,255,255,0.05)' }} />
+
+                {/* Features grid */}
+                <ul className="grid sm:grid-cols-2 gap-3 mb-8" aria-label="Timeless Membership features">
+                  {[
+                    'Complete TikTok Shop Course Library',
+                    'Every Future Course Update',
+                    'Weekly Live Group Coaching',
+                    'Private Community',
+                    'Daily Missions & Accountability',
+                    'Product Research Resources',
+                    'Templates & Swipe Files',
+                    'AI Tools',
+                    'Member Dashboard',
+                    'Resource Library',
+                    'Community Challenges',
+                    'Live Event Recordings',
+                  ].map(f => (
+                    <li key={f} className="flex items-center gap-2.5">
+                      <div className="w-5 h-5 rounded-full glass-blue flex items-center justify-center flex-shrink-0" aria-hidden="true">
+                        <Check className="w-3 h-3 text-[#4F8EF7]" />
+                      </div>
+                      <span className="text-sm text-gray-300">{f}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* CTA */}
+                <Link
+                  href="/auth/signup"
+                  className="btn-premium flex items-center justify-center gap-2 py-4 rounded-2xl font-bold text-base group/btn mb-5"
+                >
+                  Join Timeless
+                  <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" aria-hidden="true" />
+                </Link>
+
+                {/* Trust badges */}
+                <div className="flex flex-wrap justify-center gap-4" role="list" aria-label="Trust signals">
+                  {[
+                    { icon: Lock, label: 'Secure Stripe Checkout' },
+                    { icon: XCircle, label: 'Cancel Anytime' },
+                    { icon: RefreshCw, label: 'Lifetime Course Updates' },
+                  ].map(b => {
+                    const Icon = b.icon
+                    return (
+                      <div key={b.label} className="flex items-center gap-1.5 text-xs text-gray-500" role="listitem">
+                        <Icon className="w-3.5 h-3.5 text-emerald-400" aria-hidden="true" />
+                        <span className="text-emerald-400 font-semibold">✔</span> {b.label}
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── PRIVATE MENTORSHIP ─────────────────────────── */}
+        <section id="mentorship-apply" className="py-24 px-5 border-t border-white/[0.04]" aria-labelledby="mentorship-section-heading">
+          <div className="max-w-2xl mx-auto">
+            {/* Section label */}
+            <div className="text-center mb-14 reveal">
+              <div className="badge mx-auto mb-5" style={{ background: 'rgba(251,146,60,0.08)', border: '1px solid rgba(251,146,60,0.2)', color: '#FB923C' }}>Private Mentorship</div>
+              <h2 id="mentorship-section-heading" className="text-3xl md:text-4xl font-black mb-4">
+                The next level.<br />
+                <span className="gradient-text">For those ready to go all-in.</span>
+              </h2>
+              <p className="text-gray-500 text-sm leading-relaxed max-w-lg mx-auto">
+                This is not for everyone. The mentorship is designed for creators who are serious about building a real business — and ready to move with speed.
+              </p>
+            </div>
+
+            {/* ── MENTORSHIP CARD ── */}
+            <div
+              className="relative rounded-3xl overflow-hidden group/mentorship transition-all duration-500 reveal"
+              style={{
+                background: '#040404',
+                border: '1px solid rgba(79,142,247,0.15)',
+                boxShadow: '0 0 0 1px rgba(79,142,247,0.05), 0 32px 100px rgba(0,0,0,0.7)',
               }}
               onMouseEnter={e => {
                 const el = e.currentTarget as HTMLElement
-                el.style.border = '1px solid rgba(79,142,247,0.28)'
-                el.style.boxShadow = '0 0 0 1px rgba(79,142,247,0.1), 0 24px 80px rgba(0,0,0,0.7), 0 0 60px rgba(79,142,247,0.06)'
+                el.style.border = '1px solid rgba(79,142,247,0.32)'
+                el.style.boxShadow = '0 0 0 1px rgba(79,142,247,0.12), 0 32px 100px rgba(0,0,0,0.8), 0 0 80px rgba(79,142,247,0.08)'
               }}
               onMouseLeave={e => {
                 const el = e.currentTarget as HTMLElement
-                el.style.border = '1px solid rgba(79,142,247,0.12)'
-                el.style.boxShadow = '0 0 0 1px rgba(79,142,247,0.04), 0 24px 80px rgba(0,0,0,0.6)'
+                el.style.border = '1px solid rgba(79,142,247,0.15)'
+                el.style.boxShadow = '0 0 0 1px rgba(79,142,247,0.05), 0 32px 100px rgba(0,0,0,0.7)'
               }}
             >
-              <div className="absolute top-0 right-0 w-80 h-80 pointer-events-none" style={{ background: 'radial-gradient(circle at top right, rgba(79,142,247,0.07), transparent 60%)' }} aria-hidden="true" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 pointer-events-none opacity-50" style={{ background: 'radial-gradient(circle at bottom left, rgba(37,99,235,0.06), transparent 65%)' }} aria-hidden="true" />
+              <div className="absolute top-0 right-0 w-80 h-80 pointer-events-none" style={{ background: 'radial-gradient(circle at top right, rgba(79,142,247,0.08), transparent 60%)' }} aria-hidden="true" />
+              <div className="absolute bottom-0 left-0 w-56 h-56 pointer-events-none opacity-60" style={{ background: 'radial-gradient(circle at bottom left, rgba(37,99,235,0.07), transparent 65%)' }} aria-hidden="true" />
+              {/* Animated top border glow */}
+              <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(79,142,247,0.5), transparent)' }} aria-hidden="true" />
 
-              <div className="relative p-8">
-                <div className="flex flex-wrap items-center gap-2.5 mb-6">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-orange-300" style={{ background: 'rgba(251,146,60,0.08)', border: '1px solid rgba(251,146,60,0.2)' }}>
+              <div className="relative p-8 md:p-10">
+                {/* Badges */}
+                <div className="flex flex-wrap items-center gap-2.5 mb-8">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-orange-300" style={{ background: 'rgba(251,146,60,0.1)', border: '1px solid rgba(251,146,60,0.25)' }}>
                     🔥 Limited Spots
                   </div>
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-[#60A5FA]" style={{ background: 'rgba(79,142,247,0.07)', border: '1px solid rgba(79,142,247,0.18)' }}>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-[#60A5FA]" style={{ background: 'rgba(79,142,247,0.08)', border: '1px solid rgba(79,142,247,0.2)' }}>
                     Applications Open
                   </div>
-                  <span className="text-xs text-gray-600 ml-auto hidden sm:block">Only accepting a few new mentees each month</span>
+                  <span className="text-xs text-gray-600 ml-auto hidden sm:block">Only a few spots per month</span>
                 </div>
 
-                <div className="flex items-start justify-between gap-6 mb-7 flex-wrap">
+                {/* Title + Price */}
+                <div className="flex items-start justify-between gap-6 mb-8 flex-wrap">
                   <div>
-                    <div className="text-xs text-[#4F8EF7] font-semibold uppercase tracking-wider mb-2">Direct 1-on-1 access</div>
-                    <h3 className="text-2xl font-black mb-2 leading-tight">TikTok Shop Mentorship</h3>
+                    <div className="text-xs text-[#4F8EF7] font-bold uppercase tracking-widest mb-3">Private 1-on-1 Mentorship</div>
+                    <h3 className="text-3xl font-black mb-3 leading-tight">Direct access.<br />Real results.</h3>
                     <p className="text-gray-500 text-sm max-w-sm leading-relaxed">
                       This is not a course you watch alone. This is direct access to someone generating real revenue — who will look at your specific account and tell you exactly what to do.
                     </p>
                   </div>
-                  <div className="text-right flex-shrink-0">
-                    <div className="text-4xl font-black tracking-tight" style={{ textShadow: '0 0 30px rgba(79,142,247,0.2)' }}>
+                  <div className="flex-shrink-0">
+                    <div className="text-xs text-gray-600 uppercase tracking-wider mb-1">Investment</div>
+                    <div
+                      className="text-5xl font-black tracking-tight leading-none"
+                      style={{ textShadow: '0 0 40px rgba(79,142,247,0.25)' }}
+                    >
                       $1,080
                     </div>
-                    <div className="text-xs font-medium text-[#4F8EF7]/70 mt-1">One-time payment</div>
+                    <div className="text-xs font-semibold text-[#4F8EF7] mt-2">One-Time Payment</div>
+                    <div className="text-xs text-gray-600 mt-1.5 max-w-[180px] leading-relaxed">
+                      Not everyone is accepted. We only work with members we believe we can genuinely help succeed.
+                    </div>
                   </div>
                 </div>
 
-                <ul className="grid sm:grid-cols-2 gap-3 mb-7" aria-label="Mentorship includes">
-                  {[
-                    'Bi-weekly 1-on-1 coaching sessions',
-                    'Personalized product & content strategy',
-                    'Full account audit & teardown',
-                    'Weekly private accountability calls',
-                    'Priority DM access between sessions',
-                    'Custom action plan built for your niche',
-                  ].map(f => (
-                    <li key={f} className="flex items-center gap-2.5 group/item">
-                      <div
-                        className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover/item:scale-110"
-                        style={{ background: 'rgba(79,142,247,0.1)', border: '1px solid rgba(79,142,247,0.3)' }}
-                        aria-hidden="true"
-                      >
-                        <Check className="w-2.5 h-2.5 text-[#4F8EF7]" />
-                      </div>
-                      <span className="text-xs text-gray-400 group-hover/item:text-gray-200 transition-colors duration-200">{f}</span>
-                    </li>
-                  ))}
-                </ul>
+                {/* Divider */}
+                <div className="h-px mb-7" style={{ background: 'rgba(255,255,255,0.04)' }} />
 
-                <div className="divider mb-6" />
+                {/* Features */}
+                <div className="mb-8">
+                  <div className="text-xs text-gray-600 uppercase tracking-wider mb-4">Everything inside Timeless Membership, plus:</div>
+                  <ul className="grid sm:grid-cols-2 gap-3" aria-label="Mentorship features">
+                    {[
+                      'Personalized Growth Roadmap',
+                      'Private Strategy Sessions',
+                      'Weekly Accountability',
+                      'Full TikTok Shop Account Audit',
+                      'Product Research Strategy',
+                      'Video Reviews',
+                      'Content Feedback',
+                      'Priority Support',
+                      'Direct Mentor Access',
+                      'Personalized Growth Plan',
+                    ].map(f => (
+                      <li key={f} className="flex items-center gap-2.5 group/item">
+                        <div
+                          className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover/item:scale-110"
+                          style={{ background: 'rgba(79,142,247,0.12)', border: '1px solid rgba(79,142,247,0.35)' }}
+                          aria-hidden="true"
+                        >
+                          <Check className="w-2.5 h-2.5 text-[#4F8EF7]" />
+                        </div>
+                        <span className="text-sm text-gray-400 group-hover/item:text-gray-100 transition-colors duration-200">{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                {/* Divider */}
+                <div className="h-px mb-7" style={{ background: 'rgba(255,255,255,0.04)' }} />
+
+                {/* CTA */}
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
                   <Link
-                    href="/auth/signup"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all duration-200 group/btn"
-                    style={{ background: 'rgba(79,142,247,0.08)', border: '1px solid rgba(79,142,247,0.2)', color: '#60A5FA' }}
+                    href="/mentorship/apply"
+                    className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-sm font-black transition-all duration-300 group/btn whitespace-nowrap"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(79,142,247,0.15), rgba(37,99,235,0.10))',
+                      border: '1px solid rgba(79,142,247,0.3)',
+                      color: '#93C5FD',
+                      boxShadow: '0 0 30px rgba(79,142,247,0.08)',
+                    }}
                     onMouseEnter={e => {
                       const el = e.currentTarget as HTMLElement
-                      el.style.background = 'rgba(79,142,247,0.14)'
-                      el.style.border = '1px solid rgba(79,142,247,0.38)'
-                      el.style.boxShadow = '0 0 20px rgba(79,142,247,0.15)'
+                      el.style.background = 'linear-gradient(135deg, rgba(79,142,247,0.22), rgba(37,99,235,0.16))'
+                      el.style.border = '1px solid rgba(79,142,247,0.5)'
+                      el.style.boxShadow = '0 0 40px rgba(79,142,247,0.18)'
+                      el.style.color = '#BFDBFE'
                     }}
                     onMouseLeave={e => {
                       const el = e.currentTarget as HTMLElement
-                      el.style.background = 'rgba(79,142,247,0.08)'
-                      el.style.border = '1px solid rgba(79,142,247,0.2)'
-                      el.style.boxShadow = 'none'
+                      el.style.background = 'linear-gradient(135deg, rgba(79,142,247,0.15), rgba(37,99,235,0.10))'
+                      el.style.border = '1px solid rgba(79,142,247,0.3)'
+                      el.style.boxShadow = '0 0 30px rgba(79,142,247,0.08)'
+                      el.style.color = '#93C5FD'
                     }}
                   >
                     Apply for Mentorship
-                    <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-0.5 transition-transform" aria-hidden="true" />
+                    <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" aria-hidden="true" />
                   </Link>
-                  <div className="flex flex-col gap-0.5">
-                    <span className="text-xs text-gray-500">Application required · Spots are limited</span>
-                    <span className="text-xs text-gray-700">Not everyone is accepted. We only work with people serious about building.</span>
+                  <div className="flex flex-col gap-1">
+                    <span className="text-xs text-gray-500 font-medium">Application required · Spots are limited</span>
+                    <span className="text-xs text-gray-700 leading-relaxed">Every application is personally reviewed before acceptance.</span>
                   </div>
                 </div>
               </div>
