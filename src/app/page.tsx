@@ -5,8 +5,8 @@ import { useState, useEffect, useRef } from 'react'
 import {
   ChevronRight, Check, Star, Menu, X, Play,
   Flame, Users, BookOpen, TrendingUp, Zap, Award,
-  ArrowRight, Diamond, Shield, Clock, Twitter,
-  Instagram, MessageCircle, Lock, RefreshCw, CreditCard,
+  ArrowRight, Diamond, Shield, Clock,
+  Instagram, Lock, RefreshCw, CreditCard,
   XCircle
 } from 'lucide-react'
 
@@ -1005,13 +1005,13 @@ export default function LandingPage() {
                         className="absolute -top-3.5 left-0 text-[10px] font-black px-2.5 py-0.5 rounded-full whitespace-nowrap text-white"
                         style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
                       >
-                        SAVE 25%
+                        SAVE 22%
                       </div>
                       <div className="flex items-end gap-1 pt-1">
-                        <span className="text-5xl font-black">$449</span>
-                        <span className="text-gray-500 mb-1.5 ml-0.5">/year</span>
+                        <span className="text-5xl font-black">$39</span>
+                        <span className="text-gray-500 mb-1.5 ml-0.5">/mo</span>
                       </div>
-                      <div className="text-xs text-gray-600 mt-0.5">~$37/mo · Best value</div>
+                      <div className="text-xs text-gray-600 mt-0.5">$468/year · Best value</div>
                     </div>
                   </div>
                 </div>
@@ -1249,6 +1249,9 @@ export default function LandingPage() {
 
       </main>
 
+      {/* ── EMAIL CAPTURE ────────────────────────────────── */}
+      <EmailCapture />
+
       {/* ── FOOTER ──────────────────────────────────────── */}
       <footer className="border-t border-white/[0.04] pt-16 pb-10 px-5">
         <div className="max-w-6xl mx-auto">
@@ -1268,9 +1271,7 @@ export default function LandingPage() {
               </p>
               <div className="flex gap-3">
                 {[
-                  { icon: Twitter, href: '#', label: 'Twitter' },
                   { icon: Instagram, href: '#', label: 'Instagram' },
-                  { icon: MessageCircle, href: '#', label: 'Discord' },
                 ].map(s => {
                   const Icon = s.icon
                   return (
@@ -1315,9 +1316,13 @@ export default function LandingPage() {
             <nav aria-label="Legal links">
               <div className="text-xs font-semibold text-white uppercase tracking-wider mb-4">Legal</div>
               <ul className="space-y-2.5">
-                {['Privacy Policy', 'Terms of Service', 'Refund Policy', 'Cookie Policy', 'Earnings Disclaimer'].map(l => (
-                  <li key={l}>
-                    <a href="#" className="text-xs text-gray-600 hover:text-white transition-colors">{l}</a>
+                {[
+                  { label: 'Privacy Policy',      href: '/privacy' },
+                  { label: 'Terms of Service',     href: '/terms'   },
+                  { label: 'Earnings Disclaimer',  href: '/terms#earnings' },
+                ].map(({ label, href }) => (
+                  <li key={label}>
+                    <a href={href} className="text-xs text-gray-600 hover:text-white transition-colors">{label}</a>
                   </li>
                 ))}
               </ul>
@@ -1329,11 +1334,98 @@ export default function LandingPage() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-xs text-gray-700">© {new Date().getFullYear()} Timeless Network, LLC. All rights reserved.</p>
             <p className="text-xs text-gray-700 text-center max-w-md">
-              Timeless is not affiliated with TikTok or ByteDance. Results are not typical. Individual outcomes vary based on effort, experience, and market conditions.
+              Timeless is not affiliated with TikTok or ByteDance. Individual outcomes vary based on effort, experience, and market conditions.
             </p>
           </div>
         </div>
       </footer>
     </div>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Email Capture Section
+// ─────────────────────────────────────────────────────────────────────────────
+function EmailCapture() {
+  const [email, setEmail] = useState('')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email.trim()) return
+    setStatus('loading')
+    try {
+      const res = await fetch('/api/email-capture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+      if (res.ok) {
+        setStatus('success')
+        setEmail('')
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
+  }
+
+  return (
+    <section className="py-20 px-5 border-t border-white/[0.04]" aria-labelledby="email-capture-heading">
+      <div className="max-w-xl mx-auto text-center">
+        <div className="badge mx-auto mb-5">Free TikTok Shop Tips</div>
+        <h2 id="email-capture-heading" className="text-3xl md:text-4xl font-black mb-3">
+          Not ready yet?<br />
+          <span className="gradient-text">Stay in the loop.</span>
+        </h2>
+        <p className="text-gray-500 text-sm leading-relaxed mb-8 max-w-md mx-auto">
+          Get weekly TikTok Shop strategies, winning product breakdowns, and creator income tips — straight to your inbox. Free, no fluff.
+        </p>
+
+        {status === 'success' ? (
+          <div
+            className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl text-sm font-semibold text-emerald-400"
+            style={{ background: 'rgba(52,211,153,0.08)', border: '1px solid rgba(52,211,153,0.2)' }}
+            role="status"
+          >
+            <span className="text-lg">✓</span>
+            You&apos;re in — check your inbox!
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" noValidate>
+            <input
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              placeholder="your@email.com"
+              required
+              disabled={status === 'loading'}
+              className="flex-1 px-4 py-3.5 rounded-xl text-sm text-white placeholder-gray-600 outline-none transition-all"
+              style={{
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(255,255,255,0.08)',
+              }}
+              aria-label="Email address"
+              onFocus={e => { e.currentTarget.style.borderColor = 'rgba(79,142,247,0.4)' }}
+              onBlur={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)' }}
+            />
+            <button
+              type="submit"
+              disabled={status === 'loading' || !email.trim()}
+              className="btn-premium px-6 py-3.5 rounded-xl text-sm font-bold whitespace-nowrap flex-shrink-0"
+            >
+              {status === 'loading' ? 'Saving…' : 'Get Free Tips'}
+            </button>
+          </form>
+        )}
+
+        {status === 'error' && (
+          <p className="text-xs text-red-400 mt-3" role="alert">Something went wrong — try again.</p>
+        )}
+
+        <p className="text-xs text-gray-700 mt-4">No spam. Unsubscribe anytime.</p>
+      </div>
+    </section>
   )
 }

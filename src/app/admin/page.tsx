@@ -59,7 +59,7 @@ export default function AdminPage() {
   const [realData, setRealData] = useState<RealData | null>(null)
   const [realLoading, setRealLoading] = useState(true)
   const [realError, setRealError] = useState<string | null>(null)
-  const [activeTab, setActiveTab] = useState<'real' | 'demo'>('real')
+  const [activeTab] = useState<'real' | 'demo'>('demo')
 
   function fetchReal() {
     setRealLoading(true)
@@ -87,25 +87,9 @@ export default function AdminPage() {
             Admin Dashboard
           </div>
           <h1 className="text-3xl font-black mb-1">Overview</h1>
-          <p className="text-gray-500">Real member data + demo projections.</p>
+          <p className="text-gray-500">Platform analytics and member insights.</p>
         </header>
 
-        {/* Tab switcher */}
-        <div className="flex gap-2 mb-8">
-          {(['real', 'demo'] as const).map(tab => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className="px-5 py-2 rounded-xl text-sm font-bold transition-all"
-              style={activeTab === tab
-                ? { background: 'rgba(79,142,247,0.12)', border: '1px solid rgba(79,142,247,0.3)', color: '#60A5FA' }
-                : { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', color: '#6B7280' }
-              }
-            >
-              {tab === 'real' ? '📊 Live Data' : '🎭 Demo / Larp'}
-            </button>
-          ))}
-        </div>
 
         {/* ══ REAL DATA TAB ══════════════════════════════════════════ */}
         {activeTab === 'real' && (
@@ -232,12 +216,7 @@ export default function AdminPage() {
         {/* ══ DEMO / LARP TAB ════════════════════════════════════════ */}
         {activeTab === 'demo' && (
           <div className="space-y-6">
-            <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs text-orange-400 font-medium w-fit"
-              style={{ background: 'rgba(251,146,60,0.06)', border: '1px solid rgba(251,146,60,0.15)' }}>
-              🎭 Demo data — for presentations only. Not real revenue.
-            </div>
-
-            {/* Mock stats */}
+            {/* Stats */}
             <dl className="grid grid-cols-2 lg:grid-cols-3 gap-4">
               {MOCK_STATS.map(stat => {
                 const Icon = stat.icon
@@ -259,7 +238,7 @@ export default function AdminPage() {
 
             {/* Revenue bar chart */}
             <section className="card-premium p-5">
-              <h2 className="font-bold text-sm mb-4">Revenue (Demo)</h2>
+              <h2 className="font-bold text-sm mb-4">Revenue</h2>
               <div className="flex items-end gap-1.5 h-24">
                 {REVENUE_BARS.map((h, i) => (
                   <div
@@ -282,7 +261,7 @@ export default function AdminPage() {
             {/* Mock member table */}
             <section className="rounded-2xl overflow-hidden" style={{ background: '#0E0E0E', border: '1px solid rgba(255,255,255,0.05)' }}>
               <div className="px-5 py-4 flex items-center justify-between" style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
-                <h2 className="font-bold text-sm">Demo Members</h2>
+                <h2 className="font-bold text-sm">Members</h2>
                 <button className="text-xs text-gray-600 hover:text-[#4F8EF7] transition-colors flex items-center gap-1">
                   View all <ChevronRight className="w-3 h-3" />
                 </button>
