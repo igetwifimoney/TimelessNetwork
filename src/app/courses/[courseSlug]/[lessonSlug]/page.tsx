@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import Sidebar from '@/components/Sidebar'
+import SubscriptionGate from '@/components/SubscriptionGate'
 import { getCourseBySlug } from '@/data/courses'
 import {
   ArrowLeft, ChevronLeft, ChevronRight,
@@ -172,6 +173,7 @@ export default function LessonPage({
       )}
 
       <main className="flex-1 overflow-y-auto pb-24 lg:pb-0" id="main-content">
+        <SubscriptionGate>
         <div className="max-w-2xl mx-auto px-4 py-6 lg:px-6 lg:py-8">
 
           {/* Breadcrumb */}
@@ -322,6 +324,7 @@ export default function LessonPage({
             )}
           </nav>
         </div>
+        </SubscriptionGate>
       </main>
     </div>
   )

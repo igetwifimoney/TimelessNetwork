@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Sidebar from '@/components/Sidebar'
+import SubscriptionGate from '@/components/SubscriptionGate'
 import { COURSES, type Course } from '@/data/courses'
 import { BookOpen, Clock, Zap, ChevronRight, ShoppingBag, TrendingUp } from 'lucide-react'
 
@@ -80,6 +81,7 @@ export default function CoursesPage() {
       <Sidebar />
 
       <main className="flex-1 overflow-y-auto pb-24 lg:pb-0" id="main-content">
+        <SubscriptionGate>
         <div className="max-w-5xl mx-auto px-4 py-6 lg:px-6 lg:py-8">
 
           {/* Header */}
@@ -155,6 +157,7 @@ export default function CoursesPage() {
             </p>
           </div>
         </div>
+        </SubscriptionGate>
       </main>
     </div>
   )

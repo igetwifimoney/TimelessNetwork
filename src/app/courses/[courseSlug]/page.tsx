@@ -3,6 +3,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Sidebar from '@/components/Sidebar'
+import SubscriptionGate from '@/components/SubscriptionGate'
 import { getCourseBySlug, COURSES } from '@/data/courses'
 import { BookOpen, Zap, Clock, Play, ChevronRight, ArrowLeft } from 'lucide-react'
 
@@ -26,6 +27,7 @@ export default function CoursePage({ params }: { params: { courseSlug: string } 
       <Sidebar />
 
       <main className="flex-1 overflow-y-auto pb-24 lg:pb-0" id="main-content">
+        <SubscriptionGate>
         <div className="max-w-3xl mx-auto px-4 py-6 lg:px-6 lg:py-8">
 
           {/* Back nav */}
@@ -159,6 +161,7 @@ export default function CoursePage({ params }: { params: { courseSlug: string } 
             </div>
           )}
         </div>
+        </SubscriptionGate>
       </main>
     </div>
   )
