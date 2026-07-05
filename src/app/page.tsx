@@ -768,7 +768,10 @@ export default function LandingPage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <StatItem prefix="$" value={4.8} suffix="M+" label="Creator Revenue Generated" decimals={1} />
               <StatItem value={memberCount} suffix="+" label="Active Members" />
-              <StatItem value={14000} suffix="+" label="Videos Posted" />
+              <div className="text-center">
+                <span className="text-3xl md:text-4xl font-black gradient-text-blue">20+</span>
+                <div className="text-sm text-gray-500 mt-2">Courses · 23+ hrs of content</div>
+              </div>
               <div className="text-center">
                 <span className="text-3xl md:text-4xl font-black count-up gradient-text-blue">7–14 Days</span>
                 <div className="text-sm text-gray-500 mt-2">Avg. Time to First Sale</div>
