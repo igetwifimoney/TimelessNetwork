@@ -354,7 +354,7 @@ export default function DashboardPage() {
                     Connect with the crew, share wins, get feedback on your content, and stay plugged in between live calls.
                   </p>
                   <a
-                    href="https://discord.gg/timeless"
+                    href="https://discord.gg/TcuZ5u6TMw"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-xs font-bold transition-all duration-200 hover:opacity-90"
