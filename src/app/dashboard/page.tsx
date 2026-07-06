@@ -105,23 +105,24 @@ export default function DashboardPage() {
       })
     })
     setCompletedLessons(completed)
-    // Load mission completion from localStorage (reset daily)
-    const today = new Date().toDateString()
-    const saved = localStorage.getItem(`missions:${today}`)
-    if (saved) setMissions(plan.missions.map(m => ({ ...m, done: JSON.parse(saved).includes(m.id) })))
+    // Fetch mission verification status from API (auto-checks based on real actions)
+    fetch('/api/missions/status')
+      .then(r => r.json())
+      .then(({ lessonToday, communityToday, trackerToday }) => {
+        setMissions(plan.missions.map(m => ({
+          ...m,
+          done: m.verify === 'lesson'    ? lessonToday
+              : m.verify === 'community' ? communityToday
+              : m.verify === 'tracker'   ? trackerToday
+              : false,
+        })))
+      })
+      .catch(() => {})
   }, [])
 
-  const toggle = (id: string) => {
-    setMissions(prev => {
-      const next = prev.map(m => m.id === id ? { ...m, done: !m.done } : m)
-      const today = new Date().toDateString()
-      localStorage.setItem(`missions:${today}`, JSON.stringify(next.filter(m => m.done).map(m => m.id)))
-      return next
-    })
-  }
-
-  const done = missions.filter(m => m.done).length
-  const pct = Math.round((done / missions.length) * 100)
+  const verifiableMissions = missions.filter(m => m.verify !== null)
+  const done = verifiableMissions.filter(m => m.done).length
+  const pct = verifiableMissions.length > 0 ? Math.round((done / verifiableMissions.length) * 100) : 0
   const xp = stats?.xp ?? 0
   const streak = stats?.streakCount ?? 0
   const rank = stats?.leaderboardRank
@@ -228,7 +229,7 @@ export default function DashboardPage() {
                   <div className="flex items-center justify-between mb-3">
                     <div>
                       <h2 id="missions-heading" className="font-bold text-base">Today&apos;s Missions</h2>
-                      <p className="text-xs text-gray-500 mt-0.5">{done} of {missions.length} complete · {pct}%</p>
+                      <p className="text-xs text-gray-500 mt-0.5">{done} of {verifiableMissions.length} complete · {pct}%</p>
                     </div>
                     <div className="text-right">
                       <div className="text-xs text-gray-600">XP Available</div>
@@ -244,30 +245,52 @@ export default function DashboardPage() {
                   </div>
                 </div>
                 <ul className="divide-y divide-white/[0.03]">
-                  {missions.map(m => (
-                    <li key={m.id} className="flex items-center gap-0 group">
-                      <button onClick={() => toggle(m.id)}
-                        className="flex-1 flex items-center gap-4 px-6 py-4 hover:bg-white/[0.02] transition-colors text-left"
-                        aria-pressed={m.done}>
-                        <div className={`flex-shrink-0 ${m.done ? 'text-[#4F8EF7]' : 'text-gray-700'}`} aria-hidden="true">
-                          {m.done ? <CheckSquare className="w-5 h-5" /> : <Square className="w-5 h-5" />}
+                  {missions.map(m => {
+                    // Verifiable mission — shows real check state, no manual clicking
+                    if (m.verify !== null) {
+                      return (
+                        <li key={m.id} className="flex items-center gap-0">
+                          <div className="flex-1 flex items-center gap-4 px-6 py-4">
+                            <div className={`flex-shrink-0 ${m.done ? 'text-[#4F8EF7]' : 'text-gray-700'}`} aria-hidden="true">
+                              {m.done ? <CheckSquare className="w-5 h-5" /> : <Square className="w-5 h-5" />}
+                            </div>
+                            <span className="text-lg flex-shrink-0" aria-hidden="true">{m.emoji}</span>
+                            <span className={`flex-1 text-sm font-medium ${m.done ? 'line-through text-gray-600' : 'text-gray-200'}`}>
+                              {m.text}
+                            </span>
+                            <span className="flex items-center gap-1 text-xs font-semibold text-[#4F8EF7] flex-shrink-0">
+                              <Zap className="w-3 h-3" />{m.xp}
+                            </span>
+                          </div>
+                          {m.link && !m.done && (
+                            <Link href={m.link} className="px-3 py-4 text-gray-700 hover:text-[#4F8EF7] transition-colors flex-shrink-0"
+                              aria-label={`Go to ${m.text}`}>
+                              <ChevronRight className="w-4 h-4" />
+                            </Link>
+                          )}
+                        </li>
+                      )
+                    }
+                    // Unverifiable mission (TikTok/IRL) — task reminder only, no checkbox
+                    return (
+                      <li key={m.id} className="flex items-center gap-0 opacity-70">
+                        <div className="flex-1 flex items-center gap-4 px-6 py-4">
+                          <div className="flex-shrink-0 text-gray-700 w-5 h-5 flex items-center justify-center" aria-hidden="true">
+                            <span className="w-2 h-2 rounded-full bg-gray-700 block" />
+                          </div>
+                          <span className="text-lg flex-shrink-0" aria-hidden="true">{m.emoji}</span>
+                          <span className="flex-1 text-sm font-medium text-gray-500">{m.text}</span>
+                          <span className="text-[10px] text-gray-700 font-medium flex-shrink-0">TikTok</span>
                         </div>
-                        <span className="text-lg flex-shrink-0" aria-hidden="true">{m.emoji}</span>
-                        <span className={`flex-1 text-sm font-medium ${m.done ? 'line-through text-gray-600' : 'text-gray-200'}`}>
-                          {m.text}
-                        </span>
-                        <span className="flex items-center gap-1 text-xs font-semibold text-[#4F8EF7] flex-shrink-0">
-                          <Zap className="w-3 h-3" />{m.xp}
-                        </span>
-                      </button>
-                      {m.link && !m.done && (
-                        <Link href={m.link} className="px-3 py-4 text-gray-700 hover:text-[#4F8EF7] transition-colors flex-shrink-0"
-                          aria-label={`Go to ${m.text}`}>
-                          <ChevronRight className="w-4 h-4" />
-                        </Link>
-                      )}
-                    </li>
-                  ))}
+                        {m.link && (
+                          <Link href={m.link} className="px-3 py-4 text-gray-700 hover:text-[#4F8EF7] transition-colors flex-shrink-0"
+                            aria-label={`Go to ${m.text}`}>
+                            <ChevronRight className="w-4 h-4" />
+                          </Link>
+                        )}
+                      </li>
+                    )
+                  })}
                 </ul>
               </section>
 
