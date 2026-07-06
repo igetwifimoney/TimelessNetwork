@@ -59,7 +59,7 @@ export default function AdminPage() {
   const [realData, setRealData] = useState<RealData | null>(null)
   const [realLoading, setRealLoading] = useState(true)
   const [realError, setRealError] = useState<string | null>(null)
-  const [activeTab] = useState<'real' | 'demo'>('demo')
+  const [activeTab, setActiveTab] = useState<'real' | 'demo'>('real')
 
   function fetchReal() {
     setRealLoading(true)
@@ -90,6 +90,22 @@ export default function AdminPage() {
           <p className="text-gray-500">Platform analytics and member insights.</p>
         </header>
 
+        {/* Tab switcher */}
+        <div className="flex gap-2 mb-8">
+          {(['real', 'demo'] as const).map(tab => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className="px-5 py-2 rounded-xl text-sm font-bold transition-all"
+              style={activeTab === tab
+                ? { background: 'rgba(79,142,247,0.12)', border: '1px solid rgba(79,142,247,0.3)', color: '#60A5FA' }
+                : { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', color: '#6B7280' }
+              }
+            >
+              {tab === 'real' ? 'Overview' : 'Larp'}
+            </button>
+          ))}
+        </div>
 
         {/* ══ REAL DATA TAB ══════════════════════════════════════════ */}
         {activeTab === 'real' && (
