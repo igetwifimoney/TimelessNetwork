@@ -103,6 +103,7 @@ const NAV_LINKS = [
   { label: 'Learn', href: '#learn' },
   { label: 'Results', href: '#results' },
   { label: 'Community', href: '#community' },
+  { label: 'FAQ', href: '#faq' },
   { label: 'Pricing', href: '#pricing' },
 ]
 
@@ -197,9 +198,23 @@ const FEATURES = [
 ]
 
 const TESTIMONIALS = [
-  { avatar: 'JL', name: 'James L.', role: 'Full-time TikTok Shop seller', revenue: '$23,700/mo', stars: 5, text: 'Joined with zero TikTok Shop experience. 4 months later I quit my job. The course is great but the community is what kept me going every single week.' },
-  { avatar: 'BT', name: 'Brittany T.', role: 'Content creator turned seller', revenue: '$11,340/mo', stars: 5, text: "I tried YouTube, Reddit, other communities. Nothing clicked until Timeless. The structure is different. It actually tells you what to do next — and it works." },
-  { avatar: 'CR', name: 'Carlos R.', role: 'Side hustle → main income', revenue: '$7,190/mo', stars: 5, text: "The weekly live calls alone are worth more than the membership fee. I ask a question, get a real answer, implement it, and make money. It really is that simple." },
+  { avatar: 'JL', name: 'James L.', handle: '@jamesl.ttshop', role: 'Full-time TikTok Shop seller', revenue: '$23,700/mo', stars: 5, text: 'Joined with zero TikTok Shop experience. 4 months later I quit my job. The course is great but the community is what kept me going every single week.' },
+  { avatar: 'BT', name: 'Brittany T.', handle: '@brittany.creates', role: 'Content creator turned seller', revenue: '$11,340/mo', stars: 5, text: "I tried YouTube, Reddit, other communities. Nothing clicked until Timeless. The structure is different. It actually tells you what to do next — and it works." },
+  { avatar: 'CR', name: 'Carlos R.', handle: '@carlosbuilds', role: 'Side hustle → main income', revenue: '$7,190/mo', stars: 5, text: "The weekly live calls alone are worth more than the membership fee. I ask a question, get a real answer, implement it, and make money. It really is that simple." },
+]
+
+// ─────────────────────────────────────────────────────────
+// FAQ
+// ─────────────────────────────────────────────────────────
+
+const FAQ_ITEMS = [
+  { q: 'Is this beginner friendly?', a: 'Yes. Timeless is built for creators starting from zero. The curriculum starts with TikTok Shop fundamentals — account setup, the algorithm, and your first product — before advancing to scaling strategies. No experience, followers, or products required.' },
+  { q: 'Do I need followers to start?', a: "No. TikTok Shop rewards content quality and product selection — not follower counts. Many Timeless members made their first sale with under 500 followers. The system works regardless of where you're starting." },
+  { q: 'How long until I see results?', a: 'Most members make their first sale within 7–14 days of applying the product research and content framework. Consistent income takes longer — typically 2–4 months of focused effort. Results depend on consistency, niche, and execution.' },
+  { q: 'How often is new content added?', a: 'Constantly. TikTok Shop evolves fast and the curriculum evolves with it. New lessons, updated strategies, and live call recordings are added on an ongoing basis. Your membership includes every future update — no extra charges.' },
+  { q: 'Can I cancel anytime?', a: 'Yes. Cancel directly from your account settings — no emails required, no phone calls, no friction. You keep access until the end of your billing period.' },
+  { q: 'What support is included?', a: "Every member gets access to the private community, Discord channels, weekly live Q&A calls, and the content feedback thread. You're never building alone." },
+  { q: 'What makes Timeless different?', a: "Most courses are recorded once and sold forever — even when the strategies go stale. Timeless is built around what works right now: live weekly calls with people generating real revenue, a community posting real wins daily, and a curriculum that evolves as TikTok Shop changes. It's a system, not just a course." },
 ]
 
 // ─────────────────────────────────────────────────────────
@@ -509,6 +524,304 @@ function CommunityFeed() {
 }
 
 // ─────────────────────────────────────────────────────────
+// FAQ SECTION
+// ─────────────────────────────────────────────────────────
+
+function FAQSection() {
+  const [open, setOpen] = useState<number | null>(null)
+
+  return (
+    <section id="faq" className="py-28 px-5 border-t border-white/[0.04]" aria-labelledby="faq-heading">
+      <div className="max-w-3xl mx-auto">
+        <div className="text-center mb-16 reveal">
+          <div className="badge mx-auto mb-5">FAQ</div>
+          <h2 id="faq-heading" className="text-4xl md:text-5xl font-black mb-4">
+            Every question.<br />
+            <span className="gradient-text">Answered honestly.</span>
+          </h2>
+          <p className="text-gray-500">No sales spin. Just straight answers.</p>
+        </div>
+        <div className="space-y-2.5">
+          {FAQ_ITEMS.map((item, i) => (
+            <div key={i} className="reveal card-premium overflow-hidden">
+              <button
+                className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 group"
+                onClick={() => setOpen(open === i ? null : i)}
+                aria-expanded={open === i}
+                aria-controls={`faq-${i}`}
+              >
+                <span className="font-semibold text-sm group-hover:text-[#60A5FA] transition-colors pr-2">{item.q}</span>
+                <ChevronRight
+                  className="w-4 h-4 text-gray-600 flex-shrink-0 transition-transform duration-300"
+                  style={{ transform: open === i ? 'rotate(90deg)' : 'none' }}
+                  aria-hidden="true"
+                />
+              </button>
+              <div
+                id={`faq-${i}`}
+                role="region"
+                style={{
+                  maxHeight: open === i ? '400px' : '0',
+                  overflow: 'hidden',
+                  transition: 'max-height 0.35s cubic-bezier(0.4,0,0.2,1)',
+                }}
+              >
+                <p className="px-6 pb-5 text-sm text-gray-400 leading-relaxed border-t border-white/[0.04] pt-4">
+                  {item.a}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────────────
+// FOUNDER SECTION
+// ─────────────────────────────────────────────────────────
+
+function FounderSection() {
+  return (
+    <section className="py-28 px-5 border-t border-white/[0.04]" aria-labelledby="founder-heading">
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-16 reveal">
+          <div className="badge mx-auto mb-5">Meet the Founder</div>
+        </div>
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+          {/* Photo side */}
+          <div className="reveal">
+            <div className="relative max-w-sm mx-auto lg:mx-0">
+              {/* REPLACE THIS DIV with: <img src="/founder.jpg" alt="Founder" className="w-full aspect-[4/5] object-cover rounded-3xl" /> */}
+              <div
+                className="w-full aspect-[4/5] rounded-3xl overflow-hidden flex items-center justify-center"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(79,142,247,0.08) 0%, rgba(15,15,15,0.9) 100%)',
+                  border: '1px solid rgba(79,142,247,0.15)',
+                }}
+              >
+                <div
+                  className="w-32 h-32 rounded-full flex items-center justify-center text-3xl font-black text-white"
+                  style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
+                  aria-hidden="true"
+                >
+                  TG
+                </div>
+              </div>
+              {/* Floating stat card */}
+              <div
+                className="absolute -bottom-4 -right-4 px-4 py-3 rounded-2xl"
+                style={{
+                  background: 'rgba(10,10,10,0.96)',
+                  border: '1px solid rgba(79,142,247,0.2)',
+                  backdropFilter: 'blur(20px)',
+                  boxShadow: '0 8px 40px rgba(0,0,0,0.5)',
+                }}
+              >
+                <div className="text-[10px] text-gray-600 mb-0.5 uppercase tracking-wider">Platform revenue</div>
+                <div className="text-xl font-black text-white leading-none">$4.8M+</div>
+                <div className="text-xs text-[#4F8EF7] mt-1 font-semibold">across all members</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Content side */}
+          <div className="reveal reveal-delay-1 space-y-6">
+            <h2 id="founder-heading" className="text-4xl md:text-5xl font-black leading-tight">
+              Built by someone<br />
+              <span className="gradient-text">in the trenches.</span>
+            </h2>
+            <p className="text-gray-400 leading-relaxed">
+              I spent months grinding TikTok Shop with no real roadmap — watching outdated YouTube tutorials and
+              taking advice from people who&apos;d never made a single sale. When the system finally clicked,
+              I had one question: why is this so hard to find?
+            </p>
+            <p className="text-gray-400 leading-relaxed">
+              Timeless exists because the knowledge was always out there — it just wasn&apos;t organized,
+              kept current, or backed by a community that actually held you accountable.
+              I built the platform I wish existed when I was starting.
+            </p>
+            <div className="space-y-5 pt-2">
+              {[
+                { label: 'Mission', text: 'Make the TikTok Shop playbook accessible to any creator willing to do the work.' },
+                { label: 'Philosophy', text: 'Real data over hype. Consistency over shortcuts. Community over isolation.' },
+                { label: 'Vision', text: 'A world where independent creators build lasting income — on their own terms.' },
+              ].map(item => (
+                <div key={item.label} className="flex gap-4 group">
+                  <div
+                    className="w-0.5 rounded-full flex-shrink-0"
+                    style={{ background: 'linear-gradient(180deg, #4F8EF7, rgba(37,99,235,0.3))', minHeight: '44px' }}
+                    aria-hidden="true"
+                  />
+                  <div>
+                    <div className="text-[10px] text-[#4F8EF7] font-black uppercase tracking-widest mb-1">{item.label}</div>
+                    <p className="text-sm text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">{item.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────────────
+// PRODUCT PREVIEW
+// ─────────────────────────────────────────────────────────
+
+function ProductPreview() {
+  return (
+    <section className="py-28 px-5 border-t border-white/[0.04]" aria-labelledby="product-preview-heading">
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-16 reveal">
+          <div className="badge mx-auto mb-5">The Platform</div>
+          <h2 id="product-preview-heading" className="text-4xl md:text-5xl font-black mb-4">
+            See what you&apos;re<br />
+            <span className="gradient-text">actually getting.</span>
+          </h2>
+          <p className="text-gray-500">Every tool you need — built into one place.</p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-4">
+
+          {/* Course Library Mockup */}
+          <div className="reveal card-premium p-5 flex flex-col gap-4">
+            <div className="flex items-center gap-2 mb-1">
+              <div className="w-6 h-6 rounded-lg glass-blue flex items-center justify-center" aria-hidden="true">
+                <BookOpen className="w-3.5 h-3.5 text-[#4F8EF7]" />
+              </div>
+              <span className="text-xs font-semibold text-gray-300">Course Library</span>
+              <span className="ml-auto text-[10px] text-gray-600">20+ courses</span>
+            </div>
+            {[
+              { title: 'TikTok Shop Foundation', lessons: 8, progress: 100 },
+              { title: 'Product Research System', lessons: 6, progress: 67 },
+              { title: 'Viral Content Playbook', lessons: 10, progress: 30 },
+              { title: 'Scaling to $10k/Month', lessons: 7, progress: 0 },
+            ].map(course => (
+              <div key={course.title} className="flex flex-col gap-1.5 group/course">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-gray-400 truncate pr-2 group-hover/course:text-gray-300 transition-colors">{course.title}</span>
+                  <span className="text-[10px] text-gray-700 flex-shrink-0">{course.lessons} lessons</span>
+                </div>
+                <div className="h-1 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.05)' }}>
+                  <div
+                    className="h-full rounded-full transition-all duration-700"
+                    style={{
+                      width: `${course.progress}%`,
+                      background: course.progress === 100
+                        ? 'linear-gradient(90deg, #10B981, #059669)'
+                        : 'linear-gradient(90deg, #4F8EF7, #2563EB)',
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+            <div className="mt-auto pt-2 flex items-center gap-1.5">
+              <Award className="w-3 h-3 text-[#4F8EF7]" aria-hidden="true" />
+              <span className="text-[10px] text-gray-600">XP awarded on completion</span>
+            </div>
+          </div>
+
+          {/* Daily Missions Mockup */}
+          <div className="reveal reveal-delay-1 card-premium p-5 flex flex-col gap-3.5">
+            <div className="flex items-center gap-2 mb-1">
+              <div className="w-6 h-6 rounded-lg glass-blue flex items-center justify-center" aria-hidden="true">
+                <Flame className="w-3.5 h-3.5 text-[#4F8EF7]" />
+              </div>
+              <span className="text-xs font-semibold text-gray-300">Daily Missions</span>
+            </div>
+            <div className="flex items-center gap-3 mb-1">
+              <div className="relative w-12 h-12 flex-shrink-0" aria-hidden="true">
+                <svg className="w-full h-full -rotate-90" viewBox="0 0 48 48">
+                  <circle cx="24" cy="24" r="18" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="3.5" />
+                  <circle cx="24" cy="24" r="18" fill="none" stroke="#4F8EF7" strokeWidth="3.5"
+                    strokeDasharray={`${2 * Math.PI * 18 * 0.75} ${2 * Math.PI * 18}`}
+                    strokeLinecap="round" />
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center text-[10px] font-black text-white">75%</div>
+              </div>
+              <div>
+                <div className="text-sm font-bold text-white">3 of 4 done</div>
+                <div className="text-[10px] text-gray-600">Monday — Research Day</div>
+              </div>
+            </div>
+            {[
+              { text: 'Find 10 products on TikTok Shop', done: true, xp: 50 },
+              { text: 'Analyze 3 competitor accounts', done: true, xp: 40 },
+              { text: 'Add 2 products to tracker', done: true, xp: 30 },
+              { text: 'Watch Foundation lesson', done: false, xp: 50 },
+            ].map(m => (
+              <div key={m.text} className="flex items-center gap-2.5">
+                <div
+                  className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
+                  style={m.done
+                    ? { background: 'rgba(16,185,129,0.12)', border: '1px solid rgba(16,185,129,0.3)' }
+                    : { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }
+                  }
+                  aria-hidden="true"
+                >
+                  {m.done && <Check className="w-2.5 h-2.5 text-emerald-400" />}
+                </div>
+                <span className={`text-[11px] flex-1 ${m.done ? 'text-gray-600 line-through' : 'text-gray-400'}`}>{m.text}</span>
+                <span className="text-[10px] text-[#4F8EF7] font-bold flex-shrink-0">+{m.xp} XP</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Community Mockup */}
+          <div className="reveal reveal-delay-2 card-premium p-5 flex flex-col gap-3">
+            <div className="flex items-center gap-2 mb-1">
+              <div className="w-6 h-6 rounded-lg glass-blue flex items-center justify-center" aria-hidden="true">
+                <Users className="w-3.5 h-3.5 text-[#4F8EF7]" />
+              </div>
+              <span className="text-xs font-semibold text-gray-300">Community</span>
+              <div className="ml-auto flex items-center gap-1" aria-label="128 members online">
+                <span className="relative flex h-1.5 w-1.5" aria-hidden="true">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-50" />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+                </span>
+                <span className="text-[10px] text-emerald-400 font-medium">128 online</span>
+              </div>
+            </div>
+            {[
+              { init: 'CR', name: 'Carlos R.', msg: 'Just hit $5k total. Started at zero 3 months ago 🏆', ts: '8m' },
+              { init: 'JR', name: 'Jade R.', msg: 'Module 5 finally clicked. Product research makes sense now', ts: '23m' },
+              { init: 'NB', name: 'Nia B.', msg: '7-day streak 🔥 keeping the momentum going', ts: '41m' },
+              { init: 'KP', name: 'Kai P.', msg: 'Live call was exactly what I needed today', ts: '1h' },
+            ].map(p => (
+              <div key={p.name} className="flex gap-2.5 group/post">
+                <div
+                  className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold text-white flex-shrink-0"
+                  style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
+                  aria-hidden="true"
+                >
+                  {p.init}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between mb-0.5">
+                    <span className="text-[11px] font-semibold group-hover/post:text-white transition-colors">{p.name}</span>
+                    <span className="text-[10px] text-gray-700">{p.ts}</span>
+                  </div>
+                  <p className="text-[11px] text-gray-500 leading-relaxed">{p.msg}</p>
+                </div>
+              </div>
+            ))}
+            <div className="mt-auto pt-3 border-t border-white/[0.04]">
+              <div className="text-[10px] text-gray-600">Discord + in-app community included</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────────────
 // MAIN PAGE
 // ─────────────────────────────────────────────────────────
 
@@ -715,8 +1028,8 @@ export default function LandingPage() {
             </h1>
 
             <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-up delay-100">
-              Join creators building real income with proven systems,
-              weekly mentorship, and a community that actually wins.
+              The complete system for content creators ready to build real TikTok Shop income —
+              proven curriculum, live weekly mentorship, and a community that posts wins every day.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-fade-up delay-200">
@@ -773,7 +1086,7 @@ export default function LandingPage() {
                 <div className="text-sm text-gray-500 mt-2">Courses · 23+ hrs of content</div>
               </div>
               <div className="text-center">
-                <span className="text-3xl md:text-4xl font-black count-up gradient-text-blue">7–14 Days</span>
+                <span className="text-3xl md:text-4xl font-black gradient-text-blue">7–14 Days</span>
                 <div className="text-sm text-gray-500 mt-2">Avg. Time to First Sale</div>
               </div>
             </div>
@@ -817,6 +1130,9 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
+
+        {/* ── PRODUCT PREVIEW ──────────────────────────────── */}
+        <ProductPreview />
 
         {/* ── RESULTS ─────────────────────────────────────── */}
         <section id="results" className="py-28 px-5 relative overflow-hidden" aria-labelledby="results-heading">
@@ -882,6 +1198,9 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* ── FOUNDER ──────────────────────────────────────── */}
+        <FounderSection />
+
         {/* ── FEATURES ────────────────────────────────────── */}
         <section className="py-28 px-5 border-t border-white/[0.04]" aria-labelledby="features-heading">
           <div className="max-w-5xl mx-auto">
@@ -939,7 +1258,7 @@ export default function LandingPage() {
                   <footer className="flex items-center justify-between pt-4 border-t border-white/[0.04]">
                     <div className="flex items-center gap-2.5">
                       <div
-                        className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-black text-white"
+                        className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-black text-white flex-shrink-0"
                         style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
                         aria-hidden="true"
                       >
@@ -947,16 +1266,23 @@ export default function LandingPage() {
                       </div>
                       <div>
                         <cite className="text-sm font-semibold not-italic">{t.name}</cite>
-                        <div className="text-xs text-gray-500">{t.role}</div>
+                        <div className="text-[10px] text-[#4F8EF7] font-medium">{t.handle}</div>
+                        <div className="text-[10px] text-gray-600">{t.role}</div>
                       </div>
                     </div>
-                    <div className="text-sm font-bold text-emerald-400" aria-label={`Earning ${t.revenue}`}>{t.revenue}</div>
+                    <div className="text-right flex-shrink-0 ml-3">
+                      <div className="text-sm font-black text-emerald-400" aria-label={`Earning ${t.revenue}`}>{t.revenue}</div>
+                      <div className="text-[10px] text-gray-700">monthly revenue</div>
+                    </div>
                   </footer>
                 </blockquote>
               ))}
             </div>
           </div>
         </section>
+
+        {/* ── FAQ ─────────────────────────────────────────── */}
+        <FAQSection />
 
         {/* ── PRICING ─────────────────────────────────────── */}
         <section id="pricing" className="py-28 px-5 border-t border-white/[0.04]" aria-labelledby="pricing-heading">
@@ -972,7 +1298,7 @@ export default function LandingPage() {
 
             {/* ── MAIN PRICING CARD ── */}
             <div
-              className="relative rounded-3xl overflow-hidden reveal mb-6"
+              className="relative rounded-3xl overflow-hidden reveal mb-6 animate-border-pulse"
               style={{
                 background: 'rgba(79,142,247,0.03)',
                 border: '1px solid rgba(79,142,247,0.22)',
@@ -1147,6 +1473,24 @@ export default function LandingPage() {
                       Not everyone is accepted. We only work with members we believe we can genuinely help succeed.
                     </div>
                   </div>
+                </div>
+
+                {/* Mentor track record */}
+                <div
+                  className="grid grid-cols-3 gap-3 p-4 rounded-2xl mb-8"
+                  style={{ background: 'rgba(79,142,247,0.04)', border: '1px solid rgba(79,142,247,0.1)' }}
+                  aria-label="Mentor track record"
+                >
+                  {[
+                    { value: '$4.8M+', label: 'Member revenue' },
+                    { value: '20+', label: 'Courses built' },
+                    { value: '1,200+', label: 'Members trained' },
+                  ].map(stat => (
+                    <div key={stat.label} className="text-center">
+                      <div className="text-base font-black text-white leading-tight">{stat.value}</div>
+                      <div className="text-[10px] text-gray-600 mt-0.5">{stat.label}</div>
+                    </div>
+                  ))}
                 </div>
 
                 {/* Divider */}

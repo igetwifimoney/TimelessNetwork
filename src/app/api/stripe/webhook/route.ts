@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { stripe } from '@/lib/stripe'
 import { getUserIdFromCustomer } from '@/lib/stripe-customers'
+import { sendEmail, welcomeEmail } from '@/lib/resend'
 import type Stripe from 'stripe'
 
 // ── Webhook secret from Stripe dashboard ───────────────────────────────────
@@ -90,7 +91,21 @@ export async function POST(req: Request) {
       }
 
       // ── Subscription created ────────────────────────────────────
-      case 'customer.subscription.created':
+      case 'customer.subscription.created': {
+        const subNew  = event.data.object as Stripe.Subscription
+        const userIdNew = await getUserIdFromCustomer(subNew.customer as string)
+        if (userIdNew) {
+          // Fetch user info to get their email + name for the welcome email
+          const { data: { user: newUser } } = await db.auth.admin.getUserById(userIdNew)
+          if (newUser?.email) {
+            const name = (newUser.user_metadata?.full_name as string | undefined) ?? newUser.email
+            const { subject, html } = welcomeEmail(name)
+            await sendEmail({ to: newUser.email, subject, html })
+          }
+        }
+        // Fall through to handle subscription upsert (same logic as updated)
+      }
+      // eslint-disable-next-line no-fallthrough
       // ── Subscription updated (plan change, renewal, cancel-at-period-end) ─
       case 'customer.subscription.updated': {
         const subEvent = event.data.object as Stripe.Subscription
