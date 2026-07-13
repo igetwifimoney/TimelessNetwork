@@ -1413,7 +1413,7 @@ export default function LandingPage() {
             </div>
 
             {/* ── TWO COLUMN: FOUNDER LEFT / MENTORSHIP RIGHT ── */}
-            <div className="grid lg:grid-cols-2 gap-8 items-start">
+            <div className="grid lg:grid-cols-2 gap-8 items-stretch">
 
             {/* ── FOUNDER CARD (left column) ── */}
             <div className="reveal space-y-6">
@@ -1485,7 +1485,7 @@ export default function LandingPage() {
 
             {/* ── MENTORSHIP CARD (right column) ── */}
             <div
-              className="relative rounded-3xl overflow-hidden group/mentorship transition-all duration-500 reveal reveal-delay-1"
+              className="relative rounded-3xl overflow-hidden group/mentorship transition-all duration-500 reveal reveal-delay-1 h-full"
               style={{
                 background: '#040404',
                 border: '1px solid rgba(79,142,247,0.15)',
