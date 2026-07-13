@@ -1198,9 +1198,6 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ── FOUNDER ──────────────────────────────────────── */}
-        <FounderSection />
-
         {/* ── FEATURES ────────────────────────────────────── */}
         <section className="py-28 px-5 border-t border-white/[0.04]" aria-labelledby="features-heading">
           <div className="max-w-5xl mx-auto">
@@ -1400,9 +1397,9 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ── PRIVATE MENTORSHIP ─────────────────────────── */}
+        {/* ── FOUNDER + MENTORSHIP ─────────────────────────── */}
         <section id="mentorship-apply" className="py-24 px-5 border-t border-white/[0.04]" aria-labelledby="mentorship-section-heading">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             {/* Section label */}
             <div className="text-center mb-14 reveal">
               <div className="badge mx-auto mb-5" style={{ background: 'rgba(251,146,60,0.08)', border: '1px solid rgba(251,146,60,0.2)', color: '#FB923C' }}>Private Mentorship</div>
@@ -1415,9 +1412,90 @@ export default function LandingPage() {
               </p>
             </div>
 
-            {/* ── MENTORSHIP CARD ── */}
+            {/* ── TWO COLUMN: FOUNDER LEFT / MENTORSHIP RIGHT ── */}
+            <div className="grid lg:grid-cols-2 gap-8 items-start">
+
+            {/* ── FOUNDER CARD (left column) ── */}
+            <div className="reveal space-y-6">
+              {/* Photo */}
+              <div className="relative">
+                {/* REPLACE this div with: <img src="/founder.jpg" alt="[Your Name]" className="w-full aspect-[4/5] object-cover rounded-3xl" /> */}
+                <div
+                  className="w-full aspect-[4/5] rounded-3xl overflow-hidden flex items-center justify-center"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(79,142,247,0.08) 0%, rgba(10,10,10,0.95) 100%)',
+                    border: '1px solid rgba(79,142,247,0.15)',
+                  }}
+                >
+                  <div
+                    className="w-24 h-24 rounded-full flex items-center justify-center text-2xl font-black text-white"
+                    style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
+                    aria-hidden="true"
+                  >
+                    TG
+                  </div>
+                </div>
+              </div>
+
+              {/* Bio */}
+              <div>
+                <div className="text-xs text-[#4F8EF7] font-bold uppercase tracking-widest mb-2">Your Mentor</div>
+                <h3 className="text-2xl font-black mb-3 leading-tight">
+                  Built by someone<br />
+                  <span className="gradient-text">actually doing it.</span>
+                </h3>
+                <p className="text-sm text-gray-400 leading-relaxed mb-4">
+                  I spent months grinding TikTok Shop with no roadmap — watching outdated tutorials and
+                  taking advice from people who&apos;d never made a single sale. When the system finally
+                  clicked, I built the platform I wish existed when I was starting.
+                </p>
+                <p className="text-sm text-gray-500 leading-relaxed">
+                  Timeless isn&apos;t a side project. It&apos;s what I work on every day — and mentorship
+                  is where I go deepest with the people who are serious.
+                </p>
+              </div>
+
+              {/* Stat strip */}
+              <div
+                className="grid grid-cols-3 gap-3 p-4 rounded-2xl"
+                style={{ background: 'rgba(79,142,247,0.04)', border: '1px solid rgba(79,142,247,0.1)' }}
+              >
+                {[
+                  { value: '$4.8M+', label: 'Member revenue' },
+                  { value: '20+', label: 'Courses built' },
+                  { value: '1,200+', label: 'Members trained' },
+                ].map(stat => (
+                  <div key={stat.label} className="text-center">
+                    <div className="text-base font-black text-white leading-tight">{stat.value}</div>
+                    <div className="text-[10px] text-gray-600 mt-0.5">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Mission/Philosophy */}
+              <div className="space-y-4">
+                {[
+                  { label: 'Mission', text: 'Make the TikTok Shop playbook accessible to any creator willing to do the work.' },
+                  { label: 'Philosophy', text: 'Real data over hype. Consistency over shortcuts. Community over isolation.' },
+                ].map(item => (
+                  <div key={item.label} className="flex gap-3 group">
+                    <div
+                      className="w-0.5 rounded-full flex-shrink-0"
+                      style={{ background: 'linear-gradient(180deg, #4F8EF7, rgba(37,99,235,0.3))', minHeight: '36px' }}
+                      aria-hidden="true"
+                    />
+                    <div>
+                      <div className="text-[10px] text-[#4F8EF7] font-black uppercase tracking-widest mb-0.5">{item.label}</div>
+                      <p className="text-xs text-gray-500 leading-relaxed group-hover:text-gray-400 transition-colors">{item.text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* ── MENTORSHIP CARD (right column) ── */}
             <div
-              className="relative rounded-3xl overflow-hidden group/mentorship transition-all duration-500 reveal"
+              className="relative rounded-3xl overflow-hidden group/mentorship transition-all duration-500 reveal reveal-delay-1"
               style={{
                 background: '#040404',
                 border: '1px solid rgba(79,142,247,0.15)',
@@ -1473,24 +1551,6 @@ export default function LandingPage() {
                       Not everyone is accepted. We only work with members we believe we can genuinely help succeed.
                     </div>
                   </div>
-                </div>
-
-                {/* Mentor track record */}
-                <div
-                  className="grid grid-cols-3 gap-3 p-4 rounded-2xl mb-8"
-                  style={{ background: 'rgba(79,142,247,0.04)', border: '1px solid rgba(79,142,247,0.1)' }}
-                  aria-label="Mentor track record"
-                >
-                  {[
-                    { value: '$4.8M+', label: 'Member revenue' },
-                    { value: '20+', label: 'Courses built' },
-                    { value: '1,200+', label: 'Members trained' },
-                  ].map(stat => (
-                    <div key={stat.label} className="text-center">
-                      <div className="text-base font-black text-white leading-tight">{stat.value}</div>
-                      <div className="text-[10px] text-gray-600 mt-0.5">{stat.label}</div>
-                    </div>
-                  ))}
                 </div>
 
                 {/* Divider */}
@@ -1565,6 +1625,7 @@ export default function LandingPage() {
                 </div>
               </div>
             </div>
+            </div>{/* end grid */}
           </div>
         </section>
 
