@@ -1453,7 +1453,7 @@ export default function LandingPage() {
                 {[
                   { value: '$4.8M+', label: 'Member revenue' },
                   { value: '20+', label: 'Courses built' },
-                  { value: '1,200+', label: 'Members trained' },
+                  { value: '247+', label: 'Creators mentored' },
                 ].map(stat => (
                   <div key={stat.label} className="text-center">
                     <div className="text-base font-black text-white leading-tight">{stat.value}</div>
