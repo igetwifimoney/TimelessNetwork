@@ -101,13 +101,12 @@ export default function MentorshipPage() {
               <div className="flex items-start gap-5">
                 {/* Avatar */}
                 <div className="relative flex-shrink-0">
-                  <div
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center text-xl font-black text-white"
-                    style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
-                    aria-hidden="true"
-                  >
-                    {TY.avatar}
-                  </div>
+                  <img
+                    src="/founder.jpg"
+                    alt="Ty"
+                    className="w-16 h-16 rounded-2xl object-cover"
+                    style={{ border: '1px solid rgba(79,142,247,0.2)' }}
+                  />
                   {/* Live indicator */}
                   <div
                     className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-400 flex items-center justify-center"
