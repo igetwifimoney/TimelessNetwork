@@ -1419,22 +1419,12 @@ export default function LandingPage() {
             <div className="reveal space-y-6">
               {/* Photo */}
               <div className="relative">
-                {/* REPLACE this div with: <img src="/founder.jpg" alt="[Your Name]" className="w-full aspect-[4/5] object-cover rounded-3xl" /> */}
-                <div
-                  className="w-full aspect-[4/5] rounded-3xl overflow-hidden flex items-center justify-center"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(79,142,247,0.08) 0%, rgba(10,10,10,0.95) 100%)',
-                    border: '1px solid rgba(79,142,247,0.15)',
-                  }}
-                >
-                  <div
-                    className="w-24 h-24 rounded-full flex items-center justify-center text-2xl font-black text-white"
-                    style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
-                    aria-hidden="true"
-                  >
-                    TG
-                  </div>
-                </div>
+                <img
+                  src="/founder.jpg"
+                  alt="Founder"
+                  className="w-full aspect-[4/5] object-cover rounded-3xl"
+                  style={{ border: '1px solid rgba(79,142,247,0.15)' }}
+                />
               </div>
 
               {/* Bio */}
