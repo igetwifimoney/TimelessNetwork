@@ -10,7 +10,7 @@ const TY = {
   specialty: 'TikTok Shop & Creator Monetization',
   revenue: '$XX,000/mo',
   tags: ['TikTok Shop', 'Content Strategy', 'Organic Growth', 'Creator Revenue Program'],
-  bio: "I built Timeless from the ground up after going from zero to a full-time income on TikTok Shop. I've coached over 200 creators 1-on-1 and watched them go from confused beginners to consistent earners. In our session, we'll look at your specific account, content, and goals and you'll leave with a clear action plan that actually fits your situation.",
+  bio: "I've been building on TikTok Shop for years — and built Timeless from the ground up after finding a system that actually works. I've coached over 247 creators 1-on-1 and watched them go from confused beginners to consistent earners. In our session, we'll look at your specific account, content, and goals and you'll leave with a clear action plan that actually fits your situation.",
   calLink: 'https://calendly.com', // Replace with real Calendly link
   students: 247,
 }

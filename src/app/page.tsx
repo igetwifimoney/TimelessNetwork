@@ -100,11 +100,10 @@ function getMemberCount(): number {
 // ─────────────────────────────────────────────────────────
 
 const NAV_LINKS = [
-  { label: 'Learn', href: '#learn' },
   { label: 'Results', href: '#results' },
-  { label: 'Community', href: '#community' },
-  { label: 'FAQ', href: '#faq' },
   { label: 'Pricing', href: '#pricing' },
+  { label: 'FAQ', href: '#faq' },
+  { label: 'Mentorship', href: '#mentorship-apply' },
 ]
 
 const RESULT_CARDS = [
@@ -228,10 +227,10 @@ function StatItem({ prefix = '', value, suffix = '', label, decimals = 0 }: {
   const display = decimals > 0 ? count.toFixed(decimals) : Math.floor(count).toLocaleString()
   return (
     <div className="text-center">
-      <span ref={ref} className="text-3xl md:text-4xl font-black count-up gradient-text-blue" aria-live="polite">
+      <span ref={ref} className="text-2xl sm:text-3xl md:text-4xl font-black count-up gradient-text-blue" aria-live="polite">
         {prefix}{display}{suffix}
       </span>
-      <div className="text-sm text-gray-500 mt-2">{label}</div>
+      <div className="text-xs sm:text-sm text-gray-500 mt-1.5 sm:mt-2">{label}</div>
     </div>
   )
 }
@@ -334,7 +333,7 @@ function ResultCard({ card, idx }: { card: typeof RESULT_CARDS[0]; idx: number }
 
       <div className="mb-1">
         <div className="text-[10px] text-gray-600 mb-1 font-medium tracking-wide">{card.period}</div>
-        <span ref={ref} className="text-3xl font-black count-up" aria-live="polite">${Math.floor(count).toLocaleString()}</span>
+        <span ref={ref} className="text-2xl sm:text-3xl font-black count-up" aria-live="polite">${Math.floor(count).toLocaleString()}</span>
       </div>
 
       <div className="my-4 opacity-80 group-hover:opacity-100 transition-opacity">
@@ -531,11 +530,11 @@ function FAQSection() {
   const [open, setOpen] = useState<number | null>(null)
 
   return (
-    <section id="faq" className="py-28 px-5 border-t border-white/[0.04]" aria-labelledby="faq-heading">
+    <section id="faq" className="py-16 sm:py-28 px-4 sm:px-5 border-t border-white/[0.04]" aria-labelledby="faq-heading">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-16 reveal">
           <div className="badge mx-auto mb-5">FAQ</div>
-          <h2 id="faq-heading" className="text-4xl md:text-5xl font-black mb-4">
+          <h2 id="faq-heading" className="text-3xl sm:text-4xl md:text-5xl font-black mb-4">
             Every question.<br />
             <span className="gradient-text">Answered honestly.</span>
           </h2>
@@ -634,7 +633,7 @@ function FounderSection() {
               <span className="gradient-text">in the trenches.</span>
             </h2>
             <p className="text-gray-400 leading-relaxed">
-              I spent months grinding TikTok Shop with no real roadmap — watching outdated YouTube tutorials and
+              I spent years grinding TikTok Shop with no real roadmap — watching outdated YouTube tutorials and
               taking advice from people who&apos;d never made a single sale. When the system finally clicked,
               I had one question: why is this so hard to find?
             </p>
@@ -964,7 +963,7 @@ export default function LandingPage() {
 
         {/* ── HERO ─────────────────────────────────────────── */}
         <section
-          className="relative min-h-[100dvh] flex items-center justify-center px-5 pt-24 pb-24 overflow-hidden"
+          className="relative min-h-[100dvh] flex items-center justify-center px-4 sm:px-5 pt-20 sm:pt-24 pb-16 sm:pb-24 overflow-hidden"
           aria-label="Hero"
         >
           {/* Background */}
@@ -1011,7 +1010,7 @@ export default function LandingPage() {
 
           {/* Content */}
           <div className="relative max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 mb-10 animate-fade-in">
+            <div className="inline-flex items-center gap-2 mb-6 sm:mb-10 animate-fade-in">
               <div className="badge">
                 <Diamond className="w-3 h-3" aria-hidden="true" />
                 Join 1,200+ Creators Making Money
@@ -1019,7 +1018,7 @@ export default function LandingPage() {
             </div>
 
             <h1
-              className="text-5xl sm:text-6xl md:text-[72px] font-black leading-[1.02] tracking-tight mb-8 animate-fade-up"
+              className="text-[2.5rem] sm:text-5xl md:text-6xl lg:text-[72px] font-black leading-[1.05] tracking-tight mb-6 sm:mb-8 animate-fade-up"
               style={{ transform: `translateY(${mouse.y * -8}px)`, transition: 'transform 0.4s ease-out' }}
             >
               Learn TikTok Shop<br />
@@ -1027,15 +1026,15 @@ export default function LandingPage() {
               <span className="gradient-text">Actually<br className="hidden sm:block" />Making Money.</span>
             </h1>
 
-            <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-up delay-100">
+            <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed animate-fade-up delay-100">
               The complete system for content creators ready to build real TikTok Shop income —
               proven curriculum, live weekly mentorship, and a community that posts wins every day.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-fade-up delay-200">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center mb-10 sm:mb-16 animate-fade-up delay-200 w-full max-w-xs sm:max-w-none mx-auto">
               <Link
                 href="/auth/signup"
-                className="btn-premium text-base px-8 py-4 rounded-2xl inline-flex items-center justify-center gap-2 group"
+                className="btn-premium text-base px-8 py-4 rounded-2xl inline-flex items-center justify-center gap-2 group w-full sm:w-auto"
               >
                 <span className="flex items-center gap-2">
                   Get Instant Access
@@ -1044,14 +1043,14 @@ export default function LandingPage() {
               </Link>
               <a
                 href="#results"
-                className="btn-outline text-base px-8 py-4 rounded-2xl inline-flex items-center justify-center gap-2"
+                className="btn-outline text-base px-8 py-4 rounded-2xl inline-flex items-center justify-center gap-2 w-full sm:w-auto"
               >
                 See Member Results
               </a>
             </div>
 
             {/* Social proof */}
-            <div className="inline-flex items-center gap-4 glass px-5 py-3 rounded-full animate-fade-up delay-300" role="status" aria-label={`${memberCount.toLocaleString()}+ creators inside, 5-star rated`}>
+            <div className="inline-flex flex-wrap items-center justify-center gap-3 glass px-4 sm:px-5 py-3 rounded-full animate-fade-up delay-300 max-w-[90vw]" role="status" aria-label={`${memberCount.toLocaleString()}+ creators inside, 5-star rated`}>
               <div className="flex -space-x-2" aria-hidden="true">
                 {['M','J','K','A','T'].map((l, i) => (
                   <div
@@ -1063,8 +1062,8 @@ export default function LandingPage() {
                   </div>
                 ))}
               </div>
-              <span className="text-sm text-gray-400">
-                <span className="text-white font-semibold">{memberCount.toLocaleString()}+ creators</span> already inside
+              <span className="text-sm text-gray-400 whitespace-nowrap">
+                <span className="text-white font-semibold">{memberCount.toLocaleString()}+ creators</span> inside
               </span>
               <div className="flex items-center gap-0.5" aria-label="5 stars" role="img">
                 {[...Array(5)].map((_, i) => (
@@ -1076,66 +1075,25 @@ export default function LandingPage() {
         </section>
 
         {/* ── STATS ───────────────────────────────────────── */}
-        <section className="py-20 px-5 border-y border-white/[0.04]" aria-label="Platform statistics">
+        <section className="py-12 sm:py-20 px-4 sm:px-5 border-y border-white/[0.04]" aria-label="Platform statistics">
           <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-5 sm:gap-8">
               <StatItem prefix="$" value={4.8} suffix="M+" label="Creator Revenue Generated" decimals={1} />
               <StatItem value={memberCount} suffix="+" label="Active Members" />
               <div className="text-center">
-                <span className="text-3xl md:text-4xl font-black gradient-text-blue">20+</span>
-                <div className="text-sm text-gray-500 mt-2">Courses · 23+ hrs of content</div>
+                <span className="text-2xl sm:text-3xl md:text-4xl font-black gradient-text-blue">20+</span>
+                <div className="text-xs sm:text-sm text-gray-500 mt-2">Courses · 23+ hrs content</div>
               </div>
               <div className="text-center">
-                <span className="text-3xl md:text-4xl font-black gradient-text-blue">7–14 Days</span>
-                <div className="text-sm text-gray-500 mt-2">Avg. Time to First Sale</div>
+                <span className="text-2xl sm:text-3xl md:text-4xl font-black gradient-text-blue">7–14 Days</span>
+                <div className="text-xs sm:text-sm text-gray-500 mt-2">Avg. First Sale</div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ── LEARN ───────────────────────────────────────── */}
-        <section id="learn" className="py-28 px-5" aria-labelledby="learn-heading">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-16 reveal">
-              <div className="badge mx-auto mb-5">Curriculum</div>
-              <h2 id="learn-heading" className="text-4xl md:text-5xl font-black mb-4">
-                Everything you need.<br />
-                <span className="gradient-text">In the right order.</span>
-              </h2>
-              <p className="text-gray-500 max-w-xl mx-auto">No fluff. No padded content. Just the exact system people are using to make money right now.</p>
-            </div>
-            <div className="grid md:grid-cols-2 gap-4">
-              {[
-                { icon: BookOpen, title: 'TikTok Shop Fundamentals', desc: 'Build your foundation — account setup, the algorithm, and your first product listing done right.' },
-                { icon: TrendingUp, title: 'Product Research System', desc: 'The 3-filter method to find products that sell before you film a single video.' },
-                { icon: Zap, title: 'Viral Content Playbook', desc: 'Hook formulas, script structures, and filming techniques that drive real sales — not just views.' },
-                { icon: Users, title: 'Scaling to $10k/Month', desc: 'How to systematize content output, reinvest profits, and build a sustainable TikTok Shop operation.' },
-              ].map((item, i) => {
-                const Icon = item.icon
-                return (
-                  <div
-                    key={item.title}
-                    className={`card-premium p-6 flex gap-4 group reveal reveal-delay-${i + 1}`}
-                  >
-                    <div className="w-10 h-10 rounded-xl glass-blue flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
-                      <Icon className="w-5 h-5 text-[#a855f7]" />
-                    </div>
-                    <div>
-                      <div className="font-bold mb-1.5 group-hover:text-[#c084fc] transition-colors">{item.title}</div>
-                      <div className="text-sm text-gray-500 leading-relaxed">{item.desc}</div>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* ── PRODUCT PREVIEW ──────────────────────────────── */}
-        <ProductPreview />
-
         {/* ── RESULTS ─────────────────────────────────────── */}
-        <section id="results" className="py-28 px-5 relative overflow-hidden" aria-labelledby="results-heading">
+        <section id="results" className="py-16 sm:py-28 px-4 sm:px-5 relative overflow-hidden" aria-labelledby="results-heading">
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] pointer-events-none" aria-hidden="true">
             <div className="w-full h-full rounded-full opacity-[0.04]" style={{ background: 'radial-gradient(circle, #a855f7, transparent 70%)' }} />
           </div>
@@ -1158,75 +1116,8 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ── COMMUNITY ───────────────────────────────────── */}
-        <section id="community" className="py-28 px-5" aria-labelledby="community-heading">
-          <div className="max-w-5xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div className="reveal">
-                <div className="badge mb-6">Community</div>
-                <h2 id="community-heading" className="text-4xl md:text-5xl font-black mb-6 leading-tight">
-                  You don&apos;t build this<br />
-                  <span className="gradient-text">alone.</span>
-                </h2>
-                <p className="text-gray-400 text-lg leading-relaxed mb-8">
-                  Timeless isn&apos;t a course you buy and forget. It&apos;s a room full of people posting wins every day — and expecting you to show up too.
-                </p>
-                <ul className="space-y-3" aria-label="Community features">
-                  {[
-                    'Daily accountability check-ins',
-                    'Wins feed with real numbers',
-                    'Feedback on your content before you post',
-                    'Find your accountability partner',
-                    'Active channels for every niche',
-                  ].map(item => (
-                    <li key={item} className="flex items-center gap-3 group">
-                      <div className="w-5 h-5 rounded-full glass-blue flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform" aria-hidden="true">
-                        <Check className="w-3 h-3 text-[#a855f7]" />
-                      </div>
-                      <span className="text-gray-300 text-sm group-hover:text-white transition-colors">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="reveal reveal-delay-2">
-                <CommunityFeed />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── FEATURES ────────────────────────────────────── */}
-        <section className="py-28 px-5 border-t border-white/[0.04]" aria-labelledby="features-heading">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-16 reveal">
-              <div className="badge mx-auto mb-5">What&apos;s Inside</div>
-              <h2 id="features-heading" className="text-4xl md:text-5xl font-black">
-                Built different.<br />
-                <span className="gradient-text">On purpose.</span>
-              </h2>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {FEATURES.map((f, i) => {
-                const Icon = f.icon
-                return (
-                  <div key={f.title} className={`card-premium p-5 group reveal reveal-delay-${(i % 3) + 1}`}>
-                    <div
-                      className="w-9 h-9 rounded-xl glass-blue flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-300"
-                      aria-hidden="true"
-                    >
-                      <Icon className="w-[18px] h-[18px] text-[#a855f7]" />
-                    </div>
-                    <div className="font-bold text-sm mb-1.5 group-hover:text-[#c084fc] transition-colors">{f.title}</div>
-                    <div className="text-xs text-gray-500 leading-relaxed">{f.desc}</div>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        </section>
-
         {/* ── TESTIMONIALS ────────────────────────────────── */}
-        <section className="py-28 px-5" aria-labelledby="testimonials-heading">
+        <section className="py-16 sm:py-28 px-4 sm:px-5" aria-labelledby="testimonials-heading">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16 reveal">
               <div className="badge mx-auto mb-5">Testimonials</div>
@@ -1275,11 +1166,8 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ── FAQ ─────────────────────────────────────────── */}
-        <FAQSection />
-
         {/* ── PRICING ─────────────────────────────────────── */}
-        <section id="pricing" className="py-28 px-5 border-t border-white/[0.04]" aria-labelledby="pricing-heading">
+        <section id="pricing" className="py-16 sm:py-28 px-4 sm:px-5 border-t border-white/[0.04]" aria-labelledby="pricing-heading">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-16 reveal">
               <div className="badge mx-auto mb-5">Pricing</div>
@@ -1306,21 +1194,22 @@ export default function LandingPage() {
                 {/* Header */}
                 <div className="mb-7">
                   <div className="text-xs text-[#a855f7] font-bold uppercase tracking-widest mb-3">Timeless Membership</div>
-                  <div className="flex flex-wrap items-end gap-x-6 gap-y-3">
+                  <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-end gap-4 sm:gap-x-6">
                     {/* Monthly option */}
                     <div>
                       <div className="flex items-end gap-1">
-                        <span className="text-5xl font-black">$49</span>
-                        <span className="text-xl font-bold text-gray-400 mb-1">.99</span>
+                        <span className="text-4xl sm:text-5xl font-black">$49</span>
+                        <span className="text-lg sm:text-xl font-bold text-gray-400 mb-1">.99</span>
                         <span className="text-gray-500 mb-1.5 ml-0.5">/mo</span>
                       </div>
                       <div className="text-xs text-gray-600 mt-0.5">Billed monthly · Cancel anytime</div>
                     </div>
 
-                    <div className="text-gray-700 font-light text-lg mb-1">or</div>
+                    <div className="text-gray-700 font-light text-lg hidden sm:block mb-1">or</div>
+                    <div className="text-gray-700 font-light text-sm sm:hidden">— or save more —</div>
 
                     {/* Annual option */}
-                    <div className="relative">
+                    <div className="relative mt-2 sm:mt-0">
                       <div
                         className="absolute -top-3.5 left-0 text-[10px] font-black px-2.5 py-0.5 rounded-full whitespace-nowrap text-white"
                         style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
@@ -1328,7 +1217,7 @@ export default function LandingPage() {
                         SAVE 22%
                       </div>
                       <div className="flex items-end gap-1 pt-1">
-                        <span className="text-5xl font-black">$39</span>
+                        <span className="text-4xl sm:text-5xl font-black">$39</span>
                         <span className="text-gray-500 mb-1.5 ml-0.5">/mo</span>
                       </div>
                       <div className="text-xs text-gray-600 mt-0.5">$468/year · Best value</div>
@@ -1394,8 +1283,11 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* ── FAQ ─────────────────────────────────────────── */}
+        <FAQSection />
+
         {/* ── FOUNDER + MENTORSHIP ─────────────────────────── */}
-        <section id="mentorship-apply" className="py-24 px-5 border-t border-white/[0.04]" aria-labelledby="mentorship-section-heading">
+        <section id="mentorship-apply" className="py-16 sm:py-24 px-4 sm:px-5 border-t border-white/[0.04]" aria-labelledby="mentorship-section-heading">
           <div className="max-w-5xl mx-auto">
             {/* Section label */}
             <div className="text-center mb-14 reveal">
@@ -1410,7 +1302,7 @@ export default function LandingPage() {
             </div>
 
             {/* ── TWO COLUMN: FOUNDER LEFT / MENTORSHIP RIGHT ── */}
-            <div className="grid lg:grid-cols-2 gap-8 items-stretch">
+            <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 items-stretch">
 
             {/* ── FOUNDER CARD (left column) ── */}
             <div className="reveal space-y-6">
@@ -1432,7 +1324,7 @@ export default function LandingPage() {
                   <span className="gradient-text">actually doing it.</span>
                 </h3>
                 <p className="text-sm text-gray-400 leading-relaxed mb-4">
-                  I spent months grinding TikTok Shop with no roadmap — watching outdated tutorials and
+                  I spent years grinding TikTok Shop with no roadmap — watching outdated tutorials and
                   taking advice from people who&apos;d never made a single sale. When the system finally
                   clicked, I built the platform I wish existed when I was starting.
                 </p>
@@ -1504,7 +1396,7 @@ export default function LandingPage() {
               {/* Animated top border glow */}
               <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(168,85,247,0.5), transparent)' }} aria-hidden="true" />
 
-              <div className="relative p-8 md:p-10">
+              <div className="relative p-5 sm:p-8 md:p-10">
                 {/* Badges */}
                 <div className="flex flex-wrap items-center gap-2.5 mb-8">
                   <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-orange-300" style={{ background: 'rgba(251,146,60,0.1)', border: '1px solid rgba(251,146,60,0.25)' }}>
@@ -1517,7 +1409,7 @@ export default function LandingPage() {
                 </div>
 
                 {/* Title + Price */}
-                <div className="flex items-start justify-between gap-6 mb-8 flex-wrap">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
                   <div>
                     <div className="text-xs text-[#a855f7] font-bold uppercase tracking-widest mb-3">Private 1-on-1 Mentorship</div>
                     <h3 className="text-3xl font-black mb-3 leading-tight">Direct access.<br />Real results.</h3>
@@ -1528,7 +1420,7 @@ export default function LandingPage() {
                   <div className="flex-shrink-0">
                     <div className="text-xs text-gray-600 uppercase tracking-wider mb-1">Investment</div>
                     <div
-                      className="text-5xl font-black tracking-tight leading-none"
+                      className="text-4xl sm:text-5xl font-black tracking-tight leading-none"
                       style={{ textShadow: '0 0 40px rgba(168,85,247,0.25)' }}
                     >
                       $1,080
@@ -1616,28 +1508,6 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ── FINAL CTA ───────────────────────────────────── */}
-        <section className="py-32 px-5 relative overflow-hidden" aria-label="Call to action">
-          <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(168,85,247,0.05), transparent 60%)' }} aria-hidden="true" />
-          <div className="relative max-w-3xl mx-auto text-center reveal">
-            <h2 className="text-5xl md:text-6xl font-black mb-6 leading-tight">
-              The window is<br />
-              <span className="shimmer-text">open right now.</span>
-            </h2>
-            <p className="text-gray-500 text-lg mb-12 max-w-xl mx-auto">
-              TikTok Shop is still early. The creators who move now build the advantage that lasts.
-            </p>
-            <Link
-              href="/auth/signup"
-              className="btn-premium text-lg px-10 py-5 rounded-2xl inline-flex items-center gap-3 group"
-            >
-              <span className="flex items-center gap-3">
-                Start Building Today
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-              </span>
-            </Link>
-          </div>
-        </section>
 
       </main>
 
@@ -1645,7 +1515,7 @@ export default function LandingPage() {
       <EmailCapture />
 
       {/* ── FOOTER ──────────────────────────────────────── */}
-      <footer className="border-t border-white/[0.04] pt-16 pb-10 px-5">
+      <footer className="border-t border-white/[0.04] pt-10 sm:pt-16 pb-8 sm:pb-10 px-4 sm:px-5">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
             {/* Brand */}
