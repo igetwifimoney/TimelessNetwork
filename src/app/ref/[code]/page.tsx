@@ -21,7 +21,7 @@ export default function RefPage({ params }: { params: { code: string } }) {
   return (
     <div className="min-h-screen bg-black flex items-center justify-center">
       <div className="text-center">
-        <div className="w-12 h-12 border-2 border-[#4F8EF7] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+        <div className="w-12 h-12 border-2 border-[#a855f7] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
         <p className="text-gray-500 text-sm">Setting up your referral…</p>
       </div>
     </div>

@@ -131,8 +131,8 @@ export default function OnboardingPage() {
           </div>
 
           {/* Recommended first course */}
-          <div className="card-premium p-5 mb-4" style={{ border: '1px solid rgba(79,142,247,0.2)' }}>
-            <div className="text-xs text-[#4F8EF7] font-bold uppercase tracking-wider mb-3">Start Here</div>
+          <div className="card-premium p-5 mb-4" style={{ border: '1px solid rgba(168,85,247,0.2)' }}>
+            <div className="text-xs text-[#a855f7] font-bold uppercase tracking-wider mb-3">Start Here</div>
             <div className="flex items-center gap-4">
               <div className="text-3xl" aria-hidden="true">{recommended.badge}</div>
               <div className="flex-1">
@@ -154,7 +154,7 @@ export default function OnboardingPage() {
                 <li key={course.slug} className="flex items-center gap-3">
                   <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black flex-shrink-0"
                     style={i === 0
-                      ? { background: 'rgba(79,142,247,0.15)', color: '#4F8EF7' }
+                      ? { background: 'rgba(168,85,247,0.15)', color: '#a855f7' }
                       : { background: 'rgba(255,255,255,0.04)', color: '#6B7280' }}>
                     {i + 1}
                   </div>
@@ -164,7 +164,7 @@ export default function OnboardingPage() {
                       {course.title}
                     </div>
                   </div>
-                  {i === 0 && <Check className="w-4 h-4 text-[#4F8EF7] flex-shrink-0" />}
+                  {i === 0 && <Check className="w-4 h-4 text-[#a855f7] flex-shrink-0" />}
                 </li>
               ))}
             </ol>
@@ -195,7 +195,7 @@ export default function OnboardingPage() {
         {/* Progress bar */}
         <div className="w-full h-1 rounded-full mb-8 overflow-hidden" style={{ background: 'rgba(255,255,255,0.05)' }}>
           <div className="h-full rounded-full transition-all duration-500"
-            style={{ width: `${progress}%`, background: 'linear-gradient(90deg, #4F8EF7, #60A5FA)' }} />
+            style={{ width: `${progress}%`, background: 'linear-gradient(90deg, #a855f7, #c084fc)' }} />
         </div>
 
         {/* Question */}
@@ -214,7 +214,7 @@ export default function OnboardingPage() {
                 onClick={() => select(opt.value)}
                 className="w-full text-left p-4 rounded-2xl transition-all group"
                 style={selected
-                  ? { background: 'rgba(79,142,247,0.1)', border: '1px solid rgba(79,142,247,0.3)' }
+                  ? { background: 'rgba(168,85,247,0.1)', border: '1px solid rgba(168,85,247,0.3)' }
                   : { background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }
                 }
                 aria-pressed={selected}
@@ -222,12 +222,12 @@ export default function OnboardingPage() {
                 <div className="flex items-center gap-4">
                   <span className="text-2xl flex-shrink-0" aria-hidden="true">{opt.emoji}</span>
                   <div className="flex-1">
-                    <div className={`font-bold text-sm ${selected ? 'text-[#60A5FA]' : 'text-white'}`}>
+                    <div className={`font-bold text-sm ${selected ? 'text-[#c084fc]' : 'text-white'}`}>
                       {opt.label}
                     </div>
                     <div className="text-xs text-gray-500 mt-0.5">{opt.description}</div>
                   </div>
-                  {selected && <Check className="w-4 h-4 text-[#4F8EF7] flex-shrink-0" />}
+                  {selected && <Check className="w-4 h-4 text-[#a855f7] flex-shrink-0" />}
                 </div>
               </button>
             )

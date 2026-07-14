@@ -26,7 +26,7 @@ const STATUS_CONFIG: Record<Status, { label: string; color: string; bg: string; 
   testing: {
     label: 'Testing',
     color: 'text-blue-400',
-    bg: 'rgba(79,142,247,0.1)',
+    bg: 'rgba(168,85,247,0.1)',
     icon: <TrendingUp className="w-3 h-3" />,
   },
   winner: {
@@ -162,7 +162,7 @@ export default function TrackerPage() {
             <div className="text-xs text-gray-500 mt-0.5">Winners</div>
           </div>
           <div className="card rounded-2xl p-4 text-center">
-            <div className="text-2xl font-black text-[#4F8EF7]">{testing}</div>
+            <div className="text-2xl font-black text-[#a855f7]">{testing}</div>
             <div className="text-xs text-gray-500 mt-0.5">In Testing</div>
           </div>
           <div className="card rounded-2xl p-4 text-center">
@@ -173,7 +173,7 @@ export default function TrackerPage() {
 
         {/* Add/Edit form */}
         {showForm && (
-          <div className="card rounded-2xl p-5 mb-6" style={{ border: '1px solid rgba(79,142,247,0.15)' }}>
+          <div className="card rounded-2xl p-5 mb-6" style={{ border: '1px solid rgba(168,85,247,0.15)' }}>
             <h3 className="font-bold text-sm mb-4">{editId ? 'Edit Product' : 'Add New Product'}</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
@@ -282,7 +282,7 @@ export default function TrackerPage() {
                 onClick={() => setFilter(s)}
                 className="px-3 py-2 rounded-xl text-xs font-semibold transition-all whitespace-nowrap flex-shrink-0"
                 style={filter === s
-                  ? { background: 'rgba(79,142,247,0.15)', color: '#60A5FA', border: '1px solid rgba(79,142,247,0.25)' }
+                  ? { background: 'rgba(168,85,247,0.15)', color: '#c084fc', border: '1px solid rgba(168,85,247,0.25)' }
                   : { background: 'rgba(255,255,255,0.03)', color: '#6B7280', border: '1px solid rgba(255,255,255,0.06)' }
                 }
               >

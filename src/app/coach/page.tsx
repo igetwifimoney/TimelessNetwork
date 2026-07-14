@@ -34,17 +34,17 @@ function MessageBubble({ message }: { message: Message }) {
     <div className={`flex gap-3 ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
       <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm"
         style={isUser
-          ? { background: 'rgba(79,142,247,0.15)', border: '1px solid rgba(79,142,247,0.2)' }
+          ? { background: 'rgba(168,85,247,0.15)', border: '1px solid rgba(168,85,247,0.2)' }
           : { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }
         }>
-        {isUser ? <User className="w-4 h-4 text-[#4F8EF7]" /> : <Bot className="w-4 h-4 text-gray-400" />}
+        {isUser ? <User className="w-4 h-4 text-[#a855f7]" /> : <Bot className="w-4 h-4 text-gray-400" />}
       </div>
 
       <div className={`max-w-[75%] lg:max-w-[65%] px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
         isUser ? 'rounded-tr-sm text-white' : 'rounded-tl-sm text-gray-200'
       }`}
         style={isUser
-          ? { background: 'linear-gradient(135deg, #4F8EF7, #3B7DE8)', boxShadow: '0 2px 12px rgba(79,142,247,0.2)' }
+          ? { background: 'linear-gradient(135deg, #a855f7, #3B7DE8)', boxShadow: '0 2px 12px rgba(168,85,247,0.2)' }
           : { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }
         }>
         {message.content}
@@ -123,8 +123,8 @@ export default function CoachPage() {
       <div className="flex-shrink-0 px-4 lg:px-6 py-4 border-b border-white/5">
         <div className="max-w-3xl mx-auto flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-            style={{ background: 'rgba(79,142,247,0.1)', border: '1px solid rgba(79,142,247,0.15)' }}>
-            <Bot className="w-5 h-5 text-[#4F8EF7]" />
+            style={{ background: 'rgba(168,85,247,0.1)', border: '1px solid rgba(168,85,247,0.15)' }}>
+            <Bot className="w-5 h-5 text-[#a855f7]" />
           </div>
           <div>
             <div className="font-bold text-sm">Timeless AI Coach</div>
@@ -217,7 +217,7 @@ export default function CoachPage() {
               onClick={() => send(input)}
               disabled={!input.trim() || loading}
               className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mb-0.5 transition-all disabled:opacity-30"
-              style={{ background: input.trim() && !loading ? 'linear-gradient(135deg, #4F8EF7, #3B7DE8)' : 'rgba(255,255,255,0.05)' }}
+              style={{ background: input.trim() && !loading ? 'linear-gradient(135deg, #a855f7, #3B7DE8)' : 'rgba(255,255,255,0.05)' }}
             >
               <Send className="w-4 h-4 text-white" />
             </button>

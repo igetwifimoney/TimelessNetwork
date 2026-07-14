@@ -58,7 +58,7 @@ export default function LoginPage() {
       {/* Background glow */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(79,142,247,0.04), transparent 65%)' }}
+        style={{ background: 'radial-gradient(circle, rgba(168,85,247,0.04), transparent 65%)' }}
         aria-hidden="true"
       />
 
@@ -67,10 +67,10 @@ export default function LoginPage() {
         <Link href="/" className="flex items-center justify-center gap-2.5 mb-10 group" aria-label="Timeless — go to home">
           <div className="w-7 h-7 relative flex-shrink-0" aria-hidden="true">
             <div className="absolute inset-0 rounded rotate-45 transition-transform group-hover:rotate-[60deg] duration-300"
-              style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }} />
+              style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }} />
             <div className="absolute inset-[2px] bg-black rounded rotate-45" />
             <div className="absolute inset-[4px] rounded rotate-45"
-              style={{ background: 'linear-gradient(135deg, #60A5FA, #4F8EF7)' }} />
+              style={{ background: 'linear-gradient(135deg, #c084fc, #a855f7)' }} />
           </div>
           <span className="font-black text-lg tracking-tight">timeless</span>
         </Link>
@@ -151,7 +151,7 @@ export default function LoginPage() {
                 <label htmlFor="login-password" className="text-xs font-semibold text-gray-400 uppercase tracking-wide">
                   Password
                 </label>
-                <a href="#" className="text-xs text-[#4F8EF7] hover:text-[#60A5FA] transition-colors">
+                <a href="#" className="text-xs text-[#a855f7] hover:text-[#c084fc] transition-colors">
                   Forgot password?
                 </a>
               </div>
@@ -217,7 +217,7 @@ export default function LoginPage() {
 
           <p className="text-center text-sm text-gray-600 mt-6">
             Don&apos;t have an account?{' '}
-            <Link href="/auth/signup" className="text-[#4F8EF7] hover:text-[#60A5FA] font-semibold transition-colors">
+            <Link href="/auth/signup" className="text-[#a855f7] hover:text-[#c084fc] font-semibold transition-colors">
               Join Timeless
             </Link>
           </p>

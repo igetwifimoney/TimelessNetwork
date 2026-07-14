@@ -32,7 +32,7 @@ export default function AdminAnnouncement() {
   return (
     <div className="card rounded-2xl p-5">
       <div className="flex items-center gap-2 mb-4">
-        <Megaphone className="w-4 h-4 text-[#4F8EF7]" />
+        <Megaphone className="w-4 h-4 text-[#a855f7]" />
         <h2 className="font-bold text-sm">Post Announcement</h2>
       </div>
 
@@ -65,7 +65,7 @@ export default function AdminAnnouncement() {
           onClick={send}
           disabled={!text.trim() || sending || sent}
           className="w-full py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 transition-all disabled:opacity-40"
-          style={{ background: sent ? 'rgba(34,197,94,0.15)' : 'linear-gradient(135deg, #4F8EF7, #3B7DE8)' }}
+          style={{ background: sent ? 'rgba(34,197,94,0.15)' : 'linear-gradient(135deg, #a855f7, #3B7DE8)' }}
         >
           {sent ? (
             <><Check className="w-4 h-4 text-green-400" /><span className="text-green-400">Sent!</span></>

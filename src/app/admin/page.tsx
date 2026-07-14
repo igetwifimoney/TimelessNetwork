@@ -20,7 +20,7 @@ const MOCK_SIGNUPS = [
 
 const STATUS_COLORS: Record<string, string> = {
   active:  '#34D399',
-  trial:   '#60A5FA',
+  trial:   '#c084fc',
   churned: '#F87171',
 }
 
@@ -82,7 +82,7 @@ export default function AdminPage() {
 
         {/* Header */}
         <header className="mb-8">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider mb-2" style={{ color: '#4F8EF7' }}>
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider mb-2" style={{ color: '#a855f7' }}>
             <Shield className="w-3.5 h-3.5" />
             Admin Dashboard
           </div>
@@ -98,7 +98,7 @@ export default function AdminPage() {
               onClick={() => setActiveTab(tab)}
               className="px-5 py-2 rounded-xl text-sm font-bold transition-all"
               style={activeTab === tab
-                ? { background: 'rgba(79,142,247,0.12)', border: '1px solid rgba(79,142,247,0.3)', color: '#60A5FA' }
+                ? { background: 'rgba(168,85,247,0.12)', border: '1px solid rgba(168,85,247,0.3)', color: '#c084fc' }
                 : { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', color: '#6B7280' }
               }
             >
@@ -126,8 +126,8 @@ export default function AdminPage() {
                 <>
                   <div className="card-premium p-5">
                     <div className="flex items-center gap-2 mb-3">
-                      <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'rgba(79,142,247,0.1)', border: '1px solid rgba(79,142,247,0.2)' }}>
-                        <Users className="w-4 h-4 text-[#4F8EF7]" />
+                      <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'rgba(168,85,247,0.1)', border: '1px solid rgba(168,85,247,0.2)' }}>
+                        <Users className="w-4 h-4 text-[#a855f7]" />
                       </div>
                     </div>
                     <dd className="text-2xl font-black mb-0.5">{realData.totalUsers.toLocaleString()}</dd>
@@ -172,7 +172,7 @@ export default function AdminPage() {
                 <h2 className="font-bold text-sm">Real Members</h2>
                 <button
                   onClick={fetchReal}
-                  className="flex items-center gap-1.5 text-xs text-gray-600 hover:text-[#4F8EF7] transition-colors"
+                  className="flex items-center gap-1.5 text-xs text-gray-600 hover:text-[#a855f7] transition-colors"
                 >
                   <RefreshCw className="w-3 h-3" />
                   Refresh
@@ -201,7 +201,7 @@ export default function AdminPage() {
                           <td className="px-5 py-3">
                             <div className="flex items-center gap-2.5">
                               <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-black text-white flex-shrink-0"
-                                style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}>
+                                style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}>
                                 {user.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)}
                               </div>
                               <span className="text-sm font-medium">{user.name}</span>
@@ -263,8 +263,8 @@ export default function AdminPage() {
                     style={{
                       height: `${h}%`,
                       background: i === REVENUE_BARS.length - 1
-                        ? 'linear-gradient(to top, #2563EB, #4F8EF7)'
-                        : 'rgba(79,142,247,0.2)',
+                        ? 'linear-gradient(to top, #ec4899, #a855f7)'
+                        : 'rgba(168,85,247,0.2)',
                     }}
                   />
                 ))}
@@ -278,7 +278,7 @@ export default function AdminPage() {
             <section className="rounded-2xl overflow-hidden" style={{ background: '#0E0E0E', border: '1px solid rgba(255,255,255,0.05)' }}>
               <div className="px-5 py-4 flex items-center justify-between" style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
                 <h2 className="font-bold text-sm">Members</h2>
-                <button className="text-xs text-gray-600 hover:text-[#4F8EF7] transition-colors flex items-center gap-1">
+                <button className="text-xs text-gray-600 hover:text-[#a855f7] transition-colors flex items-center gap-1">
                   View all <ChevronRight className="w-3 h-3" />
                 </button>
               </div>
@@ -297,7 +297,7 @@ export default function AdminPage() {
                         <td className="px-5 py-3">
                           <div className="flex items-center gap-2.5">
                             <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-black text-white"
-                              style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}>
+                              style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}>
                               {m.name.split(' ').map(n => n[0]).join('')}
                             </div>
                             <div>

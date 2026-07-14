@@ -757,7 +757,7 @@ export default function ResourcesPage() {
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder="Search resources..."
-              className="w-full pl-11 pr-4 py-3 rounded-xl text-sm bg-white/[0.03] border border-white/[0.06] text-white placeholder-gray-600 outline-none focus:border-[#4F8EF7]/40 transition-colors"
+              className="w-full pl-11 pr-4 py-3 rounded-xl text-sm bg-white/[0.03] border border-white/[0.06] text-white placeholder-gray-600 outline-none focus:border-[#a855f7]/40 transition-colors"
               aria-label="Search resources"
             />
           </div>
@@ -770,7 +770,7 @@ export default function ResourcesPage() {
                 onClick={() => setActiveCategory(cat)}
                 className="px-4 py-2 rounded-xl text-sm font-semibold flex-shrink-0 transition-all"
                 style={activeCategory === cat
-                  ? { background: 'rgba(79,142,247,0.12)', border: '1px solid rgba(79,142,247,0.25)', color: '#60A5FA' }
+                  ? { background: 'rgba(168,85,247,0.12)', border: '1px solid rgba(168,85,247,0.25)', color: '#c084fc' }
                   : { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', color: '#6B7280' }
                 }
                 aria-pressed={activeCategory === cat}
@@ -806,7 +806,7 @@ export default function ResourcesPage() {
                     className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all"
                     style={copied === r.id
                       ? { background: 'rgba(52,211,153,0.1)', border: '1px solid rgba(52,211,153,0.2)', color: '#34D399' }
-                      : { background: 'rgba(79,142,247,0.08)', border: '1px solid rgba(79,142,247,0.15)', color: '#60A5FA' }
+                      : { background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.15)', color: '#c084fc' }
                     }
                     aria-label={`Copy ${r.title} to clipboard`}
                   >

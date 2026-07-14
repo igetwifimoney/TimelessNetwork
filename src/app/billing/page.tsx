@@ -40,7 +40,7 @@ const PRODUCT_NAMES: Record<string, string> = {
 
 const STATUS_STYLE: Record<string, { label: string; color: string; bg: string; border: string }> = {
   active:   { label: 'Active',    color: '#34D399', bg: 'rgba(52,211,153,0.08)',  border: 'rgba(52,211,153,0.15)'  },
-  trialing: { label: 'Trial',     color: '#60A5FA', bg: 'rgba(96,165,250,0.08)',  border: 'rgba(96,165,250,0.15)'  },
+  trialing: { label: 'Trial',     color: '#c084fc', bg: 'rgba(96,165,250,0.08)',  border: 'rgba(96,165,250,0.15)'  },
   past_due: { label: 'Past Due',  color: '#FBBF24', bg: 'rgba(251,191,36,0.08)',  border: 'rgba(251,191,36,0.15)'  },
   canceled: { label: 'Canceled',  color: '#F87171', bg: 'rgba(248,113,113,0.08)', border: 'rgba(248,113,113,0.15)' },
 }
@@ -117,7 +117,7 @@ export default function BillingPage() {
 
           {loading && (
             <div className="flex items-center justify-center py-24" role="status" aria-label="Loading billing info">
-              <Loader className="w-6 h-6 animate-spin text-[#4F8EF7]" aria-hidden="true" />
+              <Loader className="w-6 h-6 animate-spin text-[#a855f7]" aria-hidden="true" />
             </div>
           )}
 
@@ -160,9 +160,9 @@ export default function BillingPage() {
                         </button>
                       </div>
                       {/* Annual */}
-                      <div className="rounded-2xl p-5 relative" style={{ background: 'rgba(79,142,247,0.04)', border: '1px solid rgba(79,142,247,0.25)' }}>
-                        <div className="absolute -top-3 left-4 text-[10px] font-black px-3 py-1 rounded-full text-white" style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}>BEST VALUE</div>
-                        <div className="text-xs text-[#4F8EF7] uppercase tracking-wider mb-2">Annual</div>
+                      <div className="rounded-2xl p-5 relative" style={{ background: 'rgba(168,85,247,0.04)', border: '1px solid rgba(168,85,247,0.25)' }}>
+                        <div className="absolute -top-3 left-4 text-[10px] font-black px-3 py-1 rounded-full text-white" style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}>BEST VALUE</div>
+                        <div className="text-xs text-[#a855f7] uppercase tracking-wider mb-2">Annual</div>
                         <div className="text-3xl font-black mb-0.5">$39<span className="text-base font-normal text-gray-500">/mo</span></div>
                         <div className="text-xs text-gray-600 mb-4">$468/year · save $132</div>
                         <button
@@ -189,10 +189,10 @@ export default function BillingPage() {
                           <div className="flex items-center gap-3">
                             <div
                               className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                              style={{ background: 'rgba(79,142,247,0.08)', border: '1px solid rgba(79,142,247,0.15)' }}
+                              style={{ background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.15)' }}
                               aria-hidden="true"
                             >
-                              <CheckCircle className="w-5 h-5 text-[#4F8EF7]" />
+                              <CheckCircle className="w-5 h-5 text-[#a855f7]" />
                             </div>
                             <div>
                               <div className="font-bold text-sm">{PRODUCT_NAMES[sub.product_key] ?? sub.product_key}</div>

@@ -58,9 +58,9 @@ export default function Sidebar() {
         <div className="p-5 border-b border-white/[0.04]">
           <Link href="/dashboard" className="flex items-center gap-2.5" aria-label="Timeless — go to dashboard">
             <div className="w-6 h-6 relative" aria-hidden="true">
-              <div className="absolute inset-0 rounded rotate-45" style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }} />
+              <div className="absolute inset-0 rounded rotate-45" style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }} />
               <div className="absolute inset-[2px] bg-black rounded rotate-45" />
-              <div className="absolute inset-[3.5px] rounded rotate-45" style={{ background: 'linear-gradient(135deg, #60A5FA, #4F8EF7)' }} />
+              <div className="absolute inset-[3.5px] rounded rotate-45" style={{ background: 'linear-gradient(135deg, #c084fc, #a855f7)' }} />
             </div>
             <span className="font-black text-sm tracking-tight">timeless</span>
           </Link>
@@ -81,11 +81,11 @@ export default function Sidebar() {
                     : 'text-gray-600 hover:text-gray-300 hover:bg-white/[0.03]'
                 }`}
                 style={active
-                  ? { background: 'rgba(79,142,247,0.08)', border: '1px solid rgba(79,142,247,0.15)' }
+                  ? { background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.15)' }
                   : { border: '1px solid transparent' }
                 }
               >
-                <Icon className={`w-4 h-4 flex-shrink-0 ${active ? 'text-[#4F8EF7]' : ''}`} aria-hidden="true" />
+                <Icon className={`w-4 h-4 flex-shrink-0 ${active ? 'text-[#a855f7]' : ''}`} aria-hidden="true" />
                 {label}
               </Link>
             )
@@ -101,11 +101,11 @@ export default function Sidebar() {
                   : 'text-gray-700 hover:text-gray-400 hover:bg-white/[0.03]'
               }`}
               style={pathname.startsWith('/admin')
-                ? { background: 'rgba(79,142,247,0.08)', border: '1px solid rgba(79,142,247,0.15)' }
+                ? { background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.15)' }
                 : { border: '1px solid transparent' }
               }
             >
-              <Shield className={`w-4 h-4 flex-shrink-0 ${pathname.startsWith('/admin') ? 'text-[#4F8EF7]' : ''}`} aria-hidden="true" />
+              <Shield className={`w-4 h-4 flex-shrink-0 ${pathname.startsWith('/admin') ? 'text-[#a855f7]' : ''}`} aria-hidden="true" />
               Admin
             </Link>
           </div>
@@ -155,12 +155,12 @@ export default function Sidebar() {
             >
               <Icon
                 className="w-5 h-5"
-                style={{ color: active ? '#4F8EF7' : '#4B5563' }}
+                style={{ color: active ? '#a855f7' : '#4B5563' }}
                 aria-hidden="true"
               />
               <span
                 className="text-[10px] font-semibold"
-                style={{ color: active ? '#4F8EF7' : '#4B5563' }}
+                style={{ color: active ? '#a855f7' : '#4B5563' }}
               >
                 {label}
               </span>

@@ -76,7 +76,7 @@ export default function PrivacyPage() {
               <li>Request deletion of your account and associated data</li>
               <li>Unsubscribe from marketing emails at any time</li>
             </ul>
-            <p>To exercise any of these rights, email us at <a href="mailto:hello@jointimeless.network" className="text-[#4F8EF7] hover:underline">hello@jointimeless.network</a></p>
+            <p>To exercise any of these rights, email us at <a href="mailto:hello@jointimeless.network" className="text-[#a855f7] hover:underline">hello@jointimeless.network</a></p>
           </Section>
 
           <Section title="8. Data Retention">
@@ -92,13 +92,13 @@ export default function PrivacyPage() {
           </Section>
 
           <Section title="11. Contact">
-            <p>Questions about this Privacy Policy? Email us at <a href="mailto:hello@jointimeless.network" className="text-[#4F8EF7] hover:underline">hello@jointimeless.network</a></p>
+            <p>Questions about this Privacy Policy? Email us at <a href="mailto:hello@jointimeless.network" className="text-[#a855f7] hover:underline">hello@jointimeless.network</a></p>
           </Section>
 
         </div>
 
         <div className="mt-12 pt-8 border-t border-white/[0.05]">
-          <Link href="/terms" className="text-xs text-[#4F8EF7] hover:underline">Terms of Service →</Link>
+          <Link href="/terms" className="text-xs text-[#a855f7] hover:underline">Terms of Service →</Link>
         </div>
       </div>
     </div>

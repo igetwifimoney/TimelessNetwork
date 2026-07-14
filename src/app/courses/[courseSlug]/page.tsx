@@ -9,7 +9,7 @@ import { BookOpen, Zap, Clock, Play, ChevronRight, ArrowLeft } from 'lucide-reac
 
 const LEVEL_COLOR: Record<string, string> = {
   Beginner:     'text-emerald-400',
-  Intermediate: 'text-[#4F8EF7]',
+  Intermediate: 'text-[#a855f7]',
   Advanced:     'text-orange-400',
 }
 
@@ -45,7 +45,7 @@ export default function CoursePage({ params }: { params: { courseSlug: string } 
             <div className="flex items-start gap-4 mb-4">
               <div
                 className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0"
-                style={{ background: 'rgba(79,142,247,0.08)', border: '1px solid rgba(79,142,247,0.15)' }}
+                style={{ background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.15)' }}
                 aria-hidden="true"
               >
                 {course.badge}
@@ -72,7 +72,7 @@ export default function CoursePage({ params }: { params: { courseSlug: string } 
                 <BookOpen className="w-4 h-4" aria-hidden="true" />
                 {course.totalLessons} lessons
               </span>
-              <span className="flex items-center gap-1.5 text-[#4F8EF7] font-semibold">
+              <span className="flex items-center gap-1.5 text-[#a855f7] font-semibold">
                 <Zap className="w-4 h-4" aria-hidden="true" />
                 {course.totalXP} XP total
               </span>
@@ -105,7 +105,7 @@ export default function CoursePage({ params }: { params: { courseSlug: string } 
                   >
                     {/* Lesson number */}
                     <div
-                      className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold flex-shrink-0 transition-all group-hover:border-[#4F8EF7]/30"
+                      className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold flex-shrink-0 transition-all group-hover:border-[#a855f7]/30"
                       style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', color: '#6B7280' }}
                       aria-hidden="true"
                     >
@@ -122,14 +122,14 @@ export default function CoursePage({ params }: { params: { courseSlug: string } 
                           <Clock className="w-3 h-3" aria-hidden="true" />
                           {lesson.duration}
                         </span>
-                        <span className="flex items-center gap-1 text-[#4F8EF7]">
+                        <span className="flex items-center gap-1 text-[#a855f7]">
                           <Zap className="w-3 h-3" aria-hidden="true" />
                           {lesson.xp} XP
                         </span>
                       </div>
                     </div>
 
-                    <ChevronRight className="w-4 h-4 text-gray-700 group-hover:text-[#4F8EF7] group-hover:translate-x-0.5 transition-all flex-shrink-0" aria-hidden="true" />
+                    <ChevronRight className="w-4 h-4 text-gray-700 group-hover:text-[#a855f7] group-hover:translate-x-0.5 transition-all flex-shrink-0" aria-hidden="true" />
                   </Link>
                 </li>
               ))}
@@ -142,12 +142,12 @@ export default function CoursePage({ params }: { params: { courseSlug: string } 
               <p className="text-xs text-gray-600 mb-3 uppercase tracking-wider font-semibold">Up Next</p>
               <Link
                 href={`/courses/${nextCourse.slug}`}
-                className="flex items-center gap-4 p-4 rounded-xl group transition-all hover:border-[#4F8EF7]/20"
+                className="flex items-center gap-4 p-4 rounded-xl group transition-all hover:border-[#a855f7]/20"
                 style={{ background: '#0A0A0A', border: '1px solid rgba(255,255,255,0.04)' }}
               >
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center text-lg flex-shrink-0"
-                  style={{ background: 'rgba(79,142,247,0.06)', border: '1px solid rgba(79,142,247,0.1)' }}
+                  style={{ background: 'rgba(168,85,247,0.06)', border: '1px solid rgba(168,85,247,0.1)' }}
                   aria-hidden="true"
                 >
                   {nextCourse.badge}
@@ -156,7 +156,7 @@ export default function CoursePage({ params }: { params: { courseSlug: string } 
                   <div className="text-sm font-bold text-gray-300 group-hover:text-white transition-colors">{nextCourse.title}</div>
                   <div className="text-xs text-gray-600">{nextCourse.totalLessons} lessons · {nextCourse.totalXP} XP</div>
                 </div>
-                <ChevronRight className="w-4 h-4 text-gray-700 group-hover:text-[#4F8EF7] transition-colors flex-shrink-0" aria-hidden="true" />
+                <ChevronRight className="w-4 h-4 text-gray-700 group-hover:text-[#a855f7] transition-colors flex-shrink-0" aria-hidden="true" />
               </Link>
             </div>
           )}

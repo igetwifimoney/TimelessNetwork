@@ -15,7 +15,7 @@ const CATEGORIES = [
 
 const LEVEL_COLOR: Record<string, string> = {
   Beginner:     'text-emerald-400',
-  Intermediate: 'text-[#4F8EF7]',
+  Intermediate: 'text-[#a855f7]',
   Advanced:     'text-orange-400',
 }
 
@@ -23,13 +23,13 @@ function CourseCard({ course }: { course: Course }) {
   return (
     <Link
       href={`/courses/${course.slug}`}
-      className="card-premium p-5 flex flex-col gap-3 group hover:border-[#4F8EF7]/30 transition-all"
+      className="card-premium p-5 flex flex-col gap-3 group hover:border-[#a855f7]/30 transition-all"
       aria-label={`${course.title} — ${course.level}, ${course.totalLessons} lessons`}
     >
       <div className="flex items-start justify-between gap-3">
         <div
           className="w-11 h-11 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
-          style={{ background: 'rgba(79,142,247,0.08)', border: '1px solid rgba(79,142,247,0.15)' }}
+          style={{ background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.15)' }}
           aria-hidden="true"
         >
           {course.badge}
@@ -55,12 +55,12 @@ function CourseCard({ course }: { course: Course }) {
             <BookOpen className="w-3 h-3" aria-hidden="true" />
             {course.totalLessons} lessons
           </span>
-          <span className="flex items-center gap-1 text-[#4F8EF7] font-semibold">
+          <span className="flex items-center gap-1 text-[#a855f7] font-semibold">
             <Zap className="w-3 h-3" aria-hidden="true" />
             {course.totalXP} XP
           </span>
         </div>
-        <ChevronRight className="w-4 h-4 text-gray-700 group-hover:text-[#4F8EF7] group-hover:translate-x-0.5 transition-all" aria-hidden="true" />
+        <ChevronRight className="w-4 h-4 text-gray-700 group-hover:text-[#a855f7] group-hover:translate-x-0.5 transition-all" aria-hidden="true" />
       </div>
     </Link>
   )
@@ -90,7 +90,7 @@ export default function CoursesPage() {
               <h1 className="text-3xl font-black">Courses</h1>
               <span
                 className="text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1"
-                style={{ background: 'rgba(79,142,247,0.08)', border: '1px solid rgba(79,142,247,0.2)', color: '#60A5FA' }}
+                style={{ background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.2)', color: '#c084fc' }}
               >
                 <Clock className="w-2.5 h-2.5" />
                 Updated July 2026
@@ -121,7 +121,7 @@ export default function CoursesPage() {
                 onClick={() => setActiveCategory(id as typeof activeCategory)}
                 className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold flex-shrink-0 transition-all"
                 style={activeCategory === id
-                  ? { background: 'rgba(79,142,247,0.12)', border: '1px solid rgba(79,142,247,0.25)', color: '#60A5FA' }
+                  ? { background: 'rgba(168,85,247,0.12)', border: '1px solid rgba(168,85,247,0.25)', color: '#c084fc' }
                   : { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', color: '#6B7280' }
                 }
                 aria-pressed={activeCategory === id}

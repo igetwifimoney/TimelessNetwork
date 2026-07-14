@@ -273,7 +273,7 @@ function PostCard({
       <div className="flex items-start gap-3 lg:gap-3.5">
         <div
           className="w-8 h-8 lg:w-9 lg:h-9 rounded-full flex items-center justify-center text-xs lg:text-sm font-black text-white flex-shrink-0"
-          style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
+          style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
         >
           {post.avatar}
         </div>
@@ -287,7 +287,7 @@ function PostCard({
             >
               {post.role}
             </span>
-            <span className="text-[10px] font-medium text-[#4F8EF7] flex items-center gap-1">
+            <span className="text-[10px] font-medium text-[#a855f7] flex items-center gap-1">
               <Hash className="w-2.5 h-2.5" />{post.channel}
             </span>
             {post.isWin && (
@@ -327,7 +327,7 @@ function PostCard({
             {post.replies.length > 0 && (
               <button
                 onClick={() => setShowReplies(v => !v)}
-                className="flex items-center gap-1.5 text-xs text-[#60A5FA] hover:text-[#93C5FD] transition-colors ml-auto"
+                className="flex items-center gap-1.5 text-xs text-[#c084fc] hover:text-[#93C5FD] transition-colors ml-auto"
               >
                 {showReplies ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
                 {post.replies.length} {post.replies.length === 1 ? 'reply' : 'replies'}
@@ -337,12 +337,12 @@ function PostCard({
 
           {/* Replies section */}
           {showReplies && (
-            <div className="mt-3 space-y-3 pl-3" style={{ borderLeft: '2px solid rgba(79,142,247,0.15)' }}>
+            <div className="mt-3 space-y-3 pl-3" style={{ borderLeft: '2px solid rgba(168,85,247,0.15)' }}>
               {post.replies.map(reply => (
                 <div key={reply.id} className="flex items-start gap-2.5">
                   <div
                     className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-black text-white flex-shrink-0"
-                    style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
+                    style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
                   >
                     {reply.avatar}
                   </div>
@@ -372,7 +372,7 @@ function PostCard({
                 <form onSubmit={submitReply} className="flex items-end gap-2 mt-2">
                   <div
                     className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black text-white flex-shrink-0"
-                    style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
+                    style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
                   >
                     Y
                   </div>
@@ -401,7 +401,7 @@ function PostCard({
                         type="submit"
                         disabled={!replyText.trim()}
                         className="px-2 py-1 rounded-lg text-[10px] font-bold transition-all disabled:opacity-30"
-                        style={{ background: 'rgba(79,142,247,0.2)', color: '#60A5FA', border: '1px solid rgba(79,142,247,0.3)' }}
+                        style={{ background: 'rgba(168,85,247,0.2)', color: '#c084fc', border: '1px solid rgba(168,85,247,0.3)' }}
                       >
                         Post
                       </button>
@@ -624,9 +624,9 @@ export default function CommunityPage() {
                       onClick={() => setActiveChannel(ch.id)}
                       className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-sm transition-all"
                       style={activeChannel === ch.id ? {
-                        background: 'rgba(79,142,247,0.08)',
-                        border: '1px solid rgba(79,142,247,0.15)',
-                        color: '#60A5FA',
+                        background: 'rgba(168,85,247,0.08)',
+                        border: '1px solid rgba(168,85,247,0.15)',
+                        color: '#c084fc',
                       } : {
                         border: '1px solid transparent',
                         color: '#4B5563',
@@ -640,7 +640,7 @@ export default function CommunityPage() {
                       <span
                         className="text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0"
                         style={activeChannel === ch.id
-                          ? { background: 'rgba(79,142,247,0.2)', color: '#4F8EF7' }
+                          ? { background: 'rgba(168,85,247,0.2)', color: '#a855f7' }
                           : { background: 'rgba(255,255,255,0.05)', color: '#6B7280' }}
                       >
                         {count > 9 ? '9+' : count}
@@ -660,7 +660,7 @@ export default function CommunityPage() {
                   <div className="relative flex-shrink-0">
                     <div
                       className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white"
-                      style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
+                      style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
                     >
                       {member.initials}
                     </div>
@@ -692,7 +692,7 @@ export default function CommunityPage() {
                 onClick={() => setActiveChannel(ch.id)}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold flex-shrink-0 transition-all"
                 style={activeChannel === ch.id
-                  ? { background: 'rgba(79,142,247,0.12)', border: '1px solid rgba(79,142,247,0.25)', color: '#60A5FA' }
+                  ? { background: 'rgba(168,85,247,0.12)', border: '1px solid rgba(168,85,247,0.25)', color: '#c084fc' }
                   : { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', color: '#6B7280' }
                 }
               >
@@ -709,7 +709,7 @@ export default function CommunityPage() {
           >
             <div>
               <div className="flex items-center gap-2">
-                <Hash className="w-4 h-4 text-[#4F8EF7]" />
+                <Hash className="w-4 h-4 text-[#a855f7]" />
                 <h1 className="font-bold">{activeChannel}</h1>
               </div>
               <p className="text-xs text-gray-600 mt-0.5">1,200+ members · {visiblePosts.length} posts</p>
@@ -726,7 +726,7 @@ export default function CommunityPage() {
           {/* Mobile header */}
           <div className="lg:hidden flex items-center justify-between px-4 py-3 flex-shrink-0" style={{ background: 'rgba(0,0,0,0.6)' }}>
             <div className="flex items-center gap-2">
-              <Hash className="w-4 h-4 text-[#4F8EF7]" />
+              <Hash className="w-4 h-4 text-[#a855f7]" />
               <h1 className="font-bold text-sm">{activeChannel}</h1>
             </div>
             <div
@@ -767,7 +767,7 @@ export default function CommunityPage() {
               <form onSubmit={handlePost} className="flex gap-2 lg:gap-3 items-end">
                 <div
                   className="w-7 h-7 lg:w-8 lg:h-8 rounded-full flex items-center justify-center text-xs font-black text-white flex-shrink-0"
-                  style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
+                  style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
                 >
                   Y
                 </div>

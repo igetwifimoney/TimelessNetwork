@@ -52,7 +52,7 @@ export default function ReferralPage() {
         {/* Stats */}
         <div className="grid grid-cols-2 gap-3 mb-6">
           <div className="card rounded-2xl p-5 text-center">
-            <Users className="w-5 h-5 text-[#4F8EF7] mx-auto mb-2" />
+            <Users className="w-5 h-5 text-[#a855f7] mx-auto mb-2" />
             <div className="text-3xl font-black">{loading ? '—' : stats?.referrals ?? 0}</div>
             <div className="text-xs text-gray-500 mt-0.5">Referrals</div>
           </div>
@@ -78,7 +78,7 @@ export default function ReferralPage() {
                 className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold flex-shrink-0 transition-all"
                 style={copied
                   ? { background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.2)', color: '#34D399' }
-                  : { background: 'rgba(79,142,247,0.1)', border: '1px solid rgba(79,142,247,0.2)', color: '#60A5FA' }
+                  : { background: 'rgba(168,85,247,0.1)', border: '1px solid rgba(168,85,247,0.2)', color: '#c084fc' }
                 }>
                 {copied ? <><Check className="w-4 h-4" /> Copied!</> : <><Copy className="w-4 h-4" /> Copy</>}
               </button>
@@ -124,8 +124,8 @@ export default function ReferralPage() {
         </div>
 
         {/* Rewards */}
-        <div className="rounded-2xl p-5 text-center" style={{ background: 'rgba(79,142,247,0.04)', border: '1px solid rgba(79,142,247,0.12)' }}>
-          <Gift className="w-5 h-5 text-[#4F8EF7] mx-auto mb-2" />
+        <div className="rounded-2xl p-5 text-center" style={{ background: 'rgba(168,85,247,0.04)', border: '1px solid rgba(168,85,247,0.12)' }}>
+          <Gift className="w-5 h-5 text-[#a855f7] mx-auto mb-2" />
           <div className="font-bold text-sm mb-1">500 XP per referral</div>
           <div className="text-xs text-gray-500">
             XP is added to your account as soon as your referral subscribes.

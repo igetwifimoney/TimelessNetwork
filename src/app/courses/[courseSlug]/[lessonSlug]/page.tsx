@@ -25,7 +25,7 @@ function RenderContent({ content }: { content: string }) {
         return <strong key={pi} className="text-white font-semibold">{part.slice(2, -2)}</strong>
       }
       if (part.startsWith('`') && part.endsWith('`')) {
-        return <code key={pi} className="px-1.5 py-0.5 rounded text-[#60A5FA] text-xs font-mono" style={{ background: 'rgba(79,142,247,0.1)' }}>{part.slice(1, -1)}</code>
+        return <code key={pi} className="px-1.5 py-0.5 rounded text-[#c084fc] text-xs font-mono" style={{ background: 'rgba(168,85,247,0.1)' }}>{part.slice(1, -1)}</code>
       }
       return <span key={pi}>{part}</span>
     })
@@ -42,7 +42,7 @@ function RenderContent({ content }: { content: string }) {
       elements.push(<h1 key={i} className="text-2xl font-black text-white mb-4">{line.slice(2)}</h1>)
     } else if (line.startsWith('> ')) {
       elements.push(
-        <blockquote key={i} className="my-4 pl-4 py-3 rounded-r-xl text-sm text-gray-300 leading-relaxed" style={{ borderLeft: '3px solid #4F8EF7', background: 'rgba(79,142,247,0.06)' }}>
+        <blockquote key={i} className="my-4 pl-4 py-3 rounded-r-xl text-sm text-gray-300 leading-relaxed" style={{ borderLeft: '3px solid #a855f7', background: 'rgba(168,85,247,0.06)' }}>
           {parseInline(line.slice(2))}
         </blockquote>
       )
@@ -57,7 +57,7 @@ function RenderContent({ content }: { content: string }) {
         <ul key={`ul-${i}`} className="my-3 space-y-1.5 ml-4">
           {items.map((item, ii) => (
             <li key={ii} className="flex items-start gap-2 text-sm text-gray-300 leading-relaxed">
-              <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#4F8EF7] flex-shrink-0" aria-hidden="true" />
+              <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#a855f7] flex-shrink-0" aria-hidden="true" />
               <span>{parseInline(item)}</span>
             </li>
           ))}
@@ -75,7 +75,7 @@ function RenderContent({ content }: { content: string }) {
         <ol key={`ol-${i}`} className="my-3 space-y-1.5 ml-4">
           {items.map((item, ii) => (
             <li key={ii} className="flex items-start gap-2.5 text-sm text-gray-300 leading-relaxed">
-              <span className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-[#4F8EF7]" style={{ background: 'rgba(79,142,247,0.1)' }} aria-hidden="true">{ii + 1}</span>
+              <span className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-[#a855f7]" style={{ background: 'rgba(168,85,247,0.1)' }} aria-hidden="true">{ii + 1}</span>
               <span>{parseInline(item)}</span>
             </li>
           ))}
@@ -163,7 +163,7 @@ export default function LessonPage({
       {xpToast && (
         <div
           className="fixed top-5 right-5 z-50 flex items-center gap-2.5 px-5 py-3.5 rounded-2xl text-sm font-bold shadow-2xl animate-pulse"
-          style={{ background: 'rgba(79,142,247,0.12)', border: '1px solid rgba(79,142,247,0.25)', color: '#60A5FA' }}
+          style={{ background: 'rgba(168,85,247,0.12)', border: '1px solid rgba(168,85,247,0.25)', color: '#c084fc' }}
           role="status"
           aria-live="polite"
         >
@@ -198,7 +198,7 @@ export default function LessonPage({
                 <Clock className="w-3 h-3" aria-hidden="true" />
                 {lesson.duration}
               </span>
-              <span className="flex items-center gap-1 text-[#4F8EF7] font-semibold">
+              <span className="flex items-center gap-1 text-[#a855f7] font-semibold">
                 <Zap className="w-3 h-3" aria-hidden="true" />
                 {lesson.xp} XP
               </span>
@@ -220,7 +220,7 @@ export default function LessonPage({
                   className="h-full rounded-full transition-all duration-700"
                   style={{
                     width: `${Math.round(((lessonIndex + (completed ? 1 : 0)) / course.lessons.length) * 100)}%`,
-                    background: 'linear-gradient(90deg, #4F8EF7, #60A5FA)',
+                    background: 'linear-gradient(90deg, #a855f7, #c084fc)',
                   }}
                 />
               </div>
@@ -299,11 +299,11 @@ export default function LessonPage({
               <Link
                 href={`/courses/${courseSlug}/${nextLesson.slug}`}
                 className="flex-1 flex items-center justify-end gap-2 px-4 py-3 rounded-xl text-sm font-medium transition-all group"
-                style={{ background: 'rgba(79,142,247,0.08)', border: '1px solid rgba(79,142,247,0.2)', color: '#60A5FA' }}
+                style={{ background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.2)', color: '#c084fc' }}
                 aria-label={`Next lesson: ${nextLesson.title}`}
               >
                 <div className="min-w-0 text-right">
-                  <div className="text-[10px] text-[#4F8EF7]/60 uppercase tracking-wide">Next Lesson</div>
+                  <div className="text-[10px] text-[#a855f7]/60 uppercase tracking-wide">Next Lesson</div>
                   <div className="truncate">{nextLesson.title}</div>
                 </div>
                 <ChevronRight className="w-4 h-4 flex-shrink-0 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />

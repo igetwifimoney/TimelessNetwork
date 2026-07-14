@@ -95,7 +95,7 @@ export default function MentorshipPage() {
 
             <article
               className="card-premium p-6 group"
-              style={{ border: '1px solid rgba(79,142,247,0.2)', background: 'linear-gradient(145deg, #0a0a0a, #0d1117)' }}
+              style={{ border: '1px solid rgba(168,85,247,0.2)', background: 'linear-gradient(145deg, #0a0a0a, #0d1117)' }}
               aria-label="Book a 1-on-1 session with Ty"
             >
               <div className="flex items-start gap-5">
@@ -105,7 +105,7 @@ export default function MentorshipPage() {
                     src="/founder.jpg"
                     alt="Ty"
                     className="w-16 h-16 rounded-2xl object-cover"
-                    style={{ border: '1px solid rgba(79,142,247,0.2)' }}
+                    style={{ border: '1px solid rgba(168,85,247,0.2)' }}
                   />
                   {/* Live indicator */}
                   <div
@@ -130,13 +130,13 @@ export default function MentorshipPage() {
                           ● Available
                         </span>
                         <span
-                          className="text-xs font-bold px-2.5 py-0.5 rounded-full text-[#4F8EF7]"
-                          style={{ background: 'rgba(79,142,247,0.08)', border: '1px solid rgba(79,142,247,0.2)' }}
+                          className="text-xs font-bold px-2.5 py-0.5 rounded-full text-[#a855f7]"
+                          style={{ background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.2)' }}
                         >
                           Founder
                         </span>
                       </div>
-                      <div className="text-sm text-[#4F8EF7] font-medium mt-0.5">{TY.specialty}</div>
+                      <div className="text-sm text-[#a855f7] font-medium mt-0.5">{TY.specialty}</div>
                     </div>
                   </div>
 
@@ -149,7 +149,7 @@ export default function MentorshipPage() {
                       <li
                         key={tag}
                         className="text-xs px-2.5 py-1 rounded-lg font-medium list-none"
-                        style={{ background: 'rgba(79,142,247,0.06)', border: '1px solid rgba(79,142,247,0.12)', color: '#60A5FA' }}
+                        style={{ background: 'rgba(168,85,247,0.06)', border: '1px solid rgba(168,85,247,0.12)', color: '#c084fc' }}
                       >
                         {tag}
                       </li>
@@ -163,7 +163,7 @@ export default function MentorshipPage() {
                   >
                     <div className="flex items-center gap-4 text-xs text-gray-600">
                       <span className="flex items-center gap-1">
-                        <TrendingUp className="w-3.5 h-3.5 text-[#4F8EF7]" aria-hidden="true" />
+                        <TrendingUp className="w-3.5 h-3.5 text-[#a855f7]" aria-hidden="true" />
                         {TY.students}+ members coached
                       </span>
                     </div>
@@ -202,7 +202,7 @@ export default function MentorshipPage() {
                     <div className="relative flex-shrink-0">
                       <div
                         className="w-14 h-14 rounded-2xl flex items-center justify-center text-lg font-black text-white"
-                        style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
+                        style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
                         aria-hidden="true"
                       >
                         {mentee.avatar}
@@ -222,7 +222,7 @@ export default function MentorshipPage() {
                               Timeless Mentee
                             </span>
                           </div>
-                          <div className="text-sm text-[#4F8EF7] font-medium mt-0.5">{mentee.specialty}</div>
+                          <div className="text-sm text-[#a855f7] font-medium mt-0.5">{mentee.specialty}</div>
                         </div>
                         <div className="text-right flex-shrink-0">
                           <div className="text-lg font-black text-emerald-400">{mentee.revenue}</div>
@@ -236,7 +236,7 @@ export default function MentorshipPage() {
                           <li
                             key={tag}
                             className="text-xs px-2.5 py-1 rounded-lg font-medium list-none"
-                            style={{ background: 'rgba(79,142,247,0.06)', border: '1px solid rgba(79,142,247,0.12)', color: '#60A5FA' }}
+                            style={{ background: 'rgba(168,85,247,0.06)', border: '1px solid rgba(168,85,247,0.12)', color: '#c084fc' }}
                           >
                             {tag}
                           </li>
@@ -246,9 +246,9 @@ export default function MentorshipPage() {
                       {/* Quote */}
                       <blockquote
                         className="rounded-xl p-4 text-sm text-gray-300 leading-relaxed italic"
-                        style={{ background: 'rgba(79,142,247,0.04)', border: '1px solid rgba(79,142,247,0.08)' }}
+                        style={{ background: 'rgba(168,85,247,0.04)', border: '1px solid rgba(168,85,247,0.08)' }}
                       >
-                        <Quote className="w-3.5 h-3.5 text-[#4F8EF7] mb-2 opacity-60" aria-hidden="true" />
+                        <Quote className="w-3.5 h-3.5 text-[#a855f7] mb-2 opacity-60" aria-hidden="true" />
                         {mentee.quote}
                       </blockquote>
 

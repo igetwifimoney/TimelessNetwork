@@ -73,9 +73,9 @@ export default function SignupPage() {
           {/* Icon */}
           <div
             className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6"
-            style={{ background: 'rgba(79,142,247,0.08)', border: '1px solid rgba(79,142,247,0.2)' }}
+            style={{ background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.2)' }}
           >
-            <Mail className="w-9 h-9 text-[#4F8EF7]" />
+            <Mail className="w-9 h-9 text-[#a855f7]" />
           </div>
 
           {/* Heading */}
@@ -88,7 +88,7 @@ export default function SignupPage() {
           {/* Instructions */}
           <div
             className="rounded-2xl p-5 mb-6 text-left space-y-3"
-            style={{ background: 'rgba(79,142,247,0.04)', border: '1px solid rgba(79,142,247,0.12)' }}
+            style={{ background: 'rgba(168,85,247,0.04)', border: '1px solid rgba(168,85,247,0.12)' }}
           >
             {[
               { num: '1', text: 'Open your email inbox' },
@@ -98,8 +98,8 @@ export default function SignupPage() {
             ].map(step => (
               <div key={step.num} className="flex items-center gap-3">
                 <div
-                  className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black flex-shrink-0 text-[#4F8EF7]"
-                  style={{ background: 'rgba(79,142,247,0.12)' }}
+                  className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black flex-shrink-0 text-[#a855f7]"
+                  style={{ background: 'rgba(168,85,247,0.12)' }}
                 >
                   {step.num}
                 </div>
@@ -112,7 +112,7 @@ export default function SignupPage() {
             Didn&apos;t get it? Check your spam folder.{' '}
             <button
               onClick={() => setSubmitted(false)}
-              className="text-[#4F8EF7] hover:text-[#60A5FA] transition-colors"
+              className="text-[#a855f7] hover:text-[#c084fc] transition-colors"
             >
               Try a different email
             </button>
@@ -131,7 +131,7 @@ export default function SignupPage() {
       <div className="flex-1 flex flex-col justify-center px-8 py-12 max-w-lg mx-auto lg:mx-0 relative">
         <div
           className="absolute top-0 left-0 w-full h-full pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 20% 50%, rgba(79,142,247,0.03), transparent 60%)' }}
+          style={{ background: 'radial-gradient(ellipse at 20% 50%, rgba(168,85,247,0.03), transparent 60%)' }}
           aria-hidden="true"
         />
 
@@ -139,10 +139,10 @@ export default function SignupPage() {
           <Link href="/" className="flex items-center gap-2.5 mb-12 group w-fit" aria-label="Timeless — go to home">
             <div className="w-6 h-6 relative flex-shrink-0" aria-hidden="true">
               <div className="absolute inset-0 rounded rotate-45 transition-transform group-hover:rotate-[60deg] duration-300"
-                style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }} />
+                style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }} />
               <div className="absolute inset-[2px] bg-black rounded rotate-45" />
               <div className="absolute inset-[3.5px] rounded rotate-45"
-                style={{ background: 'linear-gradient(135deg, #60A5FA, #4F8EF7)' }} />
+                style={{ background: 'linear-gradient(135deg, #c084fc, #a855f7)' }} />
             </div>
             <span className="font-black text-sm tracking-tight">timeless</span>
           </Link>
@@ -299,7 +299,7 @@ export default function SignupPage() {
 
           <p className="text-center text-sm text-gray-600 mt-5">
             Already have an account?{' '}
-            <Link href="/auth/login" className="text-[#4F8EF7] hover:text-[#60A5FA] font-semibold transition-colors">
+            <Link href="/auth/login" className="text-[#a855f7] hover:text-[#c084fc] font-semibold transition-colors">
               Sign in
             </Link>
           </p>
@@ -320,7 +320,7 @@ export default function SignupPage() {
       >
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 60% 40%, rgba(79,142,247,0.05), transparent 60%)' }}
+          style={{ background: 'radial-gradient(ellipse at 60% 40%, rgba(168,85,247,0.05), transparent 60%)' }}
         />
 
         <div className="max-w-sm relative">
@@ -348,7 +348,7 @@ export default function SignupPage() {
           <blockquote className="card-premium p-5">
             <div className="flex items-center gap-0.5 mb-4" role="img" aria-label="5 stars">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-3.5 h-3.5 fill-[#4F8EF7] text-[#4F8EF7]" aria-hidden="true" />
+                <Star key={i} className="w-3.5 h-3.5 fill-[#a855f7] text-[#a855f7]" aria-hidden="true" />
               ))}
             </div>
             <p className="text-sm text-gray-300 leading-relaxed mb-4 italic">
@@ -358,7 +358,7 @@ export default function SignupPage() {
               <div className="flex items-center gap-2.5">
                 <div
                   className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black text-white"
-                  style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
+                  style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
                   aria-hidden="true"
                 >
                   JL

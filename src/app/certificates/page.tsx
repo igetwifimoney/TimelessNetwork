@@ -41,21 +41,21 @@ function Certificate({ course, name, date }: { course: typeof COURSES[0]; name: 
         className="relative overflow-hidden rounded-2xl p-8 text-center"
         style={{
           background: 'linear-gradient(135deg, #050505 0%, #0a0a1a 50%, #050505 100%)',
-          border: '1px solid rgba(79,142,247,0.3)',
-          boxShadow: '0 0 60px rgba(79,142,247,0.08), inset 0 0 60px rgba(79,142,247,0.02)',
+          border: '1px solid rgba(168,85,247,0.3)',
+          boxShadow: '0 0 60px rgba(168,85,247,0.08), inset 0 0 60px rgba(168,85,247,0.02)',
         }}>
 
         {/* Corner decorations */}
-        <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 rounded-tl-sm opacity-30" style={{ borderColor: '#4F8EF7' }} />
-        <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 rounded-tr-sm opacity-30" style={{ borderColor: '#4F8EF7' }} />
-        <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 rounded-bl-sm opacity-30" style={{ borderColor: '#4F8EF7' }} />
-        <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 rounded-br-sm opacity-30" style={{ borderColor: '#4F8EF7' }} />
+        <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 rounded-tl-sm opacity-30" style={{ borderColor: '#a855f7' }} />
+        <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 rounded-tr-sm opacity-30" style={{ borderColor: '#a855f7' }} />
+        <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 rounded-bl-sm opacity-30" style={{ borderColor: '#a855f7' }} />
+        <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 rounded-br-sm opacity-30" style={{ borderColor: '#a855f7' }} />
 
         {/* Badge */}
         <div className="text-5xl mb-4">{course.badge}</div>
 
         {/* Timeless wordmark */}
-        <div className="text-xs font-black uppercase tracking-[0.4em] mb-1" style={{ color: '#4F8EF7' }}>
+        <div className="text-xs font-black uppercase tracking-[0.4em] mb-1" style={{ color: '#a855f7' }}>
           TIMELESS NETWORK
         </div>
 
@@ -66,9 +66,9 @@ function Certificate({ course, name, date }: { course: typeof COURSES[0]; name: 
 
         {/* Divider */}
         <div className="flex items-center gap-3 mb-6">
-          <div className="flex-1 h-px" style={{ background: 'linear-gradient(to right, transparent, rgba(79,142,247,0.3))' }} />
-          <Award className="w-4 h-4 text-[#4F8EF7]" />
-          <div className="flex-1 h-px" style={{ background: 'linear-gradient(to left, transparent, rgba(79,142,247,0.3))' }} />
+          <div className="flex-1 h-px" style={{ background: 'linear-gradient(to right, transparent, rgba(168,85,247,0.3))' }} />
+          <Award className="w-4 h-4 text-[#a855f7]" />
+          <div className="flex-1 h-px" style={{ background: 'linear-gradient(to left, transparent, rgba(168,85,247,0.3))' }} />
         </div>
 
         {/* Name */}
@@ -84,8 +84,8 @@ function Certificate({ course, name, date }: { course: typeof COURSES[0]; name: 
 
         {/* Divider */}
         <div className="flex items-center gap-3 mb-6">
-          <div className="flex-1 h-px" style={{ background: 'linear-gradient(to right, transparent, rgba(79,142,247,0.15))' }} />
-          <div className="flex-1 h-px" style={{ background: 'linear-gradient(to left, transparent, rgba(79,142,247,0.15))' }} />
+          <div className="flex-1 h-px" style={{ background: 'linear-gradient(to right, transparent, rgba(168,85,247,0.15))' }} />
+          <div className="flex-1 h-px" style={{ background: 'linear-gradient(to left, transparent, rgba(168,85,247,0.15))' }} />
         </div>
 
         {/* Footer */}
@@ -160,7 +160,7 @@ export default function CertificatesPage() {
               className="w-full bg-transparent text-sm text-white placeholder-gray-600 outline-none"
             />
           </div>
-          <Award className="w-5 h-5 text-[#4F8EF7] flex-shrink-0" />
+          <Award className="w-5 h-5 text-[#a855f7] flex-shrink-0" />
         </div>
 
         {/* Certificate viewer */}
@@ -189,8 +189,8 @@ export default function CertificatesPage() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {earnedCourses.map(course => (
                 <button key={course.slug} onClick={() => setSelectedCourse(course.slug)}
-                  className="card rounded-2xl p-4 text-left transition-all hover:border-[#4F8EF7]/30 group"
-                  style={{ border: '1px solid rgba(79,142,247,0.15)' }}>
+                  className="card rounded-2xl p-4 text-left transition-all hover:border-[#a855f7]/30 group"
+                  style={{ border: '1px solid rgba(168,85,247,0.15)' }}>
                   <div className="text-2xl mb-2">{course.badge}</div>
                   <div className="font-bold text-sm mb-0.5">{course.title}</div>
                   <div className="text-xs text-green-400 font-semibold">✓ Certificate Earned</div>
@@ -203,7 +203,7 @@ export default function CertificatesPage() {
 
         {/* Empty earned state */}
         {earnedCourses.length === 0 && (
-          <div className="card rounded-2xl p-8 text-center mb-8" style={{ border: '1px solid rgba(79,142,247,0.1)' }}>
+          <div className="card rounded-2xl p-8 text-center mb-8" style={{ border: '1px solid rgba(168,85,247,0.1)' }}>
             <Award className="w-10 h-10 text-gray-700 mx-auto mb-3" />
             <div className="font-bold text-sm mb-1">No certificates yet</div>
             <div className="text-xs text-gray-500">Complete every lesson in a course to earn your first certificate.</div>
@@ -228,7 +228,7 @@ export default function CertificatesPage() {
                   </div>
                   <div className="font-semibold text-sm mb-1">{course.title}</div>
                   <div className="h-1 rounded-full mb-1 overflow-hidden" style={{ background: 'rgba(255,255,255,0.06)' }}>
-                    <div className="h-full rounded-full" style={{ width: `${pct}%`, background: 'rgba(79,142,247,0.5)' }} />
+                    <div className="h-full rounded-full" style={{ width: `${pct}%`, background: 'rgba(168,85,247,0.5)' }} />
                   </div>
                   <div className="text-xs text-gray-600">{done} / {total} lessons</div>
                 </div>

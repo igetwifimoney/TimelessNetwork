@@ -18,7 +18,7 @@ interface ContentItem {
 const STATUS_CONFIG: Record<Status, { label: string; color: string; bg: string }> = {
   idea:     { label: 'Idea',     color: 'text-gray-400',   bg: 'rgba(255,255,255,0.05)' },
   scripted: { label: 'Scripted', color: 'text-yellow-400', bg: 'rgba(234,179,8,0.08)'   },
-  filmed:   { label: 'Filmed',   color: 'text-blue-400',   bg: 'rgba(79,142,247,0.08)'  },
+  filmed:   { label: 'Filmed',   color: 'text-blue-400',   bg: 'rgba(168,85,247,0.08)'  },
   posted:   { label: 'Posted ✓', color: 'text-green-400',  bg: 'rgba(34,197,94,0.08)'   },
 }
 
@@ -115,7 +115,7 @@ export default function PlannerPage() {
             <p className="text-gray-500 text-sm mt-0.5">Plan your week. Track your posts. Stay consistent.</p>
           </div>
           <div className="text-right">
-            <div className="text-2xl font-black text-[#4F8EF7]">{weekPosted}/{weekTotal}</div>
+            <div className="text-2xl font-black text-[#a855f7]">{weekPosted}/{weekTotal}</div>
             <div className="text-xs text-gray-500">posted this week</div>
           </div>
         </div>
@@ -149,18 +149,18 @@ export default function PlannerPage() {
               <button key={i} onClick={() => setSelectedDate(key)}
                 className="flex flex-col items-center gap-1 py-2.5 rounded-xl transition-all"
                 style={isSelected
-                  ? { background: 'rgba(79,142,247,0.12)', border: '1px solid rgba(79,142,247,0.25)' }
+                  ? { background: 'rgba(168,85,247,0.12)', border: '1px solid rgba(168,85,247,0.25)' }
                   : { background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }
                 }>
                 <span className="text-[10px] text-gray-600 font-medium">{DAYS[i]}</span>
-                <span className={`text-sm font-black ${isToday ? 'text-[#4F8EF7]' : isSelected ? 'text-white' : 'text-gray-400'}`}>
+                <span className={`text-sm font-black ${isToday ? 'text-[#a855f7]' : isSelected ? 'text-white' : 'text-gray-400'}`}>
                   {date.getDate()}
                 </span>
                 {count > 0 ? (
                   <div className="flex gap-0.5">
                     {Array.from({ length: Math.min(count, 4) }).map((_, j) => (
                       <div key={j} className="w-1 h-1 rounded-full"
-                        style={{ background: j < posted ? '#34D399' : 'rgba(79,142,247,0.5)' }} />
+                        style={{ background: j < posted ? '#34D399' : 'rgba(168,85,247,0.5)' }} />
                     ))}
                   </div>
                 ) : <div className="h-1" />}
@@ -173,7 +173,7 @@ export default function PlannerPage() {
         <div className="mb-4 flex items-center justify-between">
           <div className="font-semibold text-sm">
             {DAYS[new Date(selectedDate + 'T12:00:00').getDay()]} · {MONTHS[new Date(selectedDate + 'T12:00:00').getMonth()]} {new Date(selectedDate + 'T12:00:00').getDate()}
-            {selectedDate === today && <span className="ml-2 text-xs text-[#4F8EF7]">Today</span>}
+            {selectedDate === today && <span className="ml-2 text-xs text-[#a855f7]">Today</span>}
           </div>
           <button onClick={() => setShowForm(true)}
             className="btn-premium flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold">
@@ -183,7 +183,7 @@ export default function PlannerPage() {
 
         {/* Add form */}
         {showForm && (
-          <div className="card rounded-2xl p-4 mb-4" style={{ border: '1px solid rgba(79,142,247,0.15)' }}>
+          <div className="card rounded-2xl p-4 mb-4" style={{ border: '1px solid rgba(168,85,247,0.15)' }}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
               <div>
                 <label className="text-xs text-gray-500 mb-1 block">Content Title *</label>

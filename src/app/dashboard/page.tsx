@@ -175,8 +175,8 @@ export default function DashboardPage() {
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
                 487 members online
               </div>
-              <div className="px-3 py-1 rounded-full text-xs font-medium text-[#4F8EF7]"
-                style={{ background: 'rgba(79,142,247,0.08)', border: '1px solid rgba(79,142,247,0.15)' }}>
+              <div className="px-3 py-1 rounded-full text-xs font-medium text-[#a855f7]"
+                style={{ background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.15)' }}>
                 {getDayName()} — {plan.theme}
               </div>
             </div>
@@ -194,7 +194,7 @@ export default function DashboardPage() {
                 label: 'Streak', value: statsLoading ? '—' : streak > 0 ? `${streak} Days 🔥` : 'Start today',
               },
               {
-                icon: Zap, color: 'text-[#4F8EF7]', bg: 'rgba(79,142,247,0.08)', border: 'rgba(79,142,247,0.15)',
+                icon: Zap, color: 'text-[#a855f7]', bg: 'rgba(168,85,247,0.08)', border: 'rgba(168,85,247,0.15)',
                 label: 'Total XP', value: statsLoading ? '—' : `${xp.toLocaleString()} XP`,
               },
               {
@@ -233,7 +233,7 @@ export default function DashboardPage() {
                     </div>
                     <div className="text-right">
                       <div className="text-xs text-gray-600">XP Available</div>
-                      <div className="text-sm font-bold text-[#4F8EF7]">
+                      <div className="text-sm font-bold text-[#a855f7]">
                         {missions.reduce((a, m) => a + m.xp, 0)} XP
                       </div>
                     </div>
@@ -241,7 +241,7 @@ export default function DashboardPage() {
                   <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.05)' }}
                     role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100}>
                     <div className="h-full rounded-full transition-all duration-700"
-                      style={{ width: `${pct}%`, background: 'linear-gradient(90deg, #4F8EF7, #60A5FA)' }} />
+                      style={{ width: `${pct}%`, background: 'linear-gradient(90deg, #a855f7, #c084fc)' }} />
                   </div>
                 </div>
                 <ul className="divide-y divide-white/[0.03]">
@@ -251,19 +251,19 @@ export default function DashboardPage() {
                       return (
                         <li key={m.id} className="flex items-center gap-0">
                           <div className="flex-1 flex items-center gap-4 px-6 py-4">
-                            <div className={`flex-shrink-0 ${m.done ? 'text-[#4F8EF7]' : 'text-gray-700'}`} aria-hidden="true">
+                            <div className={`flex-shrink-0 ${m.done ? 'text-[#a855f7]' : 'text-gray-700'}`} aria-hidden="true">
                               {m.done ? <CheckSquare className="w-5 h-5" /> : <Square className="w-5 h-5" />}
                             </div>
                             <span className="text-lg flex-shrink-0" aria-hidden="true">{m.emoji}</span>
                             <span className={`flex-1 text-sm font-medium ${m.done ? 'line-through text-gray-600' : 'text-gray-200'}`}>
                               {m.text}
                             </span>
-                            <span className="flex items-center gap-1 text-xs font-semibold text-[#4F8EF7] flex-shrink-0">
+                            <span className="flex items-center gap-1 text-xs font-semibold text-[#a855f7] flex-shrink-0">
                               <Zap className="w-3 h-3" />{m.xp}
                             </span>
                           </div>
                           {m.link && !m.done && (
-                            <Link href={m.link} className="px-3 py-4 text-gray-700 hover:text-[#4F8EF7] transition-colors flex-shrink-0"
+                            <Link href={m.link} className="px-3 py-4 text-gray-700 hover:text-[#a855f7] transition-colors flex-shrink-0"
                               aria-label={`Go to ${m.text}`}>
                               <ChevronRight className="w-4 h-4" />
                             </Link>
@@ -283,7 +283,7 @@ export default function DashboardPage() {
                           <span className="text-[10px] text-gray-700 font-medium flex-shrink-0">TikTok</span>
                         </div>
                         {m.link && (
-                          <Link href={m.link} className="px-3 py-4 text-gray-700 hover:text-[#4F8EF7] transition-colors flex-shrink-0"
+                          <Link href={m.link} className="px-3 py-4 text-gray-700 hover:text-[#a855f7] transition-colors flex-shrink-0"
                             aria-label={`Go to ${m.text}`}>
                             <ChevronRight className="w-4 h-4" />
                           </Link>
@@ -303,18 +303,18 @@ export default function DashboardPage() {
                   </Link>
                 </div>
                 <Link href={`/courses/${suggestedCourse.slug}/${suggestedLesson.slug}`}
-                  className="glass rounded-xl p-4 flex items-center gap-4 group hover:border-[#4F8EF7]/20 transition-all block"
+                  className="glass rounded-xl p-4 flex items-center gap-4 group hover:border-[#a855f7]/20 transition-all block"
                   style={{ border: '1px solid rgba(255,255,255,0.04)' }}
                   aria-label={`Continue: ${suggestedLesson.title}`}>
                   <div className="w-12 h-12 rounded-xl glass-blue flex items-center justify-center flex-shrink-0 text-xl" aria-hidden="true">
                     {suggestedCourse.badge}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-xs text-[#4F8EF7] font-semibold mb-0.5 truncate">{suggestedCourse.title}</div>
+                    <div className="text-xs text-[#a855f7] font-semibold mb-0.5 truncate">{suggestedCourse.title}</div>
                     <div className="text-sm font-bold mb-1 truncate">{suggestedLesson.title}</div>
                     <div className="flex items-center gap-2 text-xs text-gray-600">
                       <BookOpen className="w-3 h-3" />{suggestedLesson.duration}
-                      <Zap className="w-3 h-3 text-[#4F8EF7]" /><span className="text-[#4F8EF7]">{suggestedLesson.xp} XP</span>
+                      <Zap className="w-3 h-3 text-[#a855f7]" /><span className="text-[#a855f7]">{suggestedLesson.xp} XP</span>
                     </div>
                   </div>
                   <div className="btn-blue px-4 py-2.5 rounded-lg text-sm flex items-center gap-2 flex-shrink-0 group-hover:gap-3 transition-all">
@@ -338,7 +338,7 @@ export default function DashboardPage() {
                   <div className="flex flex-wrap gap-2">
                     {unlocked.slice(0, 8).map(a => (
                       <div key={a.id} className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-medium"
-                        style={{ background: 'rgba(79,142,247,0.06)', border: '1px solid rgba(79,142,247,0.12)' }}
+                        style={{ background: 'rgba(168,85,247,0.06)', border: '1px solid rgba(168,85,247,0.12)' }}
                         title={a.description}>
                         <span aria-hidden="true">{a.emoji}</span>
                         <span className="text-gray-300">{a.title}</span>
@@ -414,7 +414,7 @@ export default function DashboardPage() {
               <section className="card rounded-2xl p-5" aria-labelledby="wins-heading">
                 <div className="flex items-center justify-between mb-4">
                   <h2 id="wins-heading" className="font-bold text-sm flex items-center gap-2">
-                    <Star className="w-3.5 h-3.5 text-[#4F8EF7]" aria-hidden="true" />
+                    <Star className="w-3.5 h-3.5 text-[#a855f7]" aria-hidden="true" />
                     Latest Wins
                   </h2>
                   <Link href="/community" className="text-xs text-gray-600 hover:text-white transition-colors">All →</Link>
@@ -423,7 +423,7 @@ export default function DashboardPage() {
                   {WINS.map((w, i) => (
                     <li key={i} className="flex items-start gap-2.5">
                       <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-                        style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }} aria-hidden="true">
+                        style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }} aria-hidden="true">
                         {w.avatar}
                       </div>
                       <div className="min-w-0 flex-1">
@@ -445,7 +445,7 @@ export default function DashboardPage() {
                 <h2 id="quicklinks-heading" className="font-bold text-sm mb-4">Quick Links</h2>
                 <div className="space-y-1.5">
                   {[
-                    { href: '/courses',    icon: BookOpen,    label: 'Browse Courses',   color: 'text-[#4F8EF7]' },
+                    { href: '/courses',    icon: BookOpen,    label: 'Browse Courses',   color: 'text-[#a855f7]' },
                     { href: '/resources',  icon: Star,        label: 'Resources Library', color: 'text-yellow-400' },
                     { href: '/tracker',    icon: TrendingUp,  label: 'Product Tracker',   color: 'text-emerald-400' },
                     { href: '/coach',      icon: Zap,         label: 'AI Coach',          color: 'text-purple-400' },

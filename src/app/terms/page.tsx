@@ -70,13 +70,13 @@ export default function TermsPage() {
           </Section>
 
           <Section title="10. Contact">
-            <p>Questions about these Terms? Email us at <a href="mailto:hello@jointimeless.network" className="text-[#4F8EF7] hover:underline">hello@jointimeless.network</a></p>
+            <p>Questions about these Terms? Email us at <a href="mailto:hello@jointimeless.network" className="text-[#a855f7] hover:underline">hello@jointimeless.network</a></p>
           </Section>
 
         </div>
 
         <div className="mt-12 pt-8 border-t border-white/[0.05]">
-          <Link href="/privacy" className="text-xs text-[#4F8EF7] hover:underline">Privacy Policy →</Link>
+          <Link href="/privacy" className="text-xs text-[#a855f7] hover:underline">Privacy Policy →</Link>
         </div>
       </div>
     </div>

@@ -74,7 +74,7 @@ export function welcomeEmail(name: string): { subject: string; html: string } {
           <!-- Logo / Brand -->
           <tr>
             <td align="center" style="padding-bottom:32px;">
-              <div style="display:inline-block;padding:10px 22px;background:rgba(79,142,247,0.08);border:1px solid rgba(79,142,247,0.2);border-radius:12px;">
+              <div style="display:inline-block;padding:10px 22px;background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.2);border-radius:12px;">
                 <span style="font-size:18px;font-weight:900;color:#fff;letter-spacing:-0.5px;">Timeless</span>
               </div>
             </td>
@@ -92,7 +92,7 @@ export function welcomeEmail(name: string): { subject: string; html: string } {
               </p>
 
               <!-- What's included -->
-              <table width="100%" cellpadding="0" cellspacing="0" style="background:rgba(79,142,247,0.04);border:1px solid rgba(79,142,247,0.1);border-radius:14px;padding:20px 22px;margin-bottom:28px;">
+              <table width="100%" cellpadding="0" cellspacing="0" style="background:rgba(168,85,247,0.04);border:1px solid rgba(168,85,247,0.1);border-radius:14px;padding:20px 22px;margin-bottom:28px;">
                 <tr><td>
                   <p style="margin:0 0 14px;font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:1px;">What you have access to</p>
                   ${[
@@ -106,8 +106,8 @@ export function welcomeEmail(name: string): { subject: string; html: string } {
                   <table cellpadding="0" cellspacing="0" style="margin-bottom:10px;">
                     <tr>
                       <td style="width:20px;vertical-align:top;padding-top:2px;">
-                        <div style="width:16px;height:16px;background:rgba(79,142,247,0.15);border:1px solid rgba(79,142,247,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;">
-                          <span style="color:#4F8EF7;font-size:10px;font-weight:900;padding-left:4px;">✓</span>
+                        <div style="width:16px;height:16px;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+                          <span style="color:#a855f7;font-size:10px;font-weight:900;padding-left:4px;">✓</span>
                         </div>
                       </td>
                       <td style="padding-left:10px;font-size:14px;color:#D1D5DB;">${f}</td>
@@ -121,7 +121,7 @@ export function welcomeEmail(name: string): { subject: string; html: string } {
                 <tr>
                   <td align="center">
                     <a href="https://jointimeless.network/dashboard"
-                       style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#4F8EF7,#2563EB);color:#fff;font-size:15px;font-weight:800;text-decoration:none;border-radius:12px;letter-spacing:-0.2px;">
+                       style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#a855f7,#ec4899);color:#fff;font-size:15px;font-weight:800;text-decoration:none;border-radius:12px;letter-spacing:-0.2px;">
                       Go to Your Dashboard →
                     </a>
                   </td>
@@ -140,7 +140,7 @@ export function welcomeEmail(name: string): { subject: string; html: string } {
                   <table cellpadding="0" cellspacing="0" style="margin-bottom:10px;width:100%;">
                     <tr>
                       <td style="width:24px;vertical-align:top;">
-                        <div style="width:20px;height:20px;background:rgba(79,142,247,0.1);border:1px solid rgba(79,142,247,0.2);border-radius:50%;text-align:center;line-height:20px;font-size:11px;font-weight:900;color:#60A5FA;">${n}</div>
+                        <div style="width:20px;height:20px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);border-radius:50%;text-align:center;line-height:20px;font-size:11px;font-weight:900;color:#c084fc;">${n}</div>
                       </td>
                       <td style="padding-left:10px;">
                         <a href="${href.startsWith('http') ? href : `https://jointimeless.network${href}`}"
@@ -163,7 +163,7 @@ export function welcomeEmail(name: string): { subject: string; html: string } {
           <tr>
             <td align="center" style="padding-top:24px;">
               <p style="margin:0;font-size:12px;color:#374151;">
-                Timeless · <a href="https://jointimeless.network" style="color:#4F8EF7;text-decoration:none;">jointimeless.network</a>
+                Timeless · <a href="https://jointimeless.network" style="color:#a855f7;text-decoration:none;">jointimeless.network</a>
               </p>
               <p style="margin:4px 0 0;font-size:11px;color:#1F2937;">
                 <a href="https://jointimeless.network/billing" style="color:#374151;">Manage subscription</a>

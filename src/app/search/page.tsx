@@ -152,7 +152,7 @@ function ResultSection({ title, icon, items }: {
               <div className="text-sm font-medium text-white truncate">{item.title}</div>
               <div className="text-xs text-gray-500 truncate">{item.subtitle}</div>
             </div>
-            <ChevronRight className="w-4 h-4 text-gray-700 group-hover:text-[#4F8EF7] transition-colors flex-shrink-0" />
+            <ChevronRight className="w-4 h-4 text-gray-700 group-hover:text-[#a855f7] transition-colors flex-shrink-0" />
           </Link>
         ))}
       </div>

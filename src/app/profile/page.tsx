@@ -45,15 +45,15 @@ export default function ProfilePage() {
               {/* Avatar */}
               <div className="relative flex-shrink-0">
                 <div className="w-20 h-20 rounded-2xl flex items-center justify-center text-2xl font-black text-white"
-                  style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}>
+                  style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}>
                   Y
                 </div>
                 <button
                   className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full flex items-center justify-center transition-all hover:scale-110"
-                  style={{ background: '#111', border: '1px solid rgba(79,142,247,0.2)' }}
+                  style={{ background: '#111', border: '1px solid rgba(168,85,247,0.2)' }}
                   aria-label="Change profile photo"
                 >
-                  <Camera className="w-3.5 h-3.5 text-[#4F8EF7]" aria-hidden="true" />
+                  <Camera className="w-3.5 h-3.5 text-[#a855f7]" aria-hidden="true" />
                 </button>
               </div>
 
@@ -62,7 +62,7 @@ export default function ProfilePage() {
                   <div>
                     <h2 className="text-xl font-black">Your Name</h2>
                     <div className="text-sm text-gray-500 mt-0.5">Member since June 2023</div>
-                    <div className="text-xs mt-1 font-medium" style={{ color: '#4F8EF7' }}>
+                    <div className="text-xs mt-1 font-medium" style={{ color: '#a855f7' }}>
                       Niche: {niche}
                     </div>
                   </div>
@@ -70,7 +70,7 @@ export default function ProfilePage() {
                     onClick={() => setEditing(v => !v)}
                     className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg transition-all"
                     style={editing
-                      ? { background: 'rgba(79,142,247,0.1)', border: '1px solid rgba(79,142,247,0.2)', color: '#4F8EF7' }
+                      ? { background: 'rgba(168,85,247,0.1)', border: '1px solid rgba(168,85,247,0.2)', color: '#a855f7' }
                       : { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', color: '#6B7280' }}
                   >
                     {editing ? <><Check className="w-3.5 h-3.5" />Save</> : <><Edit3 className="w-3.5 h-3.5" />Edit</>}
@@ -86,7 +86,7 @@ export default function ProfilePage() {
                       onChange={e => setBio(e.target.value)}
                       className="w-full mt-3 text-sm text-gray-300 rounded-xl px-3 py-2.5 resize-none outline-none leading-relaxed"
                       rows={3}
-                      style={{ background: 'rgba(79,142,247,0.04)', border: '1px solid rgba(79,142,247,0.2)' }}
+                      style={{ background: 'rgba(168,85,247,0.04)', border: '1px solid rgba(168,85,247,0.2)' }}
                     />
                   </>
                 ) : (
@@ -99,7 +99,7 @@ export default function ProfilePage() {
           {/* ── Stats ── */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
             {[
-              { label: 'Total XP',     value: '1,240', icon: Zap,        color: '#4F8EF7' },
+              { label: 'Total XP',     value: '1,240', icon: Zap,        color: '#a855f7' },
               { label: 'Day Streak',   value: '1',     icon: Flame,      color: '#FB923C' },
               { label: 'Badges',       value: '3/6',   icon: Award,      color: '#C084FC' },
               { label: 'Leaderboard',  value: '#847',  icon: TrendingUp, color: '#34D399' },
@@ -124,9 +124,9 @@ export default function ProfilePage() {
               <div>
                 <span className="font-bold text-sm">Level 2</span>
                 <span className="text-gray-600 text-sm"> → </span>
-                <span className="font-bold text-sm text-[#4F8EF7]">Level 3</span>
+                <span className="font-bold text-sm text-[#a855f7]">Level 3</span>
               </div>
-              <div className="text-xs font-bold text-[#4F8EF7]">1,240 / 2,000 XP</div>
+              <div className="text-xs font-bold text-[#a855f7]">1,240 / 2,000 XP</div>
             </div>
             <div
               className="w-full h-2.5 rounded-full overflow-hidden my-2.5"
@@ -138,7 +138,7 @@ export default function ProfilePage() {
               aria-label="XP progress to Level 3: 62%"
             >
               <div className="h-2.5 rounded-full transition-all duration-700"
-                style={{ width: '62%', background: 'linear-gradient(90deg, #4F8EF7, #60A5FA)' }} />
+                style={{ width: '62%', background: 'linear-gradient(90deg, #a855f7, #c084fc)' }} />
             </div>
             <div className="flex justify-between text-xs text-gray-700">
               <span>Level 2</span>
@@ -154,7 +154,7 @@ export default function ProfilePage() {
                   <span className="text-xs text-gray-400">{item.action}</span>
                   <div className="flex items-center gap-3 flex-shrink-0 ml-4">
                     <span className="text-xs text-gray-700">{item.time}</span>
-                    <span className="text-xs font-bold flex items-center gap-1" style={{ color: '#4F8EF7' }}>
+                    <span className="text-xs font-bold flex items-center gap-1" style={{ color: '#a855f7' }}>
                       <Zap className="w-3 h-3" />+{item.xp}
                     </span>
                   </div>
@@ -172,7 +172,7 @@ export default function ProfilePage() {
                   key={badge.label}
                   className="flex flex-col items-center gap-2 p-3.5 rounded-xl transition-all group cursor-default"
                   style={badge.earned
-                    ? { background: 'rgba(79,142,247,0.06)', border: '1px solid rgba(79,142,247,0.15)' }
+                    ? { background: 'rgba(168,85,247,0.06)', border: '1px solid rgba(168,85,247,0.15)' }
                     : { background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)', opacity: 0.4, filter: 'grayscale(1)' }}
                 >
                   <span className={`text-2xl transition-transform ${badge.earned ? 'group-hover:scale-110' : ''}`}>

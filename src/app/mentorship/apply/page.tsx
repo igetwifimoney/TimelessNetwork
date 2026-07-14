@@ -81,22 +81,22 @@ export default function MentorshipApplyPage() {
           className="max-w-lg w-full rounded-3xl overflow-hidden relative"
           style={{
             background: '#040404',
-            border: '1px solid rgba(79,142,247,0.2)',
-            boxShadow: '0 0 80px rgba(79,142,247,0.07), 0 32px 100px rgba(0,0,0,0.8)',
+            border: '1px solid rgba(168,85,247,0.2)',
+            boxShadow: '0 0 80px rgba(168,85,247,0.07), 0 32px 100px rgba(0,0,0,0.8)',
           }}
         >
-          <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(79,142,247,0.6), transparent)' }} />
-          <div className="absolute top-0 right-0 w-64 h-64 pointer-events-none" style={{ background: 'radial-gradient(circle at top right, rgba(79,142,247,0.08), transparent 60%)' }} />
+          <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(168,85,247,0.6), transparent)' }} />
+          <div className="absolute top-0 right-0 w-64 h-64 pointer-events-none" style={{ background: 'radial-gradient(circle at top right, rgba(168,85,247,0.08), transparent 60%)' }} />
 
           <div className="relative p-10 text-center">
             <div
               className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
-              style={{ background: 'rgba(79,142,247,0.1)', border: '1px solid rgba(79,142,247,0.25)', boxShadow: '0 0 30px rgba(79,142,247,0.15)' }}
+              style={{ background: 'rgba(168,85,247,0.1)', border: '1px solid rgba(168,85,247,0.25)', boxShadow: '0 0 30px rgba(168,85,247,0.15)' }}
             >
-              <Check className="w-8 h-8 text-[#4F8EF7]" />
+              <Check className="w-8 h-8 text-[#a855f7]" />
             </div>
 
-            <div className="text-xs text-[#4F8EF7] font-bold uppercase tracking-widest mb-3">Application Received</div>
+            <div className="text-xs text-[#a855f7] font-bold uppercase tracking-widest mb-3">Application Received</div>
             <h1 className="text-3xl font-black mb-4 leading-tight">
               Thank you,<br />{form.name.split(' ')[0]}.
             </h1>
@@ -106,9 +106,9 @@ export default function MentorshipApplyPage() {
 
             <div
               className="rounded-2xl p-5 mb-8 text-left"
-              style={{ background: 'rgba(79,142,247,0.04)', border: '1px solid rgba(79,142,247,0.12)' }}
+              style={{ background: 'rgba(168,85,247,0.04)', border: '1px solid rgba(168,85,247,0.12)' }}
             >
-              <div className="text-xs text-[#4F8EF7] font-semibold uppercase tracking-wider mb-3">What happens next</div>
+              <div className="text-xs text-[#a855f7] font-semibold uppercase tracking-wider mb-3">What happens next</div>
               <ul className="space-y-2.5">
                 {[
                   'Your application is read personally — not by a bot',
@@ -119,7 +119,7 @@ export default function MentorshipApplyPage() {
                   <li key={i} className="flex items-start gap-3 text-sm text-gray-400">
                     <span
                       className="w-5 h-5 rounded-full text-[10px] font-black flex items-center justify-center flex-shrink-0 mt-0.5"
-                      style={{ background: 'rgba(79,142,247,0.12)', border: '1px solid rgba(79,142,247,0.2)', color: '#60A5FA' }}
+                      style={{ background: 'rgba(168,85,247,0.12)', border: '1px solid rgba(168,85,247,0.2)', color: '#c084fc' }}
                     >{i + 1}</span>
                     {step}
                   </li>
@@ -160,7 +160,7 @@ export default function MentorshipApplyPage() {
             <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-orange-300" style={{ background: 'rgba(251,146,60,0.1)', border: '1px solid rgba(251,146,60,0.25)' }}>
               🔥 Limited Spots
             </div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-[#60A5FA]" style={{ background: 'rgba(79,142,247,0.08)', border: '1px solid rgba(79,142,247,0.2)' }}>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-[#c084fc]" style={{ background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.2)' }}>
               Applications Open
             </div>
           </div>
@@ -179,14 +179,14 @@ export default function MentorshipApplyPage() {
           className="relative rounded-3xl overflow-hidden"
           style={{
             background: '#040404',
-            border: '1px solid rgba(79,142,247,0.15)',
-            boxShadow: '0 0 60px rgba(79,142,247,0.05), 0 24px 80px rgba(0,0,0,0.7)',
+            border: '1px solid rgba(168,85,247,0.15)',
+            boxShadow: '0 0 60px rgba(168,85,247,0.05), 0 24px 80px rgba(0,0,0,0.7)',
           }}
           aria-label="Mentorship application form"
           noValidate
         >
-          <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(79,142,247,0.4), transparent)' }} />
-          <div className="absolute top-0 right-0 w-64 h-48 pointer-events-none" style={{ background: 'radial-gradient(circle at top right, rgba(79,142,247,0.07), transparent 60%)' }} />
+          <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(168,85,247,0.4), transparent)' }} />
+          <div className="absolute top-0 right-0 w-64 h-48 pointer-events-none" style={{ background: 'radial-gradient(circle at top right, rgba(168,85,247,0.07), transparent 60%)' }} />
 
           <div className="relative p-8 md:p-10 space-y-6">
 
@@ -292,11 +292,11 @@ export default function MentorshipApplyPage() {
               className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl font-black text-sm transition-all duration-300"
               style={{
                 background: loading
-                  ? 'rgba(79,142,247,0.08)'
-                  : 'linear-gradient(135deg, rgba(79,142,247,0.18), rgba(37,99,235,0.12))',
-                border: '1px solid rgba(79,142,247,0.3)',
+                  ? 'rgba(168,85,247,0.08)'
+                  : 'linear-gradient(135deg, rgba(168,85,247,0.18), rgba(37,99,235,0.12))',
+                border: '1px solid rgba(168,85,247,0.3)',
                 color: '#93C5FD',
-                boxShadow: loading ? 'none' : '0 0 30px rgba(79,142,247,0.10)',
+                boxShadow: loading ? 'none' : '0 0 30px rgba(168,85,247,0.10)',
               }}
               aria-busy={loading}
             >
@@ -344,7 +344,7 @@ function Field({
   return (
     <div className="space-y-1.5">
       <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider">
-        {label} {required && <span className="text-[#4F8EF7]" aria-hidden="true">*</span>}
+        {label} {required && <span className="text-[#a855f7]" aria-hidden="true">*</span>}
       </label>
       {children}
     </div>

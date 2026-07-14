@@ -40,7 +40,7 @@ export default function SubscriptionGate({ children }: Props) {
   if (status === 'loading' || status === 'no-auth') {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <Loader2 className="w-6 h-6 animate-spin text-[#4F8EF7]" />
+        <Loader2 className="w-6 h-6 animate-spin text-[#a855f7]" />
       </div>
     )
   }
@@ -61,15 +61,15 @@ function Paywall() {
         <div
           className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6"
           style={{
-            background: 'rgba(79,142,247,0.08)',
-            border: '1px solid rgba(79,142,247,0.2)',
-            boxShadow: '0 0 30px rgba(79,142,247,0.1)',
+            background: 'rgba(168,85,247,0.08)',
+            border: '1px solid rgba(168,85,247,0.2)',
+            boxShadow: '0 0 30px rgba(168,85,247,0.1)',
           }}
         >
-          <Lock className="w-7 h-7 text-[#4F8EF7]" />
+          <Lock className="w-7 h-7 text-[#a855f7]" />
         </div>
 
-        <div className="text-xs text-[#4F8EF7] font-bold uppercase tracking-widest mb-3">
+        <div className="text-xs text-[#a855f7] font-bold uppercase tracking-widest mb-3">
           Members Only
         </div>
         <h2 className="text-3xl font-black mb-3 leading-tight">
@@ -83,8 +83,8 @@ function Paywall() {
         <div
           className="rounded-2xl p-5 mb-7 text-left"
           style={{
-            background: 'rgba(79,142,247,0.03)',
-            border: '1px solid rgba(79,142,247,0.12)',
+            background: 'rgba(168,85,247,0.03)',
+            border: '1px solid rgba(168,85,247,0.12)',
           }}
         >
           <div className="text-xs text-gray-600 uppercase tracking-wider mb-4">What you get</div>
@@ -100,9 +100,9 @@ function Paywall() {
               <li key={f} className="flex items-center gap-2.5 text-sm text-gray-300">
                 <div
                   className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ background: 'rgba(79,142,247,0.1)', border: '1px solid rgba(79,142,247,0.25)' }}
+                  style={{ background: 'rgba(168,85,247,0.1)', border: '1px solid rgba(168,85,247,0.25)' }}
                 >
-                  <Check className="w-2.5 h-2.5 text-[#4F8EF7]" />
+                  <Check className="w-2.5 h-2.5 text-[#a855f7]" />
                 </div>
                 {f}
               </li>
@@ -128,7 +128,7 @@ function Paywall() {
 
         <p className="text-xs text-gray-600">
           Already a member?{' '}
-          <Link href="/auth/login" className="text-[#4F8EF7] hover:underline">
+          <Link href="/auth/login" className="text-[#a855f7] hover:underline">
             Sign in
           </Link>
         </p>

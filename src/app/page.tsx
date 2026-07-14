@@ -264,8 +264,8 @@ function Sparkline({ data, uid }: { data: number[]; uid: string }) {
     <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} fill="none" aria-hidden="true" focusable="false">
       <defs>
         <linearGradient id={gradId} x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stopColor="#4F8EF7" stopOpacity="0.25" />
-          <stop offset="100%" stopColor="#4F8EF7" stopOpacity="0" />
+          <stop offset="0%" stopColor="#a855f7" stopOpacity="0.25" />
+          <stop offset="100%" stopColor="#a855f7" stopOpacity="0" />
         </linearGradient>
       </defs>
       <path
@@ -277,7 +277,7 @@ function Sparkline({ data, uid }: { data: number[]; uid: string }) {
         ref={lineRef}
         d={linePath}
         fill="none"
-        stroke="#4F8EF7"
+        stroke="#a855f7"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -300,7 +300,7 @@ function ResultCard({ card, idx }: { card: typeof RESULT_CARDS[0]; idx: number }
         <div className="flex items-center gap-3">
           <div
             className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-black text-white relative"
-            style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
+            style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
             aria-hidden="true"
           >
             {card.avatar}
@@ -343,7 +343,7 @@ function ResultCard({ card, idx }: { card: typeof RESULT_CARDS[0]; idx: number }
 
       <div className="flex items-center justify-between">
         <span className="text-xs text-gray-600">{card.kpi}</span>
-        <div className="glass-blue rounded-full px-2.5 py-1 text-xs font-medium text-[#4F8EF7]">
+        <div className="glass-blue rounded-full px-2.5 py-1 text-xs font-medium text-[#a855f7]">
           {card.badge}
         </div>
       </div>
@@ -480,7 +480,7 @@ function CommunityFeed() {
               <div className="flex gap-3">
                 <div
                   className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-                  style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
+                  style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
                   aria-hidden="true"
                 >
                   {p.avatar}
@@ -495,7 +495,7 @@ function CommunityFeed() {
                   <button
                     onClick={() => handleLike(id)}
                     className="flex items-center gap-1.5 mt-2 text-xs transition-colors group/like"
-                    style={{ color: isLit ? '#4F8EF7' : undefined }}
+                    style={{ color: isLit ? '#a855f7' : undefined }}
                     aria-label={`Like this post — ${count} likes`}
                   >
                     <span
@@ -507,7 +507,7 @@ function CommunityFeed() {
                     </span>
                     <span
                       className="like-count"
-                      style={{ color: isLit ? '#4F8EF7' : '#6B7280' }}
+                      style={{ color: isLit ? '#a855f7' : '#6B7280' }}
                       aria-live="polite"
                     >
                       {count}
@@ -550,7 +550,7 @@ function FAQSection() {
                 aria-expanded={open === i}
                 aria-controls={`faq-${i}`}
               >
-                <span className="font-semibold text-sm group-hover:text-[#60A5FA] transition-colors pr-2">{item.q}</span>
+                <span className="font-semibold text-sm group-hover:text-[#c084fc] transition-colors pr-2">{item.q}</span>
                 <ChevronRight
                   className="w-4 h-4 text-gray-600 flex-shrink-0 transition-transform duration-300"
                   style={{ transform: open === i ? 'rotate(90deg)' : 'none' }}
@@ -598,13 +598,13 @@ function FounderSection() {
               <div
                 className="w-full aspect-[4/5] rounded-3xl overflow-hidden flex items-center justify-center"
                 style={{
-                  background: 'linear-gradient(135deg, rgba(79,142,247,0.08) 0%, rgba(15,15,15,0.9) 100%)',
-                  border: '1px solid rgba(79,142,247,0.15)',
+                  background: 'linear-gradient(135deg, rgba(168,85,247,0.08) 0%, rgba(15,15,15,0.9) 100%)',
+                  border: '1px solid rgba(168,85,247,0.15)',
                 }}
               >
                 <div
                   className="w-32 h-32 rounded-full flex items-center justify-center text-3xl font-black text-white"
-                  style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
+                  style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
                   aria-hidden="true"
                 >
                   TG
@@ -615,14 +615,14 @@ function FounderSection() {
                 className="absolute -bottom-4 -right-4 px-4 py-3 rounded-2xl"
                 style={{
                   background: 'rgba(10,10,10,0.96)',
-                  border: '1px solid rgba(79,142,247,0.2)',
+                  border: '1px solid rgba(168,85,247,0.2)',
                   backdropFilter: 'blur(20px)',
                   boxShadow: '0 8px 40px rgba(0,0,0,0.5)',
                 }}
               >
                 <div className="text-[10px] text-gray-600 mb-0.5 uppercase tracking-wider">Platform revenue</div>
                 <div className="text-xl font-black text-white leading-none">$4.8M+</div>
-                <div className="text-xs text-[#4F8EF7] mt-1 font-semibold">across all members</div>
+                <div className="text-xs text-[#a855f7] mt-1 font-semibold">across all members</div>
               </div>
             </div>
           </div>
@@ -652,11 +652,11 @@ function FounderSection() {
                 <div key={item.label} className="flex gap-4 group">
                   <div
                     className="w-0.5 rounded-full flex-shrink-0"
-                    style={{ background: 'linear-gradient(180deg, #4F8EF7, rgba(37,99,235,0.3))', minHeight: '44px' }}
+                    style={{ background: 'linear-gradient(180deg, #a855f7, rgba(37,99,235,0.3))', minHeight: '44px' }}
                     aria-hidden="true"
                   />
                   <div>
-                    <div className="text-[10px] text-[#4F8EF7] font-black uppercase tracking-widest mb-1">{item.label}</div>
+                    <div className="text-[10px] text-[#a855f7] font-black uppercase tracking-widest mb-1">{item.label}</div>
                     <p className="text-sm text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">{item.text}</p>
                   </div>
                 </div>
@@ -692,7 +692,7 @@ function ProductPreview() {
           <div className="reveal card-premium p-5 flex flex-col gap-4">
             <div className="flex items-center gap-2 mb-1">
               <div className="w-6 h-6 rounded-lg glass-blue flex items-center justify-center" aria-hidden="true">
-                <BookOpen className="w-3.5 h-3.5 text-[#4F8EF7]" />
+                <BookOpen className="w-3.5 h-3.5 text-[#a855f7]" />
               </div>
               <span className="text-xs font-semibold text-gray-300">Course Library</span>
               <span className="ml-auto text-[10px] text-gray-600">20+ courses</span>
@@ -715,14 +715,14 @@ function ProductPreview() {
                       width: `${course.progress}%`,
                       background: course.progress === 100
                         ? 'linear-gradient(90deg, #10B981, #059669)'
-                        : 'linear-gradient(90deg, #4F8EF7, #2563EB)',
+                        : 'linear-gradient(90deg, #a855f7, #ec4899)',
                     }}
                   />
                 </div>
               </div>
             ))}
             <div className="mt-auto pt-2 flex items-center gap-1.5">
-              <Award className="w-3 h-3 text-[#4F8EF7]" aria-hidden="true" />
+              <Award className="w-3 h-3 text-[#a855f7]" aria-hidden="true" />
               <span className="text-[10px] text-gray-600">XP awarded on completion</span>
             </div>
           </div>
@@ -731,7 +731,7 @@ function ProductPreview() {
           <div className="reveal reveal-delay-1 card-premium p-5 flex flex-col gap-3.5">
             <div className="flex items-center gap-2 mb-1">
               <div className="w-6 h-6 rounded-lg glass-blue flex items-center justify-center" aria-hidden="true">
-                <Flame className="w-3.5 h-3.5 text-[#4F8EF7]" />
+                <Flame className="w-3.5 h-3.5 text-[#a855f7]" />
               </div>
               <span className="text-xs font-semibold text-gray-300">Daily Missions</span>
             </div>
@@ -739,7 +739,7 @@ function ProductPreview() {
               <div className="relative w-12 h-12 flex-shrink-0" aria-hidden="true">
                 <svg className="w-full h-full -rotate-90" viewBox="0 0 48 48">
                   <circle cx="24" cy="24" r="18" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="3.5" />
-                  <circle cx="24" cy="24" r="18" fill="none" stroke="#4F8EF7" strokeWidth="3.5"
+                  <circle cx="24" cy="24" r="18" fill="none" stroke="#a855f7" strokeWidth="3.5"
                     strokeDasharray={`${2 * Math.PI * 18 * 0.75} ${2 * Math.PI * 18}`}
                     strokeLinecap="round" />
                 </svg>
@@ -768,7 +768,7 @@ function ProductPreview() {
                   {m.done && <Check className="w-2.5 h-2.5 text-emerald-400" />}
                 </div>
                 <span className={`text-[11px] flex-1 ${m.done ? 'text-gray-600 line-through' : 'text-gray-400'}`}>{m.text}</span>
-                <span className="text-[10px] text-[#4F8EF7] font-bold flex-shrink-0">+{m.xp} XP</span>
+                <span className="text-[10px] text-[#a855f7] font-bold flex-shrink-0">+{m.xp} XP</span>
               </div>
             ))}
           </div>
@@ -777,7 +777,7 @@ function ProductPreview() {
           <div className="reveal reveal-delay-2 card-premium p-5 flex flex-col gap-3">
             <div className="flex items-center gap-2 mb-1">
               <div className="w-6 h-6 rounded-lg glass-blue flex items-center justify-center" aria-hidden="true">
-                <Users className="w-3.5 h-3.5 text-[#4F8EF7]" />
+                <Users className="w-3.5 h-3.5 text-[#a855f7]" />
               </div>
               <span className="text-xs font-semibold text-gray-300">Community</span>
               <div className="ml-auto flex items-center gap-1" aria-label="128 members online">
@@ -797,7 +797,7 @@ function ProductPreview() {
               <div key={p.name} className="flex gap-2.5 group/post">
                 <div
                   className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold text-white flex-shrink-0"
-                  style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
+                  style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
                   aria-hidden="true"
                 >
                   {p.init}
@@ -872,9 +872,9 @@ export default function LandingPage() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group" aria-label="Timeless — home">
             <div className="w-6 h-6 relative flex-shrink-0" aria-hidden="true">
-              <div className="absolute inset-0 rounded rotate-45 transition-transform group-hover:rotate-[60deg] duration-300" style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }} />
+              <div className="absolute inset-0 rounded rotate-45 transition-transform group-hover:rotate-[60deg] duration-300" style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }} />
               <div className="absolute inset-[2px] bg-black rounded rotate-45" />
-              <div className="absolute inset-[3.5px] rounded rotate-45" style={{ background: 'linear-gradient(135deg, #60A5FA, #4F8EF7)' }} />
+              <div className="absolute inset-[3.5px] rounded rotate-45" style={{ background: 'linear-gradient(135deg, #c084fc, #a855f7)' }} />
             </div>
             <span className="font-black text-sm tracking-tight">timeless</span>
           </Link>
@@ -889,7 +889,7 @@ export default function LandingPage() {
                 className="text-sm text-gray-500 hover:text-white transition-all duration-200 relative group py-1"
               >
                 {l.label}
-                <span className="absolute bottom-0 left-0 w-0 h-px bg-[#4F8EF7] group-hover:w-full transition-all duration-300" aria-hidden="true" />
+                <span className="absolute bottom-0 left-0 w-0 h-px bg-[#a855f7] group-hover:w-full transition-all duration-300" aria-hidden="true" />
               </a>
             ))}
           </div>
@@ -972,7 +972,7 @@ export default function LandingPage() {
             <div
               className="absolute inset-0 opacity-[0.018]"
               style={{
-                backgroundImage: 'linear-gradient(rgba(79,142,247,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(79,142,247,0.8) 1px, transparent 1px)',
+                backgroundImage: 'linear-gradient(rgba(168,85,247,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(168,85,247,0.8) 1px, transparent 1px)',
                 backgroundSize: '60px 60px',
                 transform: `translate(${mouse.x * -6}px, ${mouse.y * -6}px)`,
                 transition: 'transform 0.3s ease-out',
@@ -982,7 +982,7 @@ export default function LandingPage() {
             <div
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full opacity-[0.06]"
               style={{
-                background: 'radial-gradient(circle, #4F8EF7, transparent 65%)',
+                background: 'radial-gradient(circle, #a855f7, transparent 65%)',
                 transform: `translate(calc(-50% + ${mouse.x * 20}px), calc(-50% + ${mouse.y * 20}px))`,
                 transition: 'transform 0.6s ease-out',
                 willChange: 'transform',
@@ -991,7 +991,7 @@ export default function LandingPage() {
             <div
               className="absolute top-[20%] left-[15%] w-[320px] h-[320px] rounded-full opacity-[0.04] animate-float"
               style={{
-                background: 'radial-gradient(circle, #60A5FA, transparent 70%)',
+                background: 'radial-gradient(circle, #c084fc, transparent 70%)',
                 transform: `translate(${mouse.x * 30}px, ${mouse.y * 20}px)`,
                 transition: 'transform 0.8s ease-out',
                 willChange: 'transform',
@@ -1000,7 +1000,7 @@ export default function LandingPage() {
             <div
               className="absolute bottom-[25%] right-[12%] w-[250px] h-[250px] rounded-full opacity-[0.035] animate-float"
               style={{
-                background: 'radial-gradient(circle, #2563EB, transparent 70%)',
+                background: 'radial-gradient(circle, #ec4899, transparent 70%)',
                 animationDelay: '-2s',
                 transform: `translate(${mouse.x * -25}px, ${mouse.y * -15}px)`,
                 transition: 'transform 0.9s ease-out',
@@ -1057,7 +1057,7 @@ export default function LandingPage() {
                   <div
                     key={i}
                     className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white border-2 border-black"
-                    style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)', opacity: 1 - i * 0.08 }}
+                    style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)', opacity: 1 - i * 0.08 }}
                   >
                     {l}
                   </div>
@@ -1068,7 +1068,7 @@ export default function LandingPage() {
               </span>
               <div className="flex items-center gap-0.5" aria-label="5 stars" role="img">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-3.5 h-3.5 fill-[#4F8EF7] text-[#4F8EF7]" aria-hidden="true" />
+                  <Star key={i} className="w-3.5 h-3.5 fill-[#a855f7] text-[#a855f7]" aria-hidden="true" />
                 ))}
               </div>
             </div>
@@ -1118,10 +1118,10 @@ export default function LandingPage() {
                     className={`card-premium p-6 flex gap-4 group reveal reveal-delay-${i + 1}`}
                   >
                     <div className="w-10 h-10 rounded-xl glass-blue flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
-                      <Icon className="w-5 h-5 text-[#4F8EF7]" />
+                      <Icon className="w-5 h-5 text-[#a855f7]" />
                     </div>
                     <div>
-                      <div className="font-bold mb-1.5 group-hover:text-[#60A5FA] transition-colors">{item.title}</div>
+                      <div className="font-bold mb-1.5 group-hover:text-[#c084fc] transition-colors">{item.title}</div>
                       <div className="text-sm text-gray-500 leading-relaxed">{item.desc}</div>
                     </div>
                   </div>
@@ -1137,7 +1137,7 @@ export default function LandingPage() {
         {/* ── RESULTS ─────────────────────────────────────── */}
         <section id="results" className="py-28 px-5 relative overflow-hidden" aria-labelledby="results-heading">
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] pointer-events-none" aria-hidden="true">
-            <div className="w-full h-full rounded-full opacity-[0.04]" style={{ background: 'radial-gradient(circle, #4F8EF7, transparent 70%)' }} />
+            <div className="w-full h-full rounded-full opacity-[0.04]" style={{ background: 'radial-gradient(circle, #a855f7, transparent 70%)' }} />
           </div>
           <div className="max-w-5xl mx-auto relative">
             <div className="text-center mb-16 reveal">
@@ -1184,7 +1184,7 @@ export default function LandingPage() {
                   ].map(item => (
                     <li key={item} className="flex items-center gap-3 group">
                       <div className="w-5 h-5 rounded-full glass-blue flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform" aria-hidden="true">
-                        <Check className="w-3 h-3 text-[#4F8EF7]" />
+                        <Check className="w-3 h-3 text-[#a855f7]" />
                       </div>
                       <span className="text-gray-300 text-sm group-hover:text-white transition-colors">{item}</span>
                     </li>
@@ -1217,9 +1217,9 @@ export default function LandingPage() {
                       className="w-9 h-9 rounded-xl glass-blue flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-300"
                       aria-hidden="true"
                     >
-                      <Icon className="w-[18px] h-[18px] text-[#4F8EF7]" />
+                      <Icon className="w-[18px] h-[18px] text-[#a855f7]" />
                     </div>
-                    <div className="font-bold text-sm mb-1.5 group-hover:text-[#60A5FA] transition-colors">{f.title}</div>
+                    <div className="font-bold text-sm mb-1.5 group-hover:text-[#c084fc] transition-colors">{f.title}</div>
                     <div className="text-xs text-gray-500 leading-relaxed">{f.desc}</div>
                   </div>
                 )
@@ -1245,7 +1245,7 @@ export default function LandingPage() {
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className="w-3.5 h-3.5 fill-[#4F8EF7] text-[#4F8EF7] group-hover:scale-110 transition-transform"
+                        className="w-3.5 h-3.5 fill-[#a855f7] text-[#a855f7] group-hover:scale-110 transition-transform"
                         style={{ transitionDelay: `${i * 30}ms` }}
                         aria-hidden="true"
                       />
@@ -1256,14 +1256,14 @@ export default function LandingPage() {
                     <div className="flex items-center gap-2.5">
                       <div
                         className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-black text-white flex-shrink-0"
-                        style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
+                        style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
                         aria-hidden="true"
                       >
                         {t.avatar}
                       </div>
                       <div>
                         <cite className="text-sm font-semibold not-italic">{t.name}</cite>
-                        <div className="text-[10px] text-[#4F8EF7] font-medium">{t.handle}</div>
+                        <div className="text-[10px] text-[#a855f7] font-medium">{t.handle}</div>
                         <div className="text-[10px] text-gray-600">{t.role}</div>
                       </div>
                     </div>
@@ -1297,18 +1297,18 @@ export default function LandingPage() {
             <div
               className="relative rounded-3xl overflow-hidden reveal mb-6 animate-border-pulse"
               style={{
-                background: 'rgba(79,142,247,0.03)',
-                border: '1px solid rgba(79,142,247,0.22)',
-                boxShadow: '0 0 60px rgba(79,142,247,0.07), 0 24px 80px rgba(0,0,0,0.5)',
+                background: 'rgba(168,85,247,0.03)',
+                border: '1px solid rgba(168,85,247,0.22)',
+                boxShadow: '0 0 60px rgba(168,85,247,0.07), 0 24px 80px rgba(0,0,0,0.5)',
               }}
             >
-              <div className="absolute top-0 right-0 w-96 h-64 pointer-events-none" style={{ background: 'radial-gradient(circle at top right, rgba(79,142,247,0.09), transparent 65%)' }} aria-hidden="true" />
+              <div className="absolute top-0 right-0 w-96 h-64 pointer-events-none" style={{ background: 'radial-gradient(circle at top right, rgba(168,85,247,0.09), transparent 65%)' }} aria-hidden="true" />
               <div className="absolute bottom-0 left-0 w-64 h-48 pointer-events-none" style={{ background: 'radial-gradient(circle at bottom left, rgba(37,99,235,0.06), transparent 70%)' }} aria-hidden="true" />
 
               <div className="relative p-8 md:p-10">
                 {/* Header */}
                 <div className="mb-7">
-                  <div className="text-xs text-[#4F8EF7] font-bold uppercase tracking-widest mb-3">Timeless Membership</div>
+                  <div className="text-xs text-[#a855f7] font-bold uppercase tracking-widest mb-3">Timeless Membership</div>
                   <div className="flex flex-wrap items-end gap-x-6 gap-y-3">
                     {/* Monthly option */}
                     <div>
@@ -1326,7 +1326,7 @@ export default function LandingPage() {
                     <div className="relative">
                       <div
                         className="absolute -top-3.5 left-0 text-[10px] font-black px-2.5 py-0.5 rounded-full whitespace-nowrap text-white"
-                        style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }}
+                        style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
                       >
                         SAVE 22%
                       </div>
@@ -1360,7 +1360,7 @@ export default function LandingPage() {
                   ].map(f => (
                     <li key={f} className="flex items-center gap-2.5">
                       <div className="w-5 h-5 rounded-full glass-blue flex items-center justify-center flex-shrink-0" aria-hidden="true">
-                        <Check className="w-3 h-3 text-[#4F8EF7]" />
+                        <Check className="w-3 h-3 text-[#a855f7]" />
                       </div>
                       <span className="text-sm text-gray-300">{f}</span>
                     </li>
@@ -1423,13 +1423,13 @@ export default function LandingPage() {
                   src="/founder.jpg"
                   alt="Founder"
                   className="w-full aspect-[4/5] object-cover rounded-3xl"
-                  style={{ border: '1px solid rgba(79,142,247,0.15)' }}
+                  style={{ border: '1px solid rgba(168,85,247,0.15)' }}
                 />
               </div>
 
               {/* Bio */}
               <div>
-                <div className="text-xs text-[#4F8EF7] font-bold uppercase tracking-widest mb-2">Your Mentor</div>
+                <div className="text-xs text-[#a855f7] font-bold uppercase tracking-widest mb-2">Your Mentor</div>
                 <h3 className="text-2xl font-black mb-3 leading-tight">
                   Built by someone<br />
                   <span className="gradient-text">actually doing it.</span>
@@ -1448,7 +1448,7 @@ export default function LandingPage() {
               {/* Stat strip */}
               <div
                 className="grid grid-cols-3 gap-3 p-4 rounded-2xl"
-                style={{ background: 'rgba(79,142,247,0.04)', border: '1px solid rgba(79,142,247,0.1)' }}
+                style={{ background: 'rgba(168,85,247,0.04)', border: '1px solid rgba(168,85,247,0.1)' }}
               >
                 {[
                   { value: '$4.8M+', label: 'Member revenue' },
@@ -1471,11 +1471,11 @@ export default function LandingPage() {
                   <div key={item.label} className="flex gap-3 group">
                     <div
                       className="w-0.5 rounded-full flex-shrink-0"
-                      style={{ background: 'linear-gradient(180deg, #4F8EF7, rgba(37,99,235,0.3))', minHeight: '36px' }}
+                      style={{ background: 'linear-gradient(180deg, #a855f7, rgba(37,99,235,0.3))', minHeight: '36px' }}
                       aria-hidden="true"
                     />
                     <div>
-                      <div className="text-[10px] text-[#4F8EF7] font-black uppercase tracking-widest mb-0.5">{item.label}</div>
+                      <div className="text-[10px] text-[#a855f7] font-black uppercase tracking-widest mb-0.5">{item.label}</div>
                       <p className="text-xs text-gray-500 leading-relaxed group-hover:text-gray-400 transition-colors">{item.text}</p>
                     </div>
                   </div>
@@ -1488,24 +1488,24 @@ export default function LandingPage() {
               className="relative rounded-3xl overflow-hidden group/mentorship transition-all duration-500 reveal reveal-delay-1 h-full"
               style={{
                 background: '#040404',
-                border: '1px solid rgba(79,142,247,0.15)',
-                boxShadow: '0 0 0 1px rgba(79,142,247,0.05), 0 32px 100px rgba(0,0,0,0.7)',
+                border: '1px solid rgba(168,85,247,0.15)',
+                boxShadow: '0 0 0 1px rgba(168,85,247,0.05), 0 32px 100px rgba(0,0,0,0.7)',
               }}
               onMouseEnter={e => {
                 const el = e.currentTarget as HTMLElement
-                el.style.border = '1px solid rgba(79,142,247,0.32)'
-                el.style.boxShadow = '0 0 0 1px rgba(79,142,247,0.12), 0 32px 100px rgba(0,0,0,0.8), 0 0 80px rgba(79,142,247,0.08)'
+                el.style.border = '1px solid rgba(168,85,247,0.32)'
+                el.style.boxShadow = '0 0 0 1px rgba(168,85,247,0.12), 0 32px 100px rgba(0,0,0,0.8), 0 0 80px rgba(168,85,247,0.08)'
               }}
               onMouseLeave={e => {
                 const el = e.currentTarget as HTMLElement
-                el.style.border = '1px solid rgba(79,142,247,0.15)'
-                el.style.boxShadow = '0 0 0 1px rgba(79,142,247,0.05), 0 32px 100px rgba(0,0,0,0.7)'
+                el.style.border = '1px solid rgba(168,85,247,0.15)'
+                el.style.boxShadow = '0 0 0 1px rgba(168,85,247,0.05), 0 32px 100px rgba(0,0,0,0.7)'
               }}
             >
-              <div className="absolute top-0 right-0 w-80 h-80 pointer-events-none" style={{ background: 'radial-gradient(circle at top right, rgba(79,142,247,0.08), transparent 60%)' }} aria-hidden="true" />
+              <div className="absolute top-0 right-0 w-80 h-80 pointer-events-none" style={{ background: 'radial-gradient(circle at top right, rgba(168,85,247,0.08), transparent 60%)' }} aria-hidden="true" />
               <div className="absolute bottom-0 left-0 w-56 h-56 pointer-events-none opacity-60" style={{ background: 'radial-gradient(circle at bottom left, rgba(37,99,235,0.07), transparent 65%)' }} aria-hidden="true" />
               {/* Animated top border glow */}
-              <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(79,142,247,0.5), transparent)' }} aria-hidden="true" />
+              <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(168,85,247,0.5), transparent)' }} aria-hidden="true" />
 
               <div className="relative p-8 md:p-10">
                 {/* Badges */}
@@ -1513,7 +1513,7 @@ export default function LandingPage() {
                   <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-orange-300" style={{ background: 'rgba(251,146,60,0.1)', border: '1px solid rgba(251,146,60,0.25)' }}>
                     🔥 Limited Spots
                   </div>
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-[#60A5FA]" style={{ background: 'rgba(79,142,247,0.08)', border: '1px solid rgba(79,142,247,0.2)' }}>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-[#c084fc]" style={{ background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.2)' }}>
                     Applications Open
                   </div>
                   <span className="text-xs text-gray-600 ml-auto hidden sm:block">Only a few spots per month</span>
@@ -1522,7 +1522,7 @@ export default function LandingPage() {
                 {/* Title + Price */}
                 <div className="flex items-start justify-between gap-6 mb-8 flex-wrap">
                   <div>
-                    <div className="text-xs text-[#4F8EF7] font-bold uppercase tracking-widest mb-3">Private 1-on-1 Mentorship</div>
+                    <div className="text-xs text-[#a855f7] font-bold uppercase tracking-widest mb-3">Private 1-on-1 Mentorship</div>
                     <h3 className="text-3xl font-black mb-3 leading-tight">Direct access.<br />Real results.</h3>
                     <p className="text-gray-500 text-sm max-w-sm leading-relaxed">
                       This is not a course you watch alone. This is direct access to someone generating real revenue — who will look at your specific account and tell you exactly what to do.
@@ -1532,11 +1532,11 @@ export default function LandingPage() {
                     <div className="text-xs text-gray-600 uppercase tracking-wider mb-1">Investment</div>
                     <div
                       className="text-5xl font-black tracking-tight leading-none"
-                      style={{ textShadow: '0 0 40px rgba(79,142,247,0.25)' }}
+                      style={{ textShadow: '0 0 40px rgba(168,85,247,0.25)' }}
                     >
                       $1,080
                     </div>
-                    <div className="text-xs font-semibold text-[#4F8EF7] mt-2">One-Time Payment</div>
+                    <div className="text-xs font-semibold text-[#a855f7] mt-2">One-Time Payment</div>
                     <div className="text-xs text-gray-600 mt-1.5 max-w-[180px] leading-relaxed">
                       Not everyone is accepted. We only work with members we believe we can genuinely help succeed.
                     </div>
@@ -1565,10 +1565,10 @@ export default function LandingPage() {
                       <li key={f} className="flex items-center gap-2.5 group/item">
                         <div
                           className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover/item:scale-110"
-                          style={{ background: 'rgba(79,142,247,0.12)', border: '1px solid rgba(79,142,247,0.35)' }}
+                          style={{ background: 'rgba(168,85,247,0.12)', border: '1px solid rgba(168,85,247,0.35)' }}
                           aria-hidden="true"
                         >
-                          <Check className="w-2.5 h-2.5 text-[#4F8EF7]" />
+                          <Check className="w-2.5 h-2.5 text-[#a855f7]" />
                         </div>
                         <span className="text-sm text-gray-400 group-hover/item:text-gray-100 transition-colors duration-200">{f}</span>
                       </li>
@@ -1585,23 +1585,23 @@ export default function LandingPage() {
                     href="/mentorship/apply"
                     className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-sm font-black transition-all duration-300 group/btn whitespace-nowrap"
                     style={{
-                      background: 'linear-gradient(135deg, rgba(79,142,247,0.15), rgba(37,99,235,0.10))',
-                      border: '1px solid rgba(79,142,247,0.3)',
+                      background: 'linear-gradient(135deg, rgba(168,85,247,0.15), rgba(37,99,235,0.10))',
+                      border: '1px solid rgba(168,85,247,0.3)',
                       color: '#93C5FD',
-                      boxShadow: '0 0 30px rgba(79,142,247,0.08)',
+                      boxShadow: '0 0 30px rgba(168,85,247,0.08)',
                     }}
                     onMouseEnter={e => {
                       const el = e.currentTarget as HTMLElement
-                      el.style.background = 'linear-gradient(135deg, rgba(79,142,247,0.22), rgba(37,99,235,0.16))'
-                      el.style.border = '1px solid rgba(79,142,247,0.5)'
-                      el.style.boxShadow = '0 0 40px rgba(79,142,247,0.18)'
+                      el.style.background = 'linear-gradient(135deg, rgba(168,85,247,0.22), rgba(37,99,235,0.16))'
+                      el.style.border = '1px solid rgba(168,85,247,0.5)'
+                      el.style.boxShadow = '0 0 40px rgba(168,85,247,0.18)'
                       el.style.color = '#BFDBFE'
                     }}
                     onMouseLeave={e => {
                       const el = e.currentTarget as HTMLElement
-                      el.style.background = 'linear-gradient(135deg, rgba(79,142,247,0.15), rgba(37,99,235,0.10))'
-                      el.style.border = '1px solid rgba(79,142,247,0.3)'
-                      el.style.boxShadow = '0 0 30px rgba(79,142,247,0.08)'
+                      el.style.background = 'linear-gradient(135deg, rgba(168,85,247,0.15), rgba(37,99,235,0.10))'
+                      el.style.border = '1px solid rgba(168,85,247,0.3)'
+                      el.style.boxShadow = '0 0 30px rgba(168,85,247,0.08)'
                       el.style.color = '#93C5FD'
                     }}
                   >
@@ -1621,7 +1621,7 @@ export default function LandingPage() {
 
         {/* ── FINAL CTA ───────────────────────────────────── */}
         <section className="py-32 px-5 relative overflow-hidden" aria-label="Call to action">
-          <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(79,142,247,0.05), transparent 60%)' }} aria-hidden="true" />
+          <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(168,85,247,0.05), transparent 60%)' }} aria-hidden="true" />
           <div className="relative max-w-3xl mx-auto text-center reveal">
             <h2 className="text-5xl md:text-6xl font-black mb-6 leading-tight">
               The window is<br />
@@ -1655,9 +1655,9 @@ export default function LandingPage() {
             <div className="col-span-2 md:col-span-1">
               <div className="flex items-center gap-2 mb-4" aria-label="Timeless">
                 <div className="w-6 h-6 relative" aria-hidden="true">
-                  <div className="absolute inset-0 rounded rotate-45" style={{ background: 'linear-gradient(135deg, #4F8EF7, #2563EB)' }} />
+                  <div className="absolute inset-0 rounded rotate-45" style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }} />
                   <div className="absolute inset-[2px] bg-black rounded rotate-45" />
-                  <div className="absolute inset-[3.5px] rounded rotate-45" style={{ background: 'linear-gradient(135deg, #60A5FA, #4F8EF7)' }} />
+                  <div className="absolute inset-[3.5px] rounded rotate-45" style={{ background: 'linear-gradient(135deg, #c084fc, #a855f7)' }} />
                 </div>
                 <span className="font-black text-sm">timeless</span>
               </div>
@@ -1802,7 +1802,7 @@ function EmailCapture() {
                 border: '1px solid rgba(255,255,255,0.08)',
               }}
               aria-label="Email address"
-              onFocus={e => { e.currentTarget.style.borderColor = 'rgba(79,142,247,0.4)' }}
+              onFocus={e => { e.currentTarget.style.borderColor = 'rgba(168,85,247,0.4)' }}
               onBlur={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)' }}
             />
             <button
