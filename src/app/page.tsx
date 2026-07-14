@@ -1014,7 +1014,7 @@ export default function LandingPage() {
             <div className="inline-flex items-center gap-2 mb-10 animate-fade-in">
               <div className="badge">
                 <Diamond className="w-3 h-3" aria-hidden="true" />
-                The TikTok Shop Operating System
+                Join 1,200+ Creators Making Money
               </div>
             </div>
 
