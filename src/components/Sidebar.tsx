@@ -58,9 +58,9 @@ export default function Sidebar() {
         <div className="p-5 border-b border-white/[0.04]">
           <Link href="/dashboard" className="flex items-center gap-2.5" aria-label="Timeless — go to dashboard">
             <div className="w-6 h-6 relative" aria-hidden="true">
-              <div className="absolute inset-0 rounded rotate-45" style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }} />
+              <div className="absolute inset-0 rounded rotate-45" style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }} />
               <div className="absolute inset-[2px] bg-black rounded rotate-45" />
-              <div className="absolute inset-[3.5px] rounded rotate-45" style={{ background: 'linear-gradient(135deg, #c084fc, #a855f7)' }} />
+              <div className="absolute inset-[3.5px] rounded rotate-45" style={{ background: 'linear-gradient(135deg, #f9a8d4, #ec4899)' }} />
             </div>
             <span className="font-black text-sm tracking-tight">timeless</span>
           </Link>

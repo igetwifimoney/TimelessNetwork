@@ -314,7 +314,7 @@ function ResultCard({ card, idx }: { card: typeof RESULT_CARDS[0]; idx: number }
         <div className="flex items-center gap-3">
           <div
             className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-black text-white relative"
-            style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
+            style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }}
             aria-hidden="true"
           >
             {card.avatar}
@@ -494,7 +494,7 @@ function CommunityFeed() {
               <div className="flex gap-3">
                 <div
                   className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-                  style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
+                  style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }}
                   aria-hidden="true"
                 >
                   {p.avatar}
@@ -618,7 +618,7 @@ function FounderSection() {
               >
                 <div
                   className="w-32 h-32 rounded-full flex items-center justify-center text-3xl font-black text-white"
-                  style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
+                  style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }}
                   aria-hidden="true"
                 >
                   TG
@@ -811,7 +811,7 @@ function ProductPreview() {
               <div key={p.name} className="flex gap-2.5 group/post">
                 <div
                   className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold text-white flex-shrink-0"
-                  style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
+                  style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }}
                   aria-hidden="true"
                 >
                   {p.init}
@@ -886,9 +886,9 @@ export default function LandingPage() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group" aria-label="Timeless — home">
             <div className="w-6 h-6 relative flex-shrink-0" aria-hidden="true">
-              <div className="absolute inset-0 rounded rotate-45 transition-transform group-hover:rotate-[60deg] duration-300" style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }} />
+              <div className="absolute inset-0 rounded rotate-45 transition-transform group-hover:rotate-[60deg] duration-300" style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }} />
               <div className="absolute inset-[2px] bg-black rounded rotate-45" />
-              <div className="absolute inset-[3.5px] rounded rotate-45" style={{ background: 'linear-gradient(135deg, #c084fc, #a855f7)' }} />
+              <div className="absolute inset-[3.5px] rounded rotate-45" style={{ background: 'linear-gradient(135deg, #f9a8d4, #ec4899)' }} />
             </div>
             <span className="font-black text-sm tracking-tight">timeless</span>
           </Link>
@@ -1071,7 +1071,7 @@ export default function LandingPage() {
                   <div
                     key={i}
                     className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white border-2 border-black"
-                    style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)', opacity: 1 - i * 0.08 }}
+                    style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)', opacity: 1 - i * 0.08 }}
                   >
                     {l}
                   </div>
@@ -1159,7 +1159,7 @@ export default function LandingPage() {
                     <div className="flex items-center gap-2.5">
                       <div
                         className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-black text-white flex-shrink-0"
-                        style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
+                        style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }}
                         aria-hidden="true"
                       >
                         {t.avatar}
@@ -1227,7 +1227,7 @@ export default function LandingPage() {
                     <div className="relative mt-2 sm:mt-0">
                       <div
                         className="absolute -top-3.5 left-0 text-[10px] font-black px-2.5 py-0.5 rounded-full whitespace-nowrap text-white"
-                        style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
+                        style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }}
                       >
                         SAVE 22%
                       </div>
@@ -1537,9 +1537,9 @@ export default function LandingPage() {
             <div className="col-span-2 md:col-span-1">
               <div className="flex items-center gap-2 mb-4" aria-label="Timeless">
                 <div className="w-6 h-6 relative" aria-hidden="true">
-                  <div className="absolute inset-0 rounded rotate-45" style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }} />
+                  <div className="absolute inset-0 rounded rotate-45" style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }} />
                   <div className="absolute inset-[2px] bg-black rounded rotate-45" />
-                  <div className="absolute inset-[3.5px] rounded rotate-45" style={{ background: 'linear-gradient(135deg, #c084fc, #a855f7)' }} />
+                  <div className="absolute inset-[3.5px] rounded rotate-45" style={{ background: 'linear-gradient(135deg, #f9a8d4, #ec4899)' }} />
                 </div>
                 <span className="font-black text-sm">timeless</span>
               </div>

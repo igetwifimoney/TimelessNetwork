@@ -273,7 +273,7 @@ function PostCard({
       <div className="flex items-start gap-3 lg:gap-3.5">
         <div
           className="w-8 h-8 lg:w-9 lg:h-9 rounded-full flex items-center justify-center text-xs lg:text-sm font-black text-white flex-shrink-0"
-          style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
+          style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }}
         >
           {post.avatar}
         </div>
@@ -342,7 +342,7 @@ function PostCard({
                 <div key={reply.id} className="flex items-start gap-2.5">
                   <div
                     className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-black text-white flex-shrink-0"
-                    style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
+                    style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }}
                   >
                     {reply.avatar}
                   </div>
@@ -372,7 +372,7 @@ function PostCard({
                 <form onSubmit={submitReply} className="flex items-end gap-2 mt-2">
                   <div
                     className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black text-white flex-shrink-0"
-                    style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
+                    style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }}
                   >
                     Y
                   </div>
@@ -660,7 +660,7 @@ export default function CommunityPage() {
                   <div className="relative flex-shrink-0">
                     <div
                       className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white"
-                      style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
+                      style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }}
                     >
                       {member.initials}
                     </div>
@@ -767,7 +767,7 @@ export default function CommunityPage() {
               <form onSubmit={handlePost} className="flex gap-2 lg:gap-3 items-end">
                 <div
                   className="w-7 h-7 lg:w-8 lg:h-8 rounded-full flex items-center justify-center text-xs font-black text-white flex-shrink-0"
-                  style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
+                  style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }}
                 >
                   Y
                 </div>

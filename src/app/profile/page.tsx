@@ -45,7 +45,7 @@ export default function ProfilePage() {
               {/* Avatar */}
               <div className="relative flex-shrink-0">
                 <div className="w-20 h-20 rounded-2xl flex items-center justify-center text-2xl font-black text-white"
-                  style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}>
+                  style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }}>
                   Y
                 </div>
                 <button

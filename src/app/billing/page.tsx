@@ -161,7 +161,7 @@ export default function BillingPage() {
                       </div>
                       {/* Annual */}
                       <div className="rounded-2xl p-5 relative" style={{ background: 'rgba(168,85,247,0.04)', border: '1px solid rgba(168,85,247,0.25)' }}>
-                        <div className="absolute -top-3 left-4 text-[10px] font-black px-3 py-1 rounded-full text-white" style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}>BEST VALUE</div>
+                        <div className="absolute -top-3 left-4 text-[10px] font-black px-3 py-1 rounded-full text-white" style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }}>BEST VALUE</div>
                         <div className="text-xs text-[#a855f7] uppercase tracking-wider mb-2">Annual</div>
                         <div className="text-3xl font-black mb-0.5">$39<span className="text-base font-normal text-gray-500">/mo</span></div>
                         <div className="text-xs text-gray-600 mb-4">$468/year · save $132</div>

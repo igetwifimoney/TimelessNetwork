@@ -67,10 +67,10 @@ export default function LoginPage() {
         <Link href="/" className="flex items-center justify-center gap-2.5 mb-10 group" aria-label="Timeless — go to home">
           <div className="w-7 h-7 relative flex-shrink-0" aria-hidden="true">
             <div className="absolute inset-0 rounded rotate-45 transition-transform group-hover:rotate-[60deg] duration-300"
-              style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }} />
+              style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }} />
             <div className="absolute inset-[2px] bg-black rounded rotate-45" />
             <div className="absolute inset-[4px] rounded rotate-45"
-              style={{ background: 'linear-gradient(135deg, #c084fc, #a855f7)' }} />
+              style={{ background: 'linear-gradient(135deg, #f9a8d4, #ec4899)' }} />
           </div>
           <span className="font-black text-lg tracking-tight">timeless</span>
         </Link>

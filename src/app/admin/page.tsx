@@ -201,7 +201,7 @@ export default function AdminPage() {
                           <td className="px-5 py-3">
                             <div className="flex items-center gap-2.5">
                               <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-black text-white flex-shrink-0"
-                                style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}>
+                                style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }}>
                                 {user.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)}
                               </div>
                               <span className="text-sm font-medium">{user.name}</span>
@@ -297,7 +297,7 @@ export default function AdminPage() {
                         <td className="px-5 py-3">
                           <div className="flex items-center gap-2.5">
                             <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-black text-white"
-                              style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}>
+                              style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }}>
                               {m.name.split(' ').map(n => n[0]).join('')}
                             </div>
                             <div>

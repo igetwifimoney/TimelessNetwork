@@ -423,7 +423,7 @@ export default function DashboardPage() {
                   {WINS.map((w, i) => (
                     <li key={i} className="flex items-start gap-2.5">
                       <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-                        style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }} aria-hidden="true">
+                        style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }} aria-hidden="true">
                         {w.avatar}
                       </div>
                       <div className="min-w-0 flex-1">

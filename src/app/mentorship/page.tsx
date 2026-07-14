@@ -202,7 +202,7 @@ export default function MentorshipPage() {
                     <div className="relative flex-shrink-0">
                       <div
                         className="w-14 h-14 rounded-2xl flex items-center justify-center text-lg font-black text-white"
-                        style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
+                        style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }}
                         aria-hidden="true"
                       >
                         {mentee.avatar}

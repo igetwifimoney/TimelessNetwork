@@ -139,10 +139,10 @@ export default function SignupPage() {
           <Link href="/" className="flex items-center gap-2.5 mb-12 group w-fit" aria-label="Timeless — go to home">
             <div className="w-6 h-6 relative flex-shrink-0" aria-hidden="true">
               <div className="absolute inset-0 rounded rotate-45 transition-transform group-hover:rotate-[60deg] duration-300"
-                style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }} />
+                style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }} />
               <div className="absolute inset-[2px] bg-black rounded rotate-45" />
               <div className="absolute inset-[3.5px] rounded rotate-45"
-                style={{ background: 'linear-gradient(135deg, #c084fc, #a855f7)' }} />
+                style={{ background: 'linear-gradient(135deg, #f9a8d4, #ec4899)' }} />
             </div>
             <span className="font-black text-sm tracking-tight">timeless</span>
           </Link>
@@ -358,7 +358,7 @@ export default function SignupPage() {
               <div className="flex items-center gap-2.5">
                 <div
                   className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black text-white"
-                  style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
+                  style={{ background: 'linear-gradient(135deg, #ec4899, #db2777)' }}
                   aria-hidden="true"
                 >
                   JL
