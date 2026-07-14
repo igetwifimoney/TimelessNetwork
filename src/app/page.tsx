@@ -87,12 +87,27 @@ function useScrollReveal() {
 // Deterministic — every visitor sees the same number
 // ─────────────────────────────────────────────────────────
 
+function seededRand(seed: number): number {
+  const x = Math.imul(seed, 1664525) + 1013904223
+  return (x >>> 0) % 1000
+}
+
+function getDailyGrowth(day: number): number {
+  const r = seededRand(day)
+  if (r < 500) return 2   // 50 % — quiet
+  if (r < 800) return 3   // 30 % — normal
+  if (r < 900) return 5   // 10 % — solid
+  if (r < 970) return 7   //  7 % — good day
+  return 12               //  3 % — viral spike
+}
+
 function getMemberCount(): number {
-  const BASE = 1200
+  const BASE  = 1200
   const START = new Date('2026-07-04').getTime()
-  const GROWTH_PER_DAY = 3
-  const days = Math.max(0, Math.floor((Date.now() - START) / 86400000))
-  return BASE + days * GROWTH_PER_DAY
+  const days  = Math.max(0, Math.floor((Date.now() - START) / 86_400_000))
+  let total = BASE
+  for (let d = 0; d < days; d++) total += getDailyGrowth(d)
+  return total
 }
 
 // ─────────────────────────────────────────────────────────
