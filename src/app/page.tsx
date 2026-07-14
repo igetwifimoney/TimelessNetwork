@@ -1155,9 +1155,6 @@ export default function LandingPage() {
                 </div>
               ))}
             </div>
-            <p className="text-center text-xs text-gray-700 mt-8">
-              Results vary. These are real member outcomes, not guarantees. Most people make less. Some make more.
-            </p>
           </div>
         </section>
 
