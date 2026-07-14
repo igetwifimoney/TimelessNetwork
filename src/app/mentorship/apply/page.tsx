@@ -67,10 +67,32 @@ export default function MentorshipApplyPage() {
     }
 
     setLoading(true)
-    // Simulate submission (replace with real API call later)
-    await new Promise(r => setTimeout(r, 1800))
-    setLoading(false)
-    setSubmitted(true)
+    try {
+      const res = await fetch('/api/mentorship/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:       form.name,
+          email:      form.email,
+          experience: form.experience,
+          revenue:    form.revenue,
+          challenge:  form.challenge,
+          goals:      form.goals,
+          why_mentor: form.whyMentor,
+        }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        setError(data.error || 'Something went wrong. Please try again.')
+        setLoading(false)
+        return
+      }
+      setSubmitted(true)
+    } catch {
+      setError('Network error — please check your connection and try again.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   /* ── SUCCESS STATE ── */
