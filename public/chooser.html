@@ -125,6 +125,19 @@
   }
   .choice p{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:20px;flex:1;}
 
+  .countdown-badge{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:8px 14px;
+    border-radius:999px;
+    font-size:12px;font-weight:700;
+    letter-spacing:0.3px;
+    color:#fff;
+    background:linear-gradient(90deg, rgba(255,43,179,0.25), rgba(59,107,255,0.25));
+    border:1px solid rgba(255,43,179,0.35);
+    margin-bottom:20px;
+    white-space:nowrap;
+  }
+
   .choice-stats{
     display:flex;gap:10px;
     width:100%;margin-bottom:24px;
@@ -190,6 +203,7 @@
     <div class="choice-icon">📈</div>
     <h2>TIMELESS TRADING</h2>
     <p>Live signals, daily market breakdowns, and a trading community built on mindset, discipline, and execution.</p>
+    <div class="countdown-badge" id="trading-countdown">🚀 Launching in —</div>
     <div class="choice-stats">
       <div class="choice-stat"><div class="num">5.0★</div><div class="label">Whop Rating</div></div>
       <div class="choice-stat"><div class="num">24/7</div><div class="label">Expert Support</div></div>
@@ -237,6 +251,28 @@
   }
   document.getElementById('network-member-count').textContent =
     getMemberCount().toLocaleString() + '+';
+
+  // Launch countdown for Timeless Trading — targets Aug 7, 2026 local time.
+  function updateTradingCountdown() {
+    const el = document.getElementById('trading-countdown');
+    if (!el) return;
+    const LAUNCH = new Date('2026-08-07T00:00:00').getTime();
+    const diff = LAUNCH - Date.now();
+
+    if (diff <= 0) {
+      el.textContent = '🚀 Live now';
+      return;
+    }
+
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const minutes = Math.floor((diff % 3600000) / 60000);
+    const seconds = Math.floor((diff % 60000) / 1000);
+
+    el.textContent = `🚀 Launching in ${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }
+  updateTradingCountdown();
+  setInterval(updateTradingCountdown, 1000);
 </script>
 
 </body>
