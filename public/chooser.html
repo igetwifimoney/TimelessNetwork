@@ -109,6 +109,13 @@
   .choice.trading:hover{box-shadow:0 0 40px rgba(255,43,179,0.25);}
   .choice.network:hover{box-shadow:0 0 40px rgba(47,208,255,0.25);}
 
+  .choice.disabled{cursor:default;}
+  .choice.disabled:hover{
+    transform:none;
+    border-color:var(--border);
+    box-shadow:none;
+  }
+
   .choice-icon{
     width:64px;height:64px;border-radius:16px;
     display:flex;align-items:center;justify-content:center;
@@ -124,19 +131,6 @@
     margin-bottom:10px;
   }
   .choice p{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:20px;flex:1;}
-
-  .countdown-badge{
-    display:inline-flex;align-items:center;gap:6px;
-    padding:8px 14px;
-    border-radius:999px;
-    font-size:12px;font-weight:700;
-    letter-spacing:0.3px;
-    color:#fff;
-    background:linear-gradient(90deg, rgba(255,43,179,0.25), rgba(59,107,255,0.25));
-    border:1px solid rgba(255,43,179,0.35);
-    margin-bottom:20px;
-    white-space:nowrap;
-  }
 
   .choice-stats{
     display:flex;gap:10px;
@@ -171,6 +165,8 @@
     color:#050508;box-shadow:0 0 20px rgba(47,208,255,0.3);
   }
   .btn:hover{transform:translateY(-2px);}
+  .choice.trading .btn{cursor:default;}
+  .choice.trading .btn:hover{transform:none;}
 
   footer{
     margin-top:56px;color:var(--muted);font-size:12px;
@@ -199,17 +195,16 @@
 
 <div class="choices">
 
-  <a href="/trading" class="choice trading">
+  <div class="choice trading disabled">
     <div class="choice-icon">📈</div>
     <h2>TIMELESS TRADING</h2>
     <p>Live signals, daily market breakdowns, and a trading community built on mindset, discipline, and execution.</p>
-    <div class="countdown-badge" id="trading-countdown">🚀 Launching in —</div>
     <div class="choice-stats">
       <div class="choice-stat"><div class="num">5.0★</div><div class="label">Whop Rating</div></div>
       <div class="choice-stat"><div class="num">24/7</div><div class="label">Expert Support</div></div>
     </div>
-    <span class="btn">Enter Timeless Trading</span>
-  </a>
+    <span class="btn" id="trading-countdown">🚀 Launching in —</span>
+  </div>
 
   <a href="/network" class="choice network">
     <div class="choice-icon">🌐</div>
