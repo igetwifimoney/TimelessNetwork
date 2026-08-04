@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timeless — Choose Your Experience</title>
+<style>
+  :root{
+    --bg:#050508;
+    --card:#0e0e17;
+    --border:rgba(255,255,255,0.08);
+    --magenta:#ff2bb3;
+    --cyan:#2fd0ff;
+    --blue:#3b6bff;
+    --text:#f3f3f7;
+    --muted:#9a9aab;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Segoe UI', Arial, sans-serif;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:40px 20px;
+    position:relative;
+    overflow-x:hidden;
+  }
+  a{text-decoration:none;color:inherit;}
+
+  .stars{
+    position:fixed;inset:0;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+      radial-gradient(1px 1px at 70% 60%, #fff, transparent),
+      radial-gradient(1px 1px at 40% 80%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 85% 15%, #fff, transparent),
+      radial-gradient(1px 1px at 55% 45%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 10% 70%, #fff, transparent),
+      radial-gradient(1px 1px at 95% 85%, #fff, transparent);
+    opacity:0.35;
+    z-index:0;
+    pointer-events:none;
+  }
+
+  .glow{
+    position:fixed;top:-10%;left:50%;transform:translateX(-50%);
+    width:1000px;height:600px;
+    background:radial-gradient(ellipse at 30% 30%, rgba(192,38,211,0.22), transparent 60%),
+               radial-gradient(ellipse at 70% 40%, rgba(47,208,255,0.18), transparent 60%);
+    z-index:0;pointer-events:none;
+  }
+
+  header{
+    text-align:center;
+    margin-bottom:56px;
+    position:relative;z-index:1;
+  }
+  .brand{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    margin-bottom:22px;
+  }
+  .diamond{
+    width:26px;height:26px;
+    background:linear-gradient(135deg, var(--cyan), var(--magenta));
+    transform:rotate(45deg);
+    border-radius:4px;
+  }
+  .brand span{
+    font-family:'Arial Black', Arial, sans-serif;
+    font-weight:900;font-style:italic;letter-spacing:2px;
+    font-size:22px;
+    background:linear-gradient(90deg,#fff,#d9d9e6);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  header h1{
+    font-size:38px;
+    line-height:1.2;
+    margin-bottom:14px;
+  }
+  header h1 .grad{
+    background:linear-gradient(90deg, var(--magenta), var(--cyan));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  header p{color:var(--muted);font-size:16px;max-width:480px;margin:0 auto;}
+
+  .choices{
+    display:grid;grid-template-columns:1fr 1fr;gap:28px;
+    max-width:920px;width:100%;
+    position:relative;z-index:1;
+  }
+  .choice{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:44px 32px;
+    text-align:center;
+    display:flex;flex-direction:column;align-items:center;
+    transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    cursor:pointer;
+  }
+  .choice:hover{
+    transform:translateY(-6px);
+    border-color:rgba(255,255,255,0.2);
+  }
+  .choice.trading:hover{box-shadow:0 0 40px rgba(255,43,179,0.25);}
+  .choice.network:hover{box-shadow:0 0 40px rgba(47,208,255,0.25);}
+
+  .choice-icon{
+    width:64px;height:64px;border-radius:16px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:28px;margin-bottom:24px;
+  }
+  .choice.trading .choice-icon{background:linear-gradient(135deg, rgba(255,43,179,0.25), rgba(59,107,255,0.25));}
+  .choice.network .choice-icon{background:linear-gradient(135deg, rgba(47,208,255,0.25), rgba(59,107,255,0.25));}
+
+  .choice h2{
+    font-family:'Arial Black', Arial, sans-serif;
+    font-weight:900;font-style:italic;
+    font-size:22px;letter-spacing:1px;
+    margin-bottom:10px;
+  }
+  .choice p{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:20px;flex:1;}
+
+  .choice-stats{
+    display:flex;gap:10px;
+    width:100%;margin-bottom:24px;
+  }
+  .choice-stat{
+    flex:1;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:12px 8px;
+    background:rgba(255,255,255,0.03);
+  }
+  .choice-stat .num{font-size:17px;font-weight:800;margin-bottom:2px;}
+  .choice.trading .choice-stat .num{color:var(--magenta);}
+  .choice.network .choice-stat .num{color:var(--cyan);}
+  .choice-stat .label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
+
+  .btn{
+    display:inline-block;
+    padding:13px 30px;
+    border-radius:10px;
+    font-weight:700;font-size:14px;
+    width:100%;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .choice.trading .btn{
+    background:linear-gradient(90deg, var(--magenta), var(--blue));
+    color:#fff;box-shadow:0 0 20px rgba(255,43,179,0.3);
+  }
+  .choice.network .btn{
+    background:linear-gradient(90deg, var(--cyan), var(--blue));
+    color:#050508;box-shadow:0 0 20px rgba(47,208,255,0.3);
+  }
+  .btn:hover{transform:translateY(-2px);}
+
+  footer{
+    margin-top:56px;color:var(--muted);font-size:12px;
+    position:relative;z-index:1;text-align:center;
+  }
+
+  @media(max-width:700px){
+    .choices{grid-template-columns:1fr;}
+    header h1{font-size:28px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+<div class="glow"></div>
+
+<header>
+  <div class="brand">
+    <div class="diamond"></div>
+    <span>TIMELESS</span>
+  </div>
+  <h1>Two Worlds. <span class="grad">One Standard.</span></h1>
+  <p>Choose where you want to go — Timeless Trading for the markets, or Timeless Network for everything else.</p>
+</header>
+
+<div class="choices">
+
+  <a href="/trading" class="choice trading">
+    <div class="choice-icon">📈</div>
+    <h2>TIMELESS TRADING</h2>
+    <p>Live signals, daily market breakdowns, and a trading community built on mindset, discipline, and execution.</p>
+    <div class="choice-stats">
+      <div class="choice-stat"><div class="num">5.0★</div><div class="label">Whop Rating</div></div>
+      <div class="choice-stat"><div class="num">24/7</div><div class="label">Expert Support</div></div>
+    </div>
+    <span class="btn">Enter Timeless Trading</span>
+  </a>
+
+  <a href="/network" class="choice network">
+    <div class="choice-icon">🌐</div>
+    <h2>TIMELESS NETWORK</h2>
+    <p>TikTok Shop courses & mentorship — build an easy side income or go full-time, straight from the Timeless team.</p>
+    <div class="choice-stats">
+      <div class="choice-stat"><div class="num">$4.8M+</div><div class="label">Member Revenue</div></div>
+      <div class="choice-stat"><div class="num" id="network-member-count">1,300+</div><div class="label">Creators Inside</div></div>
+    </div>
+    <span class="btn">Enter Timeless Network</span>
+  </a>
+
+</div>
+
+<footer>© 2026 Timeless. All rights reserved.</footer>
+
+<script>
+  // Same daily-growth model used on jointimeless.network, so this card
+  // stays in sync with the real member count without hitting an API.
+  function seededRand(seed) {
+    const x = Math.imul(seed, 1664525) + 1013904223;
+    return (x >>> 0) % 1000;
+  }
+  function getDailyGrowth(day) {
+    const r = seededRand(day);
+    if (r < 500) return 2;
+    if (r < 800) return 3;
+    if (r < 900) return 5;
+    if (r < 970) return 7;
+    return 12;
+  }
+  function getMemberCount() {
+    const BASE = 1200;
+    const START = new Date('2026-07-04').getTime();
+    const days = Math.max(0, Math.floor((Date.now() - START) / 86400000));
+    let total = BASE;
+    for (let d = 0; d < days; d++) total += getDailyGrowth(d);
+    return total;
+  }
+  document.getElementById('network-member-count').textContent =
+    getMemberCount().toLocaleString() + '+';
+</script>
+
+</body>
+</html>
