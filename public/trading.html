@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timeless Trading</title>
+<style>
+  :root{
+    --bg:#050508;
+    --bg2:#0a0a12;
+    --card:#0e0e17;
+    --border:rgba(255,255,255,0.08);
+    --magenta:#ff2bb3;
+    --magenta2:#c026d3;
+    --cyan:#2fd0ff;
+    --blue:#3b6bff;
+    --text:#f3f3f7;
+    --muted:#9a9aab;
+    --green:#22e08b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Segoe UI', Arial, sans-serif;
+    overflow-x:hidden;
+  }
+  .wordmark{
+    font-family:'Arial Black', Arial, sans-serif;
+    font-weight:900;
+    font-style:italic;
+    letter-spacing:1px;
+  }
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  img{max-width:100%;display:block;}
+
+  /* starfield background */
+  .stars{
+    position:fixed;inset:0;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+      radial-gradient(1px 1px at 70% 60%, #fff, transparent),
+      radial-gradient(1px 1px at 40% 80%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 85% 15%, #fff, transparent),
+      radial-gradient(1px 1px at 55% 45%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 10% 70%, #fff, transparent),
+      radial-gradient(1px 1px at 95% 85%, #fff, transparent),
+      radial-gradient(1px 1px at 30% 10%, #fff, transparent);
+    background-size: 100% 100%;
+    opacity:0.35;
+    z-index:0;
+    pointer-events:none;
+  }
+
+  /* candlestick decoration */
+  .candles{
+    position:absolute;
+    display:flex;
+    align-items:flex-end;
+    gap:6px;
+    opacity:0.5;
+    filter:blur(0.2px);
+    pointer-events:none;
+  }
+  .candle{width:5px;border-radius:2px;}
+  .candle.up{background:linear-gradient(180deg, var(--cyan), var(--blue));}
+  .candle.down{background:linear-gradient(180deg, var(--magenta), var(--magenta2));}
+
+  /* header */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(5,5,8,0.75);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+  }
+  nav{
+    max-width:1200px;margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;
+  }
+  .logo{
+    display:flex;align-items:center;gap:10px;
+    font-size:20px;
+  }
+  .logo .diamond{
+    width:22px;height:22px;
+    background:linear-gradient(135deg, var(--cyan), var(--magenta));
+    transform:rotate(45deg);
+    border-radius:3px;
+  }
+  .logo span{
+    background:linear-gradient(90deg,#fff,#d9d9e6);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .nav-links{display:flex;gap:32px;font-size:14px;color:var(--muted);}
+  .nav-links a:hover{color:#fff;}
+  .btn{
+    display:inline-block;
+    padding:11px 22px;
+    border-radius:8px;
+    font-weight:700;
+    font-size:14px;
+    cursor:pointer;
+    border:none;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary{
+    background:linear-gradient(90deg, var(--magenta), var(--blue));
+    color:#fff;
+    box-shadow:0 0 25px rgba(255,43,179,0.35);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 35px rgba(255,43,179,0.55);}
+  .btn-ghost{
+    background:transparent;
+    color:#fff;
+    border:1px solid var(--border);
+  }
+  .btn-ghost:hover{border-color:rgba(255,255,255,0.3);}
+
+  /* hero */
+  .hero{
+    position:relative;
+    max-width:1200px;margin:0 auto;
+    padding:110px 24px 90px;
+    text-align:center;
+    z-index:1;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    top:-100px;left:50%;transform:translateX(-50%);
+    width:900px;height:500px;
+    background:radial-gradient(ellipse at center, rgba(192,38,211,0.25), transparent 60%),
+               radial-gradient(ellipse at 70% 30%, rgba(47,208,255,0.2), transparent 60%);
+    z-index:-1;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:7px 16px;
+    border:1px solid var(--border);
+    border-radius:999px;
+    font-size:13px;
+    color:var(--cyan);
+    background:rgba(47,208,255,0.06);
+    margin-bottom:28px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);}
+  .hero h1{
+    font-size:64px;
+    line-height:1.05;
+    margin-bottom:22px;
+  }
+  .hero h1 .grad{
+    background:linear-gradient(90deg, var(--magenta), var(--cyan));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{
+    max-width:600px;margin:0 auto 36px;
+    color:var(--muted);
+    font-size:18px;
+    line-height:1.6;
+  }
+  .hero .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+  .btn-lg{padding:16px 32px;font-size:16px;border-radius:10px;}
+
+  /* stats */
+  .stats{
+    max-width:1000px;margin:70px auto 0;
+    display:grid;grid-template-columns:repeat(4,1fr);
+    gap:24px;
+    padding:0 24px;
+    position:relative;z-index:1;
+  }
+  .stat{
+    text-align:center;
+    padding:24px 12px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
+  }
+  .stat .num{
+    font-size:32px;font-weight:800;
+    background:linear-gradient(90deg,var(--cyan),var(--blue));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    margin-bottom:6px;
+  }
+  .stat .label{font-size:13px;color:var(--muted);}
+
+  section{position:relative;z-index:1;}
+  .section-wrap{max-width:1200px;margin:0 auto;padding:120px 24px;}
+  .section-head{text-align:center;max-width:600px;margin:0 auto 60px;}
+  .section-head .tag{color:var(--magenta);font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;}
+  .section-head h2{font-size:38px;margin:14px 0 14px;}
+  .section-head p{color:var(--muted);font-size:16px;line-height:1.6;}
+
+  /* features */
+  .features-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+  }
+  .feature-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:28px;
+    transition:transform .2s ease, border-color .2s ease;
+  }
+  .feature-card:hover{transform:translateY(-4px);border-color:rgba(255,43,179,0.4);}
+  .feature-icon{
+    width:44px;height:44px;border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;margin-bottom:18px;
+    background:linear-gradient(135deg, rgba(255,43,179,0.18), rgba(47,208,255,0.18));
+    border:1px solid var(--border);
+  }
+  .feature-card h3{font-size:17px;margin-bottom:8px;}
+  .feature-card p{color:var(--muted);font-size:14px;line-height:1.6;}
+
+  /* pricing */
+  .pricing-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+    align-items:stretch;
+  }
+  .rating-badge{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    margin:-30px auto 50px;
+    font-size:14px;color:var(--muted);
+  }
+  .rating-badge .stars-row{color:var(--cyan);letter-spacing:2px;}
+  .rating-badge strong{color:#fff;}
+  .plan .payment-note{
+    font-size:12px;color:var(--cyan);margin-bottom:26px;
+  }
+  .plan{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:36px 28px;
+    display:flex;flex-direction:column;
+  }
+  .plan.featured{
+    border:1px solid transparent;
+    background:
+      linear-gradient(var(--card), var(--card)) padding-box,
+      linear-gradient(140deg, var(--magenta), var(--cyan)) border-box;
+    position:relative;
+    transform:scale(1.04);
+  }
+  .plan.featured .badge{
+    position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+    background:linear-gradient(90deg, var(--magenta), var(--blue));
+    padding:6px 16px;border-radius:999px;font-size:12px;font-weight:700;
+  }
+  .plan h3{font-size:15px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px;}
+  .plan .price{font-size:40px;font-weight:800;margin-bottom:4px;}
+  .plan .price span{font-size:14px;color:var(--muted);font-weight:400;}
+  .plan .sub{color:var(--muted);font-size:13px;margin-bottom:26px;}
+  .plan ul{margin-bottom:30px;flex:1;}
+  .plan li{
+    display:flex;align-items:flex-start;gap:10px;
+    font-size:14px;color:#d8d8e2;
+    margin-bottom:14px;
+  }
+  .plan li .check{color:var(--cyan);flex-shrink:0;}
+
+  /* mentorship */
+  .mentor-box{
+    display:grid;grid-template-columns:1.3fr 1fr;gap:40px;
+    align-items:center;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:56px;
+    position:relative;
+    overflow:hidden;
+  }
+  .mentor-box::before{
+    content:"";
+    position:absolute;top:-20%;right:-10%;
+    width:400px;height:400px;
+    background:radial-gradient(circle, rgba(255,43,179,0.18), transparent 65%);
+    z-index:0;
+  }
+  .mentor-copy, .mentor-card{position:relative;z-index:1;}
+  .mentor-copy h2{font-size:32px;margin:12px 0 16px;}
+  .mentor-copy p{color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:24px;}
+  .mentor-list li{
+    display:flex;align-items:flex-start;gap:10px;
+    font-size:14px;color:#d8d8e2;margin-bottom:12px;
+  }
+  .mentor-list .check{color:var(--cyan);flex-shrink:0;}
+  .mentor-card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.04), transparent);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:32px;
+    text-align:center;
+  }
+  .mentor-price{font-size:44px;font-weight:800;}
+  .mentor-price-sub{color:var(--muted);font-size:13px;margin-bottom:24px;}
+  .mentor-note{color:var(--muted);font-size:12px;}
+
+  @media(max-width:900px){
+    .mentor-box{grid-template-columns:1fr;padding:32px;}
+  }
+
+  /* community / discord CTA */
+  .community{
+    max-width:1100px;margin:0 auto;padding:0 24px 120px;
+  }
+  .community-box{
+    border-radius:24px;
+    padding:70px 40px;
+    text-align:center;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(192,38,211,0.35), transparent 55%),
+      radial-gradient(ellipse at 80% 80%, rgba(47,208,255,0.3), transparent 55%),
+      #0a0a13;
+    border:1px solid var(--border);
+    position:relative;
+    overflow:hidden;
+  }
+  .community-box h2{font-size:36px;margin-bottom:16px;}
+  .community-box p{color:var(--muted);max-width:520px;margin:0 auto 32px;font-size:16px;line-height:1.6;}
+
+  /* testimonials */
+  .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .testimonial{
+    background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px;
+  }
+  .testimonial .stars-row{color:var(--cyan);font-size:14px;margin-bottom:14px;letter-spacing:2px;}
+  .testimonial p{font-size:14px;color:#d8d8e2;line-height:1.6;margin-bottom:18px;}
+  .testimonial .who{display:flex;align-items:center;gap:10px;}
+  .avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--magenta),var(--blue));}
+  .who .name{font-size:13px;font-weight:700;}
+  .who .role{font-size:12px;color:var(--muted);}
+
+  footer{
+    border-top:1px solid var(--border);
+    padding:50px 24px 30px;
+  }
+  .footer-wrap{
+    max-width:1200px;margin:0 auto;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:40px;
+    margin-bottom:40px;
+  }
+  .footer-col h4{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;}
+  .footer-col li{margin-bottom:10px;font-size:14px;color:#c9c9d6;}
+  .footer-col li:hover{color:#fff;}
+  .footer-bottom{
+    max-width:1200px;margin:0 auto;
+    padding-top:24px;border-top:1px solid var(--border);
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:13px;color:var(--muted);flex-wrap:wrap;gap:12px;
+  }
+
+  @media(max-width:900px){
+    .nav-links{display:none;}
+    .hero h1{font-size:40px;}
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .features-grid, .pricing-grid, .testimonials-grid{grid-template-columns:1fr;}
+    .plan.featured{transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+
+<header>
+  <nav>
+    <div class="logo">
+      <div class="diamond"></div>
+      <span class="wordmark">TIMELESS TRADING</span>
+    </div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Membership</a>
+      <a href="#mentorship">Mentorship</a>
+      <a href="#community">Community</a>
+      <a href="#testimonials">Results</a>
+    </div>
+    <a href="https://discord.gg/mQPVspGbaG" target="_blank" rel="noopener" class="btn btn-primary">Join Discord</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="eyebrow"><span class="dot"></span> 5.0★ rated on Whop</div>
+    <h1>Take Control of Your <span class="grad">Financial Future.</span></h1>
+    <p>Elevate your mindset, discipline, and execution. Timeless Trading gives you live signals, daily breakdowns, and a community built to make your growth inevitable.</p>
+    <div class="cta-row">
+      <a href="#pricing" class="btn btn-primary btn-lg">Get V.I.P Access</a>
+      <a href="https://discord.gg/mQPVspGbaG" target="_blank" rel="noopener" class="btn btn-ghost btn-lg">Join the Discord</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="num">5.0★</div><div class="label">Whop Rating (6 reviews)</div></div>
+      <div class="stat"><div class="num">Mon–Thu</div><div class="label">Live Trading Calls</div></div>
+      <div class="stat"><div class="num">24/7</div><div class="label">Expert Support</div></div>
+      <div class="stat"><div class="num">100%</div><div class="label">5-Star Reviews</div></div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="section-wrap">
+      <div class="section-head">
+        <div class="tag">What You Get</div>
+        <h2>Everything to Boost Your Trading Journey</h2>
+        <p>Exclusive insights, premium tools, and next-level resources — all in one place.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>Live Trade Signals</h3>
+          <p>Real-time entries, exits, and risk levels sent straight to your VIP channel.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>Daily Market Breakdowns</h3>
+          <p>Clear, no-fluff analysis on where the market's headed and why it matters.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎓</div>
+          <h3>Trading Education</h3>
+          <p>Courses and VOD lessons built around mindset, discipline, and execution.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🛠️</div>
+          <h3>Exclusive Tools</h3>
+          <p>Trackers, calculators, and dashboards built for the Timeless community.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h3>24/7 Community</h3>
+          <p>An active Discord full of traders, mentors, and a real support desk.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎁</div>
+          <h3>Giveaways & Rewards</h3>
+          <p>Regular giveaways for Elite Access, merch, and community perks.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="section-wrap">
+      <div class="section-head">
+        <div class="tag">Membership</div>
+        <h2>Choose Your Access Level</h2>
+        <p>Start free, get your foot in the door with Starter, or go all-in with V.I.P for the insider wallet, live sessions, and 24/7 expert support.</p>
+      </div>
+      <div class="rating-badge"><span class="stars-row">★★★★★</span> <strong>5.0</strong> · based on 6 reviews on Whop</div>
+      <div class="pricing-grid">
+
+        <div class="plan">
+          <h3>Free Access</h3>
+          <div class="price">$0</div>
+          <div class="sub">"Exclusive Community" · 42 members</div>
+          <ul>
+            <li><span class="check">✓</span> Access to the public community</li>
+            <li><span class="check">✓</span> Market news & giveaways</li>
+            <li><span class="check">✓</span> Community chat & support tickets</li>
+            <li><span class="check">✓</span> A taste of the Timeless mindset</li>
+          </ul>
+          <a href="https://discord.gg/mQPVspGbaG" target="_blank" rel="noopener" class="btn btn-ghost">Join Free on Discord</a>
+        </div>
+
+        <div class="plan">
+          <h3>Starter Access</h3>
+          <div class="price">$67<span>/mo</span></div>
+          <div class="sub">Your foot in the door</div>
+          <ul>
+            <li><span class="check">✓</span> Everything in Free</li>
+            <li><span class="check">✓</span> Weekly signal recap & watchlist</li>
+            <li><span class="check">✓</span> Self-paced course library</li>
+            <li><span class="check">✓</span> Pinned trade ideas in chat</li>
+            <li><span class="check">✓</span> Priority chat support</li>
+          </ul>
+          <a href="#" class="btn btn-ghost">Get Starter</a>
+        </div>
+
+        <div class="plan featured">
+          <div class="badge">MOST POPULAR</div>
+          <h3>V.I.P Access</h3>
+          <div style="font-size:13px;color:var(--cyan);font-style:italic;margin-bottom:14px;">"The Key To Master All Types Of Trading"</div>
+          <div class="price">$270<span>/mo</span></div>
+          <div class="payment-note">Billed monthly · cancel anytime</div>
+          <div class="sub">9 members · elevate your trading game</div>
+          <ul>
+            <li><span class="check">✓</span> Everything in Starter</li>
+            <li><span class="check">✓</span> Insider wallet</li>
+            <li><span class="check">✓</span> Real-time live trade signals</li>
+            <li><span class="check">✓</span> Exclusive V.I.P live trading sessions</li>
+            <li><span class="check">✓</span> 24/7 expert support</li>
+            <li><span class="check">✓</span> Live trading calls Mon–Thu</li>
+          </ul>
+          <a href="#" class="btn btn-primary">Get V.I.P Access</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="mentorship">
+    <div class="section-wrap" style="padding-top:0;">
+      <div class="mentor-box">
+        <div class="mentor-copy">
+          <div class="tag">1-On-1 Mentorship</div>
+          <h2>Work Directly With the Founders</h2>
+          <p>A hands-on mentorship built around your goals — direct access to Tyler and Jason, personalized trade review, and a real plan to get you executing with discipline. This isn't a course you sit through, it's a partnership until you get it.</p>
+          <ul class="mentor-list">
+            <li><span class="check">✓</span> 1-on-1 sessions with the founders</li>
+            <li><span class="check">✓</span> Personalized trading plan & risk review</li>
+            <li><span class="check">✓</span> Direct feedback on your trades</li>
+            <li><span class="check">✓</span> Lifetime access to V.I.P community</li>
+          </ul>
+        </div>
+        <div class="mentor-card">
+          <div class="mentor-price">$1,080</div>
+          <div class="mentor-price-sub">one-time · full mentorship</div>
+          <a href="#" class="btn btn-primary btn-lg" style="width:100%;text-align:center;margin-bottom:12px;">Apply for Mentorship</a>
+          <div class="mentor-note">Checkout powered by Stripe · limited spots each month</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials">
+    <div class="section-wrap" style="padding-top:0;">
+      <div class="section-head">
+        <div class="tag">Results</div>
+        <h2>What the Community Says</h2>
+        <p>Real reviews from Timeless Trading members on Whop — 5.0 average across 6 ratings.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial">
+          <div class="stars-row">★★★★★</div>
+          <p>"Ty and EMNT are so helpful and knowledgeable — wins are consistent and you can make your money back within 2-4 weeks. Community is tight knit and real, truly underrated."</p>
+          <div class="who"><div class="avatar"></div><div><div class="name">Timothy A.</div><div class="role">@ayerstimr · V.I.P Member</div></div></div>
+        </div>
+        <div class="testimonial">
+          <div class="stars-row">★★★★★</div>
+          <p>"This group is legit and extremely helpful, made my money back within 3 weeks of joining. Real deal 🙌🙌"</p>
+          <div class="who"><div class="avatar"></div><div><div class="name">Jared A.</div><div class="role">@jayayersd · V.I.P Member</div></div></div>
+        </div>
+        <div class="testimonial">
+          <div class="stars-row">★★★★★</div>
+          <p>"Really successful group of traders. The coach, Everest, has live trading calls Monday–Thursday and the courses are amazing — very informative and well structured."</p>
+          <div class="who"><div class="avatar"></div><div><div class="name">Noah</div><div class="role">@noahtrades · V.I.P Member</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="community">
+    <div class="community">
+      <div class="community-box">
+        <h2>Ready to Level Up?</h2>
+        <p>Your future self will thank you. Join thousands of traders inside the Timeless Trading Discord today.</p>
+        <a href="https://discord.gg/mQPVspGbaG" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Join the Discord →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-wrap">
+    <div class="footer-col" style="max-width:280px;">
+      <div class="logo" style="margin-bottom:14px;">
+        <div class="diamond"></div>
+        <span class="wordmark" style="font-size:16px;">TIMELESS TRADING</span>
+      </div>
+      <p style="color:var(--muted);font-size:13px;line-height:1.6;">A trading community built on mindset, discipline, and execution.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Community</h4>
+      <ul>
+        <li><a href="https://discord.gg/mQPVspGbaG" target="_blank" rel="noopener">Discord</a></li>
+        <li>YouTube</li>
+        <li>Giveaways</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Membership</h4>
+      <ul>
+        <li>Free Access</li>
+        <li>Starter Access</li>
+        <li>V.I.P Access</li>
+        <li>1-on-1 Mentorship</li>
+        <li>Reviews on Whop</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li>Open a Ticket</li>
+        <li>FAQ</li>
+        <li>Contact Founders</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 Timeless Trading. All rights reserved.</div>
+    <div>Not financial advice. Trade at your own risk.</div>
+  </div>
+</footer>
+
+</body>
+</html>
