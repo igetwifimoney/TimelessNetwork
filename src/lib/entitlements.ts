@@ -12,6 +12,9 @@ export type Feature =
   | 'mentorship_dashboard' // private mentorship dashboard
   | 'booking_portal'       // 1:1 session booking
   | 'direct_messaging'     // DM with mentor
+  | 'trading_courses'      // Timeless Trading course library
+  | 'trading_signals'      // real-time live trade signals
+  | 'trading_live_calls'   // live trading calls, Mon–Thu
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Product catalog
@@ -60,6 +63,29 @@ export const PRODUCT_CATALOG: Record<string, ProductConfig> = {
       'booking_portal',
       'direct_messaging',
     ],
+  },
+  TRADING_STARTER: {
+    name:         'Timeless Trading — Starter',
+    description:  'Weekly signal recap, self-paced course library, pinned trade ideas, priority chat support.',
+    priceEnvKey:  'STRIPE_PRICE_TRADING_STARTER',
+    mode:         'subscription',
+    interval:     'month',
+    entitlements: ['trading_courses'],
+  },
+  TRADING_VIP: {
+    name:         'Timeless Trading — V.I.P',
+    description:  'Insider wallet, real-time live trade signals, exclusive V.I.P live trading sessions, 24/7 expert support, live trading calls Mon–Thu.',
+    priceEnvKey:  'STRIPE_PRICE_TRADING_VIP',
+    mode:         'subscription',
+    interval:     'month',
+    entitlements: ['trading_courses', 'trading_signals', 'trading_live_calls'],
+  },
+  TRADING_MENTORSHIP: {
+    name:         'Timeless Trading — 1-on-1 Mentorship',
+    description:  'One-on-one mentorship with Tyler & Jason — personalized trading plan, direct trade feedback, lifetime V.I.P community access.',
+    priceEnvKey:  'STRIPE_PRICE_TRADING_MENTORSHIP',
+    mode:         'payment',
+    entitlements: ['trading_courses', 'trading_signals', 'trading_live_calls'],
   },
 } as const
 
