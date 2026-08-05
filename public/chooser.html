@@ -168,6 +168,17 @@
   .choice.trading .btn{cursor:default;}
   .choice.trading .btn:hover{transform:none;}
 
+  .choice.network{cursor:pointer;}
+
+  .discord-link{
+    display:inline-flex;align-items:center;justify-content:center;gap:6px;
+    margin-top:12px;
+    font-size:12px;font-weight:600;
+    color:var(--muted);
+    transition:color .15s ease;
+  }
+  .discord-link:hover{color:#fff;}
+
   footer{
     margin-top:56px;color:var(--muted);font-size:12px;
     position:relative;z-index:1;text-align:center;
@@ -204,9 +215,10 @@
       <div class="choice-stat"><div class="num">24/7</div><div class="label">Expert Support</div></div>
     </div>
     <span class="btn" id="trading-countdown">🚀 Launching in —</span>
+    <a href="https://discord.gg/mQPVspGbaG" target="_blank" rel="noopener" class="discord-link">💬 Join the Discord</a>
   </div>
 
-  <a href="/network" class="choice network">
+  <div class="choice network" onclick="location.href='/network'">
     <div class="choice-icon">🌐</div>
     <h2>TIMELESS NETWORK</h2>
     <p>TikTok Shop courses & mentorship — build an easy side income or go full-time, straight from the Timeless team.</p>
@@ -214,8 +226,9 @@
       <div class="choice-stat"><div class="num">$4.8M+</div><div class="label">Member Revenue</div></div>
       <div class="choice-stat"><div class="num" id="network-member-count">1,300+</div><div class="label">Creators Inside</div></div>
     </div>
-    <span class="btn">Enter Timeless Network</span>
-  </a>
+    <a href="/network" class="btn" onclick="event.stopPropagation()">Enter Timeless Network</a>
+    <a href="https://discord.gg/TcuZ5u6TMw" target="_blank" rel="noopener" class="discord-link" onclick="event.stopPropagation()">💬 Join the Discord</a>
+  </div>
 
 </div>
 
