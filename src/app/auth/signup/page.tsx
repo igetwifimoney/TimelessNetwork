@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Eye, EyeOff, Check, Loader2, ArrowRight, Star, Mail } from 'lucide-react'
+import { Eye, EyeOff, Loader2, ArrowRight, Star, Mail } from 'lucide-react'
 import { createClient, isSupabaseConfigured } from '@/lib/supabase'
 
 const PERKS = [
@@ -19,6 +19,13 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const [nextPath, setNextPath] = useState('/dashboard')
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const next = params.get('next')
+    if (next && next.startsWith('/')) setNextPath(next)
+  }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
@@ -30,7 +37,7 @@ export default function SignupPage() {
     const supabase = createClient()
     await supabase.auth.signInWithOAuth({
       provider,
-      options: { redirectTo: `${window.location.origin}/dashboard` },
+      options: { redirectTo: `${window.location.origin}${nextPath}` },
     })
   }
 
@@ -49,7 +56,7 @@ export default function SignupPage() {
         password: form.password,
         options: {
           data: { full_name: form.name },
-          emailRedirectTo: `${window.location.origin}/dashboard`,
+          emailRedirectTo: `${window.location.origin}${nextPath}`,
         },
       })
       if (signupError) {
@@ -299,7 +306,7 @@ export default function SignupPage() {
 
           <p className="text-center text-sm text-gray-600 mt-5">
             Already have an account?{' '}
-            <Link href="/auth/login" className="text-[#a855f7] hover:text-[#c084fc] font-semibold transition-colors">
+            <Link href={`/auth/login${nextPath !== '/dashboard' ? `?next=${encodeURIComponent(nextPath)}` : ''}`} className="text-[#a855f7] hover:text-[#c084fc] font-semibold transition-colors">
               Sign in
             </Link>
           </p>
