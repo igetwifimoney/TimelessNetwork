@@ -483,7 +483,7 @@
             <li><span class="check">✓</span> Pinned trade ideas in chat</li>
             <li><span class="check">✓</span> Priority chat support</li>
           </ul>
-          <a href="#" class="btn btn-ghost">Get Starter</a>
+          <a href="#" class="btn btn-ghost" data-checkout="TRADING_STARTER" data-next="/trading#pricing">Get Starter</a>
         </div>
 
         <div class="plan featured">
@@ -501,7 +501,7 @@
             <li><span class="check">✓</span> 24/7 expert support</li>
             <li><span class="check">✓</span> Live trading calls Mon–Thu</li>
           </ul>
-          <a href="#" class="btn btn-primary">Get V.I.P Access</a>
+          <a href="#" class="btn btn-primary" data-checkout="TRADING_VIP" data-next="/trading#pricing">Get V.I.P Access</a>
         </div>
 
       </div>
@@ -525,7 +525,7 @@
         <div class="mentor-card">
           <div class="mentor-price">$1,080</div>
           <div class="mentor-price-sub">one-time · full mentorship</div>
-          <a href="#" class="btn btn-primary btn-lg" style="width:100%;text-align:center;margin-bottom:12px;">Apply for Mentorship</a>
+          <a href="#" class="btn btn-primary btn-lg" style="width:100%;text-align:center;margin-bottom:12px;" data-checkout="TRADING_MENTORSHIP" data-next="/trading#mentorship">Apply for Mentorship</a>
           <div class="mentor-note">Checkout powered by Stripe · limited spots each month</div>
         </div>
       </div>
@@ -612,6 +612,47 @@
     <div>Not financial advice. Trade at your own risk.</div>
   </div>
 </footer>
+
+<script>
+  // Wires membership/mentorship buttons to the real Stripe checkout flow.
+  // Signed-out visitors get sent to sign in first, then bounced back here.
+  document.querySelectorAll('[data-checkout]').forEach(function (el) {
+    el.addEventListener('click', async function (e) {
+      e.preventDefault();
+      var productKey = el.getAttribute('data-checkout');
+      var nextPath = el.getAttribute('data-next') || '/trading';
+      var originalText = el.textContent;
+      el.textContent = 'Loading…';
+      el.style.pointerEvents = 'none';
+
+      try {
+        var res = await fetch('/api/stripe/checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ productKey: productKey }),
+        });
+
+        if (res.status === 401) {
+          window.location.href = '/auth/login?next=' + encodeURIComponent(nextPath);
+          return;
+        }
+
+        var data = await res.json();
+        if (data.url) {
+          window.location.href = data.url;
+          return;
+        }
+
+        alert(data.error || 'Something went wrong starting checkout. Please try again.');
+      } catch (err) {
+        alert('Something went wrong starting checkout. Please try again.');
+      } finally {
+        el.textContent = originalText;
+        el.style.pointerEvents = '';
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
