@@ -1,7 +1,9 @@
 'use client'
 
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Sidebar from '@/components/Sidebar'
-import { Heart, Calendar, TrendingUp, ChevronRight, Quote } from 'lucide-react'
+import { Heart, Calendar, TrendingUp, ChevronRight, Quote, CreditCard, Loader2 } from 'lucide-react'
 
 // ── Ty — the ONLY bookable mentor ─────────────────────
 const TY = {
@@ -63,6 +65,36 @@ const HOW_IT_WORKS = [
 ]
 
 export default function MentorshipPage() {
+  const router = useRouter()
+  const [checkoutLoading, setCheckoutLoading] = useState(false)
+  const [checkoutError, setCheckoutError] = useState('')
+
+  const purchaseMentorship = async () => {
+    setCheckoutLoading(true)
+    setCheckoutError('')
+    try {
+      const res = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productKey: 'MENTORSHIP' }),
+      })
+      if (res.status === 401) {
+        router.push('/auth/login?next=/mentorship')
+        return
+      }
+      const data = await res.json()
+      if (data.url) {
+        window.location.href = data.url
+        return
+      }
+      setCheckoutError(data.error || 'Could not start checkout. Please try again.')
+    } catch {
+      setCheckoutError('Could not start checkout. Please try again.')
+    } finally {
+      setCheckoutLoading(false)
+    }
+  }
+
   return (
     <div className="flex min-h-screen bg-black">
       <Sidebar />
@@ -180,6 +212,30 @@ export default function MentorshipPage() {
                       <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
                     </a>
                   </div>
+
+                  {/* Purchase mentorship directly — skips the call, straight to checkout */}
+                  <div
+                    className="flex items-center justify-between pt-4 mt-4 flex-wrap gap-3"
+                    style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}
+                  >
+                    <span className="text-xs text-gray-600">Ready to commit? Skip the call and lock in your spot.</span>
+                    <button
+                      onClick={purchaseMentorship}
+                      disabled={checkoutLoading}
+                      className="flex items-center gap-2 text-sm font-bold px-5 py-2.5 rounded-xl transition-all"
+                      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }}
+                      aria-label="Purchase TikTok Shop Mentorship"
+                    >
+                      {checkoutLoading
+                        ? <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
+                        : <CreditCard className="w-4 h-4" aria-hidden="true" />
+                      }
+                      Purchase Mentorship — $540
+                    </button>
+                  </div>
+                  {checkoutError && (
+                    <p className="text-xs text-red-400 mt-2" role="alert">{checkoutError}</p>
+                  )}
                 </div>
               </div>
             </article>
