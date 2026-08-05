@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Eye, EyeOff, Loader2, ArrowRight } from 'lucide-react'
@@ -13,6 +13,13 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [nextPath, setNextPath] = useState('/dashboard')
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const next = params.get('next')
+    if (next && next.startsWith('/')) setNextPath(next)
+  }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
@@ -37,7 +44,7 @@ export default function LoginPage() {
       setLoading(false)
       return
     }
-    router.push('/dashboard')
+    router.push(nextPath)
     router.refresh()
   }
 
@@ -46,7 +53,7 @@ export default function LoginPage() {
     const supabase = createClient()
     await supabase.auth.signInWithOAuth({
       provider,
-      options: { redirectTo: `${window.location.origin}/dashboard` },
+      options: { redirectTo: `${window.location.origin}${nextPath}` },
     })
   }
 
@@ -217,7 +224,7 @@ export default function LoginPage() {
 
           <p className="text-center text-sm text-gray-600 mt-6">
             Don&apos;t have an account?{' '}
-            <Link href="/auth/signup" className="text-[#a855f7] hover:text-[#c084fc] font-semibold transition-colors">
+            <Link href={`/auth/signup${nextPath !== '/dashboard' ? `?next=${encodeURIComponent(nextPath)}` : ''}`} className="text-[#a855f7] hover:text-[#c084fc] font-semibold transition-colors">
               Join Timeless
             </Link>
           </p>
