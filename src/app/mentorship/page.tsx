@@ -230,7 +230,7 @@ export default function MentorshipPage() {
                         ? <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
                         : <CreditCard className="w-4 h-4" aria-hidden="true" />
                       }
-                      Purchase Mentorship — $540
+                      Purchase Mentorship — $1,080
                     </button>
                   </div>
                   {checkoutError && (
