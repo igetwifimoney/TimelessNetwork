@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Sidebar from '@/components/Sidebar'
-import { Heart, Calendar, TrendingUp, ChevronRight, Quote, CreditCard, Loader2 } from 'lucide-react'
+import { Heart, TrendingUp, ChevronRight, Quote, CreditCard, Loader2, ClipboardList, X } from 'lucide-react'
 
 // ── Ty — the ONLY bookable mentor ─────────────────────
 const TY = {
@@ -13,7 +13,6 @@ const TY = {
   revenue: '$XX,000/mo',
   tags: ['TikTok Shop', 'Content Strategy', 'Organic Growth', 'Creator Revenue Program'],
   bio: "I've been building on TikTok Shop for years — and built Timeless from the ground up after finding a system that actually works. I've coached over 247 creators 1-on-1 and watched them go from confused beginners to consistent earners. In our session, we'll look at your specific account, content, and goals and you'll leave with a clear action plan that actually fits your situation.",
-  calLink: 'https://calendly.com', // Replace with real Calendly link
   students: 247,
 }
 
@@ -59,15 +58,64 @@ const MENTEES = [
 ]
 
 const HOW_IT_WORKS = [
-  { step: '01', title: 'Book your session', desc: 'Pick a time that works on Ty\'s Calendly — sessions are 45 minutes' },
-  { step: '02', title: 'Deep-dive call', desc: 'Your account, your content, your goals — no generic advice' },
-  { step: '03', title: 'Get your action plan', desc: 'Leave with a specific roadmap you can implement immediately' },
+  { step: '01', title: 'Apply', desc: 'Tell us about your TikTok Shop journey — takes about 2 minutes' },
+  { step: '02', title: 'Get reviewed', desc: 'Every application is reviewed personally — no automatic approval' },
+  { step: '03', title: 'Start mentorship', desc: 'Approved applicants get a personalized plan and direct access to Ty' },
 ]
+
+const EMPTY_APPLY_FORM = {
+  name: '',
+  email: '',
+  experience: '',
+  revenue: '',
+  challenge: '',
+  goals: '',
+  why_mentor: '',
+}
 
 export default function MentorshipPage() {
   const router = useRouter()
   const [checkoutLoading, setCheckoutLoading] = useState(false)
   const [checkoutError, setCheckoutError] = useState('')
+
+  const [showApplyModal, setShowApplyModal] = useState(false)
+  const [applyLoading, setApplyLoading] = useState(false)
+  const [applyError, setApplyError] = useState('')
+  const [applySuccess, setApplySuccess] = useState(false)
+  const [applyForm, setApplyForm] = useState(EMPTY_APPLY_FORM)
+
+  const updateApplyField = (field: keyof typeof EMPTY_APPLY_FORM, value: string) =>
+    setApplyForm(prev => ({ ...prev, [field]: value }))
+
+  const closeApplyModal = () => {
+    setShowApplyModal(false)
+    setApplySuccess(false)
+    setApplyError('')
+    setApplyForm(EMPTY_APPLY_FORM)
+  }
+
+  const submitApplication = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setApplyLoading(true)
+    setApplyError('')
+    try {
+      const res = await fetch('/api/mentorship-apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...applyForm, source: 'network' }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        setApplyError(data.error || 'Could not submit application. Please try again.')
+        return
+      }
+      setApplySuccess(true)
+    } catch {
+      setApplyError('Could not submit application. Please try again.')
+    } finally {
+      setApplyLoading(false)
+    }
+  }
 
   const purchaseMentorship = async () => {
     setCheckoutLoading(true)
@@ -105,7 +153,7 @@ export default function MentorshipPage() {
           {/* Header */}
           <header className="mb-8">
             <h1 className="text-3xl font-black mb-1">Mentorship</h1>
-            <p className="text-gray-500 text-sm">Book a 1-on-1 session with Ty and get a personalized action plan for your TikTok Shop journey.</p>
+            <p className="text-gray-500 text-sm">Apply for 1-on-1 mentorship with Ty and get a personalized action plan for your TikTok Shop journey.</p>
           </header>
 
           {/* How it works */}
@@ -121,14 +169,14 @@ export default function MentorshipPage() {
             ))}
           </ol>
 
-          {/* ── TY'S CARD — Bookable ── */}
+          {/* ── TY'S CARD ── */}
           <section aria-labelledby="ty-heading" className="mb-12">
-            <h2 id="ty-heading" className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Book a Session</h2>
+            <h2 id="ty-heading" className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Apply for Mentorship</h2>
 
             <article
               className="card-premium p-6 group"
               style={{ border: '1px solid rgba(168,85,247,0.2)', background: 'linear-gradient(145deg, #0a0a0a, #0d1117)' }}
-              aria-label="Book a 1-on-1 session with Ty"
+              aria-label="Apply for 1-on-1 mentorship with Ty"
             >
               <div className="flex items-start gap-5">
                 {/* Avatar */}
@@ -200,25 +248,23 @@ export default function MentorshipPage() {
                       </span>
                     </div>
 
-                    <a
-                      href={TY.calLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
+                      onClick={() => setShowApplyModal(true)}
                       className="btn-premium flex items-center gap-2 text-sm font-bold px-5 py-2.5 rounded-xl transition-all"
-                      aria-label="Book a 1-on-1 session with Ty"
+                      aria-label="Apply for 1-on-1 mentorship with Ty"
                     >
-                      <Calendar className="w-4 h-4" aria-hidden="true" />
-                      Book Session
+                      <ClipboardList className="w-4 h-4" aria-hidden="true" />
+                      Apply for Mentorship
                       <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
-                    </a>
+                    </button>
                   </div>
 
-                  {/* Purchase mentorship directly — skips the call, straight to checkout */}
+                  {/* Purchase mentorship directly — skips the application, straight to checkout */}
                   <div
                     className="flex items-center justify-between pt-4 mt-4 flex-wrap gap-3"
                     style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}
                   >
-                    <span className="text-xs text-gray-600">Ready to commit? Skip the call and lock in your spot.</span>
+                    <span className="text-xs text-gray-600">Already sure this is for you? Skip the wait and purchase directly.</span>
                     <button
                       onClick={purchaseMentorship}
                       disabled={checkoutLoading}
@@ -331,19 +377,142 @@ export default function MentorshipPage() {
             <p className="text-sm text-gray-600 mb-4">
               Ready to accelerate your results?
             </p>
-            <a
-              href={TY.calLink}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => setShowApplyModal(true)}
               className="btn-premium inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-bold text-sm"
             >
-              <Calendar className="w-4 h-4" />
-              Book Your Session with Ty
+              <ClipboardList className="w-4 h-4" />
+              Apply for Mentorship
               <ChevronRight className="w-4 h-4" />
-            </a>
+            </button>
           </div>
         </div>
       </main>
+
+      {/* ── APPLICATION MODAL ── */}
+      {showApplyModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          style={{ background: 'rgba(0,0,0,0.75)' }}
+          onClick={closeApplyModal}
+        >
+          <div
+            className="w-full max-w-md rounded-2xl p-6 relative max-h-[90vh] overflow-y-auto"
+            style={{ background: 'linear-gradient(145deg, #0a0a0a, #0d1117)', border: '1px solid rgba(168,85,247,0.2)' }}
+            onClick={e => e.stopPropagation()}
+          >
+            <button
+              onClick={closeApplyModal}
+              className="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors"
+              aria-label="Close"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {!applySuccess ? (
+              <>
+                <h3 className="text-xl font-black mb-1">Apply for Mentorship</h3>
+                <p className="text-sm text-gray-500 mb-5">
+                  Tell us a bit about yourself — every application is reviewed personally. If it&apos;s a fit, we&apos;ll follow up by email with next steps.
+                </p>
+                <form onSubmit={submitApplication} className="space-y-3">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-400 mb-1">Full Name</label>
+                    <input
+                      type="text"
+                      required
+                      value={applyForm.name}
+                      onChange={e => updateApplyField('name', e.target.value)}
+                      className="w-full rounded-lg px-3 py-2 text-sm bg-black/40 border border-white/10 focus:outline-none focus:border-[#a855f7]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-400 mb-1">Email</label>
+                    <input
+                      type="email"
+                      required
+                      value={applyForm.email}
+                      onChange={e => updateApplyField('email', e.target.value)}
+                      className="w-full rounded-lg px-3 py-2 text-sm bg-black/40 border border-white/10 focus:outline-none focus:border-[#a855f7]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-400 mb-1">TikTok Shop Experience</label>
+                    <textarea
+                      rows={2}
+                      value={applyForm.experience}
+                      onChange={e => updateApplyField('experience', e.target.value)}
+                      placeholder="e.g. 6 months, posting daily"
+                      className="w-full rounded-lg px-3 py-2 text-sm bg-black/40 border border-white/10 focus:outline-none focus:border-[#a855f7] resize-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-400 mb-1">Current Revenue / Results So Far</label>
+                    <input
+                      type="text"
+                      value={applyForm.revenue}
+                      onChange={e => updateApplyField('revenue', e.target.value)}
+                      placeholder="e.g. $2k/mo, just starting out"
+                      className="w-full rounded-lg px-3 py-2 text-sm bg-black/40 border border-white/10 focus:outline-none focus:border-[#a855f7]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-400 mb-1">Biggest Challenge Right Now</label>
+                    <textarea
+                      rows={2}
+                      value={applyForm.challenge}
+                      onChange={e => updateApplyField('challenge', e.target.value)}
+                      className="w-full rounded-lg px-3 py-2 text-sm bg-black/40 border border-white/10 focus:outline-none focus:border-[#a855f7] resize-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-400 mb-1">Goals for the Next 6 Months</label>
+                    <textarea
+                      rows={2}
+                      value={applyForm.goals}
+                      onChange={e => updateApplyField('goals', e.target.value)}
+                      className="w-full rounded-lg px-3 py-2 text-sm bg-black/40 border border-white/10 focus:outline-none focus:border-[#a855f7] resize-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-400 mb-1">Why do you want 1-on-1 mentorship?</label>
+                    <textarea
+                      rows={3}
+                      value={applyForm.why_mentor}
+                      onChange={e => updateApplyField('why_mentor', e.target.value)}
+                      className="w-full rounded-lg px-3 py-2 text-sm bg-black/40 border border-white/10 focus:outline-none focus:border-[#a855f7] resize-none"
+                    />
+                  </div>
+
+                  {applyError && <p className="text-xs text-red-400" role="alert">{applyError}</p>}
+
+                  <button
+                    type="submit"
+                    disabled={applyLoading}
+                    className="btn-premium w-full flex items-center justify-center gap-2 text-sm font-bold px-5 py-3 rounded-xl transition-all mt-2"
+                  >
+                    {applyLoading && <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />}
+                    Submit Application
+                  </button>
+                </form>
+              </>
+            ) : (
+              <>
+                <h3 className="text-xl font-black mb-2">Application received 🎉</h3>
+                <p className="text-sm text-gray-500 mb-5">
+                  Thanks — we review every application personally. If it&apos;s a fit, you&apos;ll hear from us by email.
+                </p>
+                <button
+                  onClick={closeApplyModal}
+                  className="btn-premium w-full flex items-center justify-center gap-2 text-sm font-bold px-5 py-3 rounded-xl transition-all"
+                >
+                  Close
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
