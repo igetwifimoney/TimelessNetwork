@@ -357,6 +357,50 @@
     font-size:13px;color:var(--muted);flex-wrap:wrap;gap:12px;
   }
 
+  /* mentorship application modal */
+  .modal-overlay{
+    position:fixed;inset:0;
+    background:rgba(0,0,0,0.7);
+    backdrop-filter:blur(4px);
+    display:none;
+    align-items:center;justify-content:center;
+    z-index:200;
+    padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:36px;
+    max-width:480px;width:100%;
+    max-height:85vh;overflow-y:auto;
+    position:relative;
+  }
+  .modal-close{
+    position:absolute;top:16px;right:18px;
+    background:none;border:none;color:var(--muted);
+    font-size:26px;cursor:pointer;line-height:1;
+  }
+  .modal-close:hover{color:#fff;}
+  .modal h3{font-size:22px;margin-bottom:10px;}
+  .modal-sub{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:22px;}
+  .modal label{display:block;font-size:13px;color:#d8d8e2;margin-bottom:14px;}
+  .modal input, .modal textarea{
+    width:100%;margin-top:6px;
+    background:rgba(255,255,255,0.03);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:10px 12px;
+    color:var(--text);
+    font-family:inherit;font-size:14px;
+    resize:vertical;
+  }
+  .modal input:focus, .modal textarea:focus{outline:none;border-color:var(--cyan);}
+  .modal-error{
+    color:#ff6b6b;font-size:13px;margin-bottom:14px;
+  }
+
   @media(max-width:900px){
     .nav-links{display:none;}
     .hero h1{font-size:40px;}
@@ -525,8 +569,8 @@
         <div class="mentor-card">
           <div class="mentor-price">$1,080</div>
           <div class="mentor-price-sub">one-time · full mentorship</div>
-          <a href="#" class="btn btn-primary btn-lg" style="width:100%;text-align:center;margin-bottom:12px;" data-checkout="TRADING_MENTORSHIP" data-next="/trading#mentorship">Apply for Mentorship</a>
-          <div class="mentor-note">Checkout powered by Stripe · limited spots each month</div>
+          <a href="#" class="btn btn-primary btn-lg" style="width:100%;text-align:center;margin-bottom:12px;" id="open-mentor-apply">Apply for Mentorship</a>
+          <div class="mentor-note">Applications reviewed personally · limited spots each month</div>
         </div>
       </div>
     </div>
@@ -613,8 +657,114 @@
   </div>
 </footer>
 
+<div class="modal-overlay" id="mentor-modal-overlay">
+  <div class="modal">
+    <button class="modal-close" id="mentor-modal-close" aria-label="Close">&times;</button>
+
+    <div id="mentor-form-wrap">
+      <h3>Apply for Mentorship</h3>
+      <p class="modal-sub">Tell us a bit about yourself — every application is reviewed personally. If it's a fit, we'll follow up by email with a checkout link to lock in your spot.</p>
+      <form id="mentor-apply-form">
+        <label>Full Name
+          <input type="text" name="name" required>
+        </label>
+        <label>Email
+          <input type="email" name="email" required>
+        </label>
+        <label>Trading Experience
+          <textarea name="experience" rows="2" placeholder="e.g. 1 year, mostly options"></textarea>
+        </label>
+        <label>Current Account Size / Results So Far
+          <input type="text" name="revenue" placeholder="e.g. $5k account, breakeven so far">
+        </label>
+        <label>Biggest Challenge Right Now
+          <textarea name="challenge" rows="2"></textarea>
+        </label>
+        <label>Goals for the Next 6 Months
+          <textarea name="goals" rows="2"></textarea>
+        </label>
+        <label>Why do you want 1-on-1 mentorship?
+          <textarea name="why_mentor" rows="3"></textarea>
+        </label>
+        <div class="modal-error" id="mentor-form-error" hidden></div>
+        <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">Submit Application</button>
+      </form>
+    </div>
+
+    <div id="mentor-success" hidden>
+      <h3>Application received 🎉</h3>
+      <p class="modal-sub">Thanks — we review every application personally. If it's a fit, you'll get an email with a checkout link to lock in your spot.</p>
+      <button class="btn btn-ghost" style="width:100%;" id="mentor-success-close">Close</button>
+    </div>
+  </div>
+</div>
+
 <script>
-  // Wires membership/mentorship buttons to the real Stripe checkout flow.
+  // Mentorship application modal — collects info instead of charging
+  // immediately, so applications can be reviewed before sending a checkout link.
+  (function () {
+    var overlay = document.getElementById('mentor-modal-overlay');
+    var openBtn = document.getElementById('open-mentor-apply');
+    var closeBtn = document.getElementById('mentor-modal-close');
+    var successCloseBtn = document.getElementById('mentor-success-close');
+    var form = document.getElementById('mentor-apply-form');
+    var formWrap = document.getElementById('mentor-form-wrap');
+    var successWrap = document.getElementById('mentor-success');
+    var errorBox = document.getElementById('mentor-form-error');
+
+    function openModal(e) {
+      if (e) e.preventDefault();
+      overlay.classList.add('open');
+    }
+    function closeModal() {
+      overlay.classList.remove('open');
+    }
+
+    if (openBtn) openBtn.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (successCloseBtn) successCloseBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeModal();
+    });
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      errorBox.hidden = true;
+      var submitBtn = form.querySelector('button[type="submit"]');
+      var originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Submitting…';
+      submitBtn.style.pointerEvents = 'none';
+
+      var data = Object.fromEntries(new FormData(form).entries());
+      data.source = 'trading';
+
+      try {
+        var res = await fetch('/api/mentorship-apply', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        var json = await res.json();
+
+        if (!res.ok) {
+          errorBox.textContent = json.error || 'Something went wrong. Please try again.';
+          errorBox.hidden = false;
+          return;
+        }
+
+        formWrap.hidden = true;
+        successWrap.hidden = false;
+      } catch (err) {
+        errorBox.textContent = 'Something went wrong. Please try again.';
+        errorBox.hidden = false;
+      } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.style.pointerEvents = '';
+      }
+    });
+  })();
+
+  // Wires membership buttons to the real Stripe checkout flow.
   // Signed-out visitors get sent to sign in first, then bounced back here.
   document.querySelectorAll('[data-checkout]').forEach(function (el) {
     el.addEventListener('click', async function (e) {
