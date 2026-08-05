@@ -52,6 +52,16 @@ export async function POST(req: Request) {
       user.user_metadata?.full_name ?? undefined
     )
 
+    // Timeless Trading products send members back to the Trading dashboard
+    // instead of the Network dashboard/billing pages.
+    const isTrading = productKey.startsWith('TRADING_')
+    const successUrl = isTrading
+      ? `${SITE_URL}/trading-dashboard?payment=success`
+      : `${SITE_URL}/dashboard?payment=success`
+    const cancelUrl = isTrading
+      ? `${SITE_URL}/trading?payment=canceled`
+      : `${SITE_URL}/billing?payment=canceled`
+
     // ── Checkout session ───────────────────────────────────────
     // allow_promotion_codes and discounts[] are mutually exclusive in Stripe.
     // If a coupon is passed explicitly we apply it directly; otherwise we
@@ -64,8 +74,8 @@ export async function POST(req: Request) {
       customer: customerId,
       mode: product.mode,
       line_items: [{ price: priceId, quantity: 1 }],
-      success_url: `${SITE_URL}/dashboard?payment=success`,
-      cancel_url:  `${SITE_URL}/billing?payment=canceled`,
+      success_url: successUrl,
+      cancel_url:  cancelUrl,
       // Metadata is available in every webhook event for this session
       metadata: {
         user_id:     user.id,
