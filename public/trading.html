@@ -1,808 +1,2128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Timeless Trading</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Timeless Trading — Take Control of Your Financial Future</title>
+<meta name="description" content="Live signals, daily market breakdowns, and a community built on mindset, discipline, and execution. Rated 5.0 on Whop. Official MEXC partner." />
+<meta property="og:title" content="Timeless Trading — Take Control of Your Financial Future" />
+<meta property="og:description" content="Live signals, daily breakdowns, and a community built to make your growth inevitable." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --bg:#050508;
-    --bg2:#0a0a12;
-    --card:#0e0e17;
-    --border:rgba(255,255,255,0.08);
-    --magenta:#ff2bb3;
-    --magenta2:#c026d3;
-    --cyan:#2fd0ff;
-    --blue:#3b6bff;
-    --text:#f3f3f7;
-    --muted:#9a9aab;
-    --green:#22e08b;
+    --bg:#040409;
+    --ink:#f5f6ff;
+    --muted:#9ba3c2;
+    --muted-2:#6a7191;
+    --line:rgba(255,255,255,.08);
+    --line-2:rgba(255,255,255,.15);
+    --pink:#ff45b5;
+    --violet:#a259ff;
+    --blue:#4f7cff;
+    --cyan:#43d9ff;
+    --gold:#ffce6a;
+    --up:#12e28a;
+    --down:#ff2d55;
+    --grad:linear-gradient(100deg,#ff45b5 0%,#a259ff 48%,#4f7cff 100%);
+    --glass:rgba(255,255,255,.035);
+    --glass-2:rgba(255,255,255,.06);
+    --radius:22px;
+    --shadow:0 30px 90px -35px rgba(0,0,0,.95);
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --ease-out:cubic-bezier(.16,1,.3,1);
   }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Segoe UI', Arial, sans-serif;
-    overflow-x:hidden;
-  }
-  .wordmark{
-    font-family:'Arial Black', Arial, sans-serif;
-    font-weight:900;
-    font-style:italic;
-    letter-spacing:1px;
-  }
-  a{text-decoration:none;color:inherit;}
-  ul{list-style:none;}
-  img{max-width:100%;display:block;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;
+    line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;position:relative}
+  body.locked{overflow:hidden;height:100vh}
+  h1,h2,h3,.display{font-family:'Sora','Inter',sans-serif;letter-spacing:-.025em;line-height:1.03}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:'Space Grotesk',monospace;font-variant-numeric:tabular-nums}
+  ::selection{background:rgba(162,89,255,.45)}
+  @media (pointer:fine){*{cursor:none!important}}
 
-  /* starfield background */
-  .stars{
-    position:fixed;inset:0;
-    background-image:
-      radial-gradient(1px 1px at 20% 30%, #fff, transparent),
-      radial-gradient(1px 1px at 70% 60%, #fff, transparent),
-      radial-gradient(1px 1px at 40% 80%, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 85% 15%, #fff, transparent),
-      radial-gradient(1px 1px at 55% 45%, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 10% 70%, #fff, transparent),
-      radial-gradient(1px 1px at 95% 85%, #fff, transparent),
-      radial-gradient(1px 1px at 30% 10%, #fff, transparent);
-    background-size: 100% 100%;
-    opacity:0.35;
-    z-index:0;
-    pointer-events:none;
-  }
+  /* ---------- Preloader ---------- */
+  #loader{position:fixed;inset:0;z-index:9999;background:#040409;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:26px;transition:opacity .6s ease,visibility .6s}
+  #loader.done{opacity:0;visibility:hidden}
+  .load-brand{display:flex;align-items:center;gap:14px;font-family:'Sora';font-weight:800;font-style:italic;
+    font-size:22px;letter-spacing:.02em;opacity:0;animation:fadeUp .8s var(--ease-out) .15s forwards}
+  .load-gem{width:30px;height:30px;border-radius:8px;transform:rotate(45deg);background:var(--grad);
+    box-shadow:0 0 30px rgba(162,89,255,.8)}
+  .load-bar{width:220px;height:2px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}
+  .load-fill{height:100%;width:0;background:var(--grad);border-radius:2px;transition:width .2s linear}
+  .load-pct{font-family:'Space Grotesk';font-size:12px;letter-spacing:.3em;color:var(--muted-2)}
+  @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
 
-  /* candlestick decoration */
-  .candles{
-    position:absolute;
-    display:flex;
-    align-items:flex-end;
-    gap:6px;
-    opacity:0.5;
-    filter:blur(0.2px);
-    pointer-events:none;
-  }
-  .candle{width:5px;border-radius:2px;}
-  .candle.up{background:linear-gradient(180deg, var(--cyan), var(--blue));}
-  .candle.down{background:linear-gradient(180deg, var(--magenta), var(--magenta2));}
+  /* ---------- Custom cursor ---------- */
+  .cursor-dot,.cursor-ring{position:fixed;top:0;left:0;z-index:9998;pointer-events:none;border-radius:50%;
+    transform:translate(-50%,-50%);mix-blend-mode:difference}
+  .cursor-dot{width:7px;height:7px;background:#fff;transition:width .2s,height .2s}
+  .cursor-ring{width:38px;height:38px;border:1.5px solid rgba(255,255,255,.6);
+    transition:width .25s var(--ease-out),height .25s var(--ease-out),border-color .25s,background .25s}
+  body.hovering .cursor-ring{width:64px;height:64px;border-color:transparent;background:rgba(255,255,255,.12);mix-blend-mode:normal}
+  body.hovering .cursor-dot{width:0;height:0}
+  @media (pointer:coarse){.cursor-dot,.cursor-ring{display:none}}
 
-  /* header */
-  header{
-    position:sticky;top:0;z-index:50;
-    background:rgba(5,5,8,0.75);
-    backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--border);
-  }
-  nav{
-    max-width:1200px;margin:0 auto;
-    display:flex;align-items:center;justify-content:space-between;
-    padding:16px 24px;
-  }
-  .logo{
-    display:flex;align-items:center;gap:10px;
-    font-size:20px;
-  }
-  .logo .diamond{
-    width:22px;height:22px;
-    background:linear-gradient(135deg, var(--cyan), var(--magenta));
-    transform:rotate(45deg);
-    border-radius:3px;
-  }
-  .logo span{
-    background:linear-gradient(90deg,#fff,#d9d9e6);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-  }
-  .nav-links{display:flex;gap:32px;font-size:14px;color:var(--muted);}
-  .nav-links a:hover{color:#fff;}
-  .btn{
-    display:inline-block;
-    padding:11px 22px;
-    border-radius:8px;
-    font-weight:700;
-    font-size:14px;
-    cursor:pointer;
-    border:none;
-    transition:transform .15s ease, box-shadow .15s ease;
-  }
-  .btn-primary{
-    background:linear-gradient(90deg, var(--magenta), var(--blue));
-    color:#fff;
-    box-shadow:0 0 25px rgba(255,43,179,0.35);
-  }
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 35px rgba(255,43,179,0.55);}
-  .btn-ghost{
-    background:transparent;
-    color:#fff;
-    border:1px solid var(--border);
-  }
-  .btn-ghost:hover{border-color:rgba(255,255,255,0.3);}
+  /* ---------- Background ---------- */
+  #bg-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+  .bg-orb{position:fixed;border-radius:50%;filter:blur(110px);opacity:.2;z-index:0;pointer-events:none;
+    mix-blend-mode:screen;animation:float 20s var(--ease) infinite alternate}
+  .orb-1{width:560px;height:560px;background:radial-gradient(circle,#ff45b5,transparent 70%);top:-160px;left:-140px}
+  .orb-2{width:640px;height:640px;background:radial-gradient(circle,#4f7cff,transparent 70%);top:26%;right:-240px;animation-delay:-7s}
+  .orb-3{width:520px;height:520px;background:radial-gradient(circle,#a259ff,transparent 70%);bottom:-160px;left:32%;animation-delay:-13s}
+  @keyframes float{to{transform:translate3d(46px,-42px,0) scale(1.14)}}
+  .grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.45;mix-blend-mode:overlay;
+    background-image:radial-gradient(rgba(255,255,255,.03) 1px,transparent 1px);background-size:3px 3px}
+  .vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(120% 90% at 50% -10%,transparent 45%,rgba(2,2,6,.7) 100%)}
 
-  /* hero */
-  .hero{
-    position:relative;
-    max-width:1200px;margin:0 auto;
-    padding:110px 24px 90px;
-    text-align:center;
-    z-index:1;
-  }
-  .hero::before{
-    content:"";
-    position:absolute;
-    top:-100px;left:50%;transform:translateX(-50%);
-    width:900px;height:500px;
-    background:radial-gradient(ellipse at center, rgba(192,38,211,0.25), transparent 60%),
-               radial-gradient(ellipse at 70% 30%, rgba(47,208,255,0.2), transparent 60%);
-    z-index:-1;
-  }
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:7px 16px;
-    border:1px solid var(--border);
-    border-radius:999px;
-    font-size:13px;
-    color:var(--cyan);
-    background:rgba(47,208,255,0.06);
-    margin-bottom:28px;
-  }
-  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);}
-  .hero h1{
-    font-size:64px;
-    line-height:1.05;
-    margin-bottom:22px;
-  }
-  .hero h1 .grad{
-    background:linear-gradient(90deg, var(--magenta), var(--cyan));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .hero p{
-    max-width:600px;margin:0 auto 36px;
-    color:var(--muted);
-    font-size:18px;
-    line-height:1.6;
-  }
-  .hero .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
-  .btn-lg{padding:16px 32px;font-size:16px;border-radius:10px;}
+  .wrap{position:relative;z-index:2}
+  .container{width:min(1180px,91vw);margin-inline:auto}
 
-  /* stats */
-  .stats{
-    max-width:1000px;margin:70px auto 0;
-    display:grid;grid-template-columns:repeat(4,1fr);
-    gap:24px;
-    padding:0 24px;
-    position:relative;z-index:1;
-  }
-  .stat{
-    text-align:center;
-    padding:24px 12px;
-    border:1px solid var(--border);
-    border-radius:14px;
-    background:linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
-  }
-  .stat .num{
-    font-size:32px;font-weight:800;
-    background:linear-gradient(90deg,var(--cyan),var(--blue));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    margin-bottom:6px;
-  }
-  .stat .label{font-size:13px;color:var(--muted);}
+  /* ---------- Nav ---------- */
+  header.nav{position:fixed;top:0;left:0;right:0;z-index:60;transition:transform .5s var(--ease)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;
+    margin:14px auto 0;width:min(1180px,94vw);border:1px solid transparent;border-radius:18px;transition:all .45s var(--ease)}
+  header.nav.scrolled .nav-inner{background:rgba(8,9,18,.72);backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);border-color:var(--line);box-shadow:var(--shadow);padding:11px 20px}
+  .brand{display:flex;align-items:center;gap:12px;font-family:'Sora';font-weight:800;font-style:italic;
+    font-size:18.5px;letter-spacing:.02em}
+  .brand .gem{width:25px;height:25px;border-radius:7px;transform:rotate(45deg);background:var(--grad);
+    box-shadow:0 0 22px rgba(162,89,255,.7);flex:none;transition:transform .5s var(--ease)}
+  .brand:hover .gem{transform:rotate(135deg)}
+  .nav-links{display:flex;gap:30px;align-items:center}
+  .nav-links a{color:var(--muted);font-size:14.5px;font-weight:500;position:relative}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--grad);
+    transition:width .3s var(--ease);border-radius:2px}
+  .nav-links a:hover{color:#fff}.nav-links a:hover::after{width:100%}
+  .nav-links a.active{color:#fff}.nav-links a.active::after{width:100%}
+  .btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    font-family:'Sora';font-weight:700;font-size:14.5px;border:none;padding:13px 24px;border-radius:13px;
+    transition:transform .3s var(--ease),box-shadow .35s var(--ease),filter .3s;color:#fff;white-space:nowrap;overflow:hidden}
+  .btn-primary{background:var(--grad);background-size:200% 200%;
+    box-shadow:0 10px 34px -8px rgba(162,89,255,.6),inset 0 1px 0 rgba(255,255,255,.28)}
+  .btn-primary::after{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-20deg);transition:left .6s var(--ease)}
+  .btn-primary:hover::after{left:130%}
+  .btn-primary:hover{box-shadow:0 18px 48px -10px rgba(162,89,255,.85);filter:brightness(1.07)}
+  @keyframes btnGlow{0%,100%{box-shadow:0 10px 34px -8px rgba(162,89,255,.5),inset 0 1px 0 rgba(255,255,255,.28)}
+    50%{box-shadow:0 16px 46px -8px rgba(255,69,181,.8),inset 0 1px 0 rgba(255,255,255,.28)}}
+  .btn-primary{animation:btnGlow 3.6s ease-in-out infinite}
+  .btn-primary:hover{animation-play-state:paused}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+  .btn-ghost{background:var(--glass-2);border:1px solid var(--line-2);backdrop-filter:blur(10px)}
+  .btn-ghost:hover{background:rgba(255,255,255,.1)}
+  .btn-lg{padding:17px 34px;font-size:16px;border-radius:15px}
+  .nav-cta{display:flex;align-items:center;gap:14px}
+  .burger{display:none;flex-direction:column;gap:5px;padding:8px}
+  .burger span{width:24px;height:2px;background:#fff;border-radius:2px;transition:.3s}
 
-  section{position:relative;z-index:1;}
-  .section-wrap{max-width:1200px;margin:0 auto;padding:120px 24px;}
-  .section-head{text-align:center;max-width:600px;margin:0 auto 60px;}
-  .section-head .tag{color:var(--magenta);font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;}
-  .section-head h2{font-size:38px;margin:14px 0 14px;}
-  .section-head p{color:var(--muted);font-size:16px;line-height:1.6;}
+  /* ---------- Hero ---------- */
+  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:150px 0 120px;position:relative;perspective:1100px}
+  .hero-layers{display:flex;flex-direction:column;align-items:center;width:100%;
+    transition:transform .3s var(--ease-out);will-change:transform;transform-style:preserve-3d}
+  .hero::before{content:"";position:absolute;inset:-8% -25% 12% -25%;z-index:-1;pointer-events:none;
+    background:radial-gradient(46% 44% at 50% 40%,rgba(3,3,8,.92),rgba(4,4,9,.55) 48%,transparent 72%)}
+  .hero>*{text-shadow:0 2px 26px rgba(4,4,9,.55)}
+  .hero .btn{text-shadow:none}
+  .badge{display:inline-flex;align-items:center;gap:9px;padding:9px 18px;border-radius:100px;background:var(--glass);
+    border:1px solid var(--line-2);backdrop-filter:blur(10px);font-size:13.5px;color:#cfd6f0;font-weight:500;margin-bottom:32px}
+  .badge .dot{width:8px;height:8px;border-radius:50%;background:var(--up);box-shadow:0 0 12px var(--up);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .badge b{color:#fff;font-weight:700}
+  .badge .g{color:var(--gold)}
+  .hero h1{font-size:clamp(46px,7.6vw,96px);font-weight:800;max-width:15ch;margin-bottom:26px}
+  .line-mask{display:block;overflow:hidden;padding-bottom:.04em}
+  .line-mask>span{display:block;transform:translateY(115%);transition:transform 1s var(--ease-out)}
+  body.loaded .line-mask>span{transform:translateY(0)}
+  body.loaded .line-mask:nth-child(2)>span{transition-delay:.09s}
+  body.loaded .line-mask:nth-child(3)>span{transition-delay:.18s}
+  .grad-text{background:var(--grad);background-size:220% auto;-webkit-background-clip:text;background-clip:text;
+    color:transparent;animation:gradShift 7s linear infinite}
+  @keyframes gradShift{to{background-position:220% center}}
+  /* scroll progress */
+  .progress{position:fixed;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:0 50%;
+    z-index:70;background:var(--grad);box-shadow:0 0 14px rgba(162,89,255,.8);will-change:transform}
+  .hero p.sub{max-width:58ch;color:var(--muted);font-size:clamp(16px,2vw,20px);margin-bottom:40px;
+    opacity:0;transform:translateY(20px);transition:.9s var(--ease-out) .5s}
+  body.loaded .hero p.sub{opacity:1;transform:none}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;
+    opacity:0;transform:translateY(20px);transition:.9s var(--ease-out) .62s}
+  body.loaded .hero-cta{opacity:1;transform:none}
+  .social{display:flex;align-items:center;gap:16px;justify-content:center;margin-top:32px;flex-wrap:wrap;
+    opacity:0;transform:translateY(20px);transition:.9s var(--ease-out) .74s}
+  body.loaded .social{opacity:1;transform:none}
+  .avatars{display:flex}
+  .avatars .av{width:42px;height:42px;border-radius:50%;border:2px solid #08080f;margin-left:-13px;flex:none;
+    display:flex;align-items:center;justify-content:center;font-family:'Sora';font-weight:700;font-size:15px;color:#fff;
+    box-shadow:0 5px 14px rgba(0,0,0,.5);transition:transform .35s var(--ease)}
+  .avatars .av:first-child{margin-left:0}
+  .avatars .av.more{background:rgba(255,255,255,.1);border:2px solid var(--line-2);color:#cfd6f0;font-size:13px}
+  body.loaded .avatars .av{animation:avPop .55s var(--ease-out) backwards;animation-delay:calc(.85s + var(--i)*.09s)}
+  @keyframes avPop{from{opacity:0;transform:scale(.3) translateY(10px)}to{opacity:1;transform:scale(1)}}
+  .social-txt{color:var(--muted);font-size:14.5px;display:flex;align-items:center;gap:9px}
+  .social-txt b{color:#fff;font-weight:600}
+  .live-dot{width:9px;height:9px;border-radius:50%;background:var(--up);box-shadow:0 0 10px var(--up);animation:pulse 2s infinite}
+  .scroll-hint{position:absolute;bottom:96px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;
+    align-items:center;gap:8px;color:var(--muted-2);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;
+    opacity:0;transition:opacity 1s ease 1.1s}
+  body.loaded .scroll-hint{opacity:1}
+  .mouse{width:23px;height:37px;border:2px solid var(--line-2);border-radius:14px;position:relative}
+  .mouse::before{content:"";position:absolute;top:7px;left:50%;transform:translateX(-50%);width:4px;height:7px;
+    border-radius:3px;background:#fff;animation:scrolldot 1.8s infinite}
+  @keyframes scrolldot{0%{opacity:0;top:7px}30%{opacity:1}60%{opacity:1;top:18px}100%{opacity:0;top:18px}}
 
-  /* features */
-  .features-grid{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
-  }
-  .feature-card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:16px;
-    padding:28px;
-    transition:transform .2s ease, border-color .2s ease;
-  }
-  .feature-card:hover{transform:translateY(-4px);border-color:rgba(255,43,179,0.4);}
-  .feature-icon{
-    width:44px;height:44px;border-radius:10px;
-    display:flex;align-items:center;justify-content:center;
-    font-size:20px;margin-bottom:18px;
-    background:linear-gradient(135deg, rgba(255,43,179,0.18), rgba(47,208,255,0.18));
-    border:1px solid var(--border);
-  }
-  .feature-card h3{font-size:17px;margin-bottom:8px;}
-  .feature-card p{color:var(--muted);font-size:14px;line-height:1.6;}
+  /* ---------- Ticker ---------- */
+  .ticker{position:relative;z-index:2;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:rgba(6,7,14,.55);backdrop-filter:blur(10px);overflow:hidden;padding:15px 0;margin-top:-40px}
+  .ticker-track{display:flex;gap:44px;width:max-content;animation:scrollx 38s linear infinite}
+  .ticker:hover .ticker-track{animation-play-state:paused}
+  @keyframes scrollx{to{transform:translateX(-50%)}}
+  .tk{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk';font-size:14.5px;white-space:nowrap}
+  .tk .sym{color:#cfd6f0;font-weight:600}
+  .tk .px{color:var(--muted)}
+  .tk .chg{font-weight:600;padding:2px 8px;border-radius:6px;font-size:12.5px}
+  .tk .up{color:var(--up);background:rgba(47,230,160,.1)}
+  .tk .down{color:var(--down);background:rgba(255,84,112,.1)}
 
-  /* pricing */
-  .pricing-grid{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
-    align-items:stretch;
-  }
-  .rating-badge{
-    display:flex;align-items:center;justify-content:center;gap:10px;
-    margin:-30px auto 50px;
-    font-size:14px;color:var(--muted);
-  }
-  .rating-badge .stars-row{color:var(--cyan);letter-spacing:2px;}
-  .rating-badge strong{color:#fff;}
-  .plan .payment-note{
-    font-size:12px;color:var(--cyan);margin-bottom:26px;
-  }
-  .plan{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:36px 28px;
-    display:flex;flex-direction:column;
-  }
-  .plan.featured{
-    border:1px solid transparent;
-    background:
-      linear-gradient(var(--card), var(--card)) padding-box,
-      linear-gradient(140deg, var(--magenta), var(--cyan)) border-box;
-    position:relative;
-    transform:scale(1.04);
-  }
-  .plan.featured .badge{
-    position:absolute;top:-14px;left:50%;transform:translateX(-50%);
-    background:linear-gradient(90deg, var(--magenta), var(--blue));
-    padding:6px 16px;border-radius:999px;font-size:12px;font-weight:700;
-  }
-  .plan h3{font-size:15px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px;}
-  .plan .price{font-size:40px;font-weight:800;margin-bottom:4px;}
-  .plan .price span{font-size:14px;color:var(--muted);font-weight:400;}
-  .plan .sub{color:var(--muted);font-size:13px;margin-bottom:26px;}
-  .plan ul{margin-bottom:30px;flex:1;}
-  .plan li{
-    display:flex;align-items:flex-start;gap:10px;
-    font-size:14px;color:#d8d8e2;
-    margin-bottom:14px;
-  }
-  .plan li .check{color:var(--cyan);flex-shrink:0;}
+  /* ---------- Section shell ---------- */
+  section{padding:120px 0;position:relative}
+  .eyebrow{font-family:'Sora';font-weight:700;font-size:13px;letter-spacing:.3em;text-transform:uppercase;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:16px;display:block}
+  .sec-head{text-align:center;max-width:760px;margin:0 auto 68px}
+  .sec-head h2{font-size:clamp(33px,4.8vw,56px);font-weight:800;margin-bottom:18px}
+  .sec-head p{color:var(--muted);font-size:clamp(15px,1.7vw,18.5px)}
 
-  /* mentorship */
-  .mentor-box{
-    display:grid;grid-template-columns:1.3fr 1fr;gap:40px;
-    align-items:center;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:24px;
-    padding:56px;
-    position:relative;
-    overflow:hidden;
-  }
-  .mentor-box::before{
-    content:"";
-    position:absolute;top:-20%;right:-10%;
-    width:400px;height:400px;
-    background:radial-gradient(circle, rgba(255,43,179,0.18), transparent 65%);
-    z-index:0;
-  }
-  .mentor-copy, .mentor-card{position:relative;z-index:1;}
-  .mentor-copy h2{font-size:32px;margin:12px 0 16px;}
-  .mentor-copy p{color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:24px;}
-  .mentor-list li{
-    display:flex;align-items:flex-start;gap:10px;
-    font-size:14px;color:#d8d8e2;margin-bottom:12px;
-  }
-  .mentor-list .check{color:var(--cyan);flex-shrink:0;}
-  .mentor-card{
-    background:linear-gradient(180deg, rgba(255,255,255,0.04), transparent);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:32px;
-    text-align:center;
-  }
-  .mentor-price{font-size:44px;font-weight:800;}
-  .mentor-price-sub{color:var(--muted);font-size:13px;margin-bottom:24px;}
-  .mentor-note{color:var(--muted);font-size:12px;}
+  /* ---------- Stats band ---------- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;
+    border:1px solid var(--line);border-radius:26px;padding:42px 30px;background:var(--glass);backdrop-filter:blur(8px)}
+  .stat{text-align:center}
+  .stat .n{font-family:'Sora';font-weight:800;font-size:clamp(34px,4vw,48px);line-height:1;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat .l{color:var(--muted);font-size:14px;margin-top:8px}
 
-  @media(max-width:900px){
-    .mentor-box{grid-template-columns:1fr;padding:32px;}
-  }
+  /* ---------- Cards / features ---------- */
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{position:relative;background:var(--glass);border:1px solid var(--line);border-radius:var(--radius);
+    padding:34px 30px;overflow:hidden;transition:transform .5s var(--ease),box-shadow .5s;
+    transform-style:preserve-3d;will-change:transform;backdrop-filter:blur(8px)}
+  .card::before{content:"";position:absolute;inset:0;border-radius:var(--radius);padding:1px;
+    background:linear-gradient(140deg,rgba(255,69,181,.6),rgba(79,124,255,.35) 45%,transparent 70%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .4s}
+  .card::after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;
+    background:radial-gradient(circle,rgba(162,89,255,.3),transparent 65%);
+    left:var(--mx,50%);top:var(--my,0);transform:translate(-50%,-50%);opacity:0;transition:opacity .4s;pointer-events:none}
+  .card:hover{box-shadow:0 34px 80px -34px rgba(120,60,255,.6)}
+  .card:hover::before,.card:hover::after{opacity:1}
+  .card-inner{position:relative;transform:translateZ(45px)}
+  .ic{width:56px;height:56px;border-radius:15px;display:flex;align-items:center;justify-content:center;margin-bottom:22px;
+    background:linear-gradient(140deg,rgba(255,69,181,.22),rgba(79,124,255,.18));border:1px solid var(--line-2);color:#eaf}
+  .ic svg{width:27px;height:27px}
+  .card h3{font-size:21px;font-weight:700;margin-bottom:10px}
+  .card p{color:var(--muted);font-size:15px}
 
-  /* community / discord CTA */
-  .community{
-    max-width:1100px;margin:0 auto;padding:0 24px 120px;
-  }
-  .community-box{
-    border-radius:24px;
-    padding:70px 40px;
-    text-align:center;
-    background:
-      radial-gradient(ellipse at 20% 20%, rgba(192,38,211,0.35), transparent 55%),
-      radial-gradient(ellipse at 80% 80%, rgba(47,208,255,0.3), transparent 55%),
-      #0a0a13;
-    border:1px solid var(--border);
-    position:relative;
-    overflow:hidden;
-  }
-  .community-box h2{font-size:36px;margin-bottom:16px;}
-  .community-box p{color:var(--muted);max-width:520px;margin:0 auto 32px;font-size:16px;line-height:1.6;}
+  /* ---------- How it works ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;position:relative}
+  .steps::before{content:"";position:absolute;top:38px;left:12%;right:12%;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(162,89,255,.5),transparent);z-index:0}
+  .step{position:relative;z-index:1;text-align:center;padding:0 12px}
+  .step .num{width:76px;height:76px;margin:0 auto 22px;border-radius:20px;display:flex;align-items:center;justify-content:center;
+    font-family:'Sora';font-weight:800;font-size:26px;background:rgba(6,7,14,.9);border:1px solid var(--line-2);
+    color:transparent;background-clip:text;-webkit-background-clip:text;position:relative}
+  .step .num span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .step .num::before{content:"";position:absolute;inset:0;border-radius:20px;padding:1px;background:var(--grad);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+  .step h3{font-size:20px;font-weight:700;margin-bottom:10px}
+  .step p{color:var(--muted);font-size:15px;max-width:30ch;margin:0 auto}
 
-  /* testimonials */
-  .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-  .testimonial{
-    background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px;
-  }
-  .testimonial .stars-row{color:var(--cyan);font-size:14px;margin-bottom:14px;letter-spacing:2px;}
-  .testimonial p{font-size:14px;color:#d8d8e2;line-height:1.6;margin-bottom:18px;}
-  .testimonial .who{display:flex;align-items:center;gap:10px;}
-  .avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--magenta),var(--blue));}
-  .who .name{font-size:13px;font-weight:700;}
-  .who .role{font-size:12px;color:var(--muted);}
+  /* ---------- Pricing ---------- */
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+  .rating-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:44px;color:var(--muted);font-size:15px}
+  .rating-row .stars{color:var(--gold);letter-spacing:2px;font-size:18px}
+  .rating-row b{color:#fff;font-family:'Sora'}
+  .plan{position:relative;background:var(--glass);border:1px solid var(--line);border-radius:var(--radius);
+    padding:36px 30px;display:flex;flex-direction:column;transition:transform .4s var(--ease),box-shadow .4s;backdrop-filter:blur(8px)}
+  .plan:hover{transform:translateY(-8px);box-shadow:0 34px 80px -36px rgba(120,60,255,.5)}
+  .plan::after{content:"";position:absolute;inset:0;border-radius:var(--radius);pointer-events:none;opacity:0;transition:opacity .4s;
+    background:radial-gradient(260px 260px at var(--mx,50%) var(--my,0%),rgba(162,89,255,.22),transparent 60%)}
+  .plan:hover::after{opacity:1}
+  .plan.featured{background:linear-gradient(180deg,rgba(162,89,255,.13),rgba(8,9,18,.4));border:1.5px solid transparent}
+  .plan.featured::before{content:"";position:absolute;inset:0;border-radius:var(--radius);padding:1.5px;
+    background:var(--grad);background-size:220% 220%;animation:borderflow 6s linear infinite;
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+  @keyframes borderflow{to{background-position:220% 0}}
+  .plan.featured{box-shadow:0 44px 100px -44px rgba(162,89,255,.75)}
+  .tag{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--grad);font-family:'Sora';
+    font-weight:700;font-size:11.5px;letter-spacing:.15em;padding:7px 16px;border-radius:100px;
+    box-shadow:0 8px 24px -6px rgba(162,89,255,.7);white-space:nowrap}
+  .plan-name{font-family:'Sora';font-weight:700;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .plan-quote{font-size:13.5px;font-style:italic;color:var(--cyan);margin-bottom:14px;min-height:20px}
+  .price{display:flex;align-items:baseline;gap:4px;margin-bottom:6px}
+  .price .amt{font-family:'Sora';font-weight:800;font-size:52px;line-height:1}
+  .price .per{color:var(--muted);font-size:16px}
+  .plan-note{color:var(--muted-2);font-size:13.5px;margin-bottom:26px}
+  .plan ul{list-style:none;display:flex;flex-direction:column;gap:13px;margin-bottom:30px;flex:1}
+  .plan li{display:flex;gap:11px;align-items:flex-start;font-size:14.5px;color:#d6dbf0}
+  .plan li .chk{color:var(--cyan);flex:none;margin-top:3px}
+  .plan .btn{width:100%}
 
-  footer{
-    border-top:1px solid var(--border);
-    padding:50px 24px 30px;
-  }
-  .footer-wrap{
-    max-width:1200px;margin:0 auto;
-    display:flex;justify-content:space-between;flex-wrap:wrap;gap:40px;
-    margin-bottom:40px;
-  }
-  .footer-col h4{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;}
-  .footer-col li{margin-bottom:10px;font-size:14px;color:#c9c9d6;}
-  .footer-col li:hover{color:#fff;}
-  .footer-bottom{
-    max-width:1200px;margin:0 auto;
-    padding-top:24px;border-top:1px solid var(--border);
-    display:flex;justify-content:space-between;align-items:center;
-    font-size:13px;color:var(--muted);flex-wrap:wrap;gap:12px;
-  }
+  /* ---------- Mentorship ---------- */
+  .mentor{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;
+    background:linear-gradient(140deg,rgba(255,69,181,.08),rgba(79,124,255,.06));border:1px solid var(--line);
+    border-radius:30px;padding:56px;position:relative;overflow:hidden}
+  .mentor::after{content:"";position:absolute;width:420px;height:420px;right:-110px;top:-110px;border-radius:50%;
+    background:radial-gradient(circle,rgba(162,89,255,.25),transparent 70%);filter:blur(20px)}
+  .mentor-body{position:relative;z-index:2}
+  .mentor h2{font-size:clamp(30px,3.8vw,44px);font-weight:800;margin-bottom:18px}
+  .mentor p{color:var(--muted);font-size:16.5px;margin-bottom:24px;max-width:52ch}
+  .mentor ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .mentor li{display:flex;gap:10px;align-items:center;font-size:15px;color:#d6dbf0}
+  .mentor li .chk{color:var(--cyan)}
+  .mentor-card{position:relative;z-index:2;background:rgba(6,7,14,.62);border:1px solid var(--line-2);
+    border-radius:24px;padding:38px 32px;text-align:center;backdrop-filter:blur(12px)}
+  .mentor-card .m-sub{color:var(--muted);font-size:14px;margin:8px 0 26px}
 
-  /* mentorship application modal */
-  .modal-overlay{
-    position:fixed;inset:0;
-    background:rgba(0,0,0,0.7);
-    backdrop-filter:blur(4px);
-    display:none;
-    align-items:center;justify-content:center;
-    z-index:200;
-    padding:20px;
-  }
-  .modal-overlay.open{display:flex;}
-  .modal{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:36px;
-    max-width:480px;width:100%;
-    max-height:85vh;overflow-y:auto;
-    position:relative;
-  }
-  .modal-close{
-    position:absolute;top:16px;right:18px;
-    background:none;border:none;color:var(--muted);
-    font-size:26px;cursor:pointer;line-height:1;
-  }
-  .modal-close:hover{color:#fff;}
-  .modal h3{font-size:22px;margin-bottom:10px;}
-  .modal-sub{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:22px;}
-  .modal label{display:block;font-size:13px;color:#d8d8e2;margin-bottom:14px;}
-  .modal input, .modal textarea{
-    width:100%;margin-top:6px;
-    background:rgba(255,255,255,0.03);
-    border:1px solid var(--border);
-    border-radius:8px;
-    padding:10px 12px;
-    color:var(--text);
-    font-family:inherit;font-size:14px;
-    resize:vertical;
-  }
-  .modal input:focus, .modal textarea:focus{outline:none;border-color:var(--cyan);}
-  .modal-error{
-    color:#ff6b6b;font-size:13px;margin-bottom:14px;
+  /* ---------- Edge / growth chart ---------- */
+  .edge-inner{position:relative;border:1px solid var(--line);border-radius:30px;padding:44px 48px;overflow:hidden;
+    background:linear-gradient(140deg,rgba(79,124,255,.07),rgba(162,89,255,.05));backdrop-filter:blur(8px)}
+  .edge-inner::after{content:"";position:absolute;width:420px;height:420px;left:-120px;bottom:-160px;border-radius:50%;
+    background:radial-gradient(circle,rgba(79,124,255,.22),transparent 70%);filter:blur(20px);pointer-events:none}
+  .eq-head{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;align-items:flex-start;position:relative;z-index:2}
+  .eq-head h3{font-size:clamp(24px,3vw,36px);font-weight:800;margin:6px 0 10px}
+  .eq-head p{color:var(--muted);max-width:50ch;font-size:15.5px}
+  .eq-badges{display:flex;gap:10px;flex-wrap:wrap}
+  .eq-chart{position:relative;z-index:2;margin-top:22px;height:250px}
+  .eq-svg{width:100%;height:100%;display:block;overflow:visible}
+  .eq-grid line{stroke:rgba(255,255,255,.06);stroke-width:1}
+  .eq-line{filter:drop-shadow(0 0 7px rgba(162,89,255,.75));stroke-dasharray:1000;stroke-dashoffset:1000;
+    transition:stroke-dashoffset 2.6s var(--ease-out) .25s}
+  .edge.in .eq-line{stroke-dashoffset:0}
+  .eq-area{opacity:0;transition:opacity 1.3s ease 1.3s}
+  .edge.in .eq-area{opacity:1}
+  .eq-dot{opacity:0;transform-box:fill-box;transform-origin:center;filter:drop-shadow(0 0 10px rgba(255,255,255,.95));
+    transition:opacity .5s ease 2.5s}
+  .edge.in .eq-dot{opacity:1;animation:eqPulse 1.8s ease-in-out 2.6s infinite}
+  @keyframes eqPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.6)}}
+  .eq-cap{position:relative;z-index:2;margin-top:12px;color:var(--muted-2);font-size:12px}
+
+  /* ---------- Testimonials ---------- */
+  .t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .quote{background:var(--glass);border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;
+    transition:transform .4s var(--ease),border-color .4s;backdrop-filter:blur(8px)}
+  .quote:hover{transform:translateY(-6px);border-color:var(--line-2)}
+  .quote .stars{color:var(--gold);letter-spacing:2px;font-size:15px}
+  .q-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;gap:10px}
+  .v-badge{display:inline-flex;align-items:center;gap:6px;font-family:'Sora';font-weight:600;font-size:10.5px;letter-spacing:.03em;
+    color:var(--up);background:rgba(18,226,138,.1);border:1px solid rgba(18,226,138,.3);padding:4px 9px;border-radius:100px;white-space:nowrap}
+  .v-badge svg{width:12px;height:12px}
+  .reviews-cta{text-align:center;margin-top:38px}
+  .quote p{font-size:15.5px;color:#e2e6f5;margin-bottom:22px}
+  .who{display:flex;align-items:center;gap:12px}
+  .who .av{width:42px;height:42px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;
+    font-family:'Sora';font-weight:700;font-size:16px;flex:none}
+  .who .nm{font-weight:600;font-size:14.5px}
+  .who .rl{color:var(--muted-2);font-size:12.5px}
+
+  /* ---------- Partner (MEXC) ---------- */
+  .mexc{position:relative;border-radius:32px;padding:1.5px;overflow:hidden;
+    background:linear-gradient(120deg,rgba(255,69,181,.75),rgba(79,124,255,.6) 40%,rgba(47,230,192,.55) 75%,rgba(255,69,181,.75));
+    background-size:220% 220%;animation:borderflow 9s linear infinite;
+    box-shadow:0 44px 110px -55px rgba(120,60,255,.7)}
+  .mexc-inner{position:relative;border-radius:31px;padding:44px 48px;display:grid;
+    grid-template-columns:auto 1fr auto;gap:44px;align-items:center;overflow:hidden;
+    background:linear-gradient(140deg,rgba(11,9,22,.95),rgba(8,10,22,.95))}
+  .mexc-shine{position:absolute;top:-60%;left:-40%;width:55%;height:220%;transform:skewX(-20deg);pointer-events:none;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.07),transparent);animation:mexcShine 6.5s ease-in-out infinite}
+  @keyframes mexcShine{0%{left:-45%}55%,100%{left:135%}}
+  .mexc-left{display:flex;flex-direction:column;align-items:center;gap:14px;position:relative;z-index:2}
+  .mexc-tile{width:130px;height:130px;border-radius:26px;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(120% 120% at 30% 20%,#171b2b,#0b0d17);border:1px solid var(--line-2);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 20px 50px -20px rgba(47,230,192,.5);animation:floaty 5s ease-in-out infinite}
+  .mexc-mark{font-family:'Sora';font-weight:800;font-size:30px;letter-spacing:-.01em;
+    background:linear-gradient(135deg,#2fe6c0,#3aa0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .mexc-verified{display:inline-flex;align-items:center;gap:7px;font-family:'Sora';font-weight:600;font-size:12.5px;
+    color:var(--up);background:rgba(18,226,138,.12);border:1px solid rgba(18,226,138,.35);padding:7px 13px;border-radius:100px}
+  .mexc-verified svg{width:14px;height:14px}
+  .mexc-mid{position:relative;z-index:2}
+  .mexc-mid h2{font-size:clamp(24px,2.7vw,34px);font-weight:800;margin:6px 0 12px}
+  .mexc-mid p{color:var(--muted);font-size:15.5px;max-width:52ch;margin-bottom:20px}
+  .mexc-chips{display:flex;gap:10px;flex-wrap:wrap}
+  .chip{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:#dfe3f2;background:var(--glass-2);
+    border:1px solid var(--line);padding:9px 15px;border-radius:100px;transition:transform .3s var(--ease),border-color .3s}
+  .chip:hover{transform:translateY(-3px);border-color:var(--line-2)}
+  .chip .cd{width:7px;height:7px;border-radius:50%;background:var(--up);box-shadow:0 0 8px var(--up)}
+  .mexc-right{display:flex;flex-direction:column;align-items:center;gap:10px;position:relative;z-index:2}
+  .mexc-note{font-size:12.5px;color:var(--muted-2)}
+  @media(max-width:960px){
+    .mexc-inner{grid-template-columns:1fr;text-align:center;gap:26px;padding:38px 26px}
+    .mexc-left{flex-direction:row;justify-content:center}.mexc-mid p{margin-inline:auto}.mexc-chips{justify-content:center}
   }
 
-  @media(max-width:900px){
-    .nav-links{display:none;}
-    .hero h1{font-size:40px;}
-    .stats{grid-template-columns:repeat(2,1fr);}
-    .features-grid, .pricing-grid, .testimonials-grid{grid-template-columns:1fr;}
-    .plan.featured{transform:none;}
+  /* ---------- FAQ ---------- */
+  .faq{max-width:820px;margin:0 auto}
+  details.q{border:1px solid var(--line);border-radius:16px;background:var(--glass);margin-bottom:14px;
+    padding:0 26px;transition:border-color .3s,background .3s;backdrop-filter:blur(6px)}
+  details.q[open]{border-color:var(--line-2);background:var(--glass-2)}
+  details.q summary{list-style:none;cursor:pointer;padding:22px 0;display:flex;justify-content:space-between;
+    align-items:center;gap:20px;font-family:'Sora';font-weight:600;font-size:17px}
+  details.q summary::-webkit-details-marker{display:none}
+  details.q .chev{flex:none;width:22px;height:22px;position:relative;transition:transform .3s var(--ease)}
+  details.q[open] .chev{transform:rotate(45deg)}
+  details.q .chev::before,details.q .chev::after{content:"";position:absolute;background:var(--violet);border-radius:2px}
+  details.q .chev::before{top:10px;left:3px;width:16px;height:2px}
+  details.q .chev::after{top:3px;left:10px;width:2px;height:16px}
+  details.q .a{color:var(--muted);font-size:15px;padding:0 0 24px;max-width:64ch}
+
+  /* ---------- Final CTA ---------- */
+  .final{text-align:center;position:relative;border:1px solid var(--line);border-radius:34px;overflow:hidden;
+    padding:96px 40px;background:linear-gradient(140deg,rgba(255,69,181,.1),rgba(79,124,255,.08))}
+  .final::before{content:"";position:absolute;inset:0;background:radial-gradient(80% 120% at 50% 0%,rgba(162,89,255,.3),transparent 60%)}
+  .final-body{position:relative;z-index:2}
+  .final h2{font-size:clamp(34px,5vw,62px);font-weight:800;margin-bottom:20px}
+  .final p{color:var(--muted);font-size:18px;max-width:52ch;margin:0 auto 36px}
+
+  /* ---------- Footer ---------- */
+  footer{border-top:1px solid var(--line);padding:70px 0 40px;margin-top:40px;position:relative;z-index:2}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;margin-bottom:50px}
+  .foot-grid .brand{margin-bottom:16px}
+  .foot-about{color:var(--muted);font-size:14.5px;max-width:32ch}
+  .foot-col h4{font-family:'Sora';font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-2);margin-bottom:18px}
+  .foot-col a{display:block;color:var(--muted);font-size:14.5px;margin-bottom:12px;transition:color .25s}
+  .foot-col a:hover{color:#fff}
+  .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:28px;
+    border-top:1px solid var(--line);color:var(--muted-2);font-size:13px}
+
+  /* ---------- Reveal ---------- */
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease-out),transform 1s var(--ease-out);will-change:transform,opacity}
+  .reveal-l{opacity:0;transform:translateX(-52px);transition:opacity 1s var(--ease-out),transform 1s var(--ease-out)}
+  .reveal-r{opacity:0;transform:translateX(52px);transition:opacity 1s var(--ease-out),transform 1s var(--ease-out)}
+  .reveal-s{opacity:0;transform:scale(.9);transition:opacity 1s var(--ease-out),transform 1s var(--ease-out)}
+  .reveal.in,.reveal-l.in,.reveal-r.in,.reveal-s.in{opacity:1;transform:none}
+  .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.4s}
+
+  @media(max-width:960px){
+    .grid-3,.pricing-grid,.t-grid,.steps{grid-template-columns:1fr}
+    .steps::before{display:none}
+    .mentor{grid-template-columns:1fr;padding:40px 28px}.mentor ul{grid-template-columns:1fr}
+    .stats{grid-template-columns:1fr 1fr}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    .nav-links{display:none}.burger{display:flex}
+    .plan.featured{order:-1}
+  }
+  @media(max-width:560px){
+    .stats,.foot-grid{grid-template-columns:1fr}
+    section{padding:84px 0}
+    .nav-cta .btn:not(.mobile-keep){display:none}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+    .line-mask>span{transform:none}
+    #loader{display:none}
   }
 </style>
 </head>
 <body>
 
-<div class="stars"></div>
-
-<header>
-  <nav>
-    <div class="logo">
-      <div class="diamond"></div>
-      <span class="wordmark">TIMELESS TRADING</span>
-    </div>
-    <div class="nav-links">
-      <a href="#features">Features</a>
-      <a href="#pricing">Membership</a>
-      <a href="#mentorship">Mentorship</a>
-      <a href="#community">Community</a>
-      <a href="#testimonials">Results</a>
-      <a href="/auth/login?next=/trading-dashboard">Sign In</a>
-    </div>
-    <a href="https://discord.gg/mQPVspGbaG" target="_blank" rel="noopener" class="btn btn-primary">Join Discord</a>
-  </nav>
-</header>
-
-<main>
-
-  <section class="hero">
-    <div class="eyebrow"><span class="dot"></span> 5.0★ rated on Whop</div>
-    <h1>Take Control of Your <span class="grad">Financial Future.</span></h1>
-    <p>Elevate your mindset, discipline, and execution. Timeless Trading gives you live signals, daily breakdowns, and a community built to make your growth inevitable.</p>
-    <div class="cta-row">
-      <a href="#pricing" class="btn btn-primary btn-lg">Get V.I.P Access</a>
-      <a href="https://discord.gg/mQPVspGbaG" target="_blank" rel="noopener" class="btn btn-ghost btn-lg">Join the Discord</a>
-    </div>
-
-    <div class="stats">
-      <div class="stat"><div class="num">5.0★</div><div class="label">Whop Rating (6 reviews)</div></div>
-      <div class="stat"><div class="num">Mon–Thu</div><div class="label">Live Trading Calls</div></div>
-      <div class="stat"><div class="num">24/7</div><div class="label">Expert Support</div></div>
-      <div class="stat"><div class="num">100%</div><div class="label">5-Star Reviews</div></div>
-    </div>
-  </section>
-
-  <section id="features">
-    <div class="section-wrap">
-      <div class="section-head">
-        <div class="tag">What You Get</div>
-        <h2>Everything to Boost Your Trading Journey</h2>
-        <p>Exclusive insights, premium tools, and next-level resources — all in one place.</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">📈</div>
-          <h3>Live Trade Signals</h3>
-          <p>Real-time entries, exits, and risk levels sent straight to your VIP channel.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🎯</div>
-          <h3>Daily Market Breakdowns</h3>
-          <p>Clear, no-fluff analysis on where the market's headed and why it matters.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🎓</div>
-          <h3>Trading Education</h3>
-          <p>Courses and VOD lessons built around mindset, discipline, and execution.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🛠️</div>
-          <h3>Exclusive Tools</h3>
-          <p>Trackers, calculators, and dashboards built for the Timeless community.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">💬</div>
-          <h3>24/7 Community</h3>
-          <p>An active Discord full of traders, mentors, and a real support desk.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🎁</div>
-          <h3>Giveaways & Rewards</h3>
-          <p>Regular giveaways for Elite Access, merch, and community perks.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="pricing">
-    <div class="section-wrap">
-      <div class="section-head">
-        <div class="tag">Membership</div>
-        <h2>Choose Your Access Level</h2>
-        <p>Start free, get your foot in the door with Starter, or go all-in with V.I.P for the insider wallet, live sessions, and 24/7 expert support.</p>
-      </div>
-      <div class="rating-badge"><span class="stars-row">★★★★★</span> <strong>5.0</strong> · based on 6 reviews on Whop</div>
-      <div class="pricing-grid">
-
-        <div class="plan">
-          <h3>Free Access</h3>
-          <div class="price">$0</div>
-          <div class="sub">"Exclusive Community" · 42 members</div>
-          <ul>
-            <li><span class="check">✓</span> Access to the public community</li>
-            <li><span class="check">✓</span> Market news & giveaways</li>
-            <li><span class="check">✓</span> Community chat & support tickets</li>
-            <li><span class="check">✓</span> A taste of the Timeless mindset</li>
-          </ul>
-          <a href="https://discord.gg/mQPVspGbaG" target="_blank" rel="noopener" class="btn btn-ghost">Join Free on Discord</a>
-        </div>
-
-        <div class="plan">
-          <h3>Starter Access</h3>
-          <div class="price">$67<span>/mo</span></div>
-          <div class="sub">Your foot in the door</div>
-          <ul>
-            <li><span class="check">✓</span> Everything in Free</li>
-            <li><span class="check">✓</span> Weekly signal recap & watchlist</li>
-            <li><span class="check">✓</span> Self-paced course library</li>
-            <li><span class="check">✓</span> Pinned trade ideas in chat</li>
-            <li><span class="check">✓</span> Priority chat support</li>
-          </ul>
-          <a href="#" class="btn btn-ghost" data-checkout="TRADING_STARTER" data-next="/trading#pricing">Get Starter</a>
-        </div>
-
-        <div class="plan featured">
-          <div class="badge">MOST POPULAR</div>
-          <h3>V.I.P Access</h3>
-          <div style="font-size:13px;color:var(--cyan);font-style:italic;margin-bottom:14px;">"The Key To Master All Types Of Trading"</div>
-          <div class="price">$270<span>/mo</span></div>
-          <div class="payment-note">Billed monthly · cancel anytime</div>
-          <div class="sub">9 members · elevate your trading game</div>
-          <ul>
-            <li><span class="check">✓</span> Everything in Starter</li>
-            <li><span class="check">✓</span> Insider wallet</li>
-            <li><span class="check">✓</span> Real-time live trade signals</li>
-            <li><span class="check">✓</span> Exclusive V.I.P live trading sessions</li>
-            <li><span class="check">✓</span> 24/7 expert support</li>
-            <li><span class="check">✓</span> Live trading calls Mon–Thu</li>
-          </ul>
-          <a href="#" class="btn btn-primary" data-checkout="TRADING_VIP" data-next="/trading#pricing">Get V.I.P Access</a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section id="mentorship">
-    <div class="section-wrap" style="padding-top:0;">
-      <div class="mentor-box">
-        <div class="mentor-copy">
-          <div class="tag">1-On-1 Mentorship</div>
-          <h2>Work Directly With the Founders</h2>
-          <p>A hands-on mentorship built around your goals — direct access to Tyler and Jason, personalized trade review, and a real plan to get you executing with discipline. This isn't a course you sit through, it's a partnership until you get it.</p>
-          <ul class="mentor-list">
-            <li><span class="check">✓</span> 1-on-1 sessions with the founders</li>
-            <li><span class="check">✓</span> Personalized trading plan & risk review</li>
-            <li><span class="check">✓</span> Direct feedback on your trades</li>
-            <li><span class="check">✓</span> Lifetime access to V.I.P community</li>
-          </ul>
-        </div>
-        <div class="mentor-card">
-          <div class="mentor-price">$1,080</div>
-          <div class="mentor-price-sub">one-time · full mentorship</div>
-          <a href="#" class="btn btn-primary btn-lg" style="width:100%;text-align:center;margin-bottom:12px;" id="open-mentor-apply">Apply for Mentorship</a>
-          <div class="mentor-note">Applications reviewed personally · limited spots each month</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="testimonials">
-    <div class="section-wrap" style="padding-top:0;">
-      <div class="section-head">
-        <div class="tag">Results</div>
-        <h2>What the Community Says</h2>
-        <p>Real reviews from Timeless Trading members on Whop — 5.0 average across 6 ratings.</p>
-      </div>
-      <div class="testimonials-grid">
-        <div class="testimonial">
-          <div class="stars-row">★★★★★</div>
-          <p>"Ty and EMNT are so helpful and knowledgeable — wins are consistent and you can make your money back within 2-4 weeks. Community is tight knit and real, truly underrated."</p>
-          <div class="who"><div class="avatar"></div><div><div class="name">Timothy A.</div><div class="role">@ayerstimr · V.I.P Member</div></div></div>
-        </div>
-        <div class="testimonial">
-          <div class="stars-row">★★★★★</div>
-          <p>"This group is legit and extremely helpful, made my money back within 3 weeks of joining. Real deal 🙌🙌"</p>
-          <div class="who"><div class="avatar"></div><div><div class="name">Jared A.</div><div class="role">@jayayersd · V.I.P Member</div></div></div>
-        </div>
-        <div class="testimonial">
-          <div class="stars-row">★★★★★</div>
-          <p>"Really successful group of traders. The coach, Everest, has live trading calls Monday–Thursday and the courses are amazing — very informative and well structured."</p>
-          <div class="who"><div class="avatar"></div><div><div class="name">Noah</div><div class="role">@noahtrades · V.I.P Member</div></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="community">
-    <div class="community">
-      <div class="community-box">
-        <h2>Ready to Level Up?</h2>
-        <p>Your future self will thank you. Join thousands of traders inside the Timeless Trading Discord today.</p>
-        <a href="https://discord.gg/mQPVspGbaG" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Join the Discord →</a>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <div class="footer-wrap">
-    <div class="footer-col" style="max-width:280px;">
-      <div class="logo" style="margin-bottom:14px;">
-        <div class="diamond"></div>
-        <span class="wordmark" style="font-size:16px;">TIMELESS TRADING</span>
-      </div>
-      <p style="color:var(--muted);font-size:13px;line-height:1.6;">A trading community built on mindset, discipline, and execution.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Community</h4>
-      <ul>
-        <li><a href="https://discord.gg/mQPVspGbaG" target="_blank" rel="noopener">Discord</a></li>
-        <li>YouTube</li>
-        <li>Giveaways</li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Membership</h4>
-      <ul>
-        <li>Free Access</li>
-        <li>Starter Access</li>
-        <li>V.I.P Access</li>
-        <li>1-on-1 Mentorship</li>
-        <li>Reviews on Whop</li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Support</h4>
-      <ul>
-        <li>Open a Ticket</li>
-        <li>FAQ</li>
-        <li>Contact Founders</li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div>© 2026 Timeless Trading. All rights reserved.</div>
-    <div>Not financial advice. Trade at your own risk.</div>
-  </div>
-</footer>
-
-<div class="modal-overlay" id="mentor-modal-overlay">
-  <div class="modal">
-    <button class="modal-close" id="mentor-modal-close" aria-label="Close">&times;</button>
-
-    <div id="mentor-form-wrap">
-      <h3>Apply for Mentorship</h3>
-      <p class="modal-sub">Tell us a bit about yourself — every application is reviewed personally. If it's a fit, we'll follow up by email with a checkout link to lock in your spot.</p>
-      <form id="mentor-apply-form">
-        <label>Full Name
-          <input type="text" name="name" required>
-        </label>
-        <label>Email
-          <input type="email" name="email" required>
-        </label>
-        <label>Trading Experience
-          <textarea name="experience" rows="2" placeholder="e.g. 1 year, mostly options"></textarea>
-        </label>
-        <label>Current Account Size / Results So Far
-          <input type="text" name="revenue" placeholder="e.g. $5k account, breakeven so far">
-        </label>
-        <label>Biggest Challenge Right Now
-          <textarea name="challenge" rows="2"></textarea>
-        </label>
-        <label>Goals for the Next 6 Months
-          <textarea name="goals" rows="2"></textarea>
-        </label>
-        <label>Why do you want 1-on-1 mentorship?
-          <textarea name="why_mentor" rows="3"></textarea>
-        </label>
-        <div class="modal-error" id="mentor-form-error" hidden></div>
-        <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">Submit Application</button>
-      </form>
-    </div>
-
-    <div id="mentor-success" hidden>
-      <h3>Application received 🎉</h3>
-      <p class="modal-sub">Thanks — we review every application personally. If it's a fit, you'll get an email with a checkout link to lock in your spot.</p>
-      <button class="btn btn-ghost" style="width:100%;" id="mentor-success-close">Close</button>
-    </div>
-  </div>
+<!-- PRELOADER -->
+<div id="loader">
+  <div class="load-brand"><span class="load-gem"></span>TIMELESS TRADING</div>
+  <div class="load-bar"><div class="load-fill" id="loadFill"></div></div>
+  <div class="load-pct mono" id="loadPct">0%</div>
 </div>
 
+<!-- SCROLL PROGRESS -->
+<div class="progress" id="progress"></div>
+
+<!-- CURSOR -->
+<div class="cursor-ring" id="cRing"></div>
+<div class="cursor-dot" id="cDot"></div>
+
+<!-- BACKGROUND -->
+<canvas id="bg-canvas"></canvas>
+<div class="bg-orb orb-1"></div><div class="bg-orb orb-2"></div><div class="bg-orb orb-3"></div>
+<div class="grain"></div><div class="vignette"></div>
+
+<div class="wrap">
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="brand" data-hov><span class="gem"></span>TIMELESS TRADING</a>
+      <nav class="nav-links">
+        <a href="#features" data-hov>Features</a>
+        <a href="#pricing" data-hov>Membership</a>
+        <a href="#mentorship" data-hov>Mentorship</a>
+        <a href="#results" data-hov>Results</a>
+        <a href="#faq" data-hov>FAQ</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="#" class="btn btn-primary mobile-keep magnetic" data-hov>Join Discord</a>
+        <div class="burger" id="burger" data-hov><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero container">
+    <div class="hero-layers">
+    <div class="badge"><span class="dot"></span>&nbsp;<span class="g">★</span>&nbsp;<b>5.0</b>&nbsp;on Whop &middot; Official MEXC Partner</div>
+    <h1>
+      <span class="line-mask"><span>Take Control</span></span>
+      <span class="line-mask"><span>of Your <span class="grad-text">Financial</span></span></span>
+      <span class="line-mask"><span class="grad-text">Future.</span></span>
+    </h1>
+    <p class="sub">Elevate your mindset, discipline, and execution. Timeless Trading gives you live signals, daily breakdowns, and a community built to make your growth inevitable.</p>
+    <div class="hero-cta">
+      <a href="#pricing" class="btn btn-primary btn-lg magnetic" data-hov>Get V.I.P Access →</a>
+      <a href="#" class="btn btn-ghost btn-lg magnetic" data-hov>Join the Discord</a>
+    </div>
+    <div class="social">
+      <div class="avatars">
+        <span class="av" style="--i:0;background:linear-gradient(135deg,#ff45b5,#a259ff)">T</span>
+        <span class="av" style="--i:1;background:linear-gradient(135deg,#4f7cff,#43d9ff)">J</span>
+        <span class="av" style="--i:2;background:linear-gradient(135deg,#a259ff,#4f7cff)">M</span>
+        <span class="av" style="--i:3;background:linear-gradient(135deg,#12e28a,#43d9ff)">A</span>
+        <span class="av" style="--i:4;background:linear-gradient(135deg,#ff45b5,#ffce6a)">K</span>
+        <span class="av more" style="--i:5">+</span>
+      </div>
+      <div class="social-txt"><span class="live-dot"></span> Traders leveling up together — <b>live now</b></div>
+    </div>
+    </div><!-- /hero-layers -->
+    <div class="scroll-hint"><div class="mouse"></div>Scroll</div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+
+  <!-- STATS -->
+  <section class="container" style="padding-top:100px">
+    <div class="stats reveal">
+      <div class="stat"><div class="n" data-count="5.0" data-dec="1">0</div><div class="l">Average rating on Whop</div></div>
+      <div class="stat"><div class="n">Real-time</div><div class="l">Trade signals</div></div>
+      <div class="stat"><div class="n">24/7</div><div class="l">Live community access</div></div>
+      <div class="stat"><div class="n">Daily</div><div class="l">Market breakdowns</div></div>
+    </div>
+  </section>
+
+  <!-- PARTNER (MEXC) -->
+  <section class="container" style="padding-top:56px">
+    <div class="mexc reveal-s">
+      <div class="mexc-inner">
+        <div class="mexc-shine"></div>
+        <div class="mexc-left">
+          <div class="mexc-tile">
+            <span class="mexc-mark">MEXC</span>
+          </div>
+          <span class="mexc-verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Verified Partner</span>
+        </div>
+        <div class="mexc-mid">
+          <span class="eyebrow">Official Exchange Partner</span>
+          <h2>Trade Where the <span class="grad-text">Community</span> Trades</h2>
+          <p>Timeless Trading is an official MEXC partner. Sign up through our link to unlock member-only perks and trade on an exchange we stand behind.</p>
+          <div class="mexc-chips">
+            <span class="chip"><span class="cd"></span>Member sign-up perks</span>
+            <span class="chip"><span class="cd"></span>Fast, trusted execution</span>
+            <span class="chip"><span class="cd"></span>Verified partnership</span>
+          </div>
+        </div>
+        <div class="mexc-right">
+          <a href="#" class="btn btn-primary btn-lg magnetic" data-hov>Claim MEXC Perks →</a>
+          <span class="mexc-note">Takes under 2 minutes</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="container">
+    <div class="sec-head">
+      <span class="eyebrow reveal">What You Get</span>
+      <h2 class="reveal d1">Everything to Boost Your Trading Journey</h2>
+      <p class="reveal d2">Exclusive insights, premium tools, and next-level resources — all in one place.</p>
+    </div>
+    <div class="grid-3" id="featureGrid"></div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="container">
+    <div class="sec-head">
+      <span class="eyebrow reveal">How It Works</span>
+      <h2 class="reveal d1">From Guesswork to a Game Plan</h2>
+      <p class="reveal d2">Three steps to trading with a system and a room that has your back.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="num"><span>01</span></div><h3>Join the Community</h3><p>Get inside the Discord in minutes and meet a room of traders and mentors.</p></div>
+      <div class="step reveal d1"><div class="num"><span>02</span></div><h3>Learn the System</h3><p>Absorb the courses, daily breakdowns, and the mindset that drives disciplined execution.</p></div>
+      <div class="step reveal d2"><div class="num"><span>03</span></div><h3>Execute With Signals</h3><p>Trade real-time signals with clear entries, exits, and risk — never alone.</p></div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="container">
+    <div class="sec-head">
+      <span class="eyebrow reveal">Membership</span>
+      <h2 class="reveal d1">Choose Your Access Level</h2>
+      <p class="reveal d2">Start free, get your foot in the door with Starter, or go all-in with V.I.P for the insider wallet, live sessions, and 24/7 expert support.</p>
+    </div>
+    <div class="rating-row reveal d2"><span class="stars">★★★★★</span> <b>5.0</b> · rated on Whop</div>
+    <div class="pricing-grid">
+      <div class="plan reveal">
+        <div class="plan-name">Free Access</div><div class="plan-quote">"Exclusive Community"</div>
+        <div class="price"><span class="amt">$0</span></div><div class="plan-note">42 members · a taste of the mindset</div>
+        <ul>
+          <li><span class="chk">✓</span> Access to the public community</li>
+          <li><span class="chk">✓</span> Market news &amp; giveaways</li>
+          <li><span class="chk">✓</span> Community chat &amp; support tickets</li>
+          <li><span class="chk">✓</span> A taste of the Timeless mindset</li>
+        </ul>
+        <a href="#" class="btn btn-ghost magnetic" data-hov>Join Free</a>
+      </div>
+      <div class="plan reveal d1">
+        <div class="plan-name">Starter Access</div><div class="plan-quote">Your foot in the door</div>
+        <div class="price"><span class="amt">$67</span><span class="per">/mo</span></div>
+        <div class="plan-note">Everything to start building consistency</div>
+        <ul>
+          <li><span class="chk">✓</span> Everything in Free</li>
+          <li><span class="chk">✓</span> Weekly signal recap &amp; watchlist</li>
+          <li><span class="chk">✓</span> Self-paced course library</li>
+          <li><span class="chk">✓</span> Pinned trade ideas in chat</li>
+        </ul>
+        <a href="#" class="btn btn-ghost magnetic" data-hov>Get Starter</a>
+      </div>
+      <div class="plan featured reveal d2">
+        <div class="tag">★ MOST POPULAR</div>
+        <div class="plan-name">V.I.P Access</div><div class="plan-quote">"The Key To Master All Types Of Trading"</div>
+        <div class="price"><span class="amt">$270</span><span class="per">/mo</span></div>
+        <div class="plan-note">9 members · billed monthly · cancel anytime</div>
+        <ul>
+          <li><span class="chk">✓</span> Everything in Starter</li>
+          <li><span class="chk">✓</span> Live trading calls &amp; sessions</li>
+          <li><span class="chk">✓</span> Real-time signals in VIP channel</li>
+          <li><span class="chk">✓</span> Insider wallet access</li>
+          <li><span class="chk">✓</span> 24/7 priority expert support</li>
+        </ul>
+        <a href="#" class="btn btn-primary magnetic" data-hov>Get V.I.P Access →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENTORSHIP -->
+  <section id="mentorship" class="container">
+    <div class="mentor">
+      <div class="mentor-body reveal-l">
+        <span class="eyebrow">1-on-1 Mentorship</span>
+        <h2>A Partnership Until You <span class="grad-text">Get It.</span></h2>
+        <p>Direct access, a personalized trade review, and a real plan to get you executing with discipline. This isn't a course you sit through — it's a partnership with the founders until it clicks.</p>
+        <ul>
+          <li><span class="chk">✓</span> 1-on-1 sessions with the founders</li>
+          <li><span class="chk">✓</span> Personalized trading plan &amp; risk review</li>
+          <li><span class="chk">✓</span> Direct feedback on your trades</li>
+          <li><span class="chk">✓</span> Lifetime access to V.I.P community</li>
+        </ul>
+      </div>
+      <div class="mentor-card reveal-r">
+        <div class="plan-name">Full Mentorship</div>
+        <div class="price" style="justify-content:center"><span class="amt grad-text">$1,080</span></div>
+        <div class="m-sub">one-time · reviewed personally · limited spots each month</div>
+        <a href="#" class="btn btn-primary btn-lg magnetic" style="width:100%" data-hov>Apply for Mentorship</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDGE / GROWTH -->
+  <section id="edge" class="container">
+    <div class="edge reveal">
+      <div class="edge-inner">
+        <div class="eq-head">
+          <div>
+            <span class="eyebrow">The Timeless Edge</span>
+            <h3>Built for Consistent Growth</h3>
+            <p>Discipline over hype — a repeatable process, a room that keeps you accountable, and signals you actually understand.</p>
+          </div>
+          <div class="eq-badges">
+            <span class="chip"><span class="cd"></span>Live sessions</span>
+            <span class="chip"><span class="cd"></span>Daily breakdowns</span>
+            <span class="chip"><span class="cd"></span>24/7 support</span>
+          </div>
+        </div>
+        <div class="eq-chart">
+          <svg class="eq-svg" viewBox="0 0 1000 250" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="eqStroke" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#ff45b5"/><stop offset="0.5" stop-color="#a259ff"/><stop offset="1" stop-color="#43d9ff"/>
+              </linearGradient>
+              <linearGradient id="eqFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#a259ff" stop-opacity="0.34"/><stop offset="1" stop-color="#a259ff" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <g class="eq-grid"><line x1="0" y1="62" x2="1000" y2="62"/><line x1="0" y1="125" x2="1000" y2="125"/><line x1="0" y1="188" x2="1000" y2="188"/></g>
+            <path class="eq-area" fill="url(#eqFill)" d="M40,216 L95,198 L150,206 L205,172 L260,184 L315,150 L370,165 L425,124 L480,140 L535,100 L590,116 L645,78 L700,92 L755,58 L810,70 L865,44 L920,54 L960,32 L960,250 L40,250 Z"/>
+            <path class="eq-line" fill="none" stroke="url(#eqStroke)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" pathLength="1000" d="M40,216 L95,198 L150,206 L205,172 L260,184 L315,150 L370,165 L425,124 L480,140 L535,100 L590,116 L645,78 L700,92 L755,58 L810,70 L865,44 L920,54 L960,32"/>
+            <circle class="eq-dot" cx="960" cy="32" r="6" fill="#fff"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="results" class="container">
+    <div class="sec-head">
+      <span class="eyebrow reveal">Results</span>
+      <h2 class="reveal d1">What the Community Says</h2>
+      <p class="reveal d2">Real reviews from Timeless Trading members — rated 5.0 on Whop.</p>
+    </div>
+    <div class="t-grid">
+      <div class="quote tilt reveal">
+        <div class="q-top"><div class="stars">★★★★★</div><span class="v-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Verified</span></div>
+        <p>"Ty and EMNT are so helpful and knowledgeable, wins are consistent and you can make your money back within like 2-4 weeks…"</p>
+        <div class="who"><div class="av" style="background:linear-gradient(135deg,#ff45b5,#a259ff)">TA</div><div><div class="nm">Timothy Ayers</div><div class="rl">Whop review</div></div></div>
+      </div>
+      <div class="quote tilt reveal d1">
+        <div class="q-top"><div class="stars">★★★★★</div><span class="v-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Verified</span></div>
+        <p>"This group is legit and extremely helpful, made my money back within 3 weeks of joining. Real deal 🙌🙌"</p>
+        <div class="who"><div class="av" style="background:linear-gradient(135deg,#4f7cff,#43d9ff)">J</div><div><div class="nm">Jared Ayers</div><div class="rl">Whop review</div></div></div>
+      </div>
+      <div class="quote tilt reveal d2">
+        <div class="q-top"><div class="stars">★★★★★</div><span class="v-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Verified</span></div>
+        <p>"These guys know their stuff!! Very knowledgeable and definitely learning alot. Highly recommend you join!!!"</p>
+        <div class="who"><div class="av" style="background:linear-gradient(135deg,#a259ff,#4f7cff)">J</div><div><div class="nm">Jonathan Fincher</div><div class="rl">Whop review</div></div></div>
+      </div>
+      <div class="quote tilt reveal">
+        <div class="q-top"><div class="stars">★★★★★</div><span class="v-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Verified</span></div>
+        <p>"Really successful group of traders in here. The coach, Everest, knows his stuff and has live trading calls Monday–Thursday…"</p>
+        <div class="who"><div class="av" style="background:linear-gradient(135deg,#12e28a,#43d9ff)">N</div><div><div class="nm">Noah</div><div class="rl">Whop review</div></div></div>
+      </div>
+      <div class="quote tilt reveal d1">
+        <div class="q-top"><div class="stars">★★★★★</div><span class="v-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Verified</span></div>
+        <p>"Timeless Trading is phenomenal with the way they teach! the mentor is so understanding and willing to help out…"</p>
+        <div class="who"><div class="av" style="background:linear-gradient(135deg,#ff45b5,#ffce6a)">F</div><div><div class="nm">Fourthties</div><div class="rl">Whop review</div></div></div>
+      </div>
+      <div class="quote tilt reveal d2">
+        <div class="q-top"><div class="stars">★★★★★</div><span class="v-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Verified</span></div>
+        <p>"I made over $100 my first day trading in this group.. These dudes dont play!!"</p>
+        <div class="who"><div class="av" style="background:linear-gradient(135deg,#a259ff,#ff45b5)">B</div><div><div class="nm">Braeden Chaplin</div><div class="rl">Whop review</div></div></div>
+      </div>
+    </div>
+    <div class="reviews-cta reveal">
+      <a href="https://whop.com/timelesstrading-eliteaccess/reviews/" target="_blank" rel="noopener" class="btn btn-ghost magnetic" data-hov>Read all reviews on Whop →</a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="container">
+    <div class="sec-head">
+      <span class="eyebrow reveal">FAQ</span>
+      <h2 class="reveal d1">Questions, Answered</h2>
+    </div>
+    <div class="faq">
+      <details class="q reveal" open><summary>Is this financial advice?<span class="chev"></span></summary>
+        <div class="a">No. Everything shared in Timeless Trading is educational. Signals and breakdowns are ideas, not instructions — you trade at your own risk and make your own decisions.</div></details>
+      <details class="q reveal"><summary>I'm a complete beginner — is this for me?<span class="chev"></span></summary>
+        <div class="a">Yes. Start with Free or Starter to learn the mindset and system at your own pace, then step up to V.I.P for live calls and real-time signals when you're ready.</div></details>
+      <details class="q reveal"><summary>What's the difference between Starter and V.I.P?<span class="chev"></span></summary>
+        <div class="a">Starter gives you the course library, weekly recaps, and pinned ideas. V.I.P adds live trading calls, real-time signals, insider wallet access, and 24/7 priority support.</div></details>
+      <details class="q reveal"><summary>Can I cancel anytime?<span class="chev"></span></summary>
+        <div class="a">Yes. Memberships are billed monthly and you can cancel anytime — no lock-in.</div></details>
+      <details class="q reveal"><summary>How does the 1-on-1 mentorship work?<span class="chev"></span></summary>
+        <div class="a">It's a one-time program with direct sessions, a personalized trading plan, and ongoing feedback from the founders. Spots are limited each month and every application is reviewed personally.</div></details>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="container">
+    <div class="final reveal">
+      <div class="final-body">
+        <span class="eyebrow" style="text-align:center;display:block">Ready?</span>
+        <h2>Ready to Level Up?</h2>
+        <p>Your future self will thank you. Join the traders inside the Timeless Trading Discord today.</p>
+        <a href="#" class="btn btn-primary btn-lg magnetic" data-hov>Join the Discord →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="container">
+    <div class="foot-grid">
+      <div>
+        <a href="#" class="brand" data-hov><span class="gem"></span>TIMELESS TRADING</a>
+        <p class="foot-about">A trading community built on mindset, discipline, and execution.</p>
+      </div>
+      <div class="foot-col"><h4>Community</h4><a href="#" data-hov>Discord</a><a href="#" data-hov>YouTube</a><a href="#" data-hov>Giveaways</a></div>
+      <div class="foot-col"><h4>Membership</h4><a href="#" data-hov>Free Access</a><a href="#" data-hov>Starter Access</a><a href="#" data-hov>V.I.P Access</a><a href="#" data-hov>1-on-1 Mentorship</a><a href="#" data-hov>Reviews on Whop</a></div>
+      <div class="foot-col"><h4>Support</h4><a href="#" data-hov>Open a Ticket</a><a href="#" data-hov>FAQ</a><a href="#" data-hov>Contact Founders</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Timeless Trading. All rights reserved.</span>
+      <span>Not financial advice. Trade at your own risk.</span>
+    </div>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-  // Mentorship application modal — collects info instead of charging
-  // immediately, so applications can be reviewed before sending a checkout link.
-  (function () {
-    var overlay = document.getElementById('mentor-modal-overlay');
-    var openBtn = document.getElementById('open-mentor-apply');
-    var closeBtn = document.getElementById('mentor-modal-close');
-    var successCloseBtn = document.getElementById('mentor-success-close');
-    var form = document.getElementById('mentor-apply-form');
-    var formWrap = document.getElementById('mentor-form-wrap');
-    var successWrap = document.getElementById('mentor-success');
-    var errorBox = document.getElementById('mentor-form-error');
+( function () {
 
-    function openModal(e) {
-      if (e) e.preventDefault();
-      overlay.classList.add('open');
-    }
-    function closeModal() {
-      overlay.classList.remove('open');
-    }
+	/**
+ * Full-screen textured quad shader
+ */
+	var CopyShader = {
+		uniforms: {
+			'tDiffuse': {
+				value: null
+			},
+			'opacity': {
+				value: 1.0
+			}
+		},
+		vertexShader:
+  /* glsl */
+  `
 
-    if (openBtn) openBtn.addEventListener('click', openModal);
-    if (closeBtn) closeBtn.addEventListener('click', closeModal);
-    if (successCloseBtn) successCloseBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', function (e) {
-      if (e.target === overlay) closeModal();
-    });
+		varying vec2 vUv;
 
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault();
-      errorBox.hidden = true;
-      var submitBtn = form.querySelector('button[type="submit"]');
-      var originalText = submitBtn.textContent;
-      submitBtn.textContent = 'Submitting…';
-      submitBtn.style.pointerEvents = 'none';
+		void main() {
 
-      var data = Object.fromEntries(new FormData(form).entries());
-      data.source = 'trading';
+			vUv = uv;
+			gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
 
-      try {
-        var res = await fetch('/api/mentorship-apply', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        });
-        var json = await res.json();
+		}`,
+		fragmentShader:
+  /* glsl */
+  `
 
-        if (!res.ok) {
-          errorBox.textContent = json.error || 'Something went wrong. Please try again.';
-          errorBox.hidden = false;
-          return;
-        }
+		uniform float opacity;
 
-        formWrap.hidden = true;
-        successWrap.hidden = false;
-      } catch (err) {
-        errorBox.textContent = 'Something went wrong. Please try again.';
-        errorBox.hidden = false;
-      } finally {
-        submitBtn.textContent = originalText;
-        submitBtn.style.pointerEvents = '';
-      }
-    });
-  })();
+		uniform sampler2D tDiffuse;
 
-  // Wires membership buttons to the real Stripe checkout flow.
-  // Signed-out visitors get sent to sign in first, then bounced back here.
-  document.querySelectorAll('[data-checkout]').forEach(function (el) {
-    el.addEventListener('click', async function (e) {
-      e.preventDefault();
-      var productKey = el.getAttribute('data-checkout');
-      var nextPath = el.getAttribute('data-next') || '/trading';
-      var originalText = el.textContent;
-      el.textContent = 'Loading…';
-      el.style.pointerEvents = 'none';
+		varying vec2 vUv;
 
-      try {
-        var res = await fetch('/api/stripe/checkout', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ productKey: productKey }),
-        });
+		void main() {
 
-        if (res.status === 401) {
-          window.location.href = '/auth/login?next=' + encodeURIComponent(nextPath);
-          return;
-        }
+			vec4 texel = texture2D( tDiffuse, vUv );
+			gl_FragColor = opacity * texel;
 
-        var data = await res.json();
-        if (data.url) {
-          window.location.href = data.url;
-          return;
-        }
+		}`
+	};
 
-        alert(data.error || 'Something went wrong starting checkout. Please try again.');
-      } catch (err) {
-        alert('Something went wrong starting checkout. Please try again.');
-      } finally {
-        el.textContent = originalText;
-        el.style.pointerEvents = '';
-      }
+	THREE.CopyShader = CopyShader;
+
+} )();
+( function () {
+
+	/**
+ * Luminosity
+ * http://en.wikipedia.org/wiki/Luminosity
+ */
+
+	const LuminosityHighPassShader = {
+		shaderID: 'luminosityHighPass',
+		uniforms: {
+			'tDiffuse': {
+				value: null
+			},
+			'luminosityThreshold': {
+				value: 1.0
+			},
+			'smoothWidth': {
+				value: 1.0
+			},
+			'defaultColor': {
+				value: new THREE.Color( 0x000000 )
+			},
+			'defaultOpacity': {
+				value: 0.0
+			}
+		},
+		vertexShader:
+  /* glsl */
+  `
+
+		varying vec2 vUv;
+
+		void main() {
+
+			vUv = uv;
+
+			gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+		}`,
+		fragmentShader:
+  /* glsl */
+  `
+
+		uniform sampler2D tDiffuse;
+		uniform vec3 defaultColor;
+		uniform float defaultOpacity;
+		uniform float luminosityThreshold;
+		uniform float smoothWidth;
+
+		varying vec2 vUv;
+
+		void main() {
+
+			vec4 texel = texture2D( tDiffuse, vUv );
+
+			vec3 luma = vec3( 0.299, 0.587, 0.114 );
+
+			float v = dot( texel.xyz, luma );
+
+			vec4 outputColor = vec4( defaultColor.rgb, defaultOpacity );
+
+			float alpha = smoothstep( luminosityThreshold, luminosityThreshold + smoothWidth, v );
+
+			gl_FragColor = mix( outputColor, texel, alpha );
+
+		}`
+	};
+
+	THREE.LuminosityHighPassShader = LuminosityHighPassShader;
+
+} )();
+( function () {
+
+	class EffectComposer {
+
+		constructor( renderer, renderTarget ) {
+
+			this.renderer = renderer;
+
+			if ( renderTarget === undefined ) {
+
+				const parameters = {
+					minFilter: THREE.LinearFilter,
+					magFilter: THREE.LinearFilter,
+					format: THREE.RGBAFormat
+				};
+				const size = renderer.getSize( new THREE.Vector2() );
+				this._pixelRatio = renderer.getPixelRatio();
+				this._width = size.width;
+				this._height = size.height;
+				renderTarget = new THREE.WebGLRenderTarget( this._width * this._pixelRatio, this._height * this._pixelRatio, parameters );
+				renderTarget.texture.name = 'EffectComposer.rt1';
+
+			} else {
+
+				this._pixelRatio = 1;
+				this._width = renderTarget.width;
+				this._height = renderTarget.height;
+
+			}
+
+			this.renderTarget1 = renderTarget;
+			this.renderTarget2 = renderTarget.clone();
+			this.renderTarget2.texture.name = 'EffectComposer.rt2';
+			this.writeBuffer = this.renderTarget1;
+			this.readBuffer = this.renderTarget2;
+			this.renderToScreen = true;
+			this.passes = []; // dependencies
+
+			if ( THREE.CopyShader === undefined ) {
+
+				console.error( 'THREE.EffectComposer relies on THREE.CopyShader' );
+
+			}
+
+			if ( THREE.ShaderPass === undefined ) {
+
+				console.error( 'THREE.EffectComposer relies on THREE.ShaderPass' );
+
+			}
+
+			this.copyPass = new THREE.ShaderPass( THREE.CopyShader );
+			this.clock = new THREE.Clock();
+
+		}
+
+		swapBuffers() {
+
+			const tmp = this.readBuffer;
+			this.readBuffer = this.writeBuffer;
+			this.writeBuffer = tmp;
+
+		}
+
+		addPass( pass ) {
+
+			this.passes.push( pass );
+			pass.setSize( this._width * this._pixelRatio, this._height * this._pixelRatio );
+
+		}
+
+		insertPass( pass, index ) {
+
+			this.passes.splice( index, 0, pass );
+			pass.setSize( this._width * this._pixelRatio, this._height * this._pixelRatio );
+
+		}
+
+		removePass( pass ) {
+
+			const index = this.passes.indexOf( pass );
+
+			if ( index !== - 1 ) {
+
+				this.passes.splice( index, 1 );
+
+			}
+
+		}
+
+		isLastEnabledPass( passIndex ) {
+
+			for ( let i = passIndex + 1; i < this.passes.length; i ++ ) {
+
+				if ( this.passes[ i ].enabled ) {
+
+					return false;
+
+				}
+
+			}
+
+			return true;
+
+		}
+
+		render( deltaTime ) {
+
+			// deltaTime value is in seconds
+			if ( deltaTime === undefined ) {
+
+				deltaTime = this.clock.getDelta();
+
+			}
+
+			const currentRenderTarget = this.renderer.getRenderTarget();
+			let maskActive = false;
+
+			for ( let i = 0, il = this.passes.length; i < il; i ++ ) {
+
+				const pass = this.passes[ i ];
+				if ( pass.enabled === false ) continue;
+				pass.renderToScreen = this.renderToScreen && this.isLastEnabledPass( i );
+				pass.render( this.renderer, this.writeBuffer, this.readBuffer, deltaTime, maskActive );
+
+				if ( pass.needsSwap ) {
+
+					if ( maskActive ) {
+
+						const context = this.renderer.getContext();
+						const stencil = this.renderer.state.buffers.stencil; //context.stencilFunc( context.NOTEQUAL, 1, 0xffffffff );
+
+						stencil.setFunc( context.NOTEQUAL, 1, 0xffffffff );
+						this.copyPass.render( this.renderer, this.writeBuffer, this.readBuffer, deltaTime ); //context.stencilFunc( context.EQUAL, 1, 0xffffffff );
+
+						stencil.setFunc( context.EQUAL, 1, 0xffffffff );
+
+					}
+
+					this.swapBuffers();
+
+				}
+
+				if ( THREE.MaskPass !== undefined ) {
+
+					if ( pass instanceof THREE.MaskPass ) {
+
+						maskActive = true;
+
+					} else if ( pass instanceof THREE.ClearMaskPass ) {
+
+						maskActive = false;
+
+					}
+
+				}
+
+			}
+
+			this.renderer.setRenderTarget( currentRenderTarget );
+
+		}
+
+		reset( renderTarget ) {
+
+			if ( renderTarget === undefined ) {
+
+				const size = this.renderer.getSize( new THREE.Vector2() );
+				this._pixelRatio = this.renderer.getPixelRatio();
+				this._width = size.width;
+				this._height = size.height;
+				renderTarget = this.renderTarget1.clone();
+				renderTarget.setSize( this._width * this._pixelRatio, this._height * this._pixelRatio );
+
+			}
+
+			this.renderTarget1.dispose();
+			this.renderTarget2.dispose();
+			this.renderTarget1 = renderTarget;
+			this.renderTarget2 = renderTarget.clone();
+			this.writeBuffer = this.renderTarget1;
+			this.readBuffer = this.renderTarget2;
+
+		}
+
+		setSize( width, height ) {
+
+			this._width = width;
+			this._height = height;
+			const effectiveWidth = this._width * this._pixelRatio;
+			const effectiveHeight = this._height * this._pixelRatio;
+			this.renderTarget1.setSize( effectiveWidth, effectiveHeight );
+			this.renderTarget2.setSize( effectiveWidth, effectiveHeight );
+
+			for ( let i = 0; i < this.passes.length; i ++ ) {
+
+				this.passes[ i ].setSize( effectiveWidth, effectiveHeight );
+
+			}
+
+		}
+
+		setPixelRatio( pixelRatio ) {
+
+			this._pixelRatio = pixelRatio;
+			this.setSize( this._width, this._height );
+
+		}
+
+	}
+
+	class Pass {
+
+		constructor() {
+
+			// if set to true, the pass is processed by the composer
+			this.enabled = true; // if set to true, the pass indicates to swap read and write buffer after rendering
+
+			this.needsSwap = true; // if set to true, the pass clears its buffer before rendering
+
+			this.clear = false; // if set to true, the result of the pass is rendered to screen. This is set automatically by EffectComposer.
+
+			this.renderToScreen = false;
+
+		}
+
+		setSize( ) {}
+
+		render( ) {
+
+			console.error( 'THREE.Pass: .render() must be implemented in derived pass.' );
+
+		}
+
+	} // Helper for passes that need to fill the viewport with a single quad.
+
+
+	const _camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 ); // https://github.com/mrdoob/three.js/pull/21358
+
+
+	const _geometry = new THREE.BufferGeometry();
+
+	_geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( [ - 1, 3, 0, - 1, - 1, 0, 3, - 1, 0 ], 3 ) );
+
+	_geometry.setAttribute( 'uv', new THREE.Float32BufferAttribute( [ 0, 2, 0, 0, 2, 0 ], 2 ) );
+
+	class FullScreenQuad {
+
+		constructor( material ) {
+
+			this._mesh = new THREE.Mesh( _geometry, material );
+
+		}
+
+		dispose() {
+
+			this._mesh.geometry.dispose();
+
+		}
+
+		render( renderer ) {
+
+			renderer.render( this._mesh, _camera );
+
+		}
+
+		get material() {
+
+			return this._mesh.material;
+
+		}
+
+		set material( value ) {
+
+			this._mesh.material = value;
+
+		}
+
+	}
+
+	THREE.EffectComposer = EffectComposer;
+	THREE.FullScreenQuad = FullScreenQuad;
+	THREE.Pass = Pass;
+
+} )();
+( function () {
+
+	class RenderPass extends THREE.Pass {
+
+		constructor( scene, camera, overrideMaterial, clearColor, clearAlpha ) {
+
+			super();
+			this.scene = scene;
+			this.camera = camera;
+			this.overrideMaterial = overrideMaterial;
+			this.clearColor = clearColor;
+			this.clearAlpha = clearAlpha !== undefined ? clearAlpha : 0;
+			this.clear = true;
+			this.clearDepth = false;
+			this.needsSwap = false;
+			this._oldClearColor = new THREE.Color();
+
+		}
+
+		render( renderer, writeBuffer, readBuffer
+			/*, deltaTime, maskActive */
+		) {
+
+			const oldAutoClear = renderer.autoClear;
+			renderer.autoClear = false;
+			let oldClearAlpha, oldOverrideMaterial;
+
+			if ( this.overrideMaterial !== undefined ) {
+
+				oldOverrideMaterial = this.scene.overrideMaterial;
+				this.scene.overrideMaterial = this.overrideMaterial;
+
+			}
+
+			if ( this.clearColor ) {
+
+				renderer.getClearColor( this._oldClearColor );
+				oldClearAlpha = renderer.getClearAlpha();
+				renderer.setClearColor( this.clearColor, this.clearAlpha );
+
+			}
+
+			if ( this.clearDepth ) {
+
+				renderer.clearDepth();
+
+			}
+
+			renderer.setRenderTarget( this.renderToScreen ? null : readBuffer ); // TODO: Avoid using autoClear properties, see https://github.com/mrdoob/three.js/pull/15571#issuecomment-465669600
+
+			if ( this.clear ) renderer.clear( renderer.autoClearColor, renderer.autoClearDepth, renderer.autoClearStencil );
+			renderer.render( this.scene, this.camera );
+
+			if ( this.clearColor ) {
+
+				renderer.setClearColor( this._oldClearColor, oldClearAlpha );
+
+			}
+
+			if ( this.overrideMaterial !== undefined ) {
+
+				this.scene.overrideMaterial = oldOverrideMaterial;
+
+			}
+
+			renderer.autoClear = oldAutoClear;
+
+		}
+
+	}
+
+	THREE.RenderPass = RenderPass;
+
+} )();
+( function () {
+
+	class MaskPass extends THREE.Pass {
+
+		constructor( scene, camera ) {
+
+			super();
+			this.scene = scene;
+			this.camera = camera;
+			this.clear = true;
+			this.needsSwap = false;
+			this.inverse = false;
+
+		}
+
+		render( renderer, writeBuffer, readBuffer
+			/*, deltaTime, maskActive */
+		) {
+
+			const context = renderer.getContext();
+			const state = renderer.state; // don't update color or depth
+
+			state.buffers.color.setMask( false );
+			state.buffers.depth.setMask( false ); // lock buffers
+
+			state.buffers.color.setLocked( true );
+			state.buffers.depth.setLocked( true ); // set up stencil
+
+			let writeValue, clearValue;
+
+			if ( this.inverse ) {
+
+				writeValue = 0;
+				clearValue = 1;
+
+			} else {
+
+				writeValue = 1;
+				clearValue = 0;
+
+			}
+
+			state.buffers.stencil.setTest( true );
+			state.buffers.stencil.setOp( context.REPLACE, context.REPLACE, context.REPLACE );
+			state.buffers.stencil.setFunc( context.ALWAYS, writeValue, 0xffffffff );
+			state.buffers.stencil.setClear( clearValue );
+			state.buffers.stencil.setLocked( true ); // draw into the stencil buffer
+
+			renderer.setRenderTarget( readBuffer );
+			if ( this.clear ) renderer.clear();
+			renderer.render( this.scene, this.camera );
+			renderer.setRenderTarget( writeBuffer );
+			if ( this.clear ) renderer.clear();
+			renderer.render( this.scene, this.camera ); // unlock color and depth buffer for subsequent rendering
+
+			state.buffers.color.setLocked( false );
+			state.buffers.depth.setLocked( false ); // only render where stencil is set to 1
+
+			state.buffers.stencil.setLocked( false );
+			state.buffers.stencil.setFunc( context.EQUAL, 1, 0xffffffff ); // draw if == 1
+
+			state.buffers.stencil.setOp( context.KEEP, context.KEEP, context.KEEP );
+			state.buffers.stencil.setLocked( true );
+
+		}
+
+	}
+
+	class ClearMaskPass extends THREE.Pass {
+
+		constructor() {
+
+			super();
+			this.needsSwap = false;
+
+		}
+
+		render( renderer
+			/*, writeBuffer, readBuffer, deltaTime, maskActive */
+		) {
+
+			renderer.state.buffers.stencil.setLocked( false );
+			renderer.state.buffers.stencil.setTest( false );
+
+		}
+
+	}
+
+	THREE.ClearMaskPass = ClearMaskPass;
+	THREE.MaskPass = MaskPass;
+
+} )();
+( function () {
+
+	class ShaderPass extends THREE.Pass {
+
+		constructor( shader, textureID ) {
+
+			super();
+			this.textureID = textureID !== undefined ? textureID : 'tDiffuse';
+
+			if ( shader instanceof THREE.ShaderMaterial ) {
+
+				this.uniforms = shader.uniforms;
+				this.material = shader;
+
+			} else if ( shader ) {
+
+				this.uniforms = THREE.UniformsUtils.clone( shader.uniforms );
+				this.material = new THREE.ShaderMaterial( {
+					defines: Object.assign( {}, shader.defines ),
+					uniforms: this.uniforms,
+					vertexShader: shader.vertexShader,
+					fragmentShader: shader.fragmentShader
+				} );
+
+			}
+
+			this.fsQuad = new THREE.FullScreenQuad( this.material );
+
+		}
+
+		render( renderer, writeBuffer, readBuffer
+			/*, deltaTime, maskActive */
+		) {
+
+			if ( this.uniforms[ this.textureID ] ) {
+
+				this.uniforms[ this.textureID ].value = readBuffer.texture;
+
+			}
+
+			this.fsQuad.material = this.material;
+
+			if ( this.renderToScreen ) {
+
+				renderer.setRenderTarget( null );
+				this.fsQuad.render( renderer );
+
+			} else {
+
+				renderer.setRenderTarget( writeBuffer ); // TODO: Avoid using autoClear properties, see https://github.com/mrdoob/three.js/pull/15571#issuecomment-465669600
+
+				if ( this.clear ) renderer.clear( renderer.autoClearColor, renderer.autoClearDepth, renderer.autoClearStencil );
+				this.fsQuad.render( renderer );
+
+			}
+
+		}
+
+	}
+
+	THREE.ShaderPass = ShaderPass;
+
+} )();
+( function () {
+
+	/**
+ * UnrealBloomPass is inspired by the bloom pass of Unreal Engine. It creates a
+ * mip map chain of bloom textures and blurs them with different radii. Because
+ * of the weighted combination of mips, and because larger blurs are done on
+ * higher mips, this effect provides good quality and performance.
+ *
+ * Reference:
+ * - https://docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/Bloom/
+ */
+
+	class UnrealBloomPass extends THREE.Pass {
+
+		constructor( resolution, strength, radius, threshold ) {
+
+			super();
+			this.strength = strength !== undefined ? strength : 1;
+			this.radius = radius;
+			this.threshold = threshold;
+			this.resolution = resolution !== undefined ? new THREE.Vector2( resolution.x, resolution.y ) : new THREE.Vector2( 256, 256 ); // create color only once here, reuse it later inside the render function
+
+			this.clearColor = new THREE.Color( 0, 0, 0 ); // render targets
+
+			const pars = {
+				minFilter: THREE.LinearFilter,
+				magFilter: THREE.LinearFilter,
+				format: THREE.RGBAFormat
+			};
+			this.renderTargetsHorizontal = [];
+			this.renderTargetsVertical = [];
+			this.nMips = 5;
+			let resx = Math.round( this.resolution.x / 2 );
+			let resy = Math.round( this.resolution.y / 2 );
+			this.renderTargetBright = new THREE.WebGLRenderTarget( resx, resy, pars );
+			this.renderTargetBright.texture.name = 'UnrealBloomPass.bright';
+			this.renderTargetBright.texture.generateMipmaps = false;
+
+			for ( let i = 0; i < this.nMips; i ++ ) {
+
+				const renderTargetHorizonal = new THREE.WebGLRenderTarget( resx, resy, pars );
+				renderTargetHorizonal.texture.name = 'UnrealBloomPass.h' + i;
+				renderTargetHorizonal.texture.generateMipmaps = false;
+				this.renderTargetsHorizontal.push( renderTargetHorizonal );
+				const renderTargetVertical = new THREE.WebGLRenderTarget( resx, resy, pars );
+				renderTargetVertical.texture.name = 'UnrealBloomPass.v' + i;
+				renderTargetVertical.texture.generateMipmaps = false;
+				this.renderTargetsVertical.push( renderTargetVertical );
+				resx = Math.round( resx / 2 );
+				resy = Math.round( resy / 2 );
+
+			} // luminosity high pass material
+
+
+			if ( THREE.LuminosityHighPassShader === undefined ) console.error( 'THREE.UnrealBloomPass relies on THREE.LuminosityHighPassShader' );
+			const highPassShader = THREE.LuminosityHighPassShader;
+			this.highPassUniforms = THREE.UniformsUtils.clone( highPassShader.uniforms );
+			this.highPassUniforms[ 'luminosityThreshold' ].value = threshold;
+			this.highPassUniforms[ 'smoothWidth' ].value = 0.01;
+			this.materialHighPassFilter = new THREE.ShaderMaterial( {
+				uniforms: this.highPassUniforms,
+				vertexShader: highPassShader.vertexShader,
+				fragmentShader: highPassShader.fragmentShader,
+				defines: {}
+			} ); // Gaussian Blur Materials
+
+			this.separableBlurMaterials = [];
+			const kernelSizeArray = [ 3, 5, 7, 9, 11 ];
+			resx = Math.round( this.resolution.x / 2 );
+			resy = Math.round( this.resolution.y / 2 );
+
+			for ( let i = 0; i < this.nMips; i ++ ) {
+
+				this.separableBlurMaterials.push( this.getSeperableBlurMaterial( kernelSizeArray[ i ] ) );
+				this.separableBlurMaterials[ i ].uniforms[ 'texSize' ].value = new THREE.Vector2( resx, resy );
+				resx = Math.round( resx / 2 );
+				resy = Math.round( resy / 2 );
+
+			} // Composite material
+
+
+			this.compositeMaterial = this.getCompositeMaterial( this.nMips );
+			this.compositeMaterial.uniforms[ 'blurTexture1' ].value = this.renderTargetsVertical[ 0 ].texture;
+			this.compositeMaterial.uniforms[ 'blurTexture2' ].value = this.renderTargetsVertical[ 1 ].texture;
+			this.compositeMaterial.uniforms[ 'blurTexture3' ].value = this.renderTargetsVertical[ 2 ].texture;
+			this.compositeMaterial.uniforms[ 'blurTexture4' ].value = this.renderTargetsVertical[ 3 ].texture;
+			this.compositeMaterial.uniforms[ 'blurTexture5' ].value = this.renderTargetsVertical[ 4 ].texture;
+			this.compositeMaterial.uniforms[ 'bloomStrength' ].value = strength;
+			this.compositeMaterial.uniforms[ 'bloomRadius' ].value = 0.1;
+			this.compositeMaterial.needsUpdate = true;
+			const bloomFactors = [ 1.0, 0.8, 0.6, 0.4, 0.2 ];
+			this.compositeMaterial.uniforms[ 'bloomFactors' ].value = bloomFactors;
+			this.bloomTintColors = [ new THREE.Vector3( 1, 1, 1 ), new THREE.Vector3( 1, 1, 1 ), new THREE.Vector3( 1, 1, 1 ), new THREE.Vector3( 1, 1, 1 ), new THREE.Vector3( 1, 1, 1 ) ];
+			this.compositeMaterial.uniforms[ 'bloomTintColors' ].value = this.bloomTintColors; // copy material
+
+			if ( THREE.CopyShader === undefined ) {
+
+				console.error( 'THREE.UnrealBloomPass relies on THREE.CopyShader' );
+
+			}
+
+			const copyShader = THREE.CopyShader;
+			this.copyUniforms = THREE.UniformsUtils.clone( copyShader.uniforms );
+			this.copyUniforms[ 'opacity' ].value = 1.0;
+			this.materialCopy = new THREE.ShaderMaterial( {
+				uniforms: this.copyUniforms,
+				vertexShader: copyShader.vertexShader,
+				fragmentShader: copyShader.fragmentShader,
+				blending: THREE.AdditiveBlending,
+				depthTest: false,
+				depthWrite: false,
+				transparent: true
+			} );
+			this.enabled = true;
+			this.needsSwap = false;
+			this._oldClearColor = new THREE.Color();
+			this.oldClearAlpha = 1;
+			this.basic = new THREE.MeshBasicMaterial();
+			this.fsQuad = new THREE.FullScreenQuad( null );
+
+		}
+
+		dispose() {
+
+			for ( let i = 0; i < this.renderTargetsHorizontal.length; i ++ ) {
+
+				this.renderTargetsHorizontal[ i ].dispose();
+
+			}
+
+			for ( let i = 0; i < this.renderTargetsVertical.length; i ++ ) {
+
+				this.renderTargetsVertical[ i ].dispose();
+
+			}
+
+			this.renderTargetBright.dispose();
+
+		}
+
+		setSize( width, height ) {
+
+			let resx = Math.round( width / 2 );
+			let resy = Math.round( height / 2 );
+			this.renderTargetBright.setSize( resx, resy );
+
+			for ( let i = 0; i < this.nMips; i ++ ) {
+
+				this.renderTargetsHorizontal[ i ].setSize( resx, resy );
+				this.renderTargetsVertical[ i ].setSize( resx, resy );
+				this.separableBlurMaterials[ i ].uniforms[ 'texSize' ].value = new THREE.Vector2( resx, resy );
+				resx = Math.round( resx / 2 );
+				resy = Math.round( resy / 2 );
+
+			}
+
+		}
+
+		render( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
+
+			renderer.getClearColor( this._oldClearColor );
+			this.oldClearAlpha = renderer.getClearAlpha();
+			const oldAutoClear = renderer.autoClear;
+			renderer.autoClear = false;
+			renderer.setClearColor( this.clearColor, 0 );
+			if ( maskActive ) renderer.state.buffers.stencil.setTest( false ); // Render input to screen
+
+			if ( this.renderToScreen ) {
+
+				this.fsQuad.material = this.basic;
+				this.basic.map = readBuffer.texture;
+				renderer.setRenderTarget( null );
+				renderer.clear();
+				this.fsQuad.render( renderer );
+
+			} // 1. Extract Bright Areas
+
+
+			this.highPassUniforms[ 'tDiffuse' ].value = readBuffer.texture;
+			this.highPassUniforms[ 'luminosityThreshold' ].value = this.threshold;
+			this.fsQuad.material = this.materialHighPassFilter;
+			renderer.setRenderTarget( this.renderTargetBright );
+			renderer.clear();
+			this.fsQuad.render( renderer ); // 2. Blur All the mips progressively
+
+			let inputRenderTarget = this.renderTargetBright;
+
+			for ( let i = 0; i < this.nMips; i ++ ) {
+
+				this.fsQuad.material = this.separableBlurMaterials[ i ];
+				this.separableBlurMaterials[ i ].uniforms[ 'colorTexture' ].value = inputRenderTarget.texture;
+				this.separableBlurMaterials[ i ].uniforms[ 'direction' ].value = UnrealBloomPass.BlurDirectionX;
+				renderer.setRenderTarget( this.renderTargetsHorizontal[ i ] );
+				renderer.clear();
+				this.fsQuad.render( renderer );
+				this.separableBlurMaterials[ i ].uniforms[ 'colorTexture' ].value = this.renderTargetsHorizontal[ i ].texture;
+				this.separableBlurMaterials[ i ].uniforms[ 'direction' ].value = UnrealBloomPass.BlurDirectionY;
+				renderer.setRenderTarget( this.renderTargetsVertical[ i ] );
+				renderer.clear();
+				this.fsQuad.render( renderer );
+				inputRenderTarget = this.renderTargetsVertical[ i ];
+
+			} // Composite All the mips
+
+
+			this.fsQuad.material = this.compositeMaterial;
+			this.compositeMaterial.uniforms[ 'bloomStrength' ].value = this.strength;
+			this.compositeMaterial.uniforms[ 'bloomRadius' ].value = this.radius;
+			this.compositeMaterial.uniforms[ 'bloomTintColors' ].value = this.bloomTintColors;
+			renderer.setRenderTarget( this.renderTargetsHorizontal[ 0 ] );
+			renderer.clear();
+			this.fsQuad.render( renderer ); // Blend it additively over the input texture
+
+			this.fsQuad.material = this.materialCopy;
+			this.copyUniforms[ 'tDiffuse' ].value = this.renderTargetsHorizontal[ 0 ].texture;
+			if ( maskActive ) renderer.state.buffers.stencil.setTest( true );
+
+			if ( this.renderToScreen ) {
+
+				renderer.setRenderTarget( null );
+				this.fsQuad.render( renderer );
+
+			} else {
+
+				renderer.setRenderTarget( readBuffer );
+				this.fsQuad.render( renderer );
+
+			} // Restore renderer settings
+
+
+			renderer.setClearColor( this._oldClearColor, this.oldClearAlpha );
+			renderer.autoClear = oldAutoClear;
+
+		}
+
+		getSeperableBlurMaterial( kernelRadius ) {
+
+			return new THREE.ShaderMaterial( {
+				defines: {
+					'KERNEL_RADIUS': kernelRadius,
+					'SIGMA': kernelRadius
+				},
+				uniforms: {
+					'colorTexture': {
+						value: null
+					},
+					'texSize': {
+						value: new THREE.Vector2( 0.5, 0.5 )
+					},
+					'direction': {
+						value: new THREE.Vector2( 0.5, 0.5 )
+					}
+				},
+				vertexShader: `varying vec2 vUv;
+				void main() {
+					vUv = uv;
+					gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+				}`,
+				fragmentShader: `#include <common>
+				varying vec2 vUv;
+				uniform sampler2D colorTexture;
+				uniform vec2 texSize;
+				uniform vec2 direction;
+
+				float gaussianPdf(in float x, in float sigma) {
+					return 0.39894 * exp( -0.5 * x * x/( sigma * sigma))/sigma;
+				}
+				void main() {
+					vec2 invSize = 1.0 / texSize;
+					float fSigma = float(SIGMA);
+					float weightSum = gaussianPdf(0.0, fSigma);
+					vec3 diffuseSum = texture2D( colorTexture, vUv).rgb * weightSum;
+					for( int i = 1; i < KERNEL_RADIUS; i ++ ) {
+						float x = float(i);
+						float w = gaussianPdf(x, fSigma);
+						vec2 uvOffset = direction * invSize * x;
+						vec3 sample1 = texture2D( colorTexture, vUv + uvOffset).rgb;
+						vec3 sample2 = texture2D( colorTexture, vUv - uvOffset).rgb;
+						diffuseSum += (sample1 + sample2) * w;
+						weightSum += 2.0 * w;
+					}
+					gl_FragColor = vec4(diffuseSum/weightSum, 1.0);
+				}`
+			} );
+
+		}
+
+		getCompositeMaterial( nMips ) {
+
+			return new THREE.ShaderMaterial( {
+				defines: {
+					'NUM_MIPS': nMips
+				},
+				uniforms: {
+					'blurTexture1': {
+						value: null
+					},
+					'blurTexture2': {
+						value: null
+					},
+					'blurTexture3': {
+						value: null
+					},
+					'blurTexture4': {
+						value: null
+					},
+					'blurTexture5': {
+						value: null
+					},
+					'dirtTexture': {
+						value: null
+					},
+					'bloomStrength': {
+						value: 1.0
+					},
+					'bloomFactors': {
+						value: null
+					},
+					'bloomTintColors': {
+						value: null
+					},
+					'bloomRadius': {
+						value: 0.0
+					}
+				},
+				vertexShader: `varying vec2 vUv;
+				void main() {
+					vUv = uv;
+					gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+				}`,
+				fragmentShader: `varying vec2 vUv;
+				uniform sampler2D blurTexture1;
+				uniform sampler2D blurTexture2;
+				uniform sampler2D blurTexture3;
+				uniform sampler2D blurTexture4;
+				uniform sampler2D blurTexture5;
+				uniform sampler2D dirtTexture;
+				uniform float bloomStrength;
+				uniform float bloomRadius;
+				uniform float bloomFactors[NUM_MIPS];
+				uniform vec3 bloomTintColors[NUM_MIPS];
+
+				float lerpBloomFactor(const in float factor) {
+					float mirrorFactor = 1.2 - factor;
+					return mix(factor, mirrorFactor, bloomRadius);
+				}
+
+				void main() {
+					gl_FragColor = bloomStrength * ( lerpBloomFactor(bloomFactors[0]) * vec4(bloomTintColors[0], 1.0) * texture2D(blurTexture1, vUv) +
+						lerpBloomFactor(bloomFactors[1]) * vec4(bloomTintColors[1], 1.0) * texture2D(blurTexture2, vUv) +
+						lerpBloomFactor(bloomFactors[2]) * vec4(bloomTintColors[2], 1.0) * texture2D(blurTexture3, vUv) +
+						lerpBloomFactor(bloomFactors[3]) * vec4(bloomTintColors[3], 1.0) * texture2D(blurTexture4, vUv) +
+						lerpBloomFactor(bloomFactors[4]) * vec4(bloomTintColors[4], 1.0) * texture2D(blurTexture5, vUv) );
+				}`
+			} );
+
+		}
+
+	}
+
+	UnrealBloomPass.BlurDirectionX = new THREE.Vector2( 1.0, 0.0 );
+	UnrealBloomPass.BlurDirectionY = new THREE.Vector2( 0.0, 1.0 );
+
+	THREE.UnrealBloomPass = UnrealBloomPass;
+
+} )();
+
+</script>
+<script>
+/* ================= Feature cards (SVG icons) ================= */
+const ICONS={
+  signals:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-6 4 3 5-8"/><path d="M17 6h3v3"/></svg>',
+  breakdown:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg>',
+  edu:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4L2 9l10 5 10-5-10-5z"/><path d="M6 11v5c0 1 3 2.5 6 2.5S18 17 18 16v-5"/></svg>',
+  tools:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a3.5 3.5 0 01-4.6 4.6l-5 5a2 2 0 102.8 2.8l5-5a3.5 3.5 0 004.6-4.6l-2 2-1.8-1.8 2-2z"/></svg>',
+  chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13a2 2 0 012 2v6a2 2 0 01-2 2H9l-4 3v-3H4a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg>',
+  gift:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v8H4v-8"/><path d="M2 8h20v4H2z"/><path d="M12 8V20M12 8S10.5 3 8 4.5 9 8 12 8zM12 8s1.5-5 4-3.5S15 8 12 8z"/></svg>'
+};
+const FEATURES=[
+  ['signals','Live Trade Signals',"Real-time entries, exits, and risk levels sent straight to your VIP channel."],
+  ['breakdown','Daily Market Breakdowns',"Clear, no-fluff analysis on where the market's headed and why it matters."],
+  ['edu','Trading Education',"Courses and VOD lessons built around mindset, discipline, and execution."],
+  ['tools','Exclusive Tools',"Trackers, calculators, and watchlists that give you a real edge."],
+  ['chat','24/7 Community Support',"A tight-knit room of traders and mentors ready to answer, anytime."],
+  ['gift','Giveaways & Rewards',"Member-only giveaways, challenges, and perks that pay you to show up."]
+];
+const fg=document.getElementById('featureGrid');
+FEATURES.forEach((f,i)=>{
+  const el=document.createElement('div');
+  el.className='card tilt reveal d'+(i%3);
+  el.innerHTML=`<div class="card-inner"><div class="ic">${ICONS[f[0]]}</div><h3>${f[1]}</h3><p>${f[2]}</p></div>`;
+  fg.appendChild(el);
+});
+
+/* ================= Live ticker ================= */
+const TK=[['BTC/USD',64120,2.41],['ETH/USD',3412,1.18],['SOL/USD',168.20,4.02],['NQ',19845,-0.36],
+['ES',5530,0.22],['GOLD',2412,0.61],['EUR/USD',1.0872,-0.14],['XRP/USD',0.612,3.55],['DOGE',0.148,5.20],['GBP/USD',1.271,0.08]];
+const tt=document.getElementById('tickerTrack');
+function fmtPx(n){return n>=1000?n.toLocaleString('en-US',{maximumFractionDigits:0}):n.toLocaleString('en-US',{minimumFractionDigits:n<10?3:2,maximumFractionDigits:n<10?3:2});}
+function tkRow(){return TK.map(t=>{const u=t[2]>=0;return `<span class="tk"><span class="sym">${t[0]}</span><span class="px mono">${fmtPx(t[1])}</span><span class="chg mono ${u?'up':'down'}">${(u?'+':'')+t[2].toFixed(2)}%</span></span>`;}).join('');}
+tt.innerHTML=tkRow()+tkRow();
+const pxEls=[...tt.querySelectorAll('.px')],chgEls=[...tt.querySelectorAll('.chg')],TKL=TK.length;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches) setInterval(()=>{
+  TK.forEach((t,i)=>{
+    t[1]=Math.max(0.0001,t[1]+(Math.random()-0.48)*t[1]*0.004);
+    t[2]=+(t[2]+(Math.random()-0.5)*0.3).toFixed(2);
+    const u=t[2]>=0;
+    [i,i+TKL].forEach(k=>{
+      if(pxEls[k])pxEls[k].textContent=fmtPx(t[1]);
+      if(chgEls[k]){chgEls[k].textContent=(u?'+':'')+t[2].toFixed(2)+'%';chgEls[k].className='chg mono '+(u?'up':'down');
+        chgEls[k].style.filter='brightness(1.7)';
+        setTimeout(()=>{chgEls[k].style.transition='filter .7s';chgEls[k].style.filter='';},20);}
     });
   });
-</script>
+},1700);
 
+/* ================= Nav + scroll progress ================= */
+const nav=document.getElementById('nav'),progress=document.getElementById('progress');
+function onScroll(){nav.classList.toggle('scrolled',scrollY>30);
+  const h=document.documentElement.scrollHeight-innerHeight;
+  progress.style.transform='scaleX('+(h>0?scrollY/h:0)+')';}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+/* ================= Scroll-spy (active nav link) ================= */
+const spyIds=['features','pricing','mentorship','results','faq'];
+const navMap={};
+document.querySelectorAll('.nav-links a').forEach(a=>{const h=a.getAttribute('href');if(h&&h[0]==='#')navMap[h.slice(1)]=a;});
+function spy(){const y=scrollY+innerHeight*0.35;let cur='';
+  spyIds.forEach(id=>{const el=document.getElementById(id);if(el&&el.offsetTop<=y)cur=id;});
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  if(navMap[cur])navMap[cur].classList.add('active');}
+addEventListener('scroll',spy,{passive:true});spy();
+
+/* ================= Reveal ================= */
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r,.reveal-s').forEach(el=>io.observe(el));
+
+/* ================= Count-up ================= */
+const cio=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){countUp(e.target);cio.unobserve(e.target);}})},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+function countUp(el){
+  const to=parseFloat(el.dataset.count),dec=+(el.dataset.dec||0),suf=el.dataset.suffix||'';
+  let start=null;const dur=1400;
+  function tick(ts){if(!start)start=ts;const p=Math.min((ts-start)/dur,1);
+    const val=(1-Math.pow(1-p,3))*to;el.textContent=val.toFixed(dec)+suf;
+    if(p<1)requestAnimationFrame(tick);else el.textContent=to.toFixed(dec)+suf;}
+  requestAnimationFrame(tick);
+}
+
+const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ================= Scroll-linked parallax (section motion) ================= */
+if(!reduceMotion){
+  const pElems=[...document.querySelectorAll('.sec-head,.edge-inner')];
+  let pTick=false;
+  function applyPar(){const vh=innerHeight;pElems.forEach(el=>{const r=el.getBoundingClientRect();
+    if(r.bottom<-60||r.top>vh+60)return;const off=((r.top+r.height/2)-vh/2)/vh;
+    el.style.transform='translateY('+(off*-26)+'px)';});pTick=false;}
+  addEventListener('scroll',()=>{if(!pTick){pTick=true;requestAnimationFrame(applyPar);}},{passive:true});
+  addEventListener('resize',applyPar);applyPar();
+}
+
+/* ================= Custom cursor + magnetic + tilt ================= */
+if(!reduceMotion && matchMedia('(pointer:fine)').matches){
+  const dot=document.getElementById('cDot'),ring=document.getElementById('cRing');
+  let dx=0,dy=0,rx=0,ry=0,tx=0,ty=0;
+  addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;dot.style.transform=`translate(${tx}px,${ty}px) translate(-50%,-50%)`;});
+  (function ringLoop(){rx+=(tx-rx)*.18;ry+=(ty-ry)*.18;ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;requestAnimationFrame(ringLoop);})();
+  document.querySelectorAll('[data-hov]').forEach(el=>{
+    el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
+  });
+  document.querySelectorAll('.magnetic').forEach(el=>{
+    el.addEventListener('mousemove',e=>{const r=el.getBoundingClientRect();
+      el.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.25}px,${(e.clientY-r.top-r.height/2)*.35}px)`;});
+    el.addEventListener('mouseleave',()=>el.style.transform='');
+  });
+  document.querySelectorAll('.plan').forEach(pl=>{
+    pl.addEventListener('mousemove',e=>{const r=pl.getBoundingClientRect();
+      pl.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+      pl.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');});
+  });
+  document.querySelectorAll('.tilt').forEach(card=>{
+    card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();
+      const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+      card.style.transform=`perspective(900px) rotateY(${(px-.5)*10}deg) rotateX(${(.5-py)*10}deg) translateY(-6px)`;
+      card.style.setProperty('--mx',px*100+'%');card.style.setProperty('--my',py*100+'%');});
+    card.addEventListener('mouseleave',()=>card.style.transform='');
+  });
+  /* hero depth parallax tilt */
+  const heroLayers=document.querySelector('.hero-layers');
+  let hpx=0,hpy=0,htx=0,hty=0;
+  addEventListener('mousemove',e=>{htx=(e.clientX/innerWidth-.5);hty=(e.clientY/innerHeight-.5);});
+  (function heroLoop(){
+    hpx+=(htx-hpx)*.08;hpy+=(hty-hpy)*.08;
+    if(heroLayers){
+      if(scrollY<innerHeight)heroLayers.style.transform=`rotateY(${hpx*6}deg) rotateX(${-hpy*6}deg) translate3d(${hpx*16}px,${hpy*12}px,0)`;
+      else if(heroLayers.style.transform)heroLayers.style.transform='';
+    }
+    requestAnimationFrame(heroLoop);
+  })();
+}
+
+/* ================= Preloader (rAF timeline + hard fallback) ================= */
+(function(){
+  const loader=document.getElementById('loader'),fill=document.getElementById('loadFill'),pct=document.getElementById('loadPct');
+  if(reduceMotion){document.body.classList.add('loaded');return;}
+  document.body.classList.add('locked');
+  let start=null,done=false;const dur=1500;
+  function finish(){if(done)return;done=true;fill.style.width='100%';pct.textContent='100%';
+    loader.classList.add('done');document.body.classList.remove('locked');document.body.classList.add('loaded');}
+  function step(ts){if(!start)start=ts;const p=Math.min((ts-start)/dur,1);
+    const v=Math.floor(p*100);fill.style.width=v+'%';pct.textContent=v+'%';
+    if(p<1)requestAnimationFrame(step);else setTimeout(finish,220);}
+  requestAnimationFrame(step);
+  setTimeout(finish,3000); /* guarantee we never get stuck */
+})();
+
+/* ================= Mobile menu ================= */
+document.getElementById('burger').addEventListener('click',()=>{
+  const l=document.querySelector('.nav-links');const open=l.style.display==='flex';
+  l.style.cssText=open?'':'display:flex;position:absolute;top:70px;right:20px;flex-direction:column;background:rgba(8,9,18,.96);padding:20px 26px;border-radius:16px;border:1px solid rgba(255,255,255,.1);gap:18px;backdrop-filter:blur(18px)';
+});
+
+/* ================= Three.js cinematic scene ================= */
+(function(){
+  if(reduceMotion || typeof THREE==='undefined') return;
+  const canvas=document.getElementById('bg-canvas');
+  const isMobile=innerWidth<760;
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,.1,200);
+  camera.position.set(0,0,9);scene.add(camera);
+
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:!isMobile});
+  renderer.setSize(innerWidth,innerHeight);
+  renderer.setPixelRatio(Math.min(devicePixelRatio,isMobile?1.5:2));
+  renderer.outputEncoding=THREE.sRGBEncoding;
+
+  let mx=0,my=0,tmx=0,tmy=0;
+  addEventListener('mousemove',e=>{tmx=(e.clientX/innerWidth-.5);tmy=(e.clientY/innerHeight-.5);});
+  let sY=0;addEventListener('scroll',()=>sY=scrollY,{passive:true});
+
+  /* nebula plane attached to camera */
+  const bgUniforms={uTime:{value:0},uMouse:{value:new THREE.Vector2()},uRes:{value:new THREE.Vector2(innerWidth,innerHeight)}};
+  const bgMat=new THREE.ShaderMaterial({uniforms:bgUniforms,depthWrite:false,depthTest:false,toneMapped:false,
+    vertexShader:`varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
+    fragmentShader:`precision highp float;varying vec2 vUv;uniform float uTime;uniform vec2 uMouse;uniform vec2 uRes;
+      vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}vec2 mod289(vec2 x){return x-floor(x*(1.0/289.0))*289.0;}
+      vec3 permute(vec3 x){return mod289(((x*34.0)+1.0)*x);}
+      float snoise(vec2 v){const vec4 C=vec4(0.211324865,0.366025403,-0.577350269,0.024390243);
+        vec2 i=floor(v+dot(v,C.yy));vec2 x0=v-i+dot(i,C.xx);vec2 i1=(x0.x>x0.y)?vec2(1.0,0.0):vec2(0.0,1.0);
+        vec4 x12=x0.xyxy+C.xxzz;x12.xy-=i1;i=mod289(i);
+        vec3 p=permute(permute(i.y+vec3(0.0,i1.y,1.0))+i.x+vec3(0.0,i1.x,1.0));
+        vec3 m=max(0.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.0);m=m*m;m=m*m;
+        vec3 x=2.0*fract(p*C.www)-1.0;vec3 h=abs(x)-0.5;vec3 ox=floor(x+0.5);vec3 a0=x-ox;
+        m*=1.79284291-0.85373472*(a0*a0+h*h);vec3 g;g.x=a0.x*x0.x+h.x*x0.y;g.yz=a0.yz*x12.xz+h.yz*x12.yw;return 130.0*dot(m,g);}
+      float fbm(vec2 p){float s=0.0,a=0.5;for(int i=0;i<5;i++){s+=a*snoise(p);p*=2.02;a*=0.5;}return s;}
+      void main(){vec2 p=(gl_FragCoord.xy-0.5*uRes.xy)/uRes.y;float t=uTime*0.05;p+=uMouse*0.22;
+        float n=fbm(p*1.4+vec2(t,-t*0.6));float n2=fbm(p*2.3-vec2(t*0.4,t)+n);
+        vec3 pink=vec3(0.90,0.20,0.62),violet=vec3(0.55,0.28,0.95),blue=vec3(0.24,0.44,1.0),base=vec3(0.012,0.015,0.04);
+        vec3 col=base;col=mix(col,violet,smoothstep(0.0,0.9,n)*0.6);
+        col=mix(col,pink,smoothstep(0.15,1.0,n2)*0.5);col=mix(col,blue,smoothstep(-0.2,0.8,n-n2)*0.48);
+        float d=length(p);col+=violet*0.14*smoothstep(0.9,0.0,d);col+=pink*0.04;col*=smoothstep(1.45,0.12,d);
+        col=pow(max(col,0.0),vec3(0.9));
+        gl_FragColor=vec4(col*1.12,1.0);}`});
+  const bgPlane=new THREE.Mesh(new THREE.PlaneGeometry(60,60),bgMat);
+  bgPlane.position.z=-20;bgPlane.frustumCulled=false;bgPlane.renderOrder=-10;camera.add(bgPlane);
+
+  /* env map — vibrant multi-hue for colorful gem reflections */
+  const ec=document.createElement('canvas');ec.width=ec.height=256;const exx=ec.getContext('2d');
+  const eg=exx.createLinearGradient(0,0,256,256);
+  eg.addColorStop(0,'#ff45b5');eg.addColorStop(.28,'#a259ff');eg.addColorStop(.52,'#4f7cff');
+  eg.addColorStop(.76,'#43d9ff');eg.addColorStop(1,'#12e28a');
+  exx.fillStyle=eg;exx.fillRect(0,0,256,256);
+  exx.fillStyle='rgba(255,255,255,.98)';exx.beginPath();exx.arc(66,58,26,0,7);exx.fill();
+  exx.fillStyle='rgba(255,255,255,.5)';exx.beginPath();exx.arc(196,150,40,0,7);exx.fill();
+  const envTex=new THREE.CanvasTexture(ec);envTex.mapping=THREE.EquirectangularReflectionMapping;
+  const pmrem=new THREE.PMREMGenerator(renderer);const envRT=pmrem.fromEquirectangular(envTex);scene.environment=envRT.texture;
+
+  /* hidden vibrant sky-sphere — only the diamond "sees" it (layer 1), for colorful refraction */
+  const skyC=document.createElement('canvas');skyC.width=512;skyC.height=256;const scx=skyC.getContext('2d');
+  const skg=scx.createLinearGradient(0,0,512,256);
+  skg.addColorStop(0,'#ff45b5');skg.addColorStop(.3,'#a259ff');skg.addColorStop(.55,'#4f7cff');skg.addColorStop(.8,'#43d9ff');skg.addColorStop(1,'#12e28a');
+  scx.fillStyle=skg;scx.fillRect(0,0,512,256);
+  [[90,70,60],[300,150,85],[430,60,50],[200,210,70]].forEach(function(o){const rg=scx.createRadialGradient(o[0],o[1],0,o[0],o[1],o[2]);
+    rg.addColorStop(0,'rgba(255,255,255,.95)');rg.addColorStop(1,'rgba(255,255,255,0)');scx.fillStyle=rg;scx.beginPath();scx.arc(o[0],o[1],o[2],0,7);scx.fill();});
+  const skyTex=new THREE.CanvasTexture(skyC);
+  const sky=new THREE.Mesh(new THREE.SphereGeometry(42,32,32),new THREE.MeshBasicMaterial({map:skyTex,side:THREE.BackSide}));
+  sky.layers.set(1);scene.add(sky);
+  const cubeRT=new THREE.WebGLCubeRenderTarget(isMobile?128:256,{format:THREE.RGBAFormat,generateMipmaps:true,minFilter:THREE.LinearMipmapLinearFilter});
+  cubeRT.texture.mapping=THREE.CubeRefractionMapping;
+  const cubeCam=new THREE.CubeCamera(0.1,200,cubeRT);cubeCam.layers.enable(1);scene.add(cubeCam);
+
+  /* crystal — REAL refractive glass diamond (bends the vibrant sky through it) */
+  const cg=new THREE.Group();scene.add(cg);
+  const crystal=new THREE.Mesh(new THREE.OctahedronGeometry(2.15,0),
+    new THREE.MeshPhongMaterial({color:0xffffff,envMap:cubeRT.texture,refractionRatio:0.8,reflectivity:1.0,combine:THREE.MixOperation,
+      shininess:230,specular:0xccd6ff,emissive:0x2a1550,emissiveIntensity:.3,transparent:true,opacity:.93,flatShading:true}));
+  cg.add(crystal);
+  /* thin reflective shell for edge sparkle */
+  const shell=new THREE.Mesh(new THREE.OctahedronGeometry(2.18,0),
+    new THREE.MeshStandardMaterial({color:0xffffff,metalness:1,roughness:.07,envMap:envRT.texture,envMapIntensity:2.6,flatShading:true,transparent:true,opacity:.22}));
+  cg.add(shell);
+  /* chromatic dispersion rim */
+  const rimC=document.createElement('canvas');rimC.width=rimC.height=128;const rcx=rimC.getContext('2d');
+  if(rcx.createConicGradient){const rg=rcx.createConicGradient(0,64,64);
+    ['#ff45b5','#a259ff','#4f7cff','#43d9ff','#12e28a','#ffce6a','#ff45b5'].forEach((c,i,a)=>rg.addColorStop(i/(a.length-1),c));rcx.fillStyle=rg;}
+  else{const lg=rcx.createLinearGradient(0,0,128,128);lg.addColorStop(0,'#ff45b5');lg.addColorStop(.5,'#4f7cff');lg.addColorStop(1,'#12e28a');rcx.fillStyle=lg;}
+  rcx.fillRect(0,0,128,128);
+  const rim=new THREE.Mesh(new THREE.OctahedronGeometry(2.24,0),
+    new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(rimC),blending:THREE.AdditiveBlending,transparent:true,opacity:.3,depthWrite:false,side:THREE.BackSide}));
+  cg.add(rim);
+  const core=new THREE.Mesh(new THREE.OctahedronGeometry(.8,0),
+    new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.9}));
+  cg.add(core);
+  /* radiant glow halo */
+  const glowC=document.createElement('canvas');glowC.width=glowC.height=256;const gcx=glowC.getContext('2d');
+  const ggr=gcx.createRadialGradient(128,128,0,128,128,128);
+  ggr.addColorStop(0,'rgba(215,165,255,.95)');ggr.addColorStop(.3,'rgba(255,95,195,.5)');
+  ggr.addColorStop(.6,'rgba(90,140,255,.24)');ggr.addColorStop(1,'rgba(0,0,0,0)');
+  gcx.fillStyle=ggr;gcx.fillRect(0,0,256,256);
+  const glowSprite=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(glowC),
+    blending:THREE.AdditiveBlending,transparent:true,depthWrite:false,opacity:.9}));
+  glowSprite.scale.set(11,11,1);glowSprite.position.z=-1.4;cg.add(glowSprite);
+
+  /* candlesticks */
+  /* LIVE candlestick chart — candles scroll left and new ones print on the right */
+  const chart=new THREE.Group();const up=0x1fe86e,down=0xff3355;const N=isMobile?16:24;
+  const SP=0.72, leftLim=-(N*SP)/2-SP, totalW=N*SP;
+  const bodyGeo=new THREE.BoxGeometry(.46,1,.46), wickGeo=new THREE.BoxGeometry(.07,1,.07);
+  const candles=[];
+  function shapeCandle(c,open){
+    const dir=Math.random()>0.46?1:-1;
+    const d=(Math.random()*0.85+0.3)*dir - open*0.12;   /* mean-revert so it stays in view */
+    const close=open+d, rise=close>=open, h=Math.abs(close-open)+0.22, midY=(open+close)/2, col=rise?up:down;
+    c.body.scale.y=h; c.body.position.y=midY;
+    c.wick.scale.y=h+0.5+Math.random()*0.7; c.wick.position.y=midY+(Math.random()-0.5)*0.15;
+    c.body.material.color.setHex(col); c.wick.material.color.setHex(col);
+    return close;
+  }
+  let rc=0;
+  for(let i=0;i<N;i++){
+    const body=new THREE.Mesh(bodyGeo,new THREE.MeshBasicMaterial({color:up,transparent:true,opacity:1}));
+    const wick=new THREE.Mesh(wickGeo,new THREE.MeshBasicMaterial({color:up,transparent:true,opacity:1}));
+    const x=leftLim+i*SP; body.position.x=x; wick.position.x=x;
+    const c={body,wick,x}; rc=shapeCandle(c,rc); candles.push(c); chart.add(body); chart.add(wick);
+  }
+  chart.position.set(0,-4.9,-3.3);chart.rotation.x=-0.32;chart.scale.setScalar(0.85);scene.add(chart);
+
+  /* particles — soft round dots */
+  const dotC=document.createElement('canvas');dotC.width=dotC.height=64;const dcx=dotC.getContext('2d');
+  const dgr=dcx.createRadialGradient(32,32,0,32,32,32);
+  dgr.addColorStop(0,'rgba(255,255,255,1)');dgr.addColorStop(.25,'rgba(255,255,255,.9)');
+  dgr.addColorStop(.55,'rgba(255,255,255,.35)');dgr.addColorStop(1,'rgba(255,255,255,0)');
+  dcx.fillStyle=dgr;dcx.beginPath();dcx.arc(32,32,32,0,7);dcx.fill();
+  const dotTex=new THREE.CanvasTexture(dotC);
+  const pc=isMobile?1100:2600;const pg=new THREE.BufferGeometry();
+  const pos=new Float32Array(pc*3),col=new Float32Array(pc*3);
+  const cA=new THREE.Color(0xff5ac0),cB=new THREE.Color(0x5b8bff),cC=new THREE.Color(0xb06bff),cD=new THREE.Color(0x53e6ff);
+  const pal=[cA,cB,cC,cD];
+  for(let i=0;i<pc;i++){const r=6+Math.random()*26,th=Math.random()*6.28,ph=Math.acos(2*Math.random()-1);
+    pos[i*3]=r*Math.sin(ph)*Math.cos(th);pos[i*3+1]=r*Math.sin(ph)*Math.sin(th);pos[i*3+2]=r*Math.cos(ph)-6;
+    const c=pal[i%4];col[i*3]=c.r;col[i*3+1]=c.g;col[i*3+2]=c.b;}
+  pg.setAttribute('position',new THREE.BufferAttribute(pos,3));pg.setAttribute('color',new THREE.BufferAttribute(col,3));
+  const particles=new THREE.Points(pg,new THREE.PointsMaterial({size:.11,map:dotTex,alphaTest:.01,vertexColors:true,transparent:true,opacity:.95,blending:THREE.AdditiveBlending,depthWrite:false,sizeAttenuation:true}));
+  scene.add(particles);
+
+  /* lights */
+  scene.add(new THREE.AmbientLight(0x404060,1.25));
+  const l1=new THREE.PointLight(0xff45b5,2.6,80);l1.position.set(6,4,6);scene.add(l1);
+  const l2=new THREE.PointLight(0x4f7cff,2.6,80);l2.position.set(-6,-3,5);scene.add(l2);
+  const l3=new THREE.PointLight(0xa259ff,1.6,80);l3.position.set(0,6,-4);scene.add(l3);
+  const cl=new THREE.PointLight(0xffffff,2.0,30);cl.position.set(0,0,6);scene.add(cl);
+
+  /* composer + bloom */
+  let composer=null;
+  try{
+    composer=new THREE.EffectComposer(renderer);
+    composer.addPass(new THREE.RenderPass(scene,camera));
+    const bloom=new THREE.UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight),0.85,0.55,0.68);
+    composer.addPass(bloom);
+  }catch(err){composer=null;}
+
+  const clock=new THREE.Clock();let frame=0,lastT=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    const t=clock.getElapsedTime();mx+=(tmx-mx)*.05;my+=(tmy-my)*.05;
+    const sp=Math.min(sY/innerHeight,1);
+    bgUniforms.uTime.value=t;bgUniforms.uMouse.value.set(mx,-my);
+    cg.rotation.y=t*.35+mx*.6;cg.rotation.x=Math.sin(t*.3)*.25+my*.5;
+    core.rotation.y=-t*.6;core.rotation.x=t*.4;core.material.opacity=.75+Math.sin(t*2)*.18;
+    glowSprite.material.opacity=.7+Math.sin(t*1.5)*.2;
+    cg.position.y=0.7+sp*4;cg.scale.setScalar(Math.max(.001,0.85-sp*.25));cg.visible=sp<1;
+    rim.rotation.z=-t*.3;rim.material.opacity=.28+Math.sin(t*1.3)*.12;
+    /* live refraction capture: diamond bends the vibrant sky + scene */
+    frame++;
+    if(cg.visible && (isMobile?frame%3===0:frame%2===0)){
+      cg.visible=false;bgPlane.visible=false;
+      cubeCam.position.copy(cg.position);cubeCam.update(renderer,scene);
+      cg.visible=true;bgPlane.visible=true;
+    }
+    chart.rotation.y=Math.sin(t*.12)*.28+mx*.22;
+    const dt=Math.min(t-lastT,0.05);lastT=t;const spd=0.8,o=1-sp;
+    for(const c of candles){
+      c.x-=spd*dt;
+      if(c.x<leftLim){c.x+=totalW;rc=shapeCandle(c,rc);}
+      c.body.position.x=c.x;c.wick.position.x=c.x;
+      c.body.material.opacity=o;c.wick.material.opacity=o;
+    }
+    chart.position.y=-4.9+sp*1.4;chart.visible=sp<0.99;
+    particles.rotation.y=t*.02+mx*.15;particles.rotation.x=my*.1;
+    l1.position.x=Math.sin(t*.6)*7;l1.position.z=Math.cos(t*.6)*7;
+    l2.position.x=Math.cos(t*.5)*7;l2.position.z=Math.sin(t*.5)*7;
+    cl.position.x=mx*10;cl.position.y=-my*8;
+    camera.position.x+=(mx*1.2-camera.position.x)*.04;camera.position.y+=(-my*1.2-camera.position.y)*.04;
+    camera.position.z=9-sp*1.5;camera.lookAt(0,0,0);
+    if(composer)composer.render();else renderer.render(scene,camera);
+  }
+  animate();
+  addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth,innerHeight);bgUniforms.uRes.value.set(innerWidth,innerHeight);
+    if(composer)composer.setSize(innerWidth,innerHeight);});
+})();
+</script>
 </body>
 </html>
