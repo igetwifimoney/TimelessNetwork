@@ -165,10 +165,6 @@
     color:#050508;box-shadow:0 0 20px rgba(47,208,255,0.3);
   }
   .btn:hover{transform:translateY(-2px);}
-  .choice.trading .btn{cursor:default;}
-  .choice.trading .btn:hover{transform:none;}
-
-  .choice.network{cursor:pointer;}
 
   .discord-link{
     display:inline-flex;align-items:center;justify-content:center;gap:6px;
@@ -206,7 +202,7 @@
 
 <div class="choices">
 
-  <div class="choice trading disabled">
+  <div class="choice trading" onclick="location.href='/trading'">
     <div class="choice-icon">📈</div>
     <h2>TIMELESS TRADING</h2>
     <p>Live signals, daily market breakdowns, and a trading community built on mindset, discipline, and execution.</p>
@@ -214,8 +210,8 @@
       <div class="choice-stat"><div class="num">5.0★</div><div class="label">Whop Rating</div></div>
       <div class="choice-stat"><div class="num">24/7</div><div class="label">Expert Support</div></div>
     </div>
-    <span class="btn" id="trading-countdown">🚀 Launching in —</span>
-    <a href="https://discord.gg/mQPVspGbaG" target="_blank" rel="noopener" class="discord-link">💬 Join the Discord</a>
+    <a href="/trading" class="btn" onclick="event.stopPropagation()">Enter Timeless Trading</a>
+    <a href="https://discord.gg/mQPVspGbaG" target="_blank" rel="noopener" class="discord-link" onclick="event.stopPropagation()">💬 Join the Discord</a>
   </div>
 
   <div class="choice network" onclick="location.href='/network'">
@@ -259,28 +255,6 @@
   }
   document.getElementById('network-member-count').textContent =
     getMemberCount().toLocaleString() + '+';
-
-  // Launch countdown for Timeless Trading — targets Aug 7, 2026 local time.
-  function updateTradingCountdown() {
-    const el = document.getElementById('trading-countdown');
-    if (!el) return;
-    const LAUNCH = new Date('2026-08-07T00:00:00').getTime();
-    const diff = LAUNCH - Date.now();
-
-    if (diff <= 0) {
-      el.textContent = '🚀 Live now';
-      return;
-    }
-
-    const days = Math.floor(diff / 86400000);
-    const hours = Math.floor((diff % 86400000) / 3600000);
-    const minutes = Math.floor((diff % 3600000) / 60000);
-    const seconds = Math.floor((diff % 60000) / 1000);
-
-    el.textContent = `🚀 Launching in ${days}d ${hours}h ${minutes}m ${seconds}s`;
-  }
-  updateTradingCountdown();
-  setInterval(updateTradingCountdown, 1000);
 </script>
 
 </body>
