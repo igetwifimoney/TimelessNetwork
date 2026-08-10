@@ -428,6 +428,20 @@
     #loader{display:none}
   }
 </style>
+<style id="perf-mobile-bg">
+/* Added: mobile performance — lightweight animated aurora replaces the WebGL background on phones */
+html.bg-lite body{background:#040409 !important;}
+html.bg-lite #bg-canvas{display:none !important;}
+.mbg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:#040409;}
+.mbg i{position:absolute;display:block;border-radius:50%;will-change:transform;}
+.mbg .b1{width:80vw;height:80vw;left:-15vw;top:-20vh;background:radial-gradient(circle,rgba(255,69,181,.55),rgba(255,69,181,0) 62%);animation:mb1 26s ease-in-out infinite;}
+.mbg .b2{width:75vw;height:75vw;right:-20vw;top:6vh;background:radial-gradient(circle,rgba(162,89,255,.5),rgba(162,89,255,0) 62%);animation:mb2 32s ease-in-out infinite;}
+.mbg .b3{width:70vw;height:70vw;left:8vw;bottom:-25vh;background:radial-gradient(circle,rgba(79,124,255,.5),rgba(79,124,255,0) 62%);animation:mb3 30s ease-in-out infinite;}
+@keyframes mb1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(12vw,10vh) scale(1.15)}}
+@keyframes mb2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-10vw,9vh) scale(1.12)}}
+@keyframes mb3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(9vw,-10vh) scale(1.2)}}
+@media(prefers-reduced-motion:reduce){.mbg i{animation:none !important;}}
+</style>
 </head>
 <body>
 
@@ -768,6 +782,27 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* Added: mobile performance guard — animated 3D background stays on desktop; */
+/* phones get a lightweight CSS aurora instead (fixes lag from the WebGL bloom render). */
+(function(){try{
+  var isMobile = window.matchMedia("(max-width: 900px)").matches
+    || /Mobi|Android|iPhone|iPod/i.test(navigator.userAgent);
+  if(!isMobile) return;
+  document.documentElement.classList.add("bg-lite");
+  function inject(){ if(document.querySelector(".mbg")) return;
+    var d=document.createElement("div"); d.className="mbg";
+    d.innerHTML='<i class="b1"></i><i class="b2"></i><i class="b3"></i>';
+    (document.body||document.documentElement).appendChild(d); }
+  if(document.body) inject(); else document.addEventListener("DOMContentLoaded", inject);
+  window.addEventListener("load", function(){
+    var c=document.getElementById("bg-canvas");
+    if(c){try{var gl=c.getContext("webgl")||c.getContext("webgl2");var e=gl&&gl.getExtension("WEBGL_lose_context");if(e)e.loseContext();}catch(_){}
+      c.style.display="none";}
+  });
+}catch(e){}})();
+</script>
+
 <script>
 ( function () {
 
