@@ -429,6 +429,7 @@
   }
 </style>
 
+
 <style id="perf-mobile-bg">
 /* Added: mobile — light 3D particle galaxy replaces the heavy WebGL bloom bg; also fixes horizontal centering */
 html.bg-lite,html.bg-lite body{overflow-x:hidden;max-width:100%;}
@@ -778,7 +779,7 @@ html.bg-lite #bg-canvas{display:none !important;}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* Added: mobile performance guard - desktop keeps the full 3D scene; phones get a lightweight */
-/* 3D particle galaxy (no bloom, capped resolution) instead of the heavy WebGL bloom render. */
+/* 3D particle galaxy (denser, warp-pulse, scroll-reactive; no bloom, capped resolution). */
 (function(){try{
   var isMobile=window.matchMedia("(max-width: 900px)").matches||/Mobi|Android|iPhone|iPod/i.test(navigator.userAgent);
   if(!isMobile) return;
@@ -799,31 +800,40 @@ html.bg-lite #bg-canvas{display:none !important;}
     var sc=document.createElement("canvas"); sc.width=sc.height=48; var g=sc.getContext("2d");
     var grd=g.createRadialGradient(24,24,0,24,24,24); grd.addColorStop(0,"rgba(255,255,255,1)"); grd.addColorStop(.25,"rgba(255,255,255,.85)"); grd.addColorStop(1,"rgba(255,255,255,0)");
     g.fillStyle=grd; g.beginPath(); g.arc(24,24,24,0,7); g.fill(); var sprite=new THREE.CanvasTexture(sc);
-    var SN=700, sp=new Float32Array(SN*3);
-    for(var s=0;s<SN;s++){ sp[s*3]=(Math.random()-.5)*60; sp[s*3+1]=(Math.random()-.5)*40; sp[s*3+2]=-10-Math.random()*40; }
+    var SN=1000, sp=new Float32Array(SN*3);
+    for(var s=0;s<SN;s++){ sp[s*3]=(Math.random()-.5)*70; sp[s*3+1]=(Math.random()-.5)*45; sp[s*3+2]=-10-Math.random()*45; }
     var sgeo=new THREE.BufferGeometry(); sgeo.setAttribute("position",new THREE.BufferAttribute(sp,3));
     var stars=new THREE.Points(sgeo,new THREE.PointsMaterial({size:0.14,map:sprite,color:0x9fb4ff,transparent:true,opacity:.6,blending:THREE.AdditiveBlending,depthWrite:false})); scene.add(stars);
-    var N=3200,arms=3,pos=new Float32Array(N*3),col=new Float32Array(N*3);
+    var N=5200,arms=4,pos=new Float32Array(N*3),col=new Float32Array(N*3);
     var c1=new THREE.Color(0xff45b5),c2=new THREE.Color(0xa259ff),c3=new THREE.Color(0x4f7cff),tmp=new THREE.Color();
-    for(var i=0;i<N;i++){ var t=Math.pow(Math.random(),.5),radius=t*11,arm=(i%arms)/arms*Math.PI*2,ang=arm+radius*0.55+(Math.random()-.5)*0.5,scat=(1-t)*0.6+0.15;
-      pos[i*3]=Math.cos(ang)*radius+(Math.random()-.5)*scat*3; pos[i*3+1]=(Math.random()-.5)*scat*2.2; pos[i*3+2]=Math.sin(ang)*radius+(Math.random()-.5)*scat*3;
+    for(var i=0;i<N;i++){ var t=Math.pow(Math.random(),.5),radius=t*12,arm=(i%arms)/arms*Math.PI*2,ang=arm+radius*0.5+(Math.random()-.5)*0.45,scat=(1-t)*0.55+0.12;
+      pos[i*3]=Math.cos(ang)*radius+(Math.random()-.5)*scat*3; pos[i*3+1]=(Math.random()-.5)*scat*2; pos[i*3+2]=Math.sin(ang)*radius+(Math.random()-.5)*scat*3;
       if(t<.5) tmp.copy(c1).lerp(c2,t/.5); else tmp.copy(c2).lerp(c3,(t-.5)/.5); var b=0.6+Math.random()*0.4; col[i*3]=tmp.r*b;col[i*3+1]=tmp.g*b;col[i*3+2]=tmp.b*b; }
     var geo=new THREE.BufferGeometry(); geo.setAttribute("position",new THREE.BufferAttribute(pos,3)); geo.setAttribute("color",new THREE.BufferAttribute(col,3));
-    var gp=new THREE.Points(geo,new THREE.PointsMaterial({size:0.3,map:sprite,vertexColors:true,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,depthTest:false})); gp.rotation.x=0.5; scene.add(gp);
-    var mx=0,my=0,tx=0,ty=0,paused=false;
+    var gmat=new THREE.PointsMaterial({size:0.3,map:sprite,vertexColors:true,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,depthTest:false});
+    var gp=new THREE.Points(geo,gmat); gp.rotation.x=0.5; scene.add(gp);
+    var mx=0,my=0,tx=0,ty=0,paused=false,scrollT=0;
     function pm(x,y){ tx=x/innerWidth-.5; ty=y/innerHeight-.5; }
     addEventListener("pointermove",function(e){pm(e.clientX,e.clientY);},{passive:true});
     addEventListener("touchmove",function(e){ if(e.touches[0]) pm(e.touches[0].clientX,e.touches[0].clientY); },{passive:true});
+    addEventListener("scroll",function(){ scrollT=Math.min(1,(window.scrollY||0)/(innerHeight*2)); },{passive:true});
     document.addEventListener("visibilitychange",function(){ paused=document.hidden; });
     function tick(tm){ requestAnimationFrame(tick); if(paused) return;
-      mx+=(tx-mx)*0.05; my+=(ty-my)*0.05; gp.rotation.y=tm*0.00006; stars.rotation.y=tm*0.00002;
-      camera.position.x+=(mx*4-camera.position.x)*0.05; camera.position.y+=(-my*4-camera.position.y)*0.05; camera.lookAt(0,0,0); renderer.render(scene,camera); }
+      mx+=(tx-mx)*0.05; my+=(ty-my)*0.05;
+      var pulse=Math.pow(Math.sin(tm*0.00035)*0.5+0.5,4);
+      gp.rotation.y=tm*0.00006+pulse*0.1; stars.rotation.y=tm*0.00002;
+      gp.rotation.x+=((0.5+scrollT*0.28)-gp.rotation.x)*0.06; gmat.size=0.3+pulse*0.13;
+      var zoom=15-scrollT*1.6-pulse*1.2; camera.position.z+=(zoom-camera.position.z)*0.05;
+      camera.position.x+=(mx*4-camera.position.x)*0.05; camera.position.y+=(-my*4-camera.position.y)*0.05; camera.lookAt(0,0,0);
+      renderer.render(scene,camera); }
     requestAnimationFrame(tick);
     addEventListener("resize",function(){ camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth,innerHeight); },{passive:true});
   }
   if(document.readyState==="complete") start(); else window.addEventListener("load",start);
 }catch(e){}})();
 </script>
+
+
 
 
 
