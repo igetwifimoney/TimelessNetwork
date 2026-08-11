@@ -430,6 +430,7 @@
 </style>
 
 
+
 <style id="perf-mobile-bg">
 /* Added: mobile — light 3D particle galaxy replaces the heavy WebGL bloom bg; also fixes horizontal centering */
 html.bg-lite,html.bg-lite body{overflow-x:hidden;max-width:100%;}
@@ -779,7 +780,7 @@ html.bg-lite #bg-canvas{display:none !important;}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* Added: mobile performance guard - desktop keeps the full 3D scene; phones get a lightweight */
-/* 3D particle galaxy (denser, warp-pulse, scroll-reactive; no bloom, capped resolution). */
+/* 3D particle galaxy (denser, warp-pulse; stable on scroll; no bloom, capped resolution). */
 (function(){try{
   var isMobile=window.matchMedia("(max-width: 900px)").matches||/Mobi|Android|iPhone|iPod/i.test(navigator.userAgent);
   if(!isMobile) return;
@@ -794,7 +795,7 @@ html.bg-lite #bg-canvas{display:none !important;}
   function galaxy(){
     var canvas=document.createElement("canvas"); canvas.id="mbg3d"; document.body.appendChild(canvas);
     var renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:false,alpha:true});
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.5)); renderer.setSize(innerWidth,innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.5)); renderer.setSize(innerWidth,innerHeight,false);
     var scene=new THREE.Scene();
     var camera=new THREE.PerspectiveCamera(62,innerWidth/innerHeight,0.1,100); camera.position.z=15;
     var sc=document.createElement("canvas"); sc.width=sc.height=48; var g=sc.getContext("2d");
@@ -812,26 +813,27 @@ html.bg-lite #bg-canvas{display:none !important;}
     var geo=new THREE.BufferGeometry(); geo.setAttribute("position",new THREE.BufferAttribute(pos,3)); geo.setAttribute("color",new THREE.BufferAttribute(col,3));
     var gmat=new THREE.PointsMaterial({size:0.3,map:sprite,vertexColors:true,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,depthTest:false});
     var gp=new THREE.Points(geo,gmat); gp.rotation.x=0.5; scene.add(gp);
-    var mx=0,my=0,tx=0,ty=0,paused=false,scrollT=0;
+    var mx=0,my=0,tx=0,ty=0,paused=false;
     function pm(x,y){ tx=x/innerWidth-.5; ty=y/innerHeight-.5; }
     addEventListener("pointermove",function(e){pm(e.clientX,e.clientY);},{passive:true});
     addEventListener("touchmove",function(e){ if(e.touches[0]) pm(e.touches[0].clientX,e.touches[0].clientY); },{passive:true});
-    addEventListener("scroll",function(){ scrollT=Math.min(1,(window.scrollY||0)/(innerHeight*2)); },{passive:true});
     document.addEventListener("visibilitychange",function(){ paused=document.hidden; });
     function tick(tm){ requestAnimationFrame(tick); if(paused) return;
       mx+=(tx-mx)*0.05; my+=(ty-my)*0.05;
       var pulse=Math.pow(Math.sin(tm*0.00035)*0.5+0.5,4);
-      gp.rotation.y=tm*0.00006+pulse*0.1; stars.rotation.y=tm*0.00002;
-      gp.rotation.x+=((0.5+scrollT*0.28)-gp.rotation.x)*0.06; gmat.size=0.3+pulse*0.13;
-      var zoom=15-scrollT*1.6-pulse*1.2; camera.position.z+=(zoom-camera.position.z)*0.05;
+      gp.rotation.y=tm*0.00006+pulse*0.1; stars.rotation.y=tm*0.00002; gmat.size=0.3+pulse*0.13;
+      var zoom=15-pulse*0.8; camera.position.z+=(zoom-camera.position.z)*0.05;
       camera.position.x+=(mx*4-camera.position.x)*0.05; camera.position.y+=(-my*4-camera.position.y)*0.05; camera.lookAt(0,0,0);
       renderer.render(scene,camera); }
     requestAnimationFrame(tick);
-    addEventListener("resize",function(){ camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth,innerHeight); },{passive:true});
+    var lastW=innerWidth;
+    addEventListener("resize",function(){ if(innerWidth===lastW) return; lastW=innerWidth; camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth,innerHeight,false); },{passive:true});
   }
   if(document.readyState==="complete") start(); else window.addEventListener("load",start);
 }catch(e){}})();
 </script>
+
+
 
 
 
