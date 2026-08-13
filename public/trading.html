@@ -2214,6 +2214,7 @@ document.getElementById('burger').addEventListener('click',()=>{
       [].forEach.call(document.querySelectorAll("a"),function(a){
         if(/^\s*free access\s*$/i.test(a.textContent)){ (a.closest("li")||a).remove(); }
       });
+      [].forEach.call(document.querySelectorAll(".plan li"),function(li){ if(/everything in free/i.test(li.textContent||"")){ li.remove(); } });
       var g=document.querySelector(".pricing-grid");
       if(g){ g.style.gridTemplateColumns="repeat(auto-fit, minmax(280px, 380px))"; g.style.justifyContent="center"; }
       [].forEach.call(document.querySelectorAll("a"),function(el){
