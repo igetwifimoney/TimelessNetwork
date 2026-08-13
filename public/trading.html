@@ -2195,5 +2195,43 @@ document.getElementById('burger').addEventListener('click',()=>{
     if(composer)composer.setSize(innerWidth,innerHeight);});
 })();
 </script>
+
+<script>
+/* Added: wire CTAs to Stripe checkout + Discord invite, remove Free tier, center pricing, fix mentorship heading (cta-wire) */
+(function(){
+  var S={
+    starter:"https://buy.stripe.com/aFa14f470baOdUz2rI6Vq02",
+    vip:"https://buy.stripe.com/8x24gr5b4baO9Ejgiy6Vq03",
+    mentorship:"https://buy.stripe.com/bJe3cncDw6Uy17Nc2i6Vq00",
+    discord:"https://discord.gg/q93UYzZBdF"
+  };
+  function link(a,u){ a.setAttribute("href",u); a.setAttribute("target","_blank"); a.setAttribute("rel","noopener noreferrer"); }
+  function run(){
+    try{
+      [].forEach.call(document.querySelectorAll("a,button"),function(e){
+        if(/join free/i.test(e.textContent)){ var c=e.closest(".plan"); if(c) c.remove(); }
+      });
+      [].forEach.call(document.querySelectorAll("a"),function(a){
+        if(/^\s*free access\s*$/i.test(a.textContent)){ (a.closest("li")||a).remove(); }
+      });
+      var g=document.querySelector(".pricing-grid");
+      if(g){ g.style.gridTemplateColumns="repeat(auto-fit, minmax(280px, 380px))"; g.style.justifyContent="center"; }
+      [].forEach.call(document.querySelectorAll("a"),function(el){
+        var t=(el.textContent||"").trim(), tl=t.toLowerCase();
+        if(!t) return;
+        if(/discord/i.test(t)) return link(el,S.discord);
+        if(/mentorship/i.test(t) && tl!=="mentorship") return link(el,S.mentorship);
+        if(/starter/i.test(t)) return link(el,S.starter);
+        if(/(v\.i\.p|vip)/i.test(t)) return link(el,S.vip);
+      });
+      [].forEach.call(document.querySelectorAll("h1,h2,h3"),function(h){
+        if(/partnership until you/i.test(h.textContent)){ h.innerHTML=h.innerHTML.replace(/Partnership/g,"Mentorship"); }
+      });
+    }catch(e){}
+  }
+  if(document.readyState!=="loading") run(); else document.addEventListener("DOMContentLoaded",run);
+  window.addEventListener("load",run);
+})();
+</script>
 </body>
 </html>
