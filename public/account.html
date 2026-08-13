@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Timeless Trading — My Account</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+ :root{--bg:#040409;--panel:rgba(255,255,255,.04);--panel2:rgba(255,255,255,.06);--border:rgba(255,255,255,.10);--text:#f5f6ff;--muted:#9ba3c2;--p1:#ff45b5;--p2:#a259ff;--p3:#4f7cff;}
+ *{box-sizing:border-box;margin:0;padding:0}
+ body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
+ a{color:inherit}
+ .bgwrap{position:fixed;inset:0;z-index:-1;overflow:hidden;background:radial-gradient(1000px 640px at 12% -10%,rgba(255,69,181,.16),transparent 60%),radial-gradient(940px 620px at 92% 8%,rgba(162,89,255,.14),transparent 55%),radial-gradient(820px 620px at 50% 118%,rgba(79,124,255,.12),transparent 55%),var(--bg)}
+ .wrap{max-width:560px;margin:0 auto;padding:44px 20px 60px}
+ .brand{display:flex;align-items:center;gap:11px;justify-content:center;margin-bottom:26px;font-family:Sora;font-weight:800;letter-spacing:-.01em;font-size:20px}
+ .brand .mk{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--p1),var(--p2),var(--p3));box-shadow:0 6px 20px -6px rgba(162,89,255,.8)}
+ .card{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:26px;backdrop-filter:blur(10px)}
+ h1{font-family:Sora;font-weight:700;font-size:24px;margin-bottom:5px;letter-spacing:-.01em}
+ .sub{color:var(--muted);font-size:14px;line-height:1.5;margin-bottom:20px}
+ .tabs{display:flex;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:4px;margin-bottom:18px}
+ .tabs button{flex:1;border:none;background:none;color:var(--muted);font-weight:600;font-size:14px;padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;transition:.15s}
+ .tabs button.on{background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff}
+ label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin:14px 0 6px}
+ input{width:100%;background:#0b0b14;border:1px solid var(--border);border-radius:11px;padding:12px 14px;color:var(--text);font-size:15px;font-family:inherit}
+ input:focus{outline:none;border-color:var(--p2);box-shadow:0 0 0 3px rgba(162,89,255,.25)}
+ .btn{width:100%;margin-top:20px;border:none;border-radius:12px;padding:13px;font-weight:700;font-size:15px;cursor:pointer;font-family:inherit;background:linear-gradient(135deg,var(--p1),var(--p2),var(--p3));color:#fff;transition:.15s}
+ .btn:hover{filter:brightness(1.07)}
+ .btn:disabled{opacity:.6;cursor:default}
+ .msg{margin-top:14px;font-size:14px;padding:11px 13px;border-radius:10px;display:none;line-height:1.45}
+ .msg.err{display:block;background:rgba(255,80,80,.12);color:#ff9d9d;border:1px solid rgba(255,80,80,.3)}
+ .msg.ok{display:block;background:rgba(80,255,170,.10);color:#7dffc0;border:1px solid rgba(80,255,170,.3)}
+ .hide{display:none}
+ .prof{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+ .av{width:66px;height:66px;border-radius:50%;background:linear-gradient(135deg,var(--p1),var(--p2),var(--p3));display:grid;place-items:center;font-family:Sora;font-weight:800;font-size:27px;color:#fff;flex-shrink:0}
+ .prof .nm{font-family:Sora;font-weight:700;font-size:20px;letter-spacing:-.01em}
+ .prof .em{color:var(--muted);font-size:13.5px;margin-top:2px}
+ .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+ .tile{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:16px;text-align:center}
+ .tile .n{font-family:Sora;font-weight:800;font-size:30px;background:linear-gradient(135deg,var(--p1),var(--p2),var(--p3));-webkit-background-clip:text;background-clip:text;color:transparent}
+ .tile .l{color:var(--muted);font-size:12.5px;margin-top:2px}
+ .sec{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:14px}
+ .sec h3{font-family:Sora;font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;margin-bottom:12px}
+ .planrow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:6px 0}
+ .pill{font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:100px;background:rgba(80,255,170,.14);color:#7dffc0;text-transform:capitalize;white-space:nowrap}
+ .linkrow a{display:inline-block;margin-right:16px;color:var(--p2);font-weight:600;font-size:14px;text-decoration:none}
+ .linkrow a:hover{text-decoration:underline}
+ .foot{text-align:center;margin-top:6px}
+ .foot button{color:var(--muted);font-size:13px;background:none;border:none;cursor:pointer;text-decoration:underline;font-family:inherit}
+ a.cta{display:inline-block;margin:4px 8px 0 0;padding:10px 15px;border-radius:10px;font-weight:700;font-size:13.5px;text-decoration:none;background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff}
+ a.cta.ghost{background:var(--panel2);border:1px solid var(--border)}
+ .back{display:block;text-align:center;margin-top:18px;color:var(--muted);font-size:13px;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="bgwrap"></div>
+<div class="wrap">
+ <div class="brand"><span class="mk"></span>TIMELESS TRADING</div>
+
+ <div id="authView" class="card">
+  <h1 id="authTitle">Welcome back</h1>
+  <div class="sub" id="authSub">Log in to your account.</div>
+  <div class="tabs">
+   <button id="tabLogin" class="on" onclick="setTab('login')">Log In</button>
+   <button id="tabSignup" onclick="setTab('signup')">Sign Up</button>
+  </div>
+  <div id="nameWrap" class="hide">
+   <label>Full name</label>
+   <input id="fName" type="text" placeholder="Jordan Rivera" autocomplete="name">
+  </div>
+  <label>Email</label>
+  <input id="fEmail" type="email" placeholder="you@email.com" autocomplete="email">
+  <label>Password</label>
+  <input id="fPass" type="password" placeholder="At least 6 characters" autocomplete="current-password">
+  <button id="submitBtn" class="btn" onclick="submitAuth()">Log In</button>
+  <div id="authMsg" class="msg"></div>
+ </div>
+
+ <div id="accountView" class="hide">
+  <div class="card">
+   <div class="prof">
+    <div class="av" id="avatar">?</div>
+    <div>
+     <div class="nm" id="pName">Member</div>
+     <div class="em" id="pEmail"></div>
+     <div class="em" id="pSince"></div>
+    </div>
+   </div>
+   <div class="grid2">
+    <div class="tile"><div class="n" id="pXp">0</div><div class="l">XP</div></div>
+    <div class="tile"><div class="n" id="pStreak">0</div><div class="l">Day streak</div></div>
+   </div>
+   <div class="sec">
+    <h3>Your plan</h3>
+    <div id="planBody"><div class="sub" style="margin:0">Loading...</div></div>
+   </div>
+   <div class="sec">
+    <h3>Courses</h3>
+    <div id="courseBody"><div class="sub" style="margin:0">Loading...</div></div>
+   </div>
+   <div class="foot"><button onclick="logout()">Log out</button></div>
+  </div>
+ </div>
+
+ <a class="back" href="/trading">&larr; Back to Timeless Trading</a>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+ var SB_URL = "https://ljrtlcgukerzhliiwjpl.supabase.co";
+ var SB_KEY = "sb_publishable_u_w0MNcg-H2XpqSuZP3L_g_Z390rs07";
+ var sb = window.supabase.createClient(SB_URL, SB_KEY);
+ var mode = "login";
+ var PLAN = {TIMELESS_ANNUAL:"Timeless Annual", TIMELESS_MONTHLY:"Timeless Monthly", timeless_membership:"Timeless Membership", starter:"Starter", vip:"V.I.P"};
+ var CHECKOUT = {starter:"https://buy.stripe.com/aFa14f470baOdUz2rI6Vq02", vip:"https://buy.stripe.com/8x24gr5b4baO9Ejgiy6Vq03"};
+
+ function $(id){ return document.getElementById(id); }
+ function esc(s){ return String(s==null?":"s:s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]; }); }
+ function fmtDate(d){ if(!d) return ""; var x = new Date(d); if(isNaN(x)) return ""; return x.toLocaleDateString(undefined,{year:"numeric",month:"short",day:"numeric"}); }
+ function pretty(k){ if(PLAN[k]) return PLAN[k]; return String(k).replace(/[_-]+/g," ").replace(/\b\w/g, function(c){ return c.toUpperCase(); }); }
+
+ function setTab(m){ mode = m; $("tabLogin").className = (m==="login") ? "on" : ""; $("tabSignup").className = (m==="signup") ? "on" : ""; $("nameWrap").className = (m==="signup") ? "" : "hide"; $("submitBtn").textContent = (m==="signup") ? "Create account" : "Log In"; $("authTitle").textContent = (m==="signup") ? "Create your account" : "Welcome back"; $("authSub").textContent = (m==="signup") ? "Join Timeless Trading." : "Log in to your account."; $("fPass").setAttribute("autocomplete", (m==="signup") ? "new-password" : "current-password"); showMsg(""); }
+ function showMsg(t, ok){ var m = $("authMsg"); if(!t){ m.className = "msg"; m.textContent = ""; return; } m.className = "msg " + (ok ? "ok" : "err"); m.textContent = t; }
+
+ async function submitAuth(){ var email = $("fEmail").value.trim(); var pass = $("fPass").value; var name = $("fName").value.trim(); if(!email || !pass){ showMsg("Please enter your email and password."); return; } if(mode==="signup" && pass.length < 6){ showMsg("Password must be at least 6 characters."); return; } $("submitBtn").disabled = true; showMsg(""); try{ if(mode==="signup"){ var r = await sb.auth.signUp({ email: email, password: pass, options: { data: { full_name: name }, emailRedirectTo: location.origin + "/account" } }); if(r.error) throw r.error; if(r.data && r.data.session){ await loadAccount(); } else { showMsg("Account created. Check your email to confirm your address, then log in.", true); setTab("login"); } } else { var r2 = await sb.auth.signInWithPassword({ email: email, password: pass }); if(r2.error) throw r2.error; await loadAccount(); } }catch(e){ showMsg((e && e.message) ? e.message : "Something went wrong. Please try again."); } $("submitBtn").disabled = false; }
+
+ async function logout(){ await sb.auth.signOut(); location.reload(); }
+
+ async function loadAccount(){ var s = await sb.auth.getSession(); var session = s.data.session; if(!session){ $("accountView").className = "hide"; $("authView").className = "card"; return; } var user = session.user; $("authView").className = "hide"; $("accountView").className = ""; $("pEmail").textContent = user.email || ""; var pr = await sb.from("user_profiles").select("full_name,avatar_url,xp,streak_count,created_at").eq("id", user.id).maybeSingle(); var p = (pr && pr.data) ? pr.data : {}; var nm = p.full_name || (user.user_metadata && user.user_metadata.full_name) || (user.email ? user.email.split("@")[0] : "Member"); $("pName").textContent = nm; $("avatar").textContent = (nm || "?").charAt(0).toUpperCase(); $("pXp").textContent = (p.xp || 0); $("pStreak").textContent = (p.streak_count || 0); $("pSince").textContent = "Member since " + fmtDate(p.created_at || user.created_at); var sub = await sb.from("subscriptions").select("product_key,status,current_period_end,cancel_at_period_end").eq("user_id", user.id); renderPlan((sub && sub.data) ? sub.data : []); var cp = await sb.from("course_progress").select("id,course_slug,completed_at").eq("user_id", user.id); renderCourses((cp && cp.data) ? cp.data : []); }
+
+ function renderPlan(rows){ var el = $("planBody"); var active = rows.filter(function(r){ return r.status==="active" || r.status==="trialing" || r.status==="past_due"; }); if(active.length){ var h = ""; active.forEach(function(r){ var ends = r.current_period_end ? ("Renews " + fmtDate(r.current_period_end)) : ""; if(r.cancel_at_period_end && r.current_period_end) ends = "Ends " + fmtDate(r.current_period_end); h += "<div class='planrow'><div><div style='font-weight:700'>" + esc(pretty(r.product_key)) + "</div><div class='sub' style='margin:0'>" + esc(ends) + "</div></div><span class='pill'>" + esc(r.status) + "</span></div>"; }); el.innerHTML = h; } else { el.innerHTML = "<div class='sub' style='margin-bottom:12px'>No active plan yet. Get access:</div><a class='cta' href='" + CHECKOUT.vip + "'>Get V.I.P &mdash; $270/mo</a><a class='cta ghost' href='" + CHECKOUT.starter + "'>Get Starter &mdash; $67/mo</a>"; } }
+
+ function renderCourses(rows){ var el = $("courseBody"); var done = rows.length; var h = "<div class='planrow'><div style='font-weight:700'>Lessons completed</div><div style='font-family:Sora;font-weight:800;font-size:18px'>" + done + "</div></div>"; h += "<div class='linkrow' style='margin-top:10px'><a href='/courses'>Browse courses</a><a href='/dashboard'>Open dashboard</a></div>"; el.innerHTML = h; }
+
+ sb.auth.getSession().then(function(s){ if(s.data.session){ loadAccount(); } }); sb.auth.onAuthStateChange(function(_e, session){ if(session){ loadAccount(); } });
+</script>
+</body>
+</html>
