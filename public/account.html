@@ -105,6 +105,7 @@
 
  <a class="back" href="/trading">&larr; Back to Timeless Trading</a>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
  var SB_URL = "https://ljrtlcgukerzhliiwjpl.supabase.co";
@@ -115,24 +116,100 @@
  var CHECKOUT = {starter:"https://buy.stripe.com/aFa14f470baOdUz2rI6Vq02", vip:"https://buy.stripe.com/8x24gr5b4baO9Ejgiy6Vq03"};
 
  function $(id){ return document.getElementById(id); }
- function esc(s){ return String(s==null?":"s:s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]; }); }
+ function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]; }); }
  function fmtDate(d){ if(!d) return ""; var x = new Date(d); if(isNaN(x)) return ""; return x.toLocaleDateString(undefined,{year:"numeric",month:"short",day:"numeric"}); }
  function pretty(k){ if(PLAN[k]) return PLAN[k]; return String(k).replace(/[_-]+/g," ").replace(/\b\w/g, function(c){ return c.toUpperCase(); }); }
 
- function setTab(m){ mode = m; $("tabLogin").className = (m==="login") ? "on" : ""; $("tabSignup").className = (m==="signup") ? "on" : ""; $("nameWrap").className = (m==="signup") ? "" : "hide"; $("submitBtn").textContent = (m==="signup") ? "Create account" : "Log In"; $("authTitle").textContent = (m==="signup") ? "Create your account" : "Welcome back"; $("authSub").textContent = (m==="signup") ? "Join Timeless Trading." : "Log in to your account."; $("fPass").setAttribute("autocomplete", (m==="signup") ? "new-password" : "current-password"); showMsg(""); }
- function showMsg(t, ok){ var m = $("authMsg"); if(!t){ m.className = "msg"; m.textContent = ""; return; } m.className = "msg " + (ok ? "ok" : "err"); m.textContent = t; }
+ function setTab(m){
+  mode = m;
+  $("tabLogin").className = (m==="login") ? "on" : "";
+  $("tabSignup").className = (m==="signup") ? "on" : "";
+  $("nameWrap").className = (m==="signup") ? "" : "hide";
+  $("submitBtn").textContent = (m==="signup") ? "Create account" : "Log In";
+  $("authTitle").textContent = (m==="signup") ? "Create your account" : "Welcome back";
+  $("authSub").textContent = (m==="signup") ? "Join Timeless Trading." : "Log in to your account.";
+  $("fPass").setAttribute("autocomplete", (m==="signup") ? "new-password" : "current-password");
+  showMsg("");
+ }
+ function showMsg(t, ok){
+  var m = $("authMsg");
+  if(!t){ m.className = "msg"; m.textContent = ""; return; }
+  m.className = "msg " + (ok ? "ok" : "err");
+  m.textContent = t;
+ }
 
- async function submitAuth(){ var email = $("fEmail").value.trim(); var pass = $("fPass").value; var name = $("fName").value.trim(); if(!email || !pass){ showMsg("Please enter your email and password."); return; } if(mode==="signup" && pass.length < 6){ showMsg("Password must be at least 6 characters."); return; } $("submitBtn").disabled = true; showMsg(""); try{ if(mode==="signup"){ var r = await sb.auth.signUp({ email: email, password: pass, options: { data: { full_name: name }, emailRedirectTo: location.origin + "/account" } }); if(r.error) throw r.error; if(r.data && r.data.session){ await loadAccount(); } else { showMsg("Account created. Check your email to confirm your address, then log in.", true); setTab("login"); } } else { var r2 = await sb.auth.signInWithPassword({ email: email, password: pass }); if(r2.error) throw r2.error; await loadAccount(); } }catch(e){ showMsg((e && e.message) ? e.message : "Something went wrong. Please try again."); } $("submitBtn").disabled = false; }
+ async function submitAuth(){
+  var email = $("fEmail").value.trim();
+  var pass = $("fPass").value;
+  var name = $("fName").value.trim();
+  if(!email || !pass){ showMsg("Please enter your email and password."); return; }
+  if(mode==="signup" && pass.length < 6){ showMsg("Password must be at least 6 characters."); return; }
+  $("submitBtn").disabled = true; showMsg("");
+  try{
+   if(mode==="signup"){
+    var r = await sb.auth.signUp({ email: email, password: pass, options: { data: { full_name: name }, emailRedirectTo: location.origin + "/account" } });
+    if(r.error) throw r.error;
+    if(r.data && r.data.session){ await loadAccount(); }
+    else { showMsg("Account created. Check your email to confirm your address, then log in.", true); setTab("login"); }
+   } else {
+    var r2 = await sb.auth.signInWithPassword({ email: email, password: pass });
+    if(r2.error) throw r2.error;
+    await loadAccount();
+   }
+  }catch(e){ showMsg((e && e.message) ? e.message : "Something went wrong. Please try again."); }
+  $("submitBtn").disabled = false;
+ }
 
  async function logout(){ await sb.auth.signOut(); location.reload(); }
 
- async function loadAccount(){ var s = await sb.auth.getSession(); var session = s.data.session; if(!session){ $("accountView").className = "hide"; $("authView").className = "card"; return; } var user = session.user; $("authView").className = "hide"; $("accountView").className = ""; $("pEmail").textContent = user.email || ""; var pr = await sb.from("user_profiles").select("full_name,avatar_url,xp,streak_count,created_at").eq("id", user.id).maybeSingle(); var p = (pr && pr.data) ? pr.data : {}; var nm = p.full_name || (user.user_metadata && user.user_metadata.full_name) || (user.email ? user.email.split("@")[0] : "Member"); $("pName").textContent = nm; $("avatar").textContent = (nm || "?").charAt(0).toUpperCase(); $("pXp").textContent = (p.xp || 0); $("pStreak").textContent = (p.streak_count || 0); $("pSince").textContent = "Member since " + fmtDate(p.created_at || user.created_at); var sub = await sb.from("subscriptions").select("product_key,status,current_period_end,cancel_at_period_end").eq("user_id", user.id); renderPlan((sub && sub.data) ? sub.data : []); var cp = await sb.from("course_progress").select("id,course_slug,completed_at").eq("user_id", user.id); renderCourses((cp && cp.data) ? cp.data : []); }
+ async function loadAccount(){
+  var s = await sb.auth.getSession();
+  var session = s.data.session;
+  if(!session){ $("accountView").className = "hide"; $("authView").className = "card"; return; }
+  var user = session.user;
+  $("authView").className = "hide";
+  $("accountView").className = "";
+  $("pEmail").textContent = user.email || "";
+  var pr = await sb.from("user_profiles").select("full_name,avatar_url,xp,streak_count,created_at").eq("id", user.id).maybeSingle();
+  var p = (pr && pr.data) ? pr.data : {};
+  var nm = p.full_name || (user.user_metadata && user.user_metadata.full_name) || (user.email ? user.email.split("@")[0] : "Member");
+  $("pName").textContent = nm;
+  $("avatar").textContent = (nm || "?").charAt(0).toUpperCase();
+  $("pXp").textContent = (p.xp || 0);
+  $("pStreak").textContent = (p.streak_count || 0);
+  $("pSince").textContent = "Member since " + fmtDate(p.created_at || user.created_at);
+  var sub = await sb.from("subscriptions").select("product_key,status,current_period_end,cancel_at_period_end").eq("user_id", user.id);
+  renderPlan((sub && sub.data) ? sub.data : []);
+  var cp = await sb.from("course_progress").select("id,course_slug,completed_at").eq("user_id", user.id);
+  renderCourses((cp && cp.data) ? cp.data : []);
+ }
 
- function renderPlan(rows){ var el = $("planBody"); var active = rows.filter(function(r){ return r.status==="active" || r.status==="trialing" || r.status==="past_due"; }); if(active.length){ var h = ""; active.forEach(function(r){ var ends = r.current_period_end ? ("Renews " + fmtDate(r.current_period_end)) : ""; if(r.cancel_at_period_end && r.current_period_end) ends = "Ends " + fmtDate(r.current_period_end); h += "<div class='planrow'><div><div style='font-weight:700'>" + esc(pretty(r.product_key)) + "</div><div class='sub' style='margin:0'>" + esc(ends) + "</div></div><span class='pill'>" + esc(r.status) + "</span></div>"; }); el.innerHTML = h; } else { el.innerHTML = "<div class='sub' style='margin-bottom:12px'>No active plan yet. Get access:</div><a class='cta' href='" + CHECKOUT.vip + "'>Get V.I.P &mdash; $270/mo</a><a class='cta ghost' href='" + CHECKOUT.starter + "'>Get Starter &mdash; $67/mo</a>"; } }
+ function renderPlan(rows){
+  var el = $("planBody");
+  var active = rows.filter(function(r){ return r.status==="active" || r.status==="trialing" || r.status==="past_due"; });
+  if(active.length){
+   var h = "";
+   active.forEach(function(r){
+    var ends = r.current_period_end ? ("Renews " + fmtDate(r.current_period_end)) : "";
+    if(r.cancel_at_period_end && r.current_period_end) ends = "Ends " + fmtDate(r.current_period_end);
+    h += "<div class='planrow'><div><div style='font-weight:700'>" + esc(pretty(r.product_key)) + "</div><div class='sub' style='margin:0'>" + esc(ends) + "</div></div><span class='pill'>" + esc(r.status) + "</span></div>";
+   });
+   el.innerHTML = h;
+  } else {
+   el.innerHTML = "<div class='sub' style='margin-bottom:12px'>No active plan yet. Get access:</div><a class='cta' href='" + CHECKOUT.vip + "'>Get V.I.P &mdash; $270/mo</a><a class='cta ghost' href='" + CHECKOUT.starter + "'>Get Starter &mdash; $67/mo</a>";
+  }
+ }
 
- function renderCourses(rows){ var el = $("courseBody"); var done = rows.length; var h = "<div class='planrow'><div style='font-weight:700'>Lessons completed</div><div style='font-family:Sora;font-weight:800;font-size:18px'>" + done + "</div></div>"; h += "<div class='linkrow' style='margin-top:10px'><a href='/courses'>Browse courses</a><a href='/dashboard'>Open dashboard</a></div>"; el.innerHTML = h; }
+ function renderCourses(rows){
+  var el = $("courseBody");
+  var done = rows.length;
+  var h = "<div class='planrow'><div style='font-weight:700'>Lessons completed</div><div style='font-family:Sora;font-weight:800;font-size:18px'>" + done + "</div></div>";
+  h += "<div class='linkrow' style='margin-top:10px'><a href='/courses'>Browse courses</a><a href='/dashboard'>Open dashboard</a></div>";
+  el.innerHTML = h;
+ }
 
- sb.auth.getSession().then(function(s){ if(s.data.session){ loadAccount(); } }); sb.auth.onAuthStateChange(function(_e, session){ if(session){ loadAccount(); } });
+ sb.auth.getSession().then(function(s){ if(s.data.session){ loadAccount(); } });
+ sb.auth.onAuthStateChange(function(_e, session){ if(session){ loadAccount(); } });
 </script>
 </body>
 </html>
